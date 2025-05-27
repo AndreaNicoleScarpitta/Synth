@@ -1,5 +1,166 @@
 import React, { useState } from 'react'
 
+// Custom Multi-Select Component
+const MultiSelectDropdown = ({ label, options, placeholder = "Select options...", emoji = "" }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedItems, setSelectedItems] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filteredOptions = options.filter(option => 
+    option.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const toggleOption = (option) => {
+    setSelectedItems(prev => 
+      prev.includes(option) 
+        ? prev.filter(item => item !== option)
+        : [...prev, option]
+    );
+  };
+
+  const removeItem = (item) => {
+    setSelectedItems(prev => prev.filter(i => i !== item));
+  };
+
+  return (
+    <div style={{ position: 'relative', width: '100%' }}>
+      <label style={{ display: 'block', marginBottom: '8px', fontWeight: '500', color: '#374151' }}>
+        {emoji} {label}
+      </label>
+      
+      {/* Selected Items Display */}
+      {selectedItems.length > 0 && (
+        <div style={{ 
+          marginBottom: '8px', 
+          display: 'flex', 
+          flexWrap: 'wrap', 
+          gap: '6px',
+          maxHeight: '80px',
+          overflowY: 'auto'
+        }}>
+          {selectedItems.map(item => (
+            <span 
+              key={item}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                padding: '4px 8px',
+                backgroundColor: '#dbeafe',
+                color: '#1d4ed8',
+                borderRadius: '16px',
+                fontSize: '12px',
+                gap: '4px'
+              }}
+            >
+              {item}
+              <button
+                onClick={() => removeItem(item)}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: '#1d4ed8',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  padding: '0',
+                  lineHeight: '1'
+                }}
+              >
+                ×
+              </button>
+            </span>
+          ))}
+        </div>
+      )}
+      
+      {/* Dropdown Trigger */}
+      <div
+        onClick={() => setIsOpen(!isOpen)}
+        style={{
+          width: '100%',
+          padding: '12px',
+          border: '1px solid #d1d5db',
+          borderRadius: '6px',
+          backgroundColor: 'white',
+          cursor: 'pointer',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center'
+        }}
+      >
+        <span style={{ color: selectedItems.length > 0 ? '#374151' : '#9ca3af' }}>
+          {selectedItems.length > 0 ? `${selectedItems.length} selected` : placeholder}
+        </span>
+        <span style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }}>
+          ▼
+        </span>
+      </div>
+
+      {/* Dropdown Menu */}
+      {isOpen && (
+        <div style={{
+          position: 'absolute',
+          top: '100%',
+          left: '0',
+          right: '0',
+          backgroundColor: 'white',
+          border: '1px solid #d1d5db',
+          borderRadius: '6px',
+          boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+          zIndex: 1000,
+          maxHeight: '200px',
+          overflow: 'hidden'
+        }}>
+          {/* Search Input */}
+          <div style={{ padding: '12px', borderBottom: '1px solid #e5e7eb' }}>
+            <input
+              type="text"
+              placeholder="Search options..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              style={{
+                width: '100%',
+                padding: '8px',
+                border: '1px solid #d1d5db',
+                borderRadius: '4px',
+                fontSize: '14px'
+              }}
+            />
+          </div>
+          
+          {/* Options List */}
+          <div style={{ maxHeight: '150px', overflowY: 'auto' }}>
+            {filteredOptions.map(option => (
+              <div
+                key={option}
+                onClick={() => toggleOption(option)}
+                style={{
+                  padding: '10px 12px',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  backgroundColor: selectedItems.includes(option) ? '#f3f4f6' : 'white',
+                  borderBottom: '1px solid #f3f4f6'
+                }}
+                onMouseEnter={(e) => e.target.style.backgroundColor = '#f9fafb'}
+                onMouseLeave={(e) => e.target.style.backgroundColor = selectedItems.includes(option) ? '#f3f4f6' : 'white'}
+              >
+                <input
+                  type="checkbox"
+                  checked={selectedItems.includes(option)}
+                  onChange={() => {}}
+                  style={{ margin: '0' }}
+                />
+                <span style={{ fontSize: '14px' }}>{option}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const styles = {
   container: {
     minHeight: '100vh',
@@ -433,41 +594,37 @@ function App() {
                       </select>
                     </div>
 
-                    {/* Cardiac Conditions Multi-Select */}
-                    <div>
-                      <label style={{display: 'block', marginBottom: '8px', fontWeight: '500', color: '#374151'}}>
-                        🫀 Cardiac Conditions (Multi-select)
-                      </label>
-                      <select multiple style={{width: '100%', minHeight: '100px', padding: '8px', border: '1px solid #d1d5db', borderRadius: '6px', fontSize: '14px'}}>
-                        <option>Tetralogy of Fallot</option>
-                        <option>Hypoplastic Left Heart Syndrome</option>
-                        <option>Coarctation of the Aorta</option>
-                        <option>Atrial Septal Defect (ASD)</option>
-                        <option>Ventricular Septal Defect (VSD)</option>
-                        <option>Patent Ductus Arteriosus</option>
-                        <option>Transposition of Great Arteries</option>
-                        <option>Pulmonary Stenosis</option>
-                      </select>
-                      <small style={{color: '#6b7280', fontSize: '12px'}}>Select cardiac conditions to include</small>
-                    </div>
+                    <MultiSelectDropdown
+                      label="Cardiac Conditions"
+                      emoji="🫀"
+                      placeholder="Select cardiac conditions..."
+                      options={[
+                        'Tetralogy of Fallot',
+                        'Hypoplastic Left Heart Syndrome',
+                        'Coarctation of the Aorta',
+                        'Atrial Septal Defect (ASD)',
+                        'Ventricular Septal Defect (VSD)',
+                        'Patent Ductus Arteriosus',
+                        'Transposition of Great Arteries',
+                        'Pulmonary Stenosis'
+                      ]}
+                    />
 
-                    {/* Hematologic Conditions Multi-Select */}
-                    <div>
-                      <label style={{display: 'block', marginBottom: '8px', fontWeight: '500', color: '#374151'}}>
-                        🩸 Hematologic Conditions (Multi-select)
-                      </label>
-                      <select multiple style={{width: '100%', minHeight: '100px', padding: '8px', border: '1px solid #d1d5db', borderRadius: '6px', fontSize: '14px'}}>
-                        <option>Iron Deficiency Anemia</option>
-                        <option>Sickle Cell Disease</option>
-                        <option>Thrombocytopenia</option>
-                        <option>Hemophilia A</option>
-                        <option>Hemophilia B</option>
-                        <option>Von Willebrand Disease</option>
-                        <option>Thalassemia</option>
-                        <option>Aplastic Anemia</option>
-                      </select>
-                      <small style={{color: '#6b7280', fontSize: '12px'}}>Select hematologic comorbidities</small>
-                    </div>
+                    <MultiSelectDropdown
+                      label="Hematologic Conditions"
+                      emoji="🩸"
+                      placeholder="Select hematologic comorbidities..."
+                      options={[
+                        'Iron Deficiency Anemia',
+                        'Sickle Cell Disease',
+                        'Thrombocytopenia',
+                        'Hemophilia A',
+                        'Hemophilia B',
+                        'Von Willebrand Disease',
+                        'Thalassemia',
+                        'Aplastic Anemia'
+                      ]}
+                    />
                     
                     <div>
                       <label style={{display: 'block', marginBottom: '8px', fontWeight: '500', color: '#374151'}}>
@@ -497,24 +654,23 @@ function App() {
                       </select>
                     </div>
                     
-                    <div>
-                      <label style={{display: 'block', marginBottom: '8px', fontWeight: '500', color: '#374151'}}>
-                        📊 Data Types to Include (Multi-select)
-                      </label>
-                      <select multiple style={{width: '100%', minHeight: '100px', padding: '8px', border: '1px solid #d1d5db', borderRadius: '6px', fontSize: '14px'}}>
-                        <option>Structured Clinical Data (Demographics, Vitals)</option>
-                        <option>Laboratory Results (CBC, Chemistry, Coagulation)</option>
-                        <option>EKG/ECG Time Series Data</option>
-                        <option>Clinical Notes (Progress, Surgical, Discharge)</option>
-                        <option>Medication Administration Records</option>
-                        <option>Procedure Codes (CPT)</option>
-                        <option>Diagnostic Codes (ICD-10)</option>
-                        <option>Growth & Development Metrics</option>
-                        <option>Family History Transcripts</option>
-                        <option>Oxygen Saturation Trends</option>
-                      </select>
-                      <small style={{color: '#6b7280', fontSize: '12px'}}>Select data modalities to generate</small>
-                    </div>
+                    <MultiSelectDropdown
+                      label="Data Types to Include"
+                      emoji="📊"
+                      placeholder="Select data modalities to generate..."
+                      options={[
+                        'Structured Clinical Data (Demographics, Vitals)',
+                        'Laboratory Results (CBC, Chemistry, Coagulation)',
+                        'EKG/ECG Time Series Data',
+                        'Clinical Notes (Progress, Surgical, Discharge)',
+                        'Medication Administration Records',
+                        'Procedure Codes (CPT)',
+                        'Diagnostic Codes (ICD-10)',
+                        'Growth & Development Metrics',
+                        'Family History Transcripts',
+                        'Oxygen Saturation Trends'
+                      ]}
+                    />
                     
                     <div>
                       <label style={{display: 'block', marginBottom: '8px', fontWeight: '500', color: '#374151'}}>
