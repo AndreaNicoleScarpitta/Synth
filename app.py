@@ -10,6 +10,7 @@ from datetime import datetime
 import re
 import uuid
 from typing import Dict, Any
+from utils.medical_tooltips import initialize_tooltips, medical_tooltip, wrap_medical_text
 
 # Page configuration - must be first Streamlit command
 st.set_page_config(
@@ -117,6 +118,9 @@ def log_demo_session(email: str):
 
 def main():
     """Main launch page with marketing content and registration"""
+    
+    # Initialize medical tooltips
+    initialize_tooltips()
     
     # Initialize database
     init_registration_db()
@@ -475,37 +479,37 @@ def main():
     
     with col1:
         st.markdown("""
-        <div class="feature-card">
-            <div class="feature-title">AI-Powered Generation</div>
-            <p>Multi-agent system retrieves real medical literature and generates clinically accurate synthetic patients with complete audit trails.</p>
+        <div style="margin-bottom: 2.5rem;">
+            <h3 style="color: #0A1F44; font-weight: 600; margin-bottom: 0.5rem; font-size: 1.3rem;">AI-Powered Generation</h3>
+            <p style="color: #374151; line-height: 1.6; margin: 0; font-size: 1rem;">Multi-agent system retrieves real medical literature and generates clinically accurate synthetic patients with complete audit trails.</p>
         </div>
         
-        <div class="feature-card">
-            <div class="feature-title">Bias-Aware & Fair</div>
-            <p>Advanced statistical validation ensures demographic representation and eliminates AI bias across all patient populations.</p>
+        <div style="margin-bottom: 2.5rem;">
+            <h3 style="color: #0A1F44; font-weight: 600; margin-bottom: 0.5rem; font-size: 1.3rem;">Bias-Aware & Fair</h3>
+            <p style="color: #374151; line-height: 1.6; margin: 0; font-size: 1rem;">Advanced statistical validation ensures demographic representation and eliminates AI bias across all patient populations.</p>
         </div>
         
-        <div class="feature-card">
-            <div class="feature-title">Complete Medical Records</div>
-            <p>Generate full EHRs with demographics, diagnoses, medications, labs, imaging, and specialized data like hemodynamics.</p>
+        <div style="margin-bottom: 2.5rem;">
+            <h3 style="color: #0A1F44; font-weight: 600; margin-bottom: 0.5rem; font-size: 1.3rem;">Complete Medical Records</h3>
+            <p style="color: #374151; line-height: 1.6; margin: 0; font-size: 1rem;">Generate full EHRs with demographics, diagnoses, medications, labs, imaging, and specialized data like """ + medical_tooltip("hemodynamics") + """.</p>
         </div>
         """, unsafe_allow_html=True)
     
     with col2:
         st.markdown("""
-        <div class="feature-card">
-            <div class="feature-title">Regulatory Compliant</div>
-            <p>Meets HIPAA, GDPR, and FDA 21 CFR Part 11 requirements with complete traceability and enterprise-grade security.</p>
+        <div style="margin-bottom: 2.5rem;">
+            <h3 style="color: #0A1F44; font-weight: 600; margin-bottom: 0.5rem; font-size: 1.3rem;">Regulatory Compliant</h3>
+            <p style="color: #374151; line-height: 1.6; margin: 0; font-size: 1rem;">Meets """ + medical_tooltip("hipaa", "HIPAA") + """, """ + medical_tooltip("gdpr", "GDPR") + """, and FDA """ + medical_tooltip("cfr_part_11", "21 CFR Part 11") + """ requirements with complete traceability and enterprise-grade security.</p>
         </div>
         
-        <div class="feature-card">
-            <div class="feature-title">Literature-Backed</div>
-            <p>Connects to PubMed, ClinicalTrials.gov, and FDA databases for authentic, up-to-date medical knowledge integration.</p>
+        <div style="margin-bottom: 2.5rem;">
+            <h3 style="color: #0A1F44; font-weight: 600; margin-bottom: 0.5rem; font-size: 1.3rem;">Literature-Backed</h3>
+            <p style="color: #374151; line-height: 1.6; margin: 0; font-size: 1rem;">Connects to PubMed, ClinicalTrials.gov, and FDA databases for authentic, up-to-date medical knowledge integration.</p>
         </div>
         
-        <div class="feature-card">
-            <div class="feature-title">Pharma-Ready Workflows</div>
-            <p>Specialized interfaces for CDOs, CMOs, RWE teams, and regulatory affairs with role-specific analytics.</p>
+        <div style="margin-bottom: 2.5rem;">
+            <h3 style="color: #0A1F44; font-weight: 600; margin-bottom: 0.5rem; font-size: 1.3rem;">Pharma-Ready Workflows</h3>
+            <p style="color: #374151; line-height: 1.6; margin: 0; font-size: 1rem;">Specialized interfaces for CDOs, CMOs, RWE teams, and regulatory affairs with role-specific analytics.</p>
         </div>
         """, unsafe_allow_html=True)
     
