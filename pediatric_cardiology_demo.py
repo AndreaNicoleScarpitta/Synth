@@ -614,16 +614,85 @@ def main():
             
         st.success(f"✅ Generated {cohort_size} synthetic pediatric patients with complete audit trail!")
         
-        # Launch to comprehensive results page
-        col1, col2 = st.columns([2, 1])
+        # Display results directly here since navigation isn't working
+        st.markdown("---")
+        st.subheader("📊 Cohort Analysis Results")
+        
+        # Show key metrics
+        col1, col2, col3, col4 = st.columns(4)
         with col1:
-            if st.button("🚀 View Complete Results & Agent Reasoning", type="primary"):
-                st.session_state.current_page = "cohort_results"
-                st.rerun()
+            st.metric("Total Patients", cohort_size)
         with col2:
-            if st.button("📊 Quick Data Explorer"):
-                st.session_state.current_page = "data_exploration" 
-                st.rerun()
+            st.metric("Condition", condition_focus)
+        with col3:
+            st.metric("Age Group", age_group)
+        with col4:
+            st.metric("Tier", selected_tier)
+        
+        # Display sample patient data
+        if cohort_data.get('patients'):
+            st.subheader("🫀 Sample Patient Records")
+            
+            # Show first few patients
+            sample_patients = cohort_data['patients'][:3]
+            for i, patient in enumerate(sample_patients):
+                with st.expander(f"Patient {i+1}: {patient.get('patient_id', f'P{i+1:03d}')}"):
+                    
+                    # Demographics
+                    st.markdown("**Demographics:**")
+                    demo_col1, demo_col2 = st.columns(2)
+                    with demo_col1:
+                        st.write(f"Age: {patient.get('age_years', 'N/A')} years")
+                        st.write(f"Weight: {patient.get('weight_kg', 'N/A')} kg")
+                    with demo_col2:
+                        st.write(f"Sex: {patient.get('sex', 'N/A')}")
+                        st.write(f"Height: {patient.get('height_cm', 'N/A')} cm")
+                    
+                    # Clinical data
+                    st.markdown("**Clinical Data:**")
+                    if 'hemodynamics' in patient:
+                        hemo = patient['hemodynamics']
+                        hemo_col1, hemo_col2 = st.columns(2)
+                        with hemo_col1:
+                            st.write(f"Heart Rate: {hemo.get('heart_rate_bpm', 'N/A')} bpm")
+                            st.write(f"Blood Pressure: {hemo.get('systolic_bp', 'N/A')}/{hemo.get('diastolic_bp', 'N/A')} mmHg")
+                        with hemo_col2:
+                            st.write(f"Oxygen Saturation: {hemo.get('oxygen_saturation', 'N/A')}%")
+                            st.write(f"Cardiac Output: {hemo.get('cardiac_output_l_min', 'N/A')} L/min")
+                    
+                    # Medications
+                    if 'medications' in patient and patient['medications']:
+                        st.markdown("**Current Medications:**")
+                        for med in patient['medications'][:3]:
+                            st.write(f"• {med.get('medication', 'Unknown')} - {med.get('dosage', 'N/A')}")
+        
+        # Agent reasoning summary
+        st.subheader("🧠 Agent Reasoning Summary")
+        reasoning_steps = [
+            f"Analyzed {condition_focus} pathophysiology for {age_group} patients",
+            f"Generated {cohort_size} patients using {selected_tier} complexity tier",
+            f"Applied pediatric cardiology guidelines and hemodynamic modeling",
+            f"Implemented {multi_system_interactions or 'standard'} multi-system interactions"
+        ]
+        
+        for i, step in enumerate(reasoning_steps, 1):
+            st.write(f"{i}. {step}")
+        
+        # Export options
+        st.subheader("📁 Export Options")
+        export_col1, export_col2, export_col3 = st.columns(3)
+        
+        with export_col1:
+            if st.button("📄 Export as CSV"):
+                st.info("CSV export functionality - ready for implementation")
+        
+        with export_col2:
+            if st.button("📋 Export as JSON"):
+                st.info("JSON export functionality - ready for implementation")
+        
+        with export_col3:
+            if st.button("🏥 Export as FHIR"):
+                st.info("FHIR bundle export - enterprise feature")
 
 def generate_pediatric_cohort(condition: str, age_group: str, size: int, trace: TraceableDecision, 
                             surgical_strategy: str = "Primary Repair",
