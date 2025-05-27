@@ -1,0 +1,60 @@
+"""
+Objective:
+Build a modular EHR schema generator and pipeline visualization tool inside Replit.
+
+Context:
+You are constructing a synthetic EHR data engine that generates, validates, and updates clinical data for hospitals and pharmaceutical use. Your system uses LLMs and agentic AI to generate and continuously improve synthetic health records across all specialties.
+
+Tasks:
+
+1. Generate a complete EHR schema as a Python dictionary or JSON object that includes:
+    - Demographics
+    - Encounters & clinical notes
+    - Diagnoses (ICD-10 / SNOMED)
+    - Medications (RxNorm)
+    - Labs (LOINC)
+    - Imaging, pathology reports
+    - Hemodynamics (e.g., heart pressures, echo results)
+    - Hematology (CBC, blood flow markers)
+    - Genomics
+    - Wearables / IoT data
+    - Administrative (billing, claims)
+    - Metadata (audit logs, data provenance)
+
+2. Reconcile this schema with your synthetic data platform:
+    - Step 1: Synthetic patient generation (via LLM or ruleset)
+    - Step 2: Validation (agentic AI evaluates realism + consistency)
+    - Step 3: Agent crawlers (pull in clinical updates from PubMed, Trials.gov)
+    - Step 4: Data delivery (export to JSON, FHIR Bundle, or API)
+
+3. Render a **data flow diagram** of the full system using `graphviz` or `mermaid` (if supported in Replit). Diagram must include:
+    - Input sources (knowledge bases, guideline crawlers)
+    - Synthetic data engine
+    - Validator module
+    - Output modules (APIs, dashboard, sandbox, file exports)
+
+Requirements:
+- Use Python dataclasses or Pydantic models to define schema objects.
+- Use print() or Streamlit to preview schema.
+- Use `graphviz` to render the data flow diagram.
+"""
+
+# Example Start: Basic schema dictionary
+ehr_schema = {
+    "demographics": {
+        "name": "str",
+        "dob": "date",
+        "gender": "str",
+        "ethnicity": "str"
+    },
+    "encounters": [
+        {
+            "date": "datetime",
+            "provider": "str",
+            "notes": "text"
+        }
+    ],
+    # Add full modules as described above...
+}
+
+# Optional: define using Pydantic or dataclasses
