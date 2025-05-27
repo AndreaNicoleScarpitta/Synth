@@ -76,26 +76,54 @@ const styles = {
     textAlign: 'center' as const
   },
   heroTitle: {
-    fontSize: '48px',
-    fontWeight: '800',
-    color: '#1e40af',
-    marginBottom: '24px',
-    lineHeight: '1.1'
+    fontSize: '64px',
+    fontWeight: '900',
+    background: 'linear-gradient(135deg, #6B4EFF 0%, #1e40af 50%, #10b981 100%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+    marginBottom: '32px',
+    lineHeight: '1.1',
+    textAlign: 'center' as const
   },
   heroSubtitle: {
-    fontSize: '24px',
-    fontWeight: '600',
+    fontSize: '32px',
+    fontWeight: '700',
     color: '#374151',
-    marginBottom: '16px',
-    maxWidth: '800px',
-    margin: '0 auto 16px'
+    marginBottom: '24px',
+    maxWidth: '900px',
+    margin: '0 auto 24px',
+    textShadow: '0 2px 4px rgba(0,0,0,0.1)'
   },
   heroDescription: {
-    fontSize: '18px',
+    fontSize: '20px',
     color: '#6b7280',
-    marginBottom: '32px',
-    maxWidth: '600px',
-    margin: '0 auto 32px'
+    marginBottom: '40px',
+    maxWidth: '700px',
+    margin: '0 auto 40px',
+    lineHeight: '1.6'
+  },
+  heroStats: {
+    display: 'flex',
+    justifyContent: 'center',
+    gap: '48px',
+    marginBottom: '40px',
+    flexWrap: 'wrap' as const
+  },
+  statItem: {
+    textAlign: 'center' as const
+  },
+  statNumber: {
+    fontSize: '36px',
+    fontWeight: 'bold',
+    color: '#6B4EFF',
+    display: 'block'
+  },
+  statLabel: {
+    fontSize: '14px',
+    color: '#6b7280',
+    textTransform: 'uppercase' as const,
+    letterSpacing: '0.05em'
   },
   buttonContainer: {
     display: 'flex',
@@ -258,6 +286,14 @@ function App() {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
           }
+          @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+          }
+          .hero-title {
+            animation: shimmer 3s ease-in-out infinite;
+            background-size: 200% 100%;
+          }
           .card:hover {
             transform: translateY(-4px);
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
@@ -298,18 +334,37 @@ function App() {
       <main style={styles.main}>
         <section style={styles.hero}>
           <div style={styles.heroContent}>
-            <h1 style={styles.heroTitle}>Synthetic Ascension</h1>
+            <h1 style={styles.heroTitle} className="hero-title">Synthetic Ascension</h1>
             <p style={styles.heroSubtitle}>Simulate. Validate. Ascend.</p>
             <p style={styles.heroDescription}>
-              Your launchpad to validated, privacy-safe EHR simulation—fueling the next generation of AI, research, and healthtech.
+              The world's most advanced synthetic EHR platform. Generate privacy-safe, clinically accurate patient data that powers breakthrough AI research and accelerates medical innovation—without compromising patient privacy.
             </p>
+            
+            <div style={styles.heroStats}>
+              <div style={styles.statItem}>
+                <span style={styles.statNumber}>10M+</span>
+                <span style={styles.statLabel}>Synthetic Patients</span>
+              </div>
+              <div style={styles.statItem}>
+                <span style={styles.statNumber}>99.9%</span>
+                <span style={styles.statLabel}>Privacy Compliance</span>
+              </div>
+              <div style={styles.statItem}>
+                <span style={styles.statNumber}>500+</span>
+                <span style={styles.statLabel}>Research Studies</span>
+              </div>
+              <div style={styles.statItem}>
+                <span style={styles.statNumber}>24/7</span>
+                <span style={styles.statLabel}>AI Validation</span>
+              </div>
+            </div>
             
             <div style={{...styles.buttonContainer, flexDirection: 'row'}} className="button-container">
               <button style={styles.primaryButton} className="primary-button">
-                Launch Demo →
+                🚀 Launch Interactive Demo
               </button>
               <button style={styles.secondaryButton} className="secondary-button">
-                Design Partnership Interest
+                💼 Enterprise Partnership
               </button>
             </div>
           </div>
