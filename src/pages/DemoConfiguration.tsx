@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Settings, Users, Activity, Play } from 'lucide-react'
+import { Settings, Users, Activity, Play, ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useAppStore } from '@/store/useAppStore'
@@ -8,6 +8,82 @@ import { useAppStore } from '@/store/useAppStore'
 export function DemoConfiguration() {
   const navigate = useNavigate()
   const { cohortConfig, setCohortConfig, setCurrentWorkflow, setIsGenerating } = useAppStore()
+  const [selectedUseCase, setSelectedUseCase] = useState('')
+
+  const useCaseConfigurations = {
+    'pediatric-cardiology': {
+      size: 500,
+      ageRange: [2, 17],
+      complexity: 'high' as const,
+      conditions: ['cardiovascular disease', 'pediatric care'],
+      specialty: 'Pediatric Cardiology & Hematology',
+      dataModalities: ['Echocardiography', 'Laboratory Results', 'Clinical Notes', 'Surgical Reports'],
+      followUpDuration: 60
+    },
+    'rare-disease': {
+      size: 250,
+      ageRange: [0, 65],
+      complexity: 'high' as const,
+      conditions: ['oncology', 'pediatric care'],
+      specialty: 'Medical Genetics',
+      dataModalities: ['Genetic Testing', 'Laboratory Results', 'Clinical Notes', 'Imaging Studies'],
+      followUpDuration: 120
+    },
+    'clinical-trials': {
+      size: 1000,
+      ageRange: [18, 75],
+      complexity: 'medium' as const,
+      conditions: ['cardiovascular disease', 'diabetes', 'hypertension'],
+      specialty: 'Clinical Research',
+      dataModalities: ['Laboratory Results', 'Vital Signs', 'Clinical Notes', 'Adverse Events'],
+      followUpDuration: 24
+    },
+    'pharmacovigilance': {
+      size: 750,
+      ageRange: [12, 85],
+      complexity: 'high' as const,
+      conditions: ['oncology', 'cardiovascular disease'],
+      specialty: 'Pharmacovigilance',
+      dataModalities: ['Adverse Event Reports', 'Laboratory Results', 'Clinical Notes', 'Medication History'],
+      followUpDuration: 36
+    }
+  }
+
+  const useCases = [
+    {
+      id: 'pediatric-cardiology',
+      name: 'Pediatric Cardiology Research',
+      description: 'Generate synthetic pediatric cardiac patients with comprehensive hematological data for research studies'
+    },
+    {
+      id: 'rare-disease',
+      name: 'Rare Disease Studies',
+      description: 'Create synthetic cohorts for rare genetic conditions with longitudinal follow-up data'
+    },
+    {
+      id: 'clinical-trials',
+      name: 'Clinical Trial Simulation',
+      description: 'Simulate patient populations for drug trial design and endpoint validation'
+    },
+    {
+      id: 'pharmacovigilance',
+      name: 'Pharmacovigilance Analysis',
+      description: 'Generate adverse event reports and medication safety surveillance data'
+    }
+  ]
+
+  const handleUseCaseChange = (useCaseId: string) => {
+    setSelectedUseCase(useCaseId)
+    if (useCaseId && useCaseConfigurations[useCaseId]) {
+      const config = useCaseConfigurations[useCaseId]
+      setCohortConfig({
+        size: config.size,
+        ageRange: config.ageRange,
+        complexity: config.complexity,
+        conditions: config.conditions
+      })
+    }
+  }
 
   const handleStartGeneration = () => {
     setIsGenerating(true)
@@ -35,6 +111,58 @@ export function DemoConfiguration() {
       <div className="grid lg:grid-cols-3 gap-8">
         {/* Configuration Panel */}
         <div className="lg:col-span-2 space-y-6">
+          {/* Use Case Selection */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <Activity className="w-5 h-5 text-signal-violet" />
+                <span>Select Use Case Scenario</span>
+              </CardTitle>
+              <CardDescription>
+                Choose a predefined scenario to automatically configure parameters and settings.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="relative">
+                <select
+                  value={selectedUseCase}
+                  onChange={(e) => handleUseCaseChange(e.target.value)}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg appearance-none bg-white focus:ring-2 focus:ring-signal-violet focus:border-transparent"
+                >
+                  <option value="">Select a use case scenario...</option>
+                  {useCases.map((useCase) => (
+                    <option key={useCase.id} value={useCase.id}>
+                      {useCase.name}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
+              </div>
+              
+              {selectedUseCase && (
+                <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                  <h4 className="font-semibold text-blue-900 mb-2">
+                    {useCases.find(uc => uc.id === selectedUseCase)?.name}
+                  </h4>
+                  <p className="text-sm text-blue-700 mb-3">
+                    {useCases.find(uc => uc.id === selectedUseCase)?.description}
+                  </p>
+                  <div className="text-sm text-blue-600">
+                    <div className="grid grid-cols-2 gap-2">
+                      <div><strong>Specialty:</strong> {useCaseConfigurations[selectedUseCase]?.specialty}</div>
+                      <div><strong>Patient Count:</strong> {useCaseConfigurations[selectedUseCase]?.size}</div>
+                      <div><strong>Age Range:</strong> {useCaseConfigurations[selectedUseCase]?.ageRange[0]}-{useCaseConfigurations[selectedUseCase]?.ageRange[1]} years</div>
+                      <div><strong>Complexity:</strong> {useCaseConfigurations[selectedUseCase]?.complexity}</div>
+                    </div>
+                    <div className="mt-2">
+                      <strong>Data Modalities:</strong> {useCaseConfigurations[selectedUseCase]?.dataModalities.join(', ')}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">

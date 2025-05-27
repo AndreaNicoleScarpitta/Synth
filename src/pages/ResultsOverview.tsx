@@ -896,7 +896,25 @@ const ResultsOverview: React.FC<ResultsOverviewProps> = ({ results, onBackToDemo
                   <tbody>
                     {currentRecords.map((patient, index) => (
                       <tr key={patient.patient_id} style={{ borderBottom: '1px solid #f3f4f6' }}>
-                        <td style={{ padding: '12px', fontSize: '14px', fontWeight: '500' }}>{patient.patient_id}</td>
+                        <td style={{ padding: '12px', fontSize: '14px', fontWeight: '500' }}>
+                          <a 
+                            href={`/patient/${patient.patient_id}`}
+                            onClick={(e) => {
+                              e.preventDefault()
+                              window.open(`/patient/${patient.patient_id}`, '_blank')
+                            }}
+                            style={{
+                              color: '#3b82f6',
+                              textDecoration: 'none',
+                              fontWeight: '500',
+                              cursor: 'pointer'
+                            }}
+                            onMouseEnter={(e) => e.target.style.textDecoration = 'underline'}
+                            onMouseLeave={(e) => e.target.style.textDecoration = 'none'}
+                          >
+                            {patient.patient_id}
+                          </a>
+                        </td>
                         <td style={{ padding: '12px', fontSize: '14px' }}>{patient.age}</td>
                         <td style={{ padding: '12px', fontSize: '14px' }}>{patient.gender}</td>
                         <td style={{ padding: '12px', fontSize: '14px' }}>{patient.primary_diagnosis}</td>
