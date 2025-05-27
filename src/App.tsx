@@ -357,11 +357,17 @@ function App() {
                     <select style={{width: '100%', padding: '12px', border: '1px solid #d1d5db', borderRadius: '6px', fontSize: '14px'}}>
                       <option value="">Select a research use case...</option>
                       
+                      <optgroup label="⭐ Featured Demo">
+                        <option>🔬 Cardiac Hematology Simulation (Pediatric & Adolescent)</option>
+                      </optgroup>
+                      
                       <optgroup label="🩺 Clinical Research">
                         <option>Longitudinal Growth Modeling for Surgical Timing</option>
                         <option>Treatment Response Prediction in Oncology</option>
                         <option>Adverse Event Detection in Polypharmacy</option>
                         <option>Surgical Outcome Prediction Models</option>
+                        <option>Post-Operative Hemorrhage Risk Prediction</option>
+                        <option>Thrombotic Risk Assessment in CHD Patients</option>
                       </optgroup>
                       
                       <optgroup label="🧬 Pharmaceutical Research">
@@ -369,6 +375,8 @@ function App() {
                         <option>Clinical Trial Patient Stratification</option>
                         <option>Real-World Evidence Generation</option>
                         <option>Biomarker Discovery and Validation</option>
+                        <option>Synthetic Control Arms for Rare Disease Trials</option>
+                        <option>Iron Deficiency Treatment Efficacy Studies</option>
                       </optgroup>
                       
                       <optgroup label="🤖 AI Model Development">
@@ -376,6 +384,8 @@ function App() {
                         <option>Risk Stratification Model Development</option>
                         <option>Clinical Decision Support Systems</option>
                         <option>Population Health Analytics</option>
+                        <option>Early Detection Models for Cardiac Complications</option>
+                        <option>Triage Decision-Making (ICU vs Step-Down)</option>
                       </optgroup>
                       
                       <optgroup label="👶 Pediatric Cardiology">
@@ -383,6 +393,15 @@ function App() {
                         <option>Surgical Intervention Timing</option>
                         <option>Growth Pattern Analysis</option>
                         <option>Long-term Outcome Prediction</option>
+                        <option>Tetralogy of Fallot + Anemia Comorbidity</option>
+                        <option>Hypoplastic Left Heart Syndrome Trajectories</option>
+                      </optgroup>
+                      
+                      <optgroup label="🩸 Hematology Research">
+                        <option>Sickle Cell Disease in CHD Populations</option>
+                        <option>Iron Deficiency Anemia Treatment Outcomes</option>
+                        <option>Hemophilia Management in Cardiac Surgery</option>
+                        <option>Thrombocytopenia Risk Stratification</option>
                       </optgroup>
                       
                       <optgroup label="🔬 Medical Device Testing">
@@ -390,6 +409,7 @@ function App() {
                         <option>Safety Profile Assessment</option>
                         <option>Regulatory Submission Support</option>
                         <option>Post-Market Surveillance</option>
+                        <option>EHR Migration & Pipeline Validation</option>
                       </optgroup>
                     </select>
                   </div>
@@ -409,6 +429,7 @@ function App() {
                         <option>Medium Cohort (100-500 patients)</option>
                         <option>Large Cohort (1,000-5,000 patients)</option>
                         <option>Enterprise Scale (10,000+ patients)</option>
+                        <option>Featured Demo Scale (N=10,000 Pediatric)</option>
                       </select>
                     </div>
                     
@@ -449,6 +470,7 @@ function App() {
                         <option>Clinical + Lab Results</option>
                         <option>Clinical + Imaging Studies</option>
                         <option>Comprehensive Multimodal</option>
+                        <option>Full Cardiac-Hematology Suite (EKG + Labs + Notes)</option>
                       </select>
                     </div>
                     
@@ -473,6 +495,7 @@ function App() {
                         <option>Short Term (Days to Weeks)</option>
                         <option>Medium Term (Months)</option>
                         <option>Long Term (Years)</option>
+                        <option>Longitudinal Pediatric (Birth to 18 years)</option>
                       </select>
                     </div>
                   </div>
