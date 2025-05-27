@@ -18,6 +18,11 @@ if 'current_literature' not in st.session_state:
     st.session_state.current_literature = None
 
 def main():
+    # Redirect to marketing launch page by default unless demo authenticated
+    if 'demo_authenticated' not in st.session_state or not st.session_state.demo_authenticated:
+        st.switch_page("launch_page.py")
+        return
+        
     st.title("🧬 Synthetic Ascension")
     st.markdown("### Literature-backed synthetic patient cohorts for AI research")
     
