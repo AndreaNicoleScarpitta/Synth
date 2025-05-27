@@ -649,7 +649,11 @@ def main():
         # Store results for other views
         st.session_state.cohort_data_for_results = cohort_data
         
-        st.success("✅ **Cohort Generated Successfully!** Switch to 'Results Dashboard' or 'Advanced Analytics' tabs above to explore your data.")
+        st.success("✅ **Cohort Generated Successfully!** Redirecting to Results Overview...")
+        
+        # Auto-navigate to results overview
+        st.session_state.current_page = "demo_results"
+        st.rerun()
 
 def show_results_dashboard():
     """Dedicated results dashboard page"""

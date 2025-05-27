@@ -12,6 +12,202 @@ import uuid
 from typing import Dict, Any
 from utils.medical_tooltips import initialize_tooltips, medical_tooltip, wrap_medical_text
 
+def show_pediatric_demo_config():
+    """Demo Configuration Page - Step 2"""
+    from pediatric_cardiology_demo import main as pediatric_main
+    pediatric_main()
+
+def show_demo_results_overview():
+    """Demo Results Overview Page - Step 3"""
+    st.title("📊 Demo Results Overview")
+    
+    # Back to config button
+    if st.button("← Back to Demo Configuration"):
+        st.session_state.current_page = "pediatric_demo"
+        st.rerun()
+    
+    # Check if we have cohort data
+    if 'cohort_data_for_results' not in st.session_state:
+        st.warning("No cohort data available. Please generate a cohort first.")
+        if st.button("Go to Demo Configuration"):
+            st.session_state.current_page = "pediatric_demo"
+            st.rerun()
+        return
+    
+    st.markdown("---")
+    
+    # Navigation menu for sub-pages
+    st.subheader("📋 Results Navigation")
+    
+    col1, col2, col3, col4 = st.columns(4)
+    
+    with col1:
+        if st.button("👥 **Patient Record Explorer**", type="primary", use_container_width=True):
+            st.session_state.current_page = "patient_explorer"
+            st.rerun()
+    
+    with col2:
+        if st.button("📈 **Advanced Analytics**", use_container_width=True):
+            st.session_state.current_page = "advanced_analytics"
+            st.rerun()
+    
+    with col3:
+        if st.button("🤖 **ML/AI Analytics**", use_container_width=True):
+            st.session_state.current_page = "ml_analytics"
+            st.rerun()
+    
+    with col4:
+        if st.button("📋 **Audit Trails**", use_container_width=True):
+            st.session_state.current_page = "audit_trails"
+            st.rerun()
+    
+    # Show overview of generated cohort
+    cohort_data = st.session_state.cohort_data_for_results
+    
+    st.markdown("---")
+    st.subheader("📊 Cohort Overview")
+    
+    col1, col2, col3, col4 = st.columns(4)
+    
+    with col1:
+        st.metric("Total Patients", len(cohort_data))
+    
+    with col2:
+        conditions = [p.get('primary_diagnosis', 'Unknown') for p in cohort_data]
+        unique_conditions = len(set(conditions))
+        st.metric("Unique Conditions", unique_conditions)
+    
+    with col3:
+        ages = [p.get('age_months', 0) for p in cohort_data if p.get('age_months')]
+        avg_age = sum(ages) / len(ages) if ages else 0
+        st.metric("Avg Age (months)", f"{avg_age:.1f}")
+    
+    with col4:
+        males = sum(1 for p in cohort_data if p.get('sex') == 'Male')
+        st.metric("Male/Female", f"{males}/{len(cohort_data)-males}")
+
+def show_patient_record_explorer():
+    """Patient Record Explorer Matrix Page"""
+    st.title("👥 Patient Record Explorer Matrix")
+    
+    if st.button("← Back to Results Overview"):
+        st.session_state.current_page = "demo_results"
+        st.rerun()
+    
+    if 'cohort_data_for_results' not in st.session_state:
+        st.error("No cohort data available.")
+        return
+    
+    cohort_data = st.session_state.cohort_data_for_results
+    
+    st.markdown("---")
+    st.subheader("📋 Patient Matrix")
+    
+    # Create patient selection matrix
+    cols_per_row = 4
+    for i in range(0, len(cohort_data), cols_per_row):
+        cols = st.columns(cols_per_row)
+        for j, col in enumerate(cols):
+            patient_idx = i + j
+            if patient_idx < len(cohort_data):
+                patient = cohort_data[patient_idx]
+                with col:
+                    if st.button(f"Patient {patient_idx + 1}\n{patient.get('primary_diagnosis', 'Unknown')}", 
+                                key=f"patient_{patient_idx}", use_container_width=True):
+                        st.session_state.selected_patient = patient
+                        st.session_state.selected_patient_idx = patient_idx
+                        st.rerun()
+    
+    # Show selected patient details
+    if 'selected_patient' in st.session_state:
+        st.markdown("---")
+        st.subheader(f"📋 Patient {st.session_state.selected_patient_idx + 1} Details")
+        
+        patient = st.session_state.selected_patient
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.markdown("**Demographics**")
+            st.write(f"Age: {patient.get('age_months', 'N/A')} months")
+            st.write(f"Sex: {patient.get('sex', 'N/A')}")
+            st.write(f"Weight: {patient.get('weight_kg', 'N/A')} kg")
+            st.write(f"Height: {patient.get('height_cm', 'N/A')} cm")
+        
+        with col2:
+            st.markdown("**Clinical Status**")
+            if 'hemodynamics' in patient:
+                hemo = patient['hemodynamics']
+                st.markdown(f"**Heart Rate:** {hemo.get('heart_rate_bpm', 'N/A')} bpm")
+                st.markdown(f"**Blood Pressure:** {hemo.get('systolic_bp', 'N/A')}/{hemo.get('diastolic_bp', 'N/A')} mmHg")
+                st.markdown(f"**O2 Saturation:** {hemo.get('oxygen_saturation', 'N/A')}%")
+
+def show_advanced_analytics_page():
+    """Advanced Analytics Page"""
+    st.title("📈 Advanced Analytics")
+    
+    if st.button("← Back to Results Overview"):
+        st.session_state.current_page = "demo_results"
+        st.rerun()
+    
+    if 'cohort_data_for_results' not in st.session_state:
+        st.error("No cohort data available.")
+        return
+    
+    cohort_data = st.session_state.cohort_data_for_results
+    
+    # Basic analytics implementation
+    st.subheader("📊 Cohort Analytics")
+    
+    # Age distribution
+    ages = [p.get('age_months', 0) for p in cohort_data if p.get('age_months')]
+    if ages:
+        import matplotlib.pyplot as plt
+        fig, ax = plt.subplots()
+        ax.hist(ages, bins=10, alpha=0.7)
+        ax.set_xlabel('Age (months)')
+        ax.set_ylabel('Number of Patients')
+        ax.set_title('Age Distribution')
+        st.pyplot(fig)
+    
+    # Condition distribution
+    conditions = [p.get('primary_diagnosis', 'Unknown') for p in cohort_data]
+    condition_counts = {}
+    for condition in conditions:
+        condition_counts[condition] = condition_counts.get(condition, 0) + 1
+    
+    st.subheader("🔍 Condition Distribution")
+    for condition, count in condition_counts.items():
+        st.write(f"**{condition}:** {count} patients")
+
+def show_ml_ai_analytics():
+    """ML/AI Analytics Page"""
+    st.title("🤖 ML/AI Analytics & Overview")
+    
+    if st.button("← Back to Results Overview"):
+        st.session_state.current_page = "demo_results"
+        st.rerun()
+    
+    st.subheader("🧠 Agentic Chains of Thought")
+    st.info("This section would show AI agent reasoning patterns and decision trees used in synthetic data generation.")
+    
+    st.subheader("📊 Model Performance Metrics")
+    st.info("Statistical validation and model quality metrics would be displayed here.")
+
+def show_audit_trails():
+    """Audit Trails Page"""
+    st.title("📋 Audit Trails")
+    
+    if st.button("← Back to Results Overview"):
+        st.session_state.current_page = "demo_results"
+        st.rerun()
+    
+    st.subheader("🔍 Generation Audit Log")
+    st.info("Complete audit trail of synthetic data generation process would be shown here.")
+    
+    st.subheader("✅ Validation Steps")
+    st.info("Agent validation and rejection reasons would be displayed here.")
+
 # Page configuration - must be first Streamlit command
 st.set_page_config(
     page_title="Synthetic Ascension - Enterprise Synthetic EHR Platform",
@@ -836,27 +1032,38 @@ def main():
                 st.session_state.current_page = "research_dashboard"
                 st.rerun()
     
-    # Check if demo is authenticated and user wants to navigate
-    if st.session_state.get('demo_authenticated', False) and st.session_state.get('current_page'):
+    # Check if user wants to navigate to dedicated pages
+    if st.session_state.get('current_page'):
         if st.session_state.current_page == "pediatric_demo":
-            from pediatric_cardiology_demo import main as pediatric_main
-            pediatric_main()
+            show_pediatric_demo_config()
+            return
+        elif st.session_state.current_page == "demo_results":
+            show_demo_results_overview()
+            return
+        elif st.session_state.current_page == "patient_explorer":
+            show_patient_record_explorer()
+            return
+        elif st.session_state.current_page == "advanced_analytics":
+            show_advanced_analytics_page()
+            return
+        elif st.session_state.current_page == "ml_analytics":
+            show_ml_ai_analytics()
+            return
+        elif st.session_state.current_page == "audit_trails":
+            show_audit_trails()
+            return
         elif st.session_state.current_page == "pharma_workflows":
             from pharma_executive_workflows import main as pharma_main
             pharma_main()
+            return
         elif st.session_state.current_page == "architecture":
             from data_flow_visualizer import main as arch_main
             arch_main()
+            return
         elif st.session_state.current_page == "research_dashboard":
             from research_dashboard import main as research_main
             research_main()
-        elif st.session_state.current_page == "cohort_results":
-            from pages.cohort_results import main as cohort_main
-            cohort_main()
-        elif st.session_state.current_page == "data_exploration":
-            from pages.data_exploration import main as data_main
-            data_main()
-        return
+            return
     
     # Footer
     st.markdown("---")
