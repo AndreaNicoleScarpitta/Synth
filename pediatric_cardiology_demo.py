@@ -20,14 +20,24 @@ from agents.pediatric_cardiology_enhanced_generator import PediatricCardiologyGe
 from agents.advanced_clinical_configuration import AdvancedClinicalConfigurator
 from agents.surgical_strategy_simulator import SurgicalStrategySimulator
 
+def medical_tooltip(term: str, definition: str) -> str:
+    """Create a medical term with tooltip explanation"""
+    return f'<span title="{definition}" style="border-bottom: 1px dotted #666; cursor: help;">{term}</span>'
+
+def display_with_tooltip(text: str, tooltip: str):
+    """Display text with tooltip using HTML"""
+    st.markdown(f'<span title="{tooltip}" style="border-bottom: 1px dotted #666; cursor: help;">{text}</span>', unsafe_allow_html=True)
+
 def main():
-    # Check if we should show results view
-    if st.session_state.get('show_results_view', False):
+    # Initialize page state
+    if 'current_view' not in st.session_state:
+        st.session_state.current_view = 'generator'
+    
+    # Route to appropriate view
+    if st.session_state.current_view == 'results':
         show_results_dashboard()
         return
-    
-    # Check if we should show advanced analytics
-    if st.session_state.get('show_advanced_analytics', False):
+    elif st.session_state.current_view == 'analytics':
         show_advanced_analytics()
         return
     
@@ -49,13 +59,13 @@ def main():
             """)
         
         with col2:
-            st.info("""
+            st.markdown("""
             **Target Conditions:**
-            • Tetralogy of Fallot
-            • Hypoplastic Left Heart Syndrome  
-            • Coarctation of Aorta
-            • Ventricular Septal Defects
             """)
+            st.markdown("• " + medical_tooltip("Tetralogy of Fallot", "A heart defect with four abnormalities: hole between heart chambers, narrowed pulmonary valve, enlarged right ventricle, and displaced aorta"), unsafe_allow_html=True)
+            st.markdown("• " + medical_tooltip("Hypoplastic Left Heart Syndrome", "A severe birth defect where the left side of the heart is critically underdeveloped"), unsafe_allow_html=True)
+            st.markdown("• " + medical_tooltip("Coarctation of Aorta", "A narrowing of the body's main artery (aorta) that reduces blood flow"), unsafe_allow_html=True)
+            st.markdown("• " + medical_tooltip("Ventricular Septal Defects", "Holes in the wall separating the heart's two lower chambers"), unsafe_allow_html=True)
     
     # Generate synthetic pediatric cohort
     st.header("🎯 Generate Synthetic Pediatric Cohort")
@@ -634,22 +644,19 @@ def main():
         
         with nav_col1:
             if st.button("📊 **Launch Results Dashboard**", type="primary", use_container_width=True):
-                # Set flag to show results view
-                st.session_state.show_results_view = True
+                st.session_state.current_view = 'results'
                 st.session_state.cohort_data_for_results = cohort_data
                 st.rerun()
         
         with nav_col2:
             if st.button("🔬 **Advanced Analytics**", type="secondary", use_container_width=True):
-                st.session_state.show_advanced_analytics = True
+                st.session_state.current_view = 'analytics'
                 st.session_state.cohort_data_for_results = cohort_data
                 st.rerun()
         
         with nav_col3:
             if st.button("🔄 **Generate New**", use_container_width=True):
-                # Clear results and start fresh
-                if 'cohort_results' in st.session_state:
-                    del st.session_state.cohort_results
+                st.session_state.current_view = 'generator'
                 st.rerun()
 
 def show_results_dashboard():
@@ -658,7 +665,7 @@ def show_results_dashboard():
     
     # Back button
     if st.button("← Back to Generator"):
-        st.session_state.show_results_view = False
+        st.session_state.current_view = 'generator'
         st.rerun()
     
     cohort_data = st.session_state.get('cohort_data_for_results', {})
@@ -721,9 +728,9 @@ def show_results_dashboard():
                 st.markdown("**Clinical Status**")
                 if 'hemodynamics' in patient:
                     hemo = patient['hemodynamics']
-                    st.write(f"Heart Rate: {hemo.get('heart_rate_bpm', 'N/A')} bpm")
-                    st.write(f"Blood Pressure: {hemo.get('systolic_bp', 'N/A')}/{hemo.get('diastolic_bp', 'N/A')} mmHg")
-                    st.write(f"O2 Saturation: {hemo.get('oxygen_saturation', 'N/A')}%")
+                    st.markdown("Heart Rate: " + medical_tooltip(f"{hemo.get('heart_rate_bpm', 'N/A')} bpm", "Beats per minute - normal pediatric range varies by age"), unsafe_allow_html=True)
+                    st.markdown("Blood Pressure: " + medical_tooltip(f"{hemo.get('systolic_bp', 'N/A')}/{hemo.get('diastolic_bp', 'N/A')} mmHg", "Systolic/Diastolic pressure - force of blood against artery walls"), unsafe_allow_html=True)
+                    st.markdown("O2 Saturation: " + medical_tooltip(f"{hemo.get('oxygen_saturation', 'N/A')}%", "Percentage of oxygen in blood - normal is 95-100%"), unsafe_allow_html=True)
             
             # Medications
             if 'medications' in patient and patient['medications']:
@@ -765,7 +772,7 @@ def show_advanced_analytics():
     
     # Back button
     if st.button("← Back to Generator"):
-        st.session_state.show_advanced_analytics = False
+        st.session_state.current_view = 'generator'
         st.rerun()
     
     st.info("Advanced statistical analysis and machine learning insights on your synthetic cohort")
