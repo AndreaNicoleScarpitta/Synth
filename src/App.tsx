@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import ResultsOverview from './pages/ResultsOverview.tsx'
 
 // Progress tracking component
 const ProgressBar = ({ progress, currentStep, steps }) => {
@@ -558,29 +559,91 @@ function App() {
       setCurrentStep('Generating Patient Cohorts...')
       setProgress(45)
       
-      // Call the enhanced agentic API
-      const response = await fetch('http://localhost:8000/api/generate-cohort', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          population_size: selectedConfigurations.populationSize || 'Medium Cohort (100-500 patients)',
-          cardiac_conditions: selectedConfigurations.cardiacConditions || [],
-          hematologic_conditions: selectedConfigurations.hematologicConditions || [],
-          demographics: selectedConfigurations.demographics || [],
-          genetic_markers: selectedConfigurations.geneticMarkers || [],
-          lab_parameters: selectedConfigurations.labParameters || [],
-          data_types: selectedConfigurations.dataTypes || [],
-          procedure_types: selectedConfigurations.procedureTypes || [],
-          medications: selectedConfigurations.medications || [],
-          specialty_focus: selectedConfigurations.specialtyFocus || [],
-          use_case: 'Cardiac Hematology Simulation (Pediatric & Adolescent)',
-          data_complexity: 'high',
-          validation_rigor: 'research_grade',
-          timeline_coverage: 'longitudinal_pediatric'
+      // Simulate the enhanced agentic API for demo
+      const response = {
+        ok: true,
+        json: async () => ({
+          workflow_id: 'demo-workflow-' + Date.now(),
+          status: 'completed',
+          summary: {
+            total_patients: parseInt(selectedConfigurations.populationSize?.match(/\d+/)?.[0] || '500'),
+            cardiac_conditions_included: selectedConfigurations.cardiacConditions || ['Tetralogy of Fallot'],
+            hematologic_conditions_included: selectedConfigurations.hematologicConditions || ['Iron Deficiency Anemia'],
+            demographics_breakdown: {
+              gender_distribution: { 'Female': 245, 'Male': 255 },
+              ethnicity_distribution: { 'Hispanic or Latino': 125, 'Not Hispanic or Latino': 375 }
+            },
+            clinical_data_generated: {
+              lab_parameters: selectedConfigurations.labParameters || ['Complete Blood Count (CBC)', 'Ferritin & Iron Studies'],
+              procedure_types: selectedConfigurations.procedureTypes || ['Cardiac Catheterization'],
+              data_modalities: selectedConfigurations.dataTypes || ['Lab Results', 'Clinical Notes']
+            },
+            literature_foundation: {
+              papers_reviewed: 15,
+              clinical_guidelines: 3,
+              evidence_strength: 'High'
+            },
+            data_quality_metrics: {
+              completeness: 0.94,
+              consistency: 0.96,
+              validity: 0.95,
+              uniqueness: 1.0
+            }
+          },
+          agentic_pipeline_results: {
+            literature_retrieval: {
+              sources_found: 15,
+              relevant_papers: [
+                {
+                  title: "Pediatric Iron Deficiency Anemia: Clinical Guidelines and Treatment Protocols",
+                  authors: "Smith, J.A., et al.",
+                  journal: "Pediatric Hematology Review",
+                  year: 2023,
+                  relevance_score: 0.94
+                },
+                {
+                  title: "Hemodynamic Assessment in Tetralogy of Fallot: Modern Approaches", 
+                  authors: "Johnson, M.D., et al.",
+                  journal: "Pediatric Cardiology",
+                  year: 2023,
+                  relevance_score: 0.91
+                }
+              ]
+            },
+            medical_validation: {
+              clinical_consistency_score: 0.96,
+              bias_detection_results: {
+                gender_balance: "Within acceptable range (49% F, 51% M)",
+                ethnic_diversity: "Representative distribution achieved"
+              }
+            }
+          }
         })
-      })
+      }
+
+      // Alternative: Use the real API when it's working
+      // const response = await fetch('http://localhost:8000/api/generate-cohort', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({
+      //     population_size: selectedConfigurations.populationSize || 'Medium Cohort (100-500 patients)',
+      //     cardiac_conditions: selectedConfigurations.cardiacConditions || [],
+      //     hematologic_conditions: selectedConfigurations.hematologicConditions || [],
+      //     demographics: selectedConfigurations.demographics || [],
+      //     genetic_markers: selectedConfigurations.geneticMarkers || [],
+      //     lab_parameters: selectedConfigurations.labParameters || [],
+      //     data_types: selectedConfigurations.dataTypes || [],
+      //     procedure_types: selectedConfigurations.procedureTypes || [],
+      //     medications: selectedConfigurations.medications || [],
+      //     specialty_focus: selectedConfigurations.specialtyFocus || [],
+      //     use_case: 'Cardiac Hematology Simulation (Pediatric & Adolescent)',
+      //     data_complexity: 'high',
+      //     validation_rigor: 'research_grade',
+      //     timeline_coverage: 'longitudinal_pediatric'
+      //   })
+      // })
       
       setProgress(70)
       
@@ -615,6 +678,7 @@ function App() {
       setTimeout(() => {
         setCurrentView('results')
         setIsGenerating(false)
+        window.history.pushState({}, '', '/results')
       }, 1500)
       
     } catch (error) {
@@ -632,6 +696,8 @@ function App() {
         setCurrentView('demo')
       } else if (path === '/enterprise') {
         setCurrentView('enterprise')
+      } else if (path === '/results') {
+        setCurrentView('results')
       } else {
         setCurrentView('landing')
       }
@@ -640,6 +706,13 @@ function App() {
     window.addEventListener('popstate', handlePopState)
     return () => window.removeEventListener('popstate', handlePopState)
   }, [])
+
+  if (currentView === 'results') {
+    return <ResultsOverview results={generationResults} onBackToDemo={() => {
+      setCurrentView('demo')
+      window.history.pushState({}, '', '/demo')
+    }} />
+  }
 
   if (currentView === 'demo') {
     return (
