@@ -12,12 +12,7 @@ import plotly.graph_objects as go
 from datetime import datetime
 import asyncio
 
-# Page configuration
-st.set_page_config(
-    page_title="Biomedical Research - Synthetic Ascension",
-    page_icon="🔬",
-    layout="wide"
-)
+# Page configuration handled in main app.py
 
 def display_header():
     """Display the page header with branding"""
