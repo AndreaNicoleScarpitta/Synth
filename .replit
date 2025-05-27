@@ -32,6 +32,10 @@ args = "React Frontend"
 task = "workflow.run"
 args = "Enhanced API Server"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Comprehensive EHR API"
+
 [[workflows.workflow]]
 name = "API Server"
 author = "agent"
@@ -67,6 +71,15 @@ author = "agent"
 task = "shell.exec"
 args = "python api_server_enhanced.py"
 waitForPort = 8000
+
+[[workflows.workflow]]
+name = "Comprehensive EHR API"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python api_server_comprehensive.py"
+waitForPort = 8080
 
 [[ports]]
 localPort = 5000

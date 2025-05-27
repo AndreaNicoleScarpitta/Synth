@@ -41,96 +41,286 @@ const PatientRecord: React.FC = () => {
   }, [patientId])
 
   const generateSyntheticPatientData = (id) => {
-    // Generate comprehensive synthetic EHR data
+    // Generate comprehensive synthetic EHR data matching hospital standards
     const baseAge = parseInt(id.split('-')[1]) || Math.floor(Math.random() * 18) + 1
     const gender = Math.random() > 0.5 ? 'Female' : 'Male'
+    const birthDate = new Date(Date.now() - (baseAge * 365.25 * 24 * 60 * 60 * 1000))
+    const weight = Math.round((15 + Math.random() * 45) * 10) / 10
+    const height = Math.round(80 + Math.random() * 100)
+    const bmi = Math.round((weight / ((height/100) ** 2)) * 10) / 10
     
     return {
       patient_id: id,
       demographics: {
+        full_name: `Patient ${id.split('-')[2]}`,
+        date_of_birth: birthDate.toISOString().split('T')[0],
         age: baseAge,
-        gender: gender,
-        date_of_birth: new Date(Date.now() - (baseAge * 365.25 * 24 * 60 * 60 * 1000)).toISOString().split('T')[0],
-        ethnicity: ['Caucasian', 'Hispanic', 'African American', 'Asian', 'Other'][Math.floor(Math.random() * 5)],
-        weight_kg: Math.round((15 + Math.random() * 45) * 10) / 10,
-        height_cm: Math.round(80 + Math.random() * 100),
-        bmi: null,
+        sex: gender,
+        gender_identity: gender,
+        pronouns: gender === 'Male' ? 'He/Him' : 'She/Her',
+        address: {
+          street: `${Math.floor(Math.random() * 9999)} Medical Center Dr`,
+          city: 'Children\'s Hospital City',
+          state: 'CA',
+          zip: '90210',
+          country: 'USA'
+        },
+        contact: {
+          phone: `(555) ${Math.floor(Math.random() * 900) + 100}-${Math.floor(Math.random() * 9000) + 1000}`,
+          email: `guardian.${id.toLowerCase()}@email.com`,
+          emergency_contact: 'Parent/Guardian',
+          emergency_phone: `(555) ${Math.floor(Math.random() * 900) + 100}-${Math.floor(Math.random() * 9000) + 1000}`
+        },
+        race_ethnicity: {
+          race: ['White', 'Black or African American', 'Asian', 'American Indian/Alaska Native', 'Native Hawaiian/Pacific Islander'][Math.floor(Math.random() * 5)],
+          ethnicity: ['Not Hispanic or Latino', 'Hispanic or Latino'][Math.floor(Math.random() * 2)],
+          primary_language: 'English'
+        },
+        insurance: {
+          primary: 'Pediatric Health Plan',
+          member_id: `PHP${Math.floor(Math.random() * 1000000)}`,
+          group_number: 'GRP001',
+          subscriber: 'Parent/Guardian'
+        },
+        anthropometrics: {
+          weight_kg: weight,
+          height_cm: height,
+          bmi: bmi,
+          bmi_percentile: Math.floor(Math.random() * 95) + 5,
+          head_circumference_cm: baseAge < 3 ? Math.round(35 + Math.random() * 15) : null
+        },
         medical_record_number: `MRN-${Math.floor(Math.random() * 1000000)}`
       },
-      cardiac_profile: {
-        primary_diagnosis: ['Tetralogy of Fallot', 'Ventricular Septal Defect', 'Atrial Septal Defect', 'Hypoplastic Left Heart Syndrome'][Math.floor(Math.random() * 4)],
-        severity: ['Mild', 'Moderate', 'Severe'][Math.floor(Math.random() * 3)],
-        surgical_history: [
+      problem_list: {
+        active_diagnoses: [
           {
-            procedure: 'Complete Intracardiac Repair',
-            date: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-            surgeon: 'Dr. Johnson',
-            outcome: 'Successful'
+            condition: ['Tetralogy of Fallot', 'Ventricular Septal Defect', 'Atrial Septal Defect', 'Hypoplastic Left Heart Syndrome'][Math.floor(Math.random() * 4)],
+            icd10_code: ['Q21.3', 'Q21.0', 'Q21.1', 'Q23.4'][Math.floor(Math.random() * 4)],
+            onset_date: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            status: 'Active',
+            severity: ['Mild', 'Moderate', 'Severe'][Math.floor(Math.random() * 3)],
+            certainty: 'Confirmed',
+            domain: 'Cardiovascular'
+          },
+          {
+            condition: 'Heart Failure',
+            icd10_code: 'I50.9',
+            onset_date: new Date(Date.now() - Math.random() * 180 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            status: 'Active',
+            severity: 'Moderate',
+            certainty: 'Confirmed',
+            domain: 'Cardiovascular'
+          }
+        ]
+      },
+      allergies_adverse_reactions: [
+        {
+          allergen: 'Penicillin',
+          type: 'Medication',
+          reaction: 'Rash, Hives',
+          severity: 'Moderate',
+          onset_date: new Date(Date.now() - Math.random() * 1000 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+          status: 'Active',
+          triage_recommendation: 'Avoid - use alternative antibiotics'
+        }
+      ],
+      laboratory_results: {
+        panels: [
+          {
+            panel_name: 'Complete Blood Count with Differential',
+            loinc_code: '58410-2',
+            ordered_date: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            collected_date: new Date(Date.now() - Math.random() * 28 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            resulted_date: new Date(Date.now() - Math.random() * 27 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            ordering_provider: 'Dr. Sarah Chen, Pediatric Cardiology',
+            status: 'Final',
+            critical_flags: [],
+            results: [
+              {
+                test: 'Hemoglobin',
+                value: Math.round((11 + Math.random() * 4) * 10) / 10,
+                unit: 'g/dL',
+                reference_range: `${baseAge < 5 ? '11.0-14.0' : '12.0-15.5'} g/dL`,
+                flag: ''
+              },
+              {
+                test: 'Hematocrit',
+                value: Math.round((33 + Math.random() * 12) * 10) / 10,
+                unit: '%',
+                reference_range: `${baseAge < 5 ? '33-41' : '36-46'}%`,
+                flag: ''
+              },
+              {
+                test: 'White Blood Cell Count',
+                value: Math.round((4 + Math.random() * 8) * 100) / 100,
+                unit: 'K/uL',
+                reference_range: `${baseAge < 2 ? '6.0-17.5' : baseAge < 6 ? '5.0-15.5' : '4.5-13.5'} K/uL`,
+                flag: ''
+              },
+              {
+                test: 'Platelet Count',
+                value: Math.round(150 + Math.random() * 300),
+                unit: 'K/uL',
+                reference_range: '150-450 K/uL',
+                flag: ''
+              }
+            ]
+          },
+          {
+            panel_name: 'Comprehensive Metabolic Panel',
+            loinc_code: '24323-8',
+            ordered_date: new Date(Date.now() - Math.random() * 21 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            collected_date: new Date(Date.now() - Math.random() * 20 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            resulted_date: new Date(Date.now() - Math.random() * 19 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            ordering_provider: 'Dr. Sarah Chen, Pediatric Cardiology',
+            status: 'Final',
+            critical_flags: [],
+            results: [
+              {
+                test: 'Glucose',
+                value: Math.round(70 + Math.random() * 50),
+                unit: 'mg/dL',
+                reference_range: '70-100 mg/dL',
+                flag: ''
+              },
+              {
+                test: 'Creatinine',
+                value: Math.round((0.3 + Math.random() * 0.5) * 100) / 100,
+                unit: 'mg/dL',
+                reference_range: `${baseAge < 1 ? '0.2-0.4' : baseAge < 3 ? '0.3-0.7' : '0.5-1.0'} mg/dL`,
+                flag: ''
+              },
+              {
+                test: 'Sodium',
+                value: Math.round(135 + Math.random() * 10),
+                unit: 'mEq/L',
+                reference_range: '135-145 mEq/L',
+                flag: ''
+              },
+              {
+                test: 'Potassium',
+                value: Math.round((3.5 + Math.random() * 1.5) * 10) / 10,
+                unit: 'mEq/L',
+                reference_range: '3.5-5.0 mEq/L',
+                flag: ''
+              }
+            ]
+          },
+          {
+            panel_name: 'BNP (B-type Natriuretic Peptide)',
+            loinc_code: '33762-6',
+            ordered_date: new Date(Date.now() - Math.random() * 14 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            collected_date: new Date(Date.now() - Math.random() * 13 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            resulted_date: new Date(Date.now() - Math.random() * 12 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            ordering_provider: 'Dr. Sarah Chen, Pediatric Cardiology',
+            status: 'Final',
+            critical_flags: [],
+            results: [
+              {
+                test: 'BNP',
+                value: Math.round(20 + Math.random() * 180),
+                unit: 'pg/mL',
+                reference_range: '<100 pg/mL',
+                flag: Math.random() > 0.7 ? 'H' : ''
+              }
+            ]
+          }
+        ]
+      },
+      medication_history: {
+        current_medications: [
+          {
+            name: 'Furosemide (Lasix)',
+            rxnorm_code: '4603',
+            generic_name: 'Furosemide',
+            brand_name: 'Lasix',
+            dosage: `${Math.round((1 + Math.random() * 2) * 10) / 10} mg/kg/day`,
+            dose_amount: `${Math.round((5 + Math.random() * 15) * 10) / 10} mg`,
+            route: 'PO (By mouth)',
+            frequency: 'BID (Twice daily)',
+            start_date: new Date(Date.now() - Math.random() * 180 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            prescriber: 'Dr. Sarah Chen, Pediatric Cardiology',
+            indication: 'Heart failure management - fluid retention',
+            status: 'Active',
+            pharmacy: 'Children\'s Hospital Pharmacy',
+            last_filled: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            quantity_dispensed: '30 tablets',
+            refills_remaining: Math.floor(Math.random() * 6)
+          },
+          {
+            name: 'Enalapril (Vasotec)',
+            rxnorm_code: '3827',
+            generic_name: 'Enalapril',
+            brand_name: 'Vasotec',
+            dosage: '0.1 mg/kg/dose',
+            dose_amount: `${Math.round((2.5 + Math.random() * 7.5) * 10) / 10} mg`,
+            route: 'PO (By mouth)',
+            frequency: 'BID (Twice daily)',
+            start_date: new Date(Date.now() - Math.random() * 180 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            prescriber: 'Dr. Sarah Chen, Pediatric Cardiology',
+            indication: 'Afterload reduction - ACE inhibitor therapy',
+            status: 'Active',
+            pharmacy: 'Children\'s Hospital Pharmacy',
+            last_filled: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            quantity_dispensed: '60 tablets',
+            refills_remaining: Math.floor(Math.random() * 6)
           }
         ],
-        echo_findings: {
-          ejection_fraction: Math.round((55 + Math.random() * 15) * 10) / 10,
-          left_ventricular_function: ['Normal', 'Mildly Impaired', 'Moderately Impaired'][Math.floor(Math.random() * 3)],
-          valve_function: 'Normal',
-          wall_motion: 'Normal'
-        }
+        discontinued_medications: [
+          {
+            name: 'Digoxin',
+            rxnorm_code: '3407',
+            start_date: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            stop_date: new Date(Date.now() - Math.random() * 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            reason_discontinued: 'Therapeutic levels achieved with current regimen',
+            prescriber: 'Dr. Sarah Chen, Pediatric Cardiology'
+          }
+        ]
       },
-      laboratory_results: [
-        {
-          test_name: 'Complete Blood Count',
-          loinc_code: '58410-2',
-          date_collected: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-          results: {
-            hemoglobin: Math.round((11 + Math.random() * 4) * 10) / 10,
-            hematocrit: Math.round((33 + Math.random() * 12) * 10) / 10,
-            white_blood_cells: Math.round((4 + Math.random() * 8) * 1000) / 1000,
-            platelets: Math.round(150 + Math.random() * 300)
+      imaging_diagnostics: {
+        studies: [
+          {
+            study_type: 'Echocardiogram (2D Echo with Doppler)',
+            modality: 'Ultrasound',
+            study_date: new Date(Date.now() - Math.random() * 60 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            ordering_provider: 'Dr. Sarah Chen, Pediatric Cardiology',
+            performing_technologist: 'Jennifer Rodriguez, RDCS',
+            interpreting_radiologist: 'Dr. Michael Thompson, Pediatric Cardiology',
+            status: 'Final Report',
+            indication: 'Follow-up congenital heart disease',
+            technique: '2D, M-mode, and Doppler echocardiography',
+            findings: {
+              summary: 'Stable moderate ventricular septal defect with adequate biventricular function',
+              ejection_fraction: `${Math.round((55 + Math.random() * 15) * 10) / 10}%`,
+              left_ventricle: 'Normal size and systolic function',
+              right_ventricle: 'Mildly dilated with normal function',
+              valves: 'Tricuspid regurgitation - mild; other valves normal',
+              septal_defect: `Moderate perimembranous VSD, ${Math.round((8 + Math.random() * 4) * 10) / 10}mm`
+            },
+            impression: 'Stable moderate VSD with good biventricular function. No significant change from prior study.',
+            recommendations: 'Continue current medical management. Follow-up echo in 6 months.',
+            comparison: 'Compared to prior echo dated 6 months ago - stable findings'
           },
-          reference_ranges: {
-            hemoglobin: '11.5-15.5 g/dL',
-            hematocrit: '34-46%',
-            white_blood_cells: '4.5-11.0 K/uL',
-            platelets: '150-450 K/uL'
+          {
+            study_type: 'Chest X-Ray (PA and Lateral)',
+            modality: 'Radiography',
+            study_date: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            ordering_provider: 'Dr. Sarah Chen, Pediatric Cardiology',
+            interpreting_radiologist: 'Dr. Lisa Park, Pediatric Radiology',
+            status: 'Final Report',
+            indication: 'Evaluation of cardiac silhouette and pulmonary vasculature',
+            technique: 'PA and lateral chest radiographs',
+            findings: {
+              heart: 'Normal cardiac silhouette, cardiothoracic ratio within normal limits',
+              lungs: 'Clear bilateral lung fields, no acute infiltrates',
+              bones: 'No acute osseous abnormalities',
+              mediastinum: 'Normal mediastinal contours'
+            },
+            impression: 'Normal chest radiograph.',
+            comparison: 'Stable compared to prior chest X-ray 3 months ago'
           }
-        },
-        {
-          test_name: 'Comprehensive Metabolic Panel',
-          loinc_code: '24323-8',
-          date_collected: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-          results: {
-            glucose: Math.round((70 + Math.random() * 50)),
-            creatinine: Math.round((0.3 + Math.random() * 0.5) * 100) / 100,
-            sodium: Math.round(135 + Math.random() * 10),
-            potassium: Math.round((3.5 + Math.random() * 1.5) * 10) / 10
-          },
-          reference_ranges: {
-            glucose: '70-100 mg/dL',
-            creatinine: '0.3-0.8 mg/dL',
-            sodium: '135-145 mEq/L',
-            potassium: '3.5-5.0 mEq/L'
-          }
-        }
-      ],
-      medications: [
-        {
-          name: 'Furosemide',
-          rxnorm_code: '4603',
-          dosage: '1 mg/kg/day',
-          route: 'Oral',
-          frequency: 'Twice daily',
-          start_date: new Date(Date.now() - Math.random() * 180 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-          indication: 'Heart failure management'
-        },
-        {
-          name: 'Enalapril',
-          rxnorm_code: '3827',
-          dosage: '0.1 mg/kg/dose',
-          route: 'Oral',
-          frequency: 'Twice daily',
-          start_date: new Date(Date.now() - Math.random() * 180 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-          indication: 'Afterload reduction'
-        }
-      ],
+        ]
+      },
       clinical_encounters: [
         {
           date: new Date(Date.now() - Math.random() * 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],

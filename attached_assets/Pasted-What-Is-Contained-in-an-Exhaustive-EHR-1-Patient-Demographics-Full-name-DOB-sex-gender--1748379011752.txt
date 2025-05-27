@@ -1,0 +1,208 @@
+What Is Contained in an Exhaustive EHR?
+1. 📌 Patient Demographics
+
+    Full name, DOB, sex, gender identity, pronouns
+
+    Address, phone, email
+
+    Race, ethnicity, language
+
+    Insurance and financial information
+
+    Primary care provider, referral source
+
+2. 🩺 Problem List
+
+    Active diagnoses (e.g., Type 2 Diabetes, COPD, PTSD)
+
+    Chronic conditions with onset dates and resolution status
+
+    ICD-10 codes
+
+    Diagnostic certainty flags (e.g., suspected vs. confirmed)
+
+    Grouped by domain (e.g., cardiovascular, psychiatric)
+
+3. 💊 Medication History
+
+    Current medications, past prescriptions, and discontinued meds
+
+    Dose, frequency, route (PO, IV, IM), start/stop dates
+
+    Medication allergies and adverse reactions
+
+    Pharmacy fill history (if integrated)
+
+4. 🧪 Lab Results
+
+    All labs grouped by panel (e.g., CBC, CMP, lipid panel)
+
+    Time-series trends
+
+    Critical flags and normal ranges
+
+    Interpretation comments (if applicable)
+
+    Reference ranges based on age/sex
+
+5. 🖼️ Imaging & Diagnostics
+
+    Radiology studies: X-ray, CT, MRI, ultrasound
+
+    Pathology reports, echocardiograms, stress tests
+
+    Results: impressions + full dictation
+
+    Links to DICOM viewer or embedded images
+
+    Comparison to prior studies
+
+6. 📝 Clinical Notes
+
+    Encounter notes (SOAP or H&P format)
+
+    Progress notes: inpatient/outpatient, multidisciplinary
+
+    Specialty notes: neurology, oncology, psychiatry, etc.
+
+    Surgical/procedure notes
+
+    Consultation summaries
+
+    Telephone calls and MyChart messages
+
+    Notes accumulate over years—longitudinal records often have thousands of individual note entries.
+
+7. 🗓️ Encounters & Visit History
+
+    Chronological list of all clinical encounters:
+
+        Inpatient admissions (hospitalizations)
+
+        Emergency department visits
+
+        Outpatient specialty visits
+
+        Telehealth encounters
+
+    Reason for visit, provider, location, diagnosis, procedures performed
+
+8. 🚑 Procedures & Surgeries
+
+    CPT codes, procedure names
+
+    Surgeon/operator, assistant, anesthetic type
+
+    Pre-op and post-op notes
+
+    Complications, pathology reports, outcomes
+
+    Time-stamped and linked to episode of care
+
+9. 🧾 Allergies & Adverse Reactions
+
+    Medications, foods, environmental allergens
+
+    Reaction types: rash, anaphylaxis, nausea, etc.
+
+    Severity, onset date, confirmation status
+
+    Triage recommendations (e.g., avoid, monitor)
+
+10. 🧠 Mental Health & Social Determinants
+
+    Psychiatric diagnoses, therapy notes, screening scores (PHQ-9, GAD-7)
+
+    Substance use history
+
+    Housing status, food insecurity, employment
+
+    Domestic violence screening
+
+    Education level, literacy barriers
+
+11. 🧍 Vital Signs
+
+    Structured time series:
+
+        HR, RR, BP, Temp, SpO2, Height/Weight, BMI
+
+    Trend graphs
+
+    Norms based on age and context
+
+    Alerts for abnormal values (e.g., >180 SBP)
+
+12. 🧬 Genetics / Family History
+
+    Personal genomic results (if tested)
+
+    Documented family history of chronic or inherited conditions
+
+    Pedigree chart links or structured family tree
+
+13. 📦 Immunization Records
+
+    Childhood and adult immunizations
+
+    Dates, manufacturer, lot numbers
+
+    Refusal documentation or contraindications
+
+14. 👶 OB/GYN and Pregnancy History
+
+    Gravida/Para
+
+    EDD, LMP, pregnancy outcomes
+
+    Prenatal labs and ultrasounds
+
+    Birth plan, delivery details, postpartum follow-ups
+
+15. 📜 Advance Directives / Legal Documents
+
+    Code status (Full, DNR, DNI, etc.)
+
+    POLST/MOLST
+
+    Power of attorney, healthcare proxy
+
+    Organ donation preferences
+
+16. 👥 Care Team / Contacts
+
+    Assigned PCP, specialists, case manager
+
+    Emergency contacts
+
+    Interdisciplinary care plans
+
+    Communication logs
+
+17. 📤 Correspondence & Attachments
+
+    Scanned external records
+
+    Faxed referrals or operative reports
+
+    Patient-submitted data (e.g., external labs)
+
+    Consent forms, disability forms, legal paperwork
+
+18. 📈 Flowsheets & Monitoring Panels
+
+    ICU-style charting for time-sensitive monitoring
+
+    Nutrition, respiratory, neuro checks, wound care
+
+    Automatic charting devices (e.g., ventilator settings, insulin pumps)
+
+19. 🔐 Audit Logs & Access Reports
+
+    Who accessed what, when
+
+    Patient portal activity
+
+    Amendments made to notes or diagnoses
+
+    Disclosure tracking for HIPAA compliance
