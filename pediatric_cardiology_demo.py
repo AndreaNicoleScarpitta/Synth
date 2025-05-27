@@ -99,10 +99,19 @@ def main():
     # Advanced Clinical Parameters
     st.subheader("🏥 Surgical & Treatment Strategy")
     
-    col4, col5, col6 = st.columns(3)
+    # Add treatment strategy tabs
+    strategy_tab1, strategy_tab2, strategy_tab3, strategy_tab4 = st.tabs([
+        "🏥 Surgical Strategy", 
+        "🧬 Genetic Management", 
+        "💊 Pharmacological Management",
+        "📊 Data Exploration"
+    ])
     
-    with col4:
-        surgical_strategy = st.selectbox(
+    with strategy_tab1:
+        col4, col5, col6 = st.columns(3)
+        
+        with col4:
+            surgical_strategy = st.selectbox(
             "Surgical Management Approach",
             [
                 "Staged Palliation (Norwood → Glenn → Fontan)",
@@ -283,6 +292,74 @@ def main():
                 "Strain Imaging"
             ]
         )
+    
+    with strategy_tab2:
+        st.info("🧬 **Genetic Management - Coming Soon!**")
+        st.markdown("""
+        **Advanced genetic analysis and management features in development:**
+        
+        • **Pharmacogenomics** - Personalized drug dosing based on genetic variants
+        • **Gene Panel Testing** - Comprehensive cardiac gene analysis 
+        • **Family Pedigree Analysis** - Multi-generational risk assessment
+        • **CRISPR Simulation** - Gene therapy outcome modeling
+        • **Polygenic Risk Scores** - Complex trait prediction algorithms
+        • **Epigenetic Factors** - Environmental gene interaction modeling
+        
+        *Expected Release: Q2 2025*
+        """)
+        
+        # Preview mockup
+        st.markdown("### Preview: Genetic Risk Dashboard")
+        preview_col1, preview_col2 = st.columns(2)
+        with preview_col1:
+            st.metric("Genetic Risk Score", "7.2/10", "↑ High Risk")
+            st.metric("Variants Identified", "12", "4 pathogenic")
+        with preview_col2:
+            st.metric("Family History Score", "8.5/10", "Strong pattern")
+            st.metric("Pharmacogenomic Alerts", "3", "CYP2D6 variant")
+    
+    with strategy_tab3:
+        st.info("💊 **Pharmacological Management - Coming Soon!**")
+        st.markdown("""
+        **Comprehensive drug management and optimization features:**
+        
+        • **AI-Powered Dosing** - Weight and age-adjusted pediatric dosing
+        • **Drug Interaction Checker** - Real-time safety monitoring
+        • **Therapeutic Drug Monitoring** - Plasma level optimization
+        • **Adverse Event Prediction** - ML-based risk assessment
+        • **Medication Adherence Tracking** - Patient compliance analytics
+        • **Cost-Effectiveness Analysis** - Treatment pathway optimization
+        
+        *Expected Release: Q3 2025*
+        """)
+        
+        # Preview mockup
+        st.markdown("### Preview: Smart Dosing Assistant")
+        med_col1, med_col2 = st.columns(2)
+        with med_col1:
+            st.metric("Active Medications", "8", "2 high-risk")
+            st.metric("Drug Interactions", "1", "⚠️ Monitor")
+        with med_col2:
+            st.metric("Adherence Score", "92%", "↑ Excellent")
+            st.metric("Cost per Month", "$347", "↓ Optimized")
+    
+    with strategy_tab4:
+        st.success("📊 **Data Exploration - Available Now!**")
+        st.markdown("""
+        **Explore your synthetic EHR data with powerful analytics:**
+        
+        • **Cohort Overview** - High-level population analytics
+        • **Demographics Analysis** - Age, sex, ethnicity distributions
+        • **Clinical Trends** - Vital signs, lab values, correlations
+        • **Surgical Outcomes** - Procedure success rates and complications
+        • **Individual Records** - Detailed patient drill-down capabilities
+        • **Export Options** - CSV, JSON, FHIR bundle formats
+        """)
+        
+        if st.button("🚀 Launch Data Explorer", type="primary"):
+            st.switch_page("pages/data_exploration.py")
+        
+        st.markdown("*Generate a cohort first, then explore the comprehensive analytics dashboard!*")
     
     # Generate button
     if st.button("🫀 Generate Pediatric Cardiology Cohort", type="primary"):
