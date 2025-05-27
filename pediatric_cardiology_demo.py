@@ -113,6 +113,12 @@ def main():
     
     min_size, max_size = tier_ranges[selected_tier]
     
+    # Initialize variables to ensure they're accessible
+    condition_focus = age_group = cohort_size = multi_system_interactions = None
+    surgical_strategy = device_implant = clinical_scenario = genetic_syndrome = None
+    demographic_focus = comorbidity_profile = medication_protocol = None
+    monitoring_parameters = imaging_studies = None
+    
     # Primary clinical parameters
     col1, col2, col3 = st.columns(3)
     
@@ -165,7 +171,7 @@ def main():
         )
         
         # Multi-system interaction modeling
-        st.selectbox(
+        multi_system_interactions = st.selectbox(
             "Multi-System Interactions",
             [
                 "Isolated CHD (Single System)",
@@ -446,27 +452,38 @@ def main():
         
         st.markdown("*Generate a cohort first, then explore the comprehensive analytics dashboard!*")
     
-    # Generate button
-    if st.button("🫀 Generate Pediatric Cardiology Cohort", type="primary"):
+    # Generate button as call to action after configuration
+    st.markdown("---")
+    generate_col1, generate_col2 = st.columns([2, 1])
+    
+    with generate_col1:
+        st.markdown(f"**Ready to generate {selected_tier} cohort with advanced clinical configuration**")
+        st.markdown(f"*This will create {min_size:,}-{max_size:,} synthetic patients with complete agent reasoning and EHR records*")
+    
+    with generate_col2:
+        generate_cohort_button = st.button("🫀 Generate Cohort", type="primary", use_container_width=True)
+    
+    # Generate cohort logic
+    if generate_cohort_button:
         
         with st.spinner("🔬 Generating advanced synthetic cohort with full agent reasoning..."):
             
-            # Store configuration for results page
+            # Store configuration for results page with safe defaults
             configuration = {
                 'tier': selected_tier,
-                'cohort_size': cohort_size,
-                'condition': condition_focus,
-                'age_group': age_group,
-                'multi_system': multi_system_interactions,
-                'surgical_strategy': surgical_strategy,
-                'device_implant': device_implant,
-                'clinical_scenario': clinical_scenario,
-                'genetic_syndrome': genetic_syndrome,
-                'demographic_focus': demographic_focus,
-                'comorbidities': comorbidity_profile,
-                'medications': medication_protocol,
-                'monitoring': monitoring_parameters,
-                'imaging': imaging_studies,
+                'cohort_size': cohort_size or 100,
+                'condition': condition_focus or "Tetralogy of Fallot (TOF)",
+                'age_group': age_group or "Infants (1-12 months)",
+                'multi_system': multi_system_interactions or "Isolated CHD (Single System)",
+                'surgical_strategy': surgical_strategy or "Primary Repair",
+                'device_implant': device_implant or "None",
+                'clinical_scenario': clinical_scenario or "Standard Clinical Cohort",
+                'genetic_syndrome': genetic_syndrome or "None (Isolated CHD)",
+                'demographic_focus': demographic_focus or "General Population",
+                'comorbidities': comorbidity_profile or [],
+                'medications': medication_protocol or [],
+                'monitoring': monitoring_parameters or [],
+                'imaging': imaging_studies or [],
                 'generation_time': datetime.now().isoformat()
             }
             
@@ -560,7 +577,7 @@ def main():
                 },
                 {
                     "description": "Multi-System Interaction Modeling",
-                    "reasoning": f"Implemented {multi_system_interactions} complexity to simulate realistic comorbidity patterns",
+                    "reasoning": f"Implemented {multi_system_interactions or 'standard'} complexity to simulate realistic comorbidity patterns",
                     "context": f"Tier {selected_tier} requires sophisticated physiologic state modeling",
                     "confidence": 0.88,
                     "duration_ms": 2100,
