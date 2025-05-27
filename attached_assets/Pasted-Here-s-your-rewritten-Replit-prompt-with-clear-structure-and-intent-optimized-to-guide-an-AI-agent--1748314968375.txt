@@ -1,0 +1,76 @@
+Here’s your rewritten Replit prompt with clear structure and intent, optimized to guide an AI agent or developer workspace setup:
+
+
+---
+
+Prompt:
+
+> I’m building an agentic AI system on Replit and need a full-stack architecture for generating synthetic, multimodal EHR records from a problem statement, not a search query.
+
+Requirements:
+
+1. Live Agent Visibility
+
+I want real-time visibility into the agents performing tasks (e.g., data generation, validation, insertion).
+
+Include an interface or logs to track agent status and outputs.
+
+
+
+2. Agent Workflow
+
+The user provides a clinical problem statement (e.g., “suspected autoimmune flare in adolescent female”).
+
+From this, agents use RAG (Retrieval-Augmented Generation) to generate synthetic EHR records—structured (lab values, vitals), unstructured (notes), and time-series data.
+
+
+
+3. Databases (Multi-layered)
+
+SQL DB (e.g., PostgreSQL): For structured EHR data (labs, encounters, demographics)
+
+Graph DB (e.g., Neo4j): For relationships across patient history, diagnosis chains, and timelines
+
+Document DB (e.g., MongoDB): For storing unstructured notes, external references, agent output states
+
+Object Storage (e.g., MinIO or local blob store): For saving multimodal assets (e.g., synthetic images, waveform data)
+
+
+
+4. Audit & Explainability
+
+Every agent action must be auditable. Store logs of inputs, prompts, outputs, and downstream effects.
+
+Create traceability across the orchestration DAG.
+
+
+
+5. Orchestration Engine
+
+Use Temporal or a similar open-source orchestrator to manage multi-step agent flows
+
+Ensure that workflows are resumable, inspectable, and support retries
+
+
+
+6. Output
+
+A Langflow-style visual graph of the agent flow
+
+Reusable pipeline template to create and validate synthetic patient records from a single input problem
+
+
+
+
+
+
+> Build the full architecture and example implementation to run in Replit, using open source packages only.
+Bonus: Include APIs to trigger flows and retrieve patient data by synthetic cohort.
+
+
+
+
+---
+
+Let me know if you want a pre-scaffolded Replit project or want this as a Langflow flow instead.
+
