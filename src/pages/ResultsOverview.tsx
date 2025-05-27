@@ -899,10 +899,6 @@ const ResultsOverview: React.FC<ResultsOverviewProps> = ({ results, onBackToDemo
                         <td style={{ padding: '12px', fontSize: '14px', fontWeight: '500' }}>
                           <a 
                             href={`/patient/${patient.patient_id}`}
-                            onClick={(e) => {
-                              e.preventDefault()
-                              window.open(`/patient/${patient.patient_id}`, '_blank')
-                            }}
                             style={{
                               color: '#3b82f6',
                               textDecoration: 'none',
