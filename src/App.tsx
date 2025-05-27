@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom'
+import ResultsOverview from './pages/ResultsOverview.tsx'
+import PatientRecord from './pages/PatientRecord.tsx'
 
 // Progress tracking component
 const ProgressBar = ({ progress, currentStep, steps }) => {
@@ -471,7 +474,7 @@ const features = [
   }
 ]
 
-function AppContent() {
+function App() {
   const [currentView, setCurrentView] = useState('landing')
   const [isGenerating, setIsGenerating] = useState(false)
   const [progress, setProgress] = useState(0)
@@ -687,7 +690,7 @@ function AppContent() {
     }
   }
 
-  // Handle browser back/forward buttons and initial URL
+  // Handle browser back/forward buttons
   React.useEffect(() => {
     const handlePopState = () => {
       const path = window.location.pathname
@@ -702,14 +705,11 @@ function AppContent() {
       }
     }
 
-    // Set initial view based on current URL
-    handlePopState()
-
     window.addEventListener('popstate', handlePopState)
     return () => window.removeEventListener('popstate', handlePopState)
   }, [])
 
-  if (currentView === 'results' && generationResults) {
+  if (currentView === 'results') {
     return <ResultsOverview results={generationResults} onBackToDemo={() => {
       setCurrentView('demo')
       window.history.pushState({}, '', '/demo')
@@ -1297,10 +1297,6 @@ function AppContent() {
       </main>
     </div>
   )
-}
-
-function App() {
-  return <AppContent />
 }
 
 export default App

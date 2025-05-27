@@ -6,18 +6,6 @@ const PatientRecord: React.FC = () => {
   const { patientId } = useParams<{ patientId: string }>()
   const navigate = useNavigate()
 
-  // Function to generate realistic patient photo based on demographics
-  const generatePatientPhoto = (demographics, patientId) => {
-    // Using This Person Does Not Exist API to generate realistic photos
-    // Based on demographic characteristics for authentic representation
-    const seed = patientId.replace(/\D/g, '') // Extract numbers for consistent seed
-    const genderParam = demographics.gender.toLowerCase() === 'female' ? 'women' : 'men'
-    const ageGroup = demographics.age < 12 ? 'child' : demographics.age < 18 ? 'teen' : 'adult'
-    
-    // Generate realistic photo URL based on demographics
-    return `https://this-person-does-not-exist.com/img/avatar-${seed}${genderParam.charAt(0)}.jpg`
-  }
-
   // Comprehensive patient data with all modalities
   const patientData = {
     'CHD-2024-001': {
@@ -31,24 +19,6 @@ const PatientRecord: React.FC = () => {
         height: "125 cm",
         bmi: "16.1 kg/m²"
       },
-      photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face&q=80",
-      medical_images: [
-        {
-          type: "Echocardiogram Video",
-          url: "https://via.placeholder.com/400x300/4F46E5/FFFFFF?text=Echo+Video+Replay",
-          description: "Apical 4-chamber view showing post-surgical anatomy"
-        },
-        {
-          type: "Chest X-Ray",
-          url: "https://via.placeholder.com/300x400/059669/FFFFFF?text=Chest+X-Ray",
-          description: "Post-operative chest radiograph"
-        },
-        {
-          type: "Cardiac MRI",
-          url: "https://via.placeholder.com/350x350/DC2626/FFFFFF?text=Cardiac+MRI",
-          description: "Cardiac function assessment"
-        }
-      ],
       primary_diagnosis: "Tetralogy of Fallot",
       secondary_conditions: ["Pulmonary Stenosis", "Iron Deficiency Anemia"],
       surgical_history: [
@@ -162,24 +132,6 @@ const PatientRecord: React.FC = () => {
         height: "168 cm",
         bmi: "20.7 kg/m²"
       },
-      photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face&q=80",
-      medical_images: [
-        {
-          type: "Fontan MRI Video",
-          url: "https://via.placeholder.com/400x300/8B5CF6/FFFFFF?text=Fontan+MRI+Cine",
-          description: "Fontan circulation flow assessment"
-        },
-        {
-          type: "Chest X-Ray Series",
-          url: "https://via.placeholder.com/300x400/10B981/FFFFFF?text=CXR+Series",
-          description: "Serial chest radiographs showing Fontan anatomy"
-        },
-        {
-          type: "Echo Doppler",
-          url: "https://via.placeholder.com/350x350/F59E0B/FFFFFF?text=Echo+Doppler",
-          description: "Doppler assessment of systemic ventricular function"
-        }
-      ],
       primary_diagnosis: "Hypoplastic Left Heart Syndrome",
       secondary_conditions: ["Protein-losing Enteropathy", "Thrombocytopenia"],
       surgical_history: [
@@ -471,37 +423,9 @@ const PatientRecord: React.FC = () => {
         {/* Patient Header */}
         <div style={styles.patientHeader}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '16px' }}>
-            <div style={{ display: 'flex', alignItems: 'start', gap: '24px' }}>
-              {/* Patient Photo */}
-              <div style={{
-                width: '120px',
-                height: '120px',
-                borderRadius: '12px',
-                overflow: 'hidden',
-                border: '3px solid #e5e7eb',
-                flexShrink: 0
-              }}>
-                <img 
-                  src={patient.photo}
-                  alt={`Patient ${patient.patient_id}`}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover'
-                  }}
-                  onError={(e) => {
-                    e.target.src = `https://ui-avatars.com/api/?name=${patient.demographics.gender}&background=3b82f6&color=ffffff&size=120`
-                  }}
-                />
-              </div>
-              
-              <div>
-                <h1 style={styles.patientTitle}>Patient {patient.patient_id}</h1>
-                <p style={styles.patientSubtitle}>{patient.primary_diagnosis}</p>
-                <div style={{ fontSize: '14px', color: '#6b7280', marginTop: '8px' }}>
-                  {patient.demographics.age}-year-old {patient.demographics.ethnicity} {patient.demographics.gender.toLowerCase()}
-                </div>
-              </div>
+            <div>
+              <h1 style={styles.patientTitle}>Patient {patient.patient_id}</h1>
+              <p style={styles.patientSubtitle}>{patient.primary_diagnosis}</p>
             </div>
             <span style={getRiskBadgeStyle(patient.risk_score)}>
               {patient.risk_score} Risk
@@ -535,132 +459,6 @@ const PatientRecord: React.FC = () => {
             </div>
           </div>
         </div>
-
-        {/* Medical Images Gallery */}
-        {patient.medical_images && patient.medical_images.length > 0 && (
-          <div style={{
-            backgroundColor: 'white',
-            borderRadius: '12px',
-            padding: '24px',
-            marginBottom: '24px',
-            border: '1px solid #e5e7eb'
-          }}>
-            <h3 style={{
-              margin: '0 0 20px 0',
-              fontSize: '18px',
-              fontWeight: '600',
-              color: '#1f2937',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px'
-            }}>
-              <span style={{
-                width: '24px',
-                height: '24px',
-                backgroundColor: '#3b82f6',
-                borderRadius: '6px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'white',
-                fontSize: '12px'
-              }}>📸</span>
-              Medical Images & Videos
-            </h3>
-            
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: '20px'
-            }}>
-              {patient.medical_images.map((image, index) => (
-                <div key={index} style={{
-                  border: '2px solid #e5e7eb',
-                  borderRadius: '12px',
-                  overflow: 'hidden',
-                  backgroundColor: '#f9fafb',
-                  transition: 'all 0.2s ease',
-                  cursor: 'pointer'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = '#3b82f6'
-                  e.currentTarget.style.transform = 'scale(1.02)'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = '#e5e7eb'
-                  e.currentTarget.style.transform = 'scale(1)'
-                }}
-                onClick={() => window.open(image.url, '_blank')}
-                >
-                  <div style={{
-                    height: '200px',
-                    backgroundColor: '#f3f4f6',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    position: 'relative'
-                  }}>
-                    <img 
-                      src={image.url}
-                      alt={image.type}
-                      style={{
-                        maxWidth: '100%',
-                        maxHeight: '100%',
-                        objectFit: 'contain'
-                      }}
-                    />
-                    {image.type.toLowerCase().includes('video') && (
-                      <div style={{
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        backgroundColor: 'rgba(0,0,0,0.7)',
-                        borderRadius: '50%',
-                        width: '60px',
-                        height: '60px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: 'white',
-                        fontSize: '24px'
-                      }}>
-                        ▶️
-                      </div>
-                    )}
-                  </div>
-                  
-                  <div style={{ padding: '16px' }}>
-                    <h4 style={{
-                      margin: '0 0 8px 0',
-                      fontSize: '16px',
-                      fontWeight: '600',
-                      color: '#1f2937'
-                    }}>
-                      {image.type}
-                    </h4>
-                    <p style={{
-                      margin: '0',
-                      fontSize: '14px',
-                      color: '#6b7280',
-                      lineHeight: '1.4'
-                    }}>
-                      {image.description}
-                    </p>
-                    <div style={{
-                      marginTop: '12px',
-                      fontSize: '12px',
-                      color: '#3b82f6',
-                      fontWeight: '500'
-                    }}>
-                      Click to view full size
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
 
         {/* Clinical Data Sections */}
         <div style={styles.sectionGrid}>
