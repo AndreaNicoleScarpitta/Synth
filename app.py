@@ -661,7 +661,7 @@ def main():
                     registration_id = save_registration(registration_data)
                     
                     st.success(f"""
-                    🎉 **Registration Successful!**
+                    **Registration Successful!**
                     
                     Thank you for your interest in Synthetic Ascension. We've added you to our priority access list.
                     
@@ -671,7 +671,7 @@ def main():
                     """)
                     
                     if demo_requested:
-                        st.info("✨ **Priority Demo Access Requested** - You'll receive demo credentials via email within 24 hours.")
+                        st.info("**Priority Demo Access Requested** - You'll receive demo credentials via email within 24 hours.")
                 else:
                     st.error("Please enter a valid email address.")
             else:
@@ -679,9 +679,15 @@ def main():
     
     # Demo access section
     st.markdown("---")
-    st.markdown("## 🔐 Demo Access Portal")
+    st.markdown("""
+    <div style="margin: 3rem 0;">
+        <h2 style="font-family: 'Syne', sans-serif; color: #0A1F44; font-weight: 600; font-size: 2.2rem; text-align: center; margin-bottom: 2rem;">
+            Demo Access Portal
+        </h2>
+    </div>
+    """, unsafe_allow_html=True)
     
-    if st.button("🎮 Access Password-Protected Demo", use_container_width=True):
+    if st.button("Access Password-Protected Demo", use_container_width=True):
         st.session_state.show_demo_login = True
     
     if st.session_state.get('show_demo_login', False):
@@ -691,7 +697,7 @@ def main():
             demo_email = st.text_input("Email", placeholder="your.email@company.com")
             demo_password = st.text_input("Password", type="password", placeholder="Enter demo password")
             
-            login_submitted = st.form_submit_button("🔑 Access Demo")
+            login_submitted = st.form_submit_button("Access Demo")
             
             if login_submitted:
                 if validate_demo_login(demo_email, demo_password):
@@ -699,41 +705,48 @@ def main():
                     st.session_state.demo_authenticated = True
                     st.session_state.demo_session_id = session_id
                     
-                    st.success("✅ **Demo Access Granted!**")
-                    st.balloons()
+                    st.success("**Demo Access Granted!**")
                     
                     # Store demo authentication state
                     st.session_state.demo_authenticated = True
                     st.session_state.demo_session_id = session_id
                         
                 else:
-                    st.error("❌ **Access Denied** - Invalid email or password. Please contact our team for demo credentials.")
+                    st.error("**Access Denied** - Invalid email or password. Please contact our team for demo credentials.")
     
     # Demo navigation - outside of forms
     if st.session_state.get('demo_authenticated', False):
         st.markdown("---")
-        st.markdown("## 🎮 **Demo Access Granted!**")
-        st.markdown("**Welcome to Synthetic Ascension Demo! Choose your workflow:**")
+        st.markdown("""
+        <div style="margin: 2rem 0;">
+            <h2 style="font-family: 'Syne', sans-serif; color: #0A1F44; font-weight: 600; font-size: 2rem; text-align: center; margin-bottom: 1rem;">
+                Demo Access Granted
+            </h2>
+            <p style="text-align: center; color: #5A6F7A; font-size: 1.1rem; margin-bottom: 2rem;">
+                Welcome to Synthetic Ascension Demo! Choose your workflow:
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
         
         col1, col2, col3, col4 = st.columns(4)
         
         with col1:
-            if st.button("🫀 Pediatric Cardiology Demo", use_container_width=True):
+            if st.button("Pediatric Cardiology Demo", use_container_width=True):
                 st.session_state.current_page = "pediatric_demo"
                 st.rerun()
         
         with col2:
-            if st.button("💊 Pharma Executive Workflows", use_container_width=True):
+            if st.button("Pharma Executive Workflows", use_container_width=True):
                 st.session_state.current_page = "pharma_workflows"
                 st.rerun()
         
         with col3:
-            if st.button("🏗️ System Architecture", use_container_width=True):
+            if st.button("System Architecture", use_container_width=True):
                 st.session_state.current_page = "architecture"
                 st.rerun()
         
         with col4:
-            if st.button("🔬 Research Dashboard", use_container_width=True):
+            if st.button("Research Dashboard", use_container_width=True):
                 st.session_state.current_page = "research_dashboard"
                 st.rerun()
     
