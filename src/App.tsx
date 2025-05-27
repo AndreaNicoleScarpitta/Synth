@@ -281,19 +281,41 @@ function App() {
 
   const handleLaunchDemo = () => {
     setCurrentView('demo')
+    // Update URL for unique demo access
+    window.history.pushState({}, '', '/demo')
   }
 
   const handleEnterprisePartnership = () => {
     setCurrentView('enterprise')
+    window.history.pushState({}, '', '/enterprise')
   }
 
   const handleStartDemo = () => {
     setCurrentView('demo')
+    window.history.pushState({}, '', '/demo')
   }
 
   const handleBackToLanding = () => {
     setCurrentView('landing')
+    window.history.pushState({}, '', '/')
   }
+
+  // Handle browser back/forward buttons
+  React.useEffect(() => {
+    const handlePopState = () => {
+      const path = window.location.pathname
+      if (path === '/demo') {
+        setCurrentView('demo')
+      } else if (path === '/enterprise') {
+        setCurrentView('enterprise')
+      } else {
+        setCurrentView('landing')
+      }
+    }
+
+    window.addEventListener('popstate', handlePopState)
+    return () => window.removeEventListener('popstate', handlePopState)
+  }, [])
 
   if (currentView === 'demo') {
     return (
@@ -325,171 +347,189 @@ function App() {
               
               <div style={{maxWidth: '800px', margin: '48px auto'}}>
                 
-                {/* Clinical Research Context */}
+                {/* Research Use Case Selection */}
                 <div style={{...styles.card, marginBottom: '24px'}}>
-                  <h3 style={styles.cardTitle}>Clinical Research Context</h3>
+                  <h3 style={styles.cardTitle}>Select Research Use Case</h3>
                   <div style={{marginTop: '24px'}}>
                     <label style={{display: 'block', marginBottom: '8px', fontWeight: '500', color: '#374151'}}>
-                      Quick Start - Select Example Context:
+                      Choose Your Research Scenario:
                     </label>
-                    <select style={{width: '100%', padding: '12px', border: '1px solid #d1d5db', borderRadius: '6px', marginBottom: '16px'}}>
-                      <option value="">Choose a predefined scenario...</option>
-                      <option>Simulate late-stage renal failure in Type 2 diabetics with comorbid hypertension</option>
-                      <option>Generate elderly patients with multiple cardiovascular risk factors</option>
-                      <option>Create pediatric cohort with autoimmune conditions requiring immunosuppression</option>
-                      <option>Model patients with treatment-resistant depression and anxiety comorbidities</option>
-                      <option>Simulate acute respiratory failure in COPD patients during exacerbation</option>
-                      <option>Pediatric cardiology cases with congenital heart defects</option>
-                      <option>Oncology patients undergoing chemotherapy with varying response rates</option>
-                      <option>Surgical patients with post-operative complications</option>
+                    <select style={{width: '100%', padding: '12px', border: '1px solid #d1d5db', borderRadius: '6px', fontSize: '14px'}}>
+                      <option value="">Select a research use case...</option>
+                      
+                      <optgroup label="🩺 Clinical Research">
+                        <option>Longitudinal Growth Modeling for Surgical Timing</option>
+                        <option>Treatment Response Prediction in Oncology</option>
+                        <option>Adverse Event Detection in Polypharmacy</option>
+                        <option>Surgical Outcome Prediction Models</option>
+                      </optgroup>
+                      
+                      <optgroup label="🧬 Pharmaceutical Research">
+                        <option>Drug Safety Signal Detection</option>
+                        <option>Clinical Trial Patient Stratification</option>
+                        <option>Real-World Evidence Generation</option>
+                        <option>Biomarker Discovery and Validation</option>
+                      </optgroup>
+                      
+                      <optgroup label="🤖 AI Model Development">
+                        <option>Diagnostic Algorithm Training</option>
+                        <option>Risk Stratification Model Development</option>
+                        <option>Clinical Decision Support Systems</option>
+                        <option>Population Health Analytics</option>
+                      </optgroup>
+                      
+                      <optgroup label="👶 Pediatric Cardiology">
+                        <option>Congenital Heart Defect Progression</option>
+                        <option>Surgical Intervention Timing</option>
+                        <option>Growth Pattern Analysis</option>
+                        <option>Long-term Outcome Prediction</option>
+                      </optgroup>
+                      
+                      <optgroup label="🔬 Medical Device Testing">
+                        <option>Device Performance Validation</option>
+                        <option>Safety Profile Assessment</option>
+                        <option>Regulatory Submission Support</option>
+                        <option>Post-Market Surveillance</option>
+                      </optgroup>
                     </select>
-                    
-                    <label style={{display: 'block', marginBottom: '8px', fontWeight: '500', color: '#374151'}}>
-                      Clinical Research Question/Context:
-                    </label>
-                    <textarea 
-                      placeholder="Describe the clinical scenario, patient population, or research question you want to simulate..."
-                      rows={4}
-                      style={{width: '100%', padding: '12px', border: '1px solid #d1d5db', borderRadius: '6px', resize: 'vertical'}}
-                    />
                   </div>
                 </div>
 
-                {/* Generation Parameters */}
+                {/* Configuration Parameters */}
                 <div style={{...styles.card, marginBottom: '24px'}}>
-                  <h3 style={styles.cardTitle}>Generation Parameters</h3>
+                  <h3 style={styles.cardTitle}>Configuration Parameters</h3>
                   <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px', marginTop: '24px'}}>
-                    <div>
-                      <label style={{display: 'block', marginBottom: '8px', fontWeight: '500', color: '#374151'}}>
-                        Cohort Size
-                      </label>
-                      <input 
-                        type="number" 
-                        min="1" 
-                        max="100" 
-                        defaultValue="10"
-                        style={{width: '100%', padding: '12px', border: '1px solid #d1d5db', borderRadius: '6px'}}
-                      />
-                      <small style={{color: '#6b7280', fontSize: '12px'}}>Number of synthetic patients to generate</small>
-                    </div>
                     
                     <div>
                       <label style={{display: 'block', marginBottom: '8px', fontWeight: '500', color: '#374151'}}>
-                        Validation Strictness
+                        Patient Population Size
                       </label>
                       <select style={{width: '100%', padding: '12px', border: '1px solid #d1d5db', borderRadius: '6px'}}>
-                        <option>Lenient</option>
-                        <option selected>Standard</option>
-                        <option>Strict</option>
+                        <option>Small Cohort (10-50 patients)</option>
+                        <option>Medium Cohort (100-500 patients)</option>
+                        <option>Large Cohort (1,000-5,000 patients)</option>
+                        <option>Enterprise Scale (10,000+ patients)</option>
                       </select>
-                      <small style={{color: '#6b7280', fontSize: '12px'}}>How rigorous should the validation agents be?</small>
                     </div>
                     
                     <div>
-                      <label style={{display: 'flex', alignItems: 'center', gap: '8px', fontWeight: '500', color: '#374151'}}>
-                        <input type="checkbox" defaultChecked style={{width: '16px', height: '16px'}} />
-                        Include Multimodal Data
+                      <label style={{display: 'block', marginBottom: '8px', fontWeight: '500', color: '#374151'}}>
+                        Data Complexity Level
                       </label>
-                      <small style={{color: '#6b7280', fontSize: '12px'}}>Generate imaging, procedures, and time-series data</small>
+                      <select style={{width: '100%', padding: '12px', border: '1px solid #d1d5db', borderRadius: '6px'}}>
+                        <option>Basic Demographics & Diagnoses</option>
+                        <option>Standard Clinical Records</option>
+                        <option>Complex Multi-System Cases</option>
+                        <option>Longitudinal Patient Journeys</option>
+                      </select>
+                    </div>
+                    
+                    <div>
+                      <label style={{display: 'block', marginBottom: '8px', fontWeight: '500', color: '#374151'}}>
+                        Medical Specialty Focus
+                      </label>
+                      <select style={{width: '100%', padding: '12px', border: '1px solid #d1d5db', borderRadius: '6px'}}>
+                        <option>General Medicine</option>
+                        <option>Pediatric Cardiology</option>
+                        <option>Oncology</option>
+                        <option>Emergency Medicine</option>
+                        <option>Psychiatry</option>
+                        <option>Nephrology</option>
+                        <option>Pulmonology</option>
+                        <option>Orthopedics</option>
+                      </select>
+                    </div>
+                    
+                    <div>
+                      <label style={{display: 'block', marginBottom: '8px', fontWeight: '500', color: '#374151'}}>
+                        Data Types to Include
+                      </label>
+                      <select style={{width: '100%', padding: '12px', border: '1px solid #d1d5db', borderRadius: '6px'}}>
+                        <option>Core Clinical Data Only</option>
+                        <option>Clinical + Lab Results</option>
+                        <option>Clinical + Imaging Studies</option>
+                        <option>Comprehensive Multimodal</option>
+                      </select>
+                    </div>
+                    
+                    <div>
+                      <label style={{display: 'block', marginBottom: '8px', fontWeight: '500', color: '#374151'}}>
+                        Validation Rigor
+                      </label>
+                      <select style={{width: '100%', padding: '12px', border: '1px solid #d1d5db', borderRadius: '6px'}}>
+                        <option>Lenient (Fast Generation)</option>
+                        <option>Standard (Balanced)</option>
+                        <option>Strict (High Quality)</option>
+                        <option>Research Grade (Maximum Rigor)</option>
+                      </select>
+                    </div>
+                    
+                    <div>
+                      <label style={{display: 'block', marginBottom: '8px', fontWeight: '500', color: '#374151'}}>
+                        Timeline Coverage
+                      </label>
+                      <select style={{width: '100%', padding: '12px', border: '1px solid #d1d5db', borderRadius: '6px'}}>
+                        <option>Single Point in Time</option>
+                        <option>Short Term (Days to Weeks)</option>
+                        <option>Medium Term (Months)</option>
+                        <option>Long Term (Years)</option>
+                      </select>
                     </div>
                   </div>
                 </div>
 
-                {/* Advanced Options */}
+                {/* Advanced Settings */}
                 <div style={{...styles.card, marginBottom: '24px'}}>
-                  <h3 style={styles.cardTitle}>Advanced Configuration</h3>
-                  
-                  <div style={{marginTop: '24px'}}>
-                    <h4 style={{fontSize: '16px', fontWeight: '600', color: '#374151', marginBottom: '16px'}}>Data Types to Include</h4>
-                    <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px'}}>
-                      <label style={{display: 'flex', alignItems: 'center', gap: '8px', color: '#374151'}}>
-                        <input type="checkbox" defaultChecked style={{width: '16px', height: '16px'}} />
-                        Time-series vitals and labs
+                  <h3 style={styles.cardTitle}>Advanced Settings</h3>
+                  <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px', marginTop: '24px'}}>
+                    
+                    <div>
+                      <label style={{display: 'block', marginBottom: '8px', fontWeight: '500', color: '#374151'}}>
+                        Demographic Distribution
                       </label>
-                      <label style={{display: 'flex', alignItems: 'center', gap: '8px', color: '#374151'}}>
-                        <input type="checkbox" defaultChecked style={{width: '16px', height: '16px'}} />
-                        Imaging studies and reports
-                      </label>
-                      <label style={{display: 'flex', alignItems: 'center', gap: '8px', color: '#374151'}}>
-                        <input type="checkbox" defaultChecked style={{width: '16px', height: '16px'}} />
-                        Procedures and interventions
-                      </label>
-                      <label style={{display: 'flex', alignItems: 'center', gap: '8px', color: '#374151'}}>
-                        <input type="checkbox" defaultChecked style={{width: '16px', height: '16px'}} />
-                        Clinical notes and narratives
-                      </label>
-                      <label style={{display: 'flex', alignItems: 'center', gap: '8px', color: '#374151'}}>
-                        <input type="checkbox" style={{width: '16px', height: '16px'}} />
-                        Genomic data
-                      </label>
-                      <label style={{display: 'flex', alignItems: 'center', gap: '8px', color: '#374151'}}>
-                        <input type="checkbox" style={{width: '16px', height: '16px'}} />
-                        Social determinants
-                      </label>
+                      <select style={{width: '100%', padding: '12px', border: '1px solid #d1d5db', borderRadius: '6px'}}>
+                        <option>Real-World Representative</option>
+                        <option>Age-Stratified Cohort</option>
+                        <option>Gender-Balanced</option>
+                        <option>Ethnically Diverse</option>
+                        <option>Custom Distribution</option>
+                      </select>
                     </div>
-                  </div>
-
-                  <div style={{marginTop: '24px'}}>
-                    <h4 style={{fontSize: '16px', fontWeight: '600', color: '#374151', marginBottom: '16px'}}>Validation Agent Settings</h4>
-                    <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px'}}>
-                      <div>
-                        <label style={{display: 'block', marginBottom: '8px', fontWeight: '500', color: '#374151'}}>
-                          Realism Agent Skepticism: <span style={{color: '#0ea5e9'}}>0.5</span>
-                        </label>
-                        <input 
-                          type="range" 
-                          min="0" 
-                          max="1" 
-                          step="0.1" 
-                          defaultValue="0.5"
-                          style={{width: '100%'}}
-                        />
-                        <small style={{color: '#6b7280', fontSize: '12px'}}>0.0 = Very lenient, 1.0 = Very strict</small>
-                      </div>
-                      <div>
-                        <label style={{display: 'block', marginBottom: '8px', fontWeight: '500', color: '#374151'}}>
-                          Relevance Agent Skepticism: <span style={{color: '#0ea5e9'}}>0.5</span>
-                        </label>
-                        <input 
-                          type="range" 
-                          min="0" 
-                          max="1" 
-                          step="0.1" 
-                          defaultValue="0.5"
-                          style={{width: '100%'}}
-                        />
-                        <small style={{color: '#6b7280', fontSize: '12px'}}>0.0 = Very lenient, 1.0 = Very strict</small>
-                      </div>
+                    
+                    <div>
+                      <label style={{display: 'block', marginBottom: '8px', fontWeight: '500', color: '#374151'}}>
+                        Comorbidity Complexity
+                      </label>
+                      <select style={{width: '100%', padding: '12px', border: '1px solid #d1d5db', borderRadius: '6px'}}>
+                        <option>Single Primary Condition</option>
+                        <option>Common Comorbidities</option>
+                        <option>Complex Multi-System</option>
+                        <option>Rare Disease Patterns</option>
+                      </select>
                     </div>
-                  </div>
-
-                  <div style={{marginTop: '24px'}}>
-                    <h4 style={{fontSize: '16px', fontWeight: '600', color: '#374151', marginBottom: '16px'}}>Specialty Focus Areas</h4>
-                    <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px'}}>
-                      <label style={{display: 'flex', alignItems: 'center', gap: '8px', color: '#374151'}}>
-                        <input type="checkbox" style={{width: '16px', height: '16px'}} />
-                        Pediatric Cardiology
+                    
+                    <div>
+                      <label style={{display: 'block', marginBottom: '8px', fontWeight: '500', color: '#374151'}}>
+                        Treatment Variability
                       </label>
-                      <label style={{display: 'flex', alignItems: 'center', gap: '8px', color: '#374151'}}>
-                        <input type="checkbox" style={{width: '16px', height: '16px'}} />
-                        Oncology
+                      <select style={{width: '100%', padding: '12px', border: '1px solid #d1d5db', borderRadius: '6px'}}>
+                        <option>Standard Protocol</option>
+                        <option>Provider Variation</option>
+                        <option>Geographic Differences</option>
+                        <option>Experimental Treatments</option>
+                      </select>
+                    </div>
+                    
+                    <div>
+                      <label style={{display: 'block', marginBottom: '8px', fontWeight: '500', color: '#374151'}}>
+                        Outcome Distribution
                       </label>
-                      <label style={{display: 'flex', alignItems: 'center', gap: '8px', color: '#374151'}}>
-                        <input type="checkbox" style={{width: '16px', height: '16px'}} />
-                        Emergency Medicine
-                      </label>
-                      <label style={{display: 'flex', alignItems: 'center', gap: '8px', color: '#374151'}}>
-                        <input type="checkbox" style={{width: '16px', height: '16px'}} />
-                        Psychiatry
-                      </label>
-                      <label style={{display: 'flex', alignItems: 'center', gap: '8px', color: '#374151'}}>
-                        <input type="checkbox" style={{width: '16px', height: '16px'}} />
-                        Nephrology
-                      </label>
-                      <label style={{display: 'flex', alignItems: 'center', gap: '8px', color: '#374151'}}>
-                        <input type="checkbox" style={{width: '16px', height: '16px'}} />
-                        Pulmonology
-                      </label>
+                      <select style={{width: '100%', padding: '12px', border: '1px solid #d1d5db', borderRadius: '6px'}}>
+                        <option>Typical Clinical Outcomes</option>
+                        <option>Enriched Success Cases</option>
+                        <option>Enriched Adverse Events</option>
+                        <option>Balanced Mixed Outcomes</option>
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -497,10 +537,10 @@ function App() {
                 {/* Generation Button */}
                 <div style={{textAlign: 'center'}}>
                   <button style={{...styles.primaryButton, padding: '16px 32px', fontSize: '16px'}}>
-                    🎯 Generate Synthetic Cohort
+                    🎯 Generate Synthetic Dataset
                   </button>
                   <p style={{marginTop: '12px', color: '#6b7280', fontSize: '14px'}}>
-                    Generation typically takes 30-60 seconds depending on cohort size and complexity
+                    Your synthetic EHR dataset will be generated with full audit trails and validation reports
                   </p>
                 </div>
               </div>
