@@ -109,9 +109,8 @@ manager = ConnectionManager()
 class ProblemStatement(BaseModel):
     """Clinical problem statement for EHR generation"""
     statement: str = Field(
-        ..., 
         description="Clinical problem statement (e.g., 'suspected autoimmune flare in adolescent female')",
-        example="suspected autoimmune flare in adolescent female with joint pain and fatigue"
+        examples=["suspected autoimmune flare in adolescent female with joint pain and fatigue"]
     )
     cohort_size: int = Field(
         default=10, 
@@ -126,7 +125,7 @@ class ProblemStatement(BaseModel):
     validation_level: str = Field(
         default="comprehensive",
         description="Level of validation to perform",
-        regex="^(basic|standard|comprehensive)$"
+        pattern="^(basic|standard|comprehensive)$"
     )
 
 class PatientResponse(BaseModel):
