@@ -18,8 +18,6 @@ from agents.advanced_clinical_configuration import AdvancedClinicalConfigurator
 from agents.surgical_strategy_simulator import SurgicalStrategySimulator
 
 def main():
-    st.set_page_config(page_title="Data Exploration - Synthetic Ascension", layout="wide")
-    
     st.title("📊 Synthetic EHR Data Exploration Dashboard")
     st.markdown("**Comprehensive Analytics and Individual Record Drill-Down**")
     
