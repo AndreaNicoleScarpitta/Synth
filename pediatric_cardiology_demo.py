@@ -615,9 +615,15 @@ def main():
         st.success(f"✅ Generated {cohort_size} synthetic pediatric patients with complete audit trail!")
         
         # Launch to comprehensive results page
-        if st.button("🚀 View Complete Results & Agent Reasoning", type="primary"):
-            st.session_state.current_page = "cohort_results"
-            st.rerun()
+        col1, col2 = st.columns([2, 1])
+        with col1:
+            if st.button("🚀 View Complete Results & Agent Reasoning", type="primary"):
+                st.session_state.current_page = "cohort_results"
+                st.rerun()
+        with col2:
+            if st.button("📊 Quick Data Explorer"):
+                st.session_state.current_page = "data_exploration" 
+                st.rerun()
 
 def generate_pediatric_cohort(condition: str, age_group: str, size: int, trace: TraceableDecision, 
                             surgical_strategy: str = "Primary Repair",

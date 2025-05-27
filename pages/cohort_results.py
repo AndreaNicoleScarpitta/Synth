@@ -24,7 +24,8 @@ def main():
     if 'cohort_results' not in st.session_state:
         st.warning("⚠️ No cohort data found. Please generate a cohort first.")
         if st.button("↩️ Back to Cohort Generator"):
-            st.switch_page("pediatric_cardiology_demo.py")
+            st.session_state.current_page = "pediatric_demo"
+            st.rerun()
         return
     
     cohort_data = st.session_state.cohort_results
