@@ -418,7 +418,7 @@ function App() {
                 {/* Configuration Parameters */}
                 <div style={{...styles.card, marginBottom: '24px'}}>
                   <h3 style={styles.cardTitle}>Configuration Parameters</h3>
-                  <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px', marginTop: '24px'}}>
+                  <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', marginTop: '24px'}}>
                     
                     <div>
                       <label style={{display: 'block', marginBottom: '8px', fontWeight: '500', color: '#374151'}}>
@@ -431,6 +431,42 @@ function App() {
                         <option>Enterprise Scale (10,000+ patients)</option>
                         <option>Featured Demo Scale (N=10,000 Pediatric)</option>
                       </select>
+                    </div>
+
+                    {/* Cardiac Conditions Multi-Select */}
+                    <div>
+                      <label style={{display: 'block', marginBottom: '8px', fontWeight: '500', color: '#374151'}}>
+                        🫀 Cardiac Conditions (Multi-select)
+                      </label>
+                      <select multiple style={{width: '100%', minHeight: '100px', padding: '8px', border: '1px solid #d1d5db', borderRadius: '6px', fontSize: '14px'}}>
+                        <option>Tetralogy of Fallot</option>
+                        <option>Hypoplastic Left Heart Syndrome</option>
+                        <option>Coarctation of the Aorta</option>
+                        <option>Atrial Septal Defect (ASD)</option>
+                        <option>Ventricular Septal Defect (VSD)</option>
+                        <option>Patent Ductus Arteriosus</option>
+                        <option>Transposition of Great Arteries</option>
+                        <option>Pulmonary Stenosis</option>
+                      </select>
+                      <small style={{color: '#6b7280', fontSize: '12px'}}>Select cardiac conditions to include</small>
+                    </div>
+
+                    {/* Hematologic Conditions Multi-Select */}
+                    <div>
+                      <label style={{display: 'block', marginBottom: '8px', fontWeight: '500', color: '#374151'}}>
+                        🩸 Hematologic Conditions (Multi-select)
+                      </label>
+                      <select multiple style={{width: '100%', minHeight: '100px', padding: '8px', border: '1px solid #d1d5db', borderRadius: '6px', fontSize: '14px'}}>
+                        <option>Iron Deficiency Anemia</option>
+                        <option>Sickle Cell Disease</option>
+                        <option>Thrombocytopenia</option>
+                        <option>Hemophilia A</option>
+                        <option>Hemophilia B</option>
+                        <option>Von Willebrand Disease</option>
+                        <option>Thalassemia</option>
+                        <option>Aplastic Anemia</option>
+                      </select>
+                      <small style={{color: '#6b7280', fontSize: '12px'}}>Select hematologic comorbidities</small>
                     </div>
                     
                     <div>
@@ -463,15 +499,21 @@ function App() {
                     
                     <div>
                       <label style={{display: 'block', marginBottom: '8px', fontWeight: '500', color: '#374151'}}>
-                        Data Types to Include
+                        📊 Data Types to Include (Multi-select)
                       </label>
-                      <select style={{width: '100%', padding: '12px', border: '1px solid #d1d5db', borderRadius: '6px'}}>
-                        <option>Core Clinical Data Only</option>
-                        <option>Clinical + Lab Results</option>
-                        <option>Clinical + Imaging Studies</option>
-                        <option>Comprehensive Multimodal</option>
-                        <option>Full Cardiac-Hematology Suite (EKG + Labs + Notes)</option>
+                      <select multiple style={{width: '100%', minHeight: '100px', padding: '8px', border: '1px solid #d1d5db', borderRadius: '6px', fontSize: '14px'}}>
+                        <option>Structured Clinical Data (Demographics, Vitals)</option>
+                        <option>Laboratory Results (CBC, Chemistry, Coagulation)</option>
+                        <option>EKG/ECG Time Series Data</option>
+                        <option>Clinical Notes (Progress, Surgical, Discharge)</option>
+                        <option>Medication Administration Records</option>
+                        <option>Procedure Codes (CPT)</option>
+                        <option>Diagnostic Codes (ICD-10)</option>
+                        <option>Growth & Development Metrics</option>
+                        <option>Family History Transcripts</option>
+                        <option>Oxygen Saturation Trends</option>
                       </select>
+                      <small style={{color: '#6b7280', fontSize: '12px'}}>Select data modalities to generate</small>
                     </div>
                     
                     <div>
