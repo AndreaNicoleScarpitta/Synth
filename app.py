@@ -121,52 +121,134 @@ def main():
     # Initialize database
     init_registration_db()
     
-    # Custom CSS for marketing appeal
+    # Custom CSS for sleek modern design
     st.markdown("""
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
     .main-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 2rem;
-        border-radius: 15px;
+        background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 25%, #16213e 50%, #0f3460 100%);
+        padding: 3rem 2rem;
+        border-radius: 20px;
         color: white;
         text-align: center;
-        margin-bottom: 2rem;
+        margin-bottom: 3rem;
+        box-shadow: 0 20px 40px rgba(15, 15, 35, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .logo-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+    
+    .logo {
+        font-size: 3.5rem;
+        margin-right: 1rem;
+        background: linear-gradient(45deg, #00d4ff, #090979, #020024);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.5));
     }
     
     .feature-card {
-        background: #f8f9fa;
-        padding: 1.5rem;
-        border-radius: 10px;
-        border-left: 4px solid #667eea;
-        margin: 1rem 0;
+        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+        padding: 2rem;
+        border-radius: 16px;
+        border: 1px solid rgba(15, 15, 35, 0.05);
+        margin: 1.5rem 0;
+        box-shadow: 0 8px 32px rgba(15, 15, 35, 0.08);
+        transition: all 0.3s ease;
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 48px rgba(15, 15, 35, 0.12);
     }
     
     .stats-box {
-        background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
         color: white;
-        padding: 1rem;
-        border-radius: 8px;
+        padding: 1.5rem;
+        border-radius: 16px;
         text-align: center;
-        margin: 0.5rem;
+        margin: 1rem;
+        box-shadow: 0 12px 24px rgba(102, 126, 234, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.2);
     }
     
     .testimonial {
-        background: #e3f2fd;
-        padding: 1.5rem;
-        border-radius: 10px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 2rem;
+        border-radius: 16px;
         font-style: italic;
-        border-left: 4px solid #2196f3;
-        margin: 1rem 0;
+        margin: 2rem 0;
+        box-shadow: 0 12px 24px rgba(102, 126, 234, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .tech-section {
+        background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+        color: white;
+        padding: 3rem 2rem;
+        border-radius: 20px;
+        margin: 3rem 0;
+        box-shadow: 0 20px 40px rgba(15, 15, 35, 0.3);
+    }
+    
+    .nav-button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 12px;
+        font-weight: 600;
+        box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+        transition: all 0.3s ease;
+    }
+    
+    .nav-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 24px rgba(102, 126, 234, 0.4);
+    }
+    
+    body {
+        font-family: 'Inter', sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+    
+    .stButton > button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        transition: all 0.3s ease;
+    }
+    
+    .stButton > button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
     }
     </style>
     """, unsafe_allow_html=True)
     
-    # Main header
+    # Main header with new logo and branding
     st.markdown("""
     <div class="main-header">
-        <h1>🧬 Synthetic Ascension</h1>
-        <h2>Enterprise-Grade Synthetic EHR for Pharmaceutical Research</h2>
-        <p style="font-size: 1.2rem; margin-top: 1rem;">
+        <div class="logo-container">
+            <div class="logo">⚛️</div>
+            <div>
+                <h1 style="margin: 0; font-size: 3rem; font-weight: 700;">Synthetic Ascension</h1>
+                <div style="font-size: 0.9rem; opacity: 0.8; letter-spacing: 2px; margin-top: 0.5rem;">NEXT-GEN SYNTHETIC EHR PLATFORM</div>
+            </div>
+        </div>
+        <h2 style="font-size: 1.8rem; font-weight: 300; margin: 2rem 0 1rem 0;">Enterprise AI for Pharmaceutical Research</h2>
+        <p style="font-size: 1.2rem; margin-top: 1rem; opacity: 0.9; font-weight: 300;">
             Generate privacy-preserving, bias-aware synthetic patient data powered by AI agents and real medical literature
         </p>
     </div>
@@ -293,40 +375,44 @@ def main():
         - Ensure regulatory compliance from day one
         """)
     
-    # Technical highlights
-    st.markdown("## 🔧 Enterprise-Grade Technology")
-    
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        st.markdown("""
-        **Multi-Agent Architecture**
-        - Literature retrieval agents
-        - Synthetic cohort generators  
-        - Statistical validation agents
-        - Medical terminology validators
-        - Web monitoring & curation
-        """)
-    
-    with col2:
-        st.markdown("""
-        **Data Quality Assurance**
-        - Clinical realism validation
-        - Statistical consistency checks
-        - Demographic bias detection
-        - Complete audit trails
-        - Quality scoring metrics
-        """)
-    
-    with col3:
-        st.markdown("""
-        **Integration Ready**
-        - REST API with Swagger docs
-        - FHIR R4 bundle export
-        - CSV/JSON data formats
-        - PostgreSQL backend
-        - Real-time WebSocket updates
-        """)
+    # Technical highlights with new styling
+    st.markdown("""
+    <div class="tech-section">
+        <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem; font-weight: 300;">⚡ Enterprise-Grade Technology</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem;">
+            <div>
+                <h4 style="color: #00d4ff; margin-bottom: 1rem;">🤖 Multi-Agent Architecture</h4>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>• Literature retrieval agents</li>
+                    <li>• Synthetic cohort generators</li>
+                    <li>• Statistical validation agents</li>
+                    <li>• Medical terminology validators</li>
+                    <li>• Web monitoring & curation</li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #00d4ff; margin-bottom: 1rem;">🛡️ Data Quality Assurance</h4>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>• Clinical realism validation</li>
+                    <li>• Statistical consistency checks</li>
+                    <li>• Demographic bias detection</li>
+                    <li>• Complete audit trails</li>
+                    <li>• Quality scoring metrics</li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #00d4ff; margin-bottom: 1rem;">🔗 Integration Ready</h4>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>• REST API with Swagger docs</li>
+                    <li>• FHIR R4 bundle export</li>
+                    <li>• CSV/JSON data formats</li>
+                    <li>• PostgreSQL backend</li>
+                    <li>• Real-time WebSocket updates</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
     
     # Registration form
     st.markdown("## 📝 Get Early Access")
