@@ -18,13 +18,7 @@ from enterprise_framework import (
 )
 
 def main():
-    st.set_page_config(
-        page_title="Pediatric Cardiology Research Platform",
-        page_icon="🫀",
-        layout="wide"
-    )
-    
-    st.title("🫀 Pediatric Cardiovascular Modeling Platform")
+    st.title("Pediatric Cardiovascular Modeling Platform")
     st.markdown("**Enterprise-Grade Synthetic EHR for Congenital Heart Disease Research**")
     
     # Header with use case context

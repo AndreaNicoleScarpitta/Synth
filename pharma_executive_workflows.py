@@ -20,13 +20,7 @@ from enterprise_framework import (
 )
 
 def main():
-    st.set_page_config(
-        page_title="Pharma Executive Workflows - Synthetic Ascension",
-        page_icon="💊",
-        layout="wide"
-    )
-    
-    st.title("💊 Pharmaceutical Executive Workflows")
+    st.title("Pharmaceutical Executive Workflows")
     st.markdown("**Enterprise-Grade Synthetic EHR for Pharma R&D, Clinical Development & Regulatory Affairs**")
     
     # Executive persona selection

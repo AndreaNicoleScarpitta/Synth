@@ -25,6 +25,7 @@ from utils.security import (
     rate_limit, audit_log, DataClassification, DataEncryption,
     secure_export_headers, UserRole, AccessLevel
 )
+from utils.database_manager import get_database_manager
 
 # Initialize FastAPI with comprehensive documentation
 app = FastAPI(
@@ -1434,6 +1435,84 @@ async def get_security_status(
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to get security status: {str(e)}")
+
+@app.get("/system/databases/status",
+         response_model=Dict[str, Any],
+         tags=["System Management"],
+         summary="Database System Status",
+         description="Get comprehensive status of all database systems")
+async def get_database_status(
+    current_user: Dict[str, Any] = Depends(require_role([UserRole.ADMIN]))
+):
+    """
+    Get comprehensive status of all database systems including:
+    
+    - **PostgreSQL**: Relational database for structured EHR data
+    - **ChromaDB**: Vector database for literature embeddings
+    - **Cache System**: In-memory cache for session data
+    - **Document Store**: JSON document storage for configurations
+    
+    **Access Requirements:**
+    - Admin role required only
+    """
+    
+    try:
+        db_manager = get_database_manager()
+        health_status = db_manager.health_check()
+        
+        return {
+            "database_systems": health_status,
+            "checked_at": datetime.utcnow().isoformat(),
+            "summary": {
+                "total_systems": len(health_status.get("components", {})),
+                "healthy_systems": len([
+                    comp for comp in health_status.get("components", {}).values()
+                    if comp.get("status") == "healthy"
+                ]),
+                "overall_status": health_status.get("overall_status", "unknown")
+            }
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to get database status: {str(e)}")
+
+@app.get("/system/databases/stats",
+         response_model=Dict[str, Any],
+         tags=["System Management"],
+         summary="Database Statistics",
+         description="Get detailed statistics for all database systems")
+async def get_database_stats(
+    current_user: Dict[str, Any] = Depends(require_role([UserRole.ADMIN, UserRole.RESEARCHER]))
+):
+    """
+    Get detailed statistics for all database systems
+    
+    **Access Requirements:**
+    - Admin or Researcher role required
+    
+    **Includes:**
+    - Vector database collection details
+    - Cache utilization metrics
+    - Document store collection counts
+    - Storage utilization estimates
+    """
+    
+    try:
+        db_manager = get_database_manager()
+        stats = db_manager.get_database_stats()
+        
+        return {
+            "database_statistics": stats,
+            "collected_at": datetime.utcnow().isoformat(),
+            "recommendations": [
+                "Regular cache cleanup improves performance",
+                "Monitor vector database growth for storage planning",
+                "Archive old document store collections periodically"
+            ]
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to get database statistics: {str(e)}")
 
 if __name__ == "__main__":
     import uvicorn
