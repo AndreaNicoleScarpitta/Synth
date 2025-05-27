@@ -3,7 +3,7 @@ import React from 'react'
 const styles = {
   container: {
     minHeight: '100vh',
-    background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
+    background: '#ffffff',
     fontFamily: 'Inter, system-ui, sans-serif'
   },
   header: {
@@ -12,10 +12,10 @@ const styles = {
     left: 0,
     right: 0,
     zIndex: 50,
-    background: 'rgba(255, 255, 255, 0.95)',
+    background: 'rgba(255, 255, 255, 0.98)',
     backdropFilter: 'blur(10px)',
-    borderBottom: '1px solid #e2e8f0',
-    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)'
+    borderBottom: '1px solid #f1f5f9',
+    boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)'
   },
   nav: {
     maxWidth: '1200px',
@@ -34,8 +34,8 @@ const styles = {
   logoIcon: {
     width: '32px',
     height: '32px',
-    borderRadius: '8px',
-    background: 'linear-gradient(135deg, #6B4EFF 0%, #1e40af 100%)',
+    borderRadius: '6px',
+    background: 'linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -44,9 +44,9 @@ const styles = {
     fontSize: '14px'
   },
   logoText: {
-    fontWeight: 'bold',
+    fontWeight: '600',
     fontSize: '20px',
-    color: '#1e40af'
+    color: '#0f172a'
   },
   status: {
     display: 'flex',
@@ -58,7 +58,7 @@ const styles = {
   statusDot: {
     width: '8px',
     height: '8px',
-    backgroundColor: '#10b981',
+    backgroundColor: '#06b6d4',
     borderRadius: '50%',
     animation: 'pulse 2s infinite'
   },
@@ -76,31 +76,29 @@ const styles = {
     textAlign: 'center' as const
   },
   heroTitle: {
-    fontSize: '64px',
-    fontWeight: '900',
-    background: 'linear-gradient(135deg, #6B4EFF 0%, #1e40af 50%, #10b981 100%)',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-    backgroundClip: 'text',
-    marginBottom: '32px',
+    fontSize: '56px',
+    fontWeight: '700',
+    color: '#0f172a',
+    marginBottom: '24px',
     lineHeight: '1.1',
-    textAlign: 'center' as const
+    textAlign: 'center' as const,
+    letterSpacing: '-0.02em'
   },
   heroSubtitle: {
-    fontSize: '32px',
-    fontWeight: '700',
-    color: '#374151',
-    marginBottom: '24px',
-    maxWidth: '900px',
-    margin: '0 auto 24px',
-    textShadow: '0 2px 4px rgba(0,0,0,0.1)'
+    fontSize: '24px',
+    fontWeight: '500',
+    color: '#0ea5e9',
+    marginBottom: '32px',
+    maxWidth: '800px',
+    margin: '0 auto 32px',
+    letterSpacing: '0.05em'
   },
   heroDescription: {
-    fontSize: '20px',
-    color: '#6b7280',
-    marginBottom: '40px',
-    maxWidth: '700px',
-    margin: '0 auto 40px',
+    fontSize: '18px',
+    color: '#475569',
+    marginBottom: '48px',
+    maxWidth: '680px',
+    margin: '0 auto 48px',
     lineHeight: '1.6'
   },
   heroStats: {
@@ -114,16 +112,17 @@ const styles = {
     textAlign: 'center' as const
   },
   statNumber: {
-    fontSize: '36px',
-    fontWeight: 'bold',
-    color: '#6B4EFF',
+    fontSize: '32px',
+    fontWeight: '700',
+    color: '#0f172a',
     display: 'block'
   },
   statLabel: {
-    fontSize: '14px',
-    color: '#6b7280',
+    fontSize: '13px',
+    color: '#64748b',
     textTransform: 'uppercase' as const,
-    letterSpacing: '0.05em'
+    letterSpacing: '0.05em',
+    fontWeight: '500'
   },
   buttonContainer: {
     display: 'flex',
@@ -133,24 +132,24 @@ const styles = {
     marginBottom: '64px'
   },
   primaryButton: {
-    background: 'linear-gradient(135deg, #6B4EFF 0%, #1e40af 100%)',
+    background: '#0ea5e9',
     color: 'white',
-    padding: '12px 32px',
-    borderRadius: '8px',
+    padding: '14px 28px',
+    borderRadius: '6px',
     fontWeight: '500',
     border: 'none',
     cursor: 'pointer',
-    boxShadow: '0 4px 12px rgba(107, 78, 255, 0.3)',
+    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
     transition: 'all 0.2s',
     fontSize: '16px'
   },
   secondaryButton: {
-    border: '2px solid #6B4EFF',
-    color: '#6B4EFF',
-    padding: '12px 32px',
-    borderRadius: '8px',
+    border: '1px solid #cbd5e1',
+    color: '#475569',
+    padding: '14px 28px',
+    borderRadius: '6px',
     fontWeight: '500',
-    background: 'transparent',
+    background: 'white',
     cursor: 'pointer',
     transition: 'all 0.2s',
     fontSize: '16px'
@@ -165,14 +164,14 @@ const styles = {
     marginBottom: '64px'
   },
   featuresTitle: {
-    fontSize: '36px',
-    fontWeight: 'bold',
-    color: '#1e40af',
+    fontSize: '32px',
+    fontWeight: '600',
+    color: '#0f172a',
     marginBottom: '16px'
   },
   featuresSubtitle: {
     fontSize: '18px',
-    color: '#6b7280',
+    color: '#475569',
     maxWidth: '800px',
     margin: '0 auto'
   },
@@ -183,10 +182,10 @@ const styles = {
   },
   card: {
     background: 'white',
-    borderRadius: '12px',
-    padding: '24px',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)',
-    border: '1px solid #e5e7eb',
+    borderRadius: '8px',
+    padding: '28px',
+    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)',
+    border: '1px solid #f1f5f9',
     transition: 'all 0.3s'
   },
   cardIcon: {
@@ -209,9 +208,10 @@ const styles = {
     lineHeight: '1.6'
   },
   cta: {
-    background: 'linear-gradient(135deg, #6B4EFF 0%, #1e40af 100%)',
-    color: 'white',
-    padding: '80px 24px'
+    background: '#f8fafc',
+    color: '#0f172a',
+    padding: '80px 24px',
+    borderTop: '1px solid #e2e8f0'
   },
   ctaContent: {
     maxWidth: '1200px',
@@ -231,14 +231,14 @@ const styles = {
     opacity: 0.9
   },
   ctaButton: {
-    background: 'white',
-    color: '#1e40af',
-    padding: '12px 32px',
-    borderRadius: '8px',
+    background: '#0ea5e9',
+    color: 'white',
+    padding: '14px 28px',
+    borderRadius: '6px',
     fontWeight: '500',
     border: 'none',
     cursor: 'pointer',
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
     fontSize: '16px'
   }
 }
@@ -247,32 +247,32 @@ const features = [
   {
     title: "Synthetic Patient Generation",
     description: "Create realistic patient cohorts with complex medical histories, demographics, and clinical pathways.",
-    gradient: "linear-gradient(135deg, #6B4EFF 0%, #8b5cf6 100%)"
+    color: "#0ea5e9"
   },
   {
-    title: "Privacy-First Architecture",
+    title: "Privacy-First Architecture", 
     description: "HIPAA-compliant synthetic data generation with zero risk of patient privacy exposure.",
-    gradient: "linear-gradient(135deg, #10b981 0%, #34d399 100%)"
+    color: "#06b6d4"
   },
   {
     title: "AI-Powered Validation",
     description: "Advanced statistical validation and bias detection to ensure data quality and representativeness.",
-    gradient: "linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)"
+    color: "#0284c7"
   },
   {
-    title: "Real-time Analytics",
-    description: "Interactive dashboards and comprehensive audit trails for complete transparency and control.",
-    gradient: "linear-gradient(135deg, #f59e0b 0%, #f97316 100%)"
+    title: "Clinical Accuracy",
+    description: "Medically precise synthetic records that maintain clinical integrity and diagnostic consistency.",
+    color: "#0891b2"
   },
   {
     title: "Scalable Infrastructure",
     description: "Generate cohorts from hundreds to millions of patients with enterprise-grade performance.",
-    gradient: "linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)"
+    color: "#0e7490"
   },
   {
     title: "Research Ready",
     description: "Pre-configured templates for clinical trials, drug discovery, and healthcare AI development.",
-    gradient: "linear-gradient(135deg, #ec4899 0%, #f472b6 100%)"
+    color: "#155e75"
   }
 ]
 
@@ -299,16 +299,17 @@ function App() {
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
           }
           .primary-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(107, 78, 255, 0.4);
+            background: #0284c7;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(14, 165, 233, 0.25);
           }
           .secondary-button:hover {
-            background: #6B4EFF;
-            color: white;
+            background: #f8fafc;
+            border-color: #94a3b8;
           }
           .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+            background: #0284c7;
+            transform: translateY(-1px);
           }
           @media (min-width: 640px) {
             .button-container {
@@ -361,10 +362,10 @@ function App() {
             
             <div style={{...styles.buttonContainer, flexDirection: 'row'}} className="button-container">
               <button style={styles.primaryButton} className="primary-button">
-                🚀 Launch Interactive Demo
+                Launch Demo
               </button>
               <button style={styles.secondaryButton} className="secondary-button">
-                💼 Enterprise Partnership
+                Enterprise Partnership
               </button>
             </div>
           </div>
@@ -381,8 +382,8 @@ function App() {
           <div style={styles.grid}>
             {features.map((feature, index) => (
               <div key={index} style={styles.card} className="card">
-                <div style={{...styles.cardIcon, background: feature.gradient}}>
-                  <div style={{width: '24px', height: '24px', background: 'white', borderRadius: '4px'}}></div>
+                <div style={{...styles.cardIcon, background: feature.color}}>
+                  <div style={{width: '24px', height: '24px', background: 'white', borderRadius: '3px'}}></div>
                 </div>
                 <h3 style={styles.cardTitle}>{feature.title}</h3>
                 <p style={styles.cardDescription}>{feature.description}</p>
@@ -398,7 +399,7 @@ function App() {
               Join leading healthcare organizations and research institutions already using Synthetic Ascension.
             </p>
             <button style={styles.ctaButton} className="cta-button">
-              Start Your Demo →
+              Start Your Demo
             </button>
           </div>
         </section>
