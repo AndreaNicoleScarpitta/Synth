@@ -18,24 +18,15 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Streamlit Server"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
 args = "API Server"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
 args = "Research Dashboard"
 
-[[workflows.workflow]]
-name = "Streamlit Server"
-author = "agent"
-
 [[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "streamlit run app.py --server.port 5000"
-waitForPort = 5000
+task = "workflow.run"
+args = "React Frontend"
 
 [[workflows.workflow]]
 name = "API Server"
@@ -54,6 +45,15 @@ author = "agent"
 task = "shell.exec"
 args = "streamlit run research_dashboard.py --server.port 8001"
 waitForPort = 8001
+
+[[workflows.workflow]]
+name = "React Frontend"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx vite --host 0.0.0.0 --port 5000"
+waitForPort = 5000
 
 [[ports]]
 localPort = 5000
