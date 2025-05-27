@@ -1,0 +1,124 @@
+Here’s a clean, structured Replit prompt for this second use case—focused on synthetic EHR generation, adversarial validation, and researcher-facing transparency:
+
+
+---
+
+Prompt:
+
+> I’m building a full-stack, open-source platform to create and validate multimodal synthetic EHR data with real-time feedback and auditability. This will run in Replit using agentic AI workflows.
+
+
+
+
+---
+
+Requirements:
+
+1. Synthetic EHR Generation
+
+Enable users to input a clinical context or research question (e.g., “simulate late-stage renal failure in Type 2 diabetics with comorbid hypertension”).
+
+Use BIOGPT and other open-source clinical LLMs (e.g., MedAlpaca, ClinicalCamel, GatorTron) to generate:
+
+Structured: vitals, labs, demographics, diagnoses
+
+Unstructured: clinical notes, radiology impressions
+
+Multimodal: optional time series (e.g., vitals), imaging placeholders, waveform
+
+
+
+2. Interface for Data Access
+
+Build a lightweight front-end UI or dashboard where users can:
+
+View approved synthetic records
+
+Filter by cohort, modality, generation date, etc.
+
+Access rejected/flagged records and see exactly why they failed
+
+
+
+3. Adversarial Agent Validation Layer
+
+Pass all generated records through two or more configurable agents:
+
+Realism Agent: Validates realism using statistical profiles or comparisons to gold-standard public datasets (e.g., MIMIC, eICU, Synthea)
+
+Relevance Agent: Validates that the record aligns with the stated research question or problem prompt
+
+
+Each agent's tolerance/skepticism level can be tuned (like LLM temperature)
+
+
+4. Audit & Transparency
+
+Every generated record should be:
+
+Logged with who generated it, what agents rejected it, and why
+
+Version-controlled with clear lineage and traceability
+
+Accompanied by a summary report (e.g., “Rejected for implausible comorbidity profile”)
+
+
+
+5. Tech Stack
+
+LLMs: BioGPT (Ollama or HuggingFace), ClinicalGPT, MedLLaMA2
+
+Validation models: Use statistical profile matchers, ICD-10 co-occurrence validators, ontology mappers
+
+Database:
+
+PostgreSQL for structured EHR
+
+MongoDB for agent logs, notes, and state
+
+Object storage (e.g., MinIO) for imaging/waveform placeholders
+
+
+Langflow or FastAPI + Streamlit UI for orchestration & interface
+
+Temporal or Prefect for agent orchestration
+
+RAG support: ChromaDB or FAISS for background knowledge
+
+
+6. Future Extension
+
+Add ability for researchers to tune agent criteria and submit synthetic datasets for external publication or validation
+
+
+
+---
+
+Deliverables
+
+A fully working Replit or local-dev scaffold
+
+API to:
+
+Trigger EHR generation
+
+Retrieve validated records
+
+View failure reasons
+
+
+UI with:
+
+Cohort filtering
+
+Validation toggle views
+
+Agent heatmaps or explainability visuals
+
+
+
+
+---
+
+Let me know if you want this exported as a scaffolded repo, a Langflow diagram, or a zip you can drag into Replit to get started.
+
