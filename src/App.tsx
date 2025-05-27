@@ -1,7 +1,4 @@
 import React, { useState } from 'react'
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom'
-import ResultsOverview from './pages/ResultsOverview.tsx'
-import PatientRecord from './pages/PatientRecord.tsx'
 
 // Progress tracking component
 const ProgressBar = ({ progress, currentStep, steps }) => {
