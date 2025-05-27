@@ -545,7 +545,7 @@ const PatientRecord: React.FC = () => {
         return (
           <div style={styles.sectionContent}>
             <h3 style={styles.sectionTitle}>Current Medications</h3>
-            {patientData.medications.map((med, index) => (
+            {patientData.medications?.current_medications?.map((med, index) => (
               <div key={index} style={styles.medicationCard}>
                 <div style={styles.medHeader}>
                   <h4 style={styles.medName}>{med.name}</h4>
