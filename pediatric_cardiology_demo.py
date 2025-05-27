@@ -18,6 +18,7 @@ from enterprise_framework import (
 )
 from agents.pediatric_cardiology_enhanced_generator import PediatricCardiologyGenerator
 from agents.advanced_clinical_configuration import AdvancedClinicalConfigurator
+from agents.surgical_strategy_simulator import SurgicalStrategySimulator
 
 def main():
     st.title("Pediatric Cardiovascular Modeling Platform")
