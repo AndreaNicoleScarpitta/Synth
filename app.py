@@ -409,18 +409,21 @@ def main():
     </style>
     """, unsafe_allow_html=True)
     
-    # Brand header implementing design system
+    # Professional brand header
     st.markdown("""
-    <div class="brand-header">
-        <div class="brand-logo">
-            <div class="logo-icon">🧬</div>
-            <div>
-                <h1 class="brand-name">Synthetic Ascension</h1>
+    <div class="hero-section">
+        <div class="hero-content">
+            <div class="brand-identity">
+                <h1 class="brand-title">Synthetic Ascension</h1>
                 <div class="brand-tagline">Simulate. Validate. Ascend.</div>
             </div>
-        </div>
-        <div class="brand-description">
-            Your launchpad to validated, privacy-safe EHR simulation—fueling the next generation of AI, research, and healthtech
+            <div class="hero-description">
+                The world's most advanced platform for privacy-preserving synthetic EHR generation, 
+                powered by AI agents and validated against comprehensive medical literature.
+            </div>
+            <div class="value-proposition">
+                Accelerate pharmaceutical research while maintaining complete data privacy and regulatory compliance.
+            </div>
         </div>
     </div>
     """, unsafe_allow_html=True)
