@@ -509,7 +509,7 @@ def main():
         
         <div style="margin-bottom: 2.5rem;">
             <h3 style="color: #0A1F44; font-weight: 600; margin-bottom: 0.5rem; font-size: 1.3rem;">Pharma-Ready Workflows</h3>
-            <p style="color: #374151; line-height: 1.6; margin: 0; font-size: 1rem;">Specialized interfaces for CDOs, CMOs, RWE teams, and regulatory affairs with role-specific analytics.</p>
+            <p style="color: #374151; line-height: 1.6; margin: 0; font-size: 1rem;">Specialized interfaces for CDOs, CMOs, """ + medical_tooltip("real_world_evidence", "RWE") + """ teams, and regulatory affairs with role-specific analytics.</p>
         </div>
         """, unsafe_allow_html=True)
     
