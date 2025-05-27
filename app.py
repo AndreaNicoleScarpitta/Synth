@@ -424,38 +424,40 @@ def main():
                     st.success("✅ **Demo Access Granted!**")
                     st.balloons()
                     
-                    # Show demo navigation
-                    st.markdown("""
-                    **Welcome to Synthetic Ascension Demo!**
-                    
-                    You now have access to the full platform. Choose your workflow:
-                    """)
-                    
-                    col1, col2, col3 = st.columns(3)
-                    
-                    with col1:
-                        if st.button("🫀 Pediatric Cardiology Demo", use_container_width=True):
-                            st.session_state.current_page = "pediatric_demo"
-                            st.rerun()
-                    
-                    with col2:
-                        if st.button("💊 Pharma Executive Workflows", use_container_width=True):
-                            st.session_state.current_page = "pharma_workflows"
-                            st.rerun()
-                    
-                    with col3:
-                        if st.button("🏗️ System Architecture", use_container_width=True):
-                            st.session_state.current_page = "architecture"
-                            st.rerun()
-                    
-                    # Main research dashboard
-                    st.markdown("**Or access the main research platform:**")
-                    if st.button("🔬 Launch Research Dashboard", use_container_width=True):
-                        st.session_state.current_page = "research_dashboard"
-                        st.rerun()
+                    # Store demo authentication state
+                    st.session_state.demo_authenticated = True
+                    st.session_state.demo_session_id = session_id
                         
                 else:
                     st.error("❌ **Access Denied** - Invalid email or password. Please contact our team for demo credentials.")
+    
+    # Demo navigation - outside of forms
+    if st.session_state.get('demo_authenticated', False):
+        st.markdown("---")
+        st.markdown("## 🎮 **Demo Access Granted!**")
+        st.markdown("**Welcome to Synthetic Ascension Demo! Choose your workflow:**")
+        
+        col1, col2, col3, col4 = st.columns(4)
+        
+        with col1:
+            if st.button("🫀 Pediatric Cardiology Demo", use_container_width=True):
+                st.session_state.current_page = "pediatric_demo"
+                st.rerun()
+        
+        with col2:
+            if st.button("💊 Pharma Executive Workflows", use_container_width=True):
+                st.session_state.current_page = "pharma_workflows"
+                st.rerun()
+        
+        with col3:
+            if st.button("🏗️ System Architecture", use_container_width=True):
+                st.session_state.current_page = "architecture"
+                st.rerun()
+        
+        with col4:
+            if st.button("🔬 Research Dashboard", use_container_width=True):
+                st.session_state.current_page = "research_dashboard"
+                st.rerun()
     
     # Check if demo is authenticated and user wants to navigate
     if st.session_state.get('demo_authenticated', False) and st.session_state.get('current_page'):
