@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import ResultsOverview from './pages/ResultsOverview.tsx'
 import PatientRecord from './pages/PatientRecord.tsx'
 
@@ -475,6 +475,15 @@ const features = [
 ]
 
 function App() {
+  return (
+    <Routes>
+      <Route path="/patient/:patientId" element={<PatientRecord />} />
+      <Route path="/*" element={<MainApp />} />
+    </Routes>
+  )
+}
+
+function MainApp() {
   const [currentView, setCurrentView] = useState('landing')
   const [isGenerating, setIsGenerating] = useState(false)
   const [progress, setProgress] = useState(0)
