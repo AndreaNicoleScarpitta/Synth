@@ -616,7 +616,8 @@ def main():
         
         # Launch to comprehensive results page
         if st.button("🚀 View Complete Results & Agent Reasoning", type="primary"):
-            st.switch_page("pages/cohort_results.py")
+            st.session_state.current_page = "cohort_results"
+            st.rerun()
 
 def generate_pediatric_cohort(condition: str, age_group: str, size: int, trace: TraceableDecision, 
                             surgical_strategy: str = "Primary Repair",

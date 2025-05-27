@@ -850,6 +850,9 @@ def main():
         elif st.session_state.current_page == "research_dashboard":
             from research_dashboard import main as research_main
             research_main()
+        elif st.session_state.current_page == "cohort_results":
+            from pages.cohort_results import main as cohort_main
+            cohort_main()
         return
     
     # Footer
