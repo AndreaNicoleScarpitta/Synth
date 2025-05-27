@@ -110,14 +110,6 @@ def log_demo_session(email: str):
 def main():
     """Main launch page with marketing content and registration"""
     
-    # Page configuration
-    st.set_page_config(
-        page_title="Synthetic Ascension - Enterprise Synthetic EHR Platform",
-        page_icon="🧬",
-        layout="wide",
-        initial_sidebar_state="collapsed"
-    )
-    
     # Initialize database
     init_registration_db()
     
@@ -617,9 +609,9 @@ def main():
     
     with col1:
         st.markdown("""
-        <div style="text-align: center; padding: 1.5rem; background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%); border-radius: 12px; margin-bottom: 2rem;">
-            <h3 style="color: #0A1F44; margin-top: 0;">🗓️ Schedule a Consultation</h3>
-            <p style="color: #3C3C4E; margin-bottom: 1.5rem;">Book a 30-minute call to discuss your specific use case and see a personalized demo.</p>
+        <div style="text-align: center; padding: 1.5rem; background: white; border: 2px solid #6B4EFF; border-radius: 12px; margin-bottom: 2rem; box-shadow: 0 4px 12px rgba(107, 78, 255, 0.15);">
+            <h3 style="color: #0A1F44; margin-top: 0; font-weight: 700;">Design Partnership Interest</h3>
+            <p style="color: #3C3C4E; margin-bottom: 1.5rem; line-height: 1.5;">Partner with us to shape the future of synthetic EHR technology for your specific research needs.</p>
             <a href="https://calendly.com/andrew-scarpitta-cscb/30min" target="_blank" style="
                 display: inline-block;
                 background: linear-gradient(135deg, #6B4EFF 0%, #8B5FFF 100%);
@@ -631,17 +623,17 @@ def main():
                 font-size: 1.1rem;
                 transition: all 0.3s ease;
                 box-shadow: 0 4px 12px rgba(107, 78, 255, 0.25);
-            ">Book Call Now</a>
+            ">Explore Partnership</a>
         </div>
         """, unsafe_allow_html=True)
     
     with col2:
         st.markdown("""
-        <div style="text-align: center; padding: 1.5rem; background: linear-gradient(135deg, #f0fff4 0%, #dcfce7 100%); border-radius: 12px; margin-bottom: 2rem;">
-            <h3 style="color: #0A1F44; margin-top: 0;">📋 Join Waitlist</h3>
-            <p style="color: #3C3C4E; margin-bottom: 1.5rem;">Get priority access and updates on platform availability.</p>
+        <div style="text-align: center; padding: 1.5rem; background: white; border: 2px solid #34C759; border-radius: 12px; margin-bottom: 2rem; box-shadow: 0 4px 12px rgba(52, 199, 89, 0.15);">
+            <h3 style="color: #0A1F44; margin-top: 0; font-weight: 700;">Join Waitlist</h3>
+            <p style="color: #3C3C4E; margin-bottom: 1.5rem; line-height: 1.5;">Get priority access and updates on platform availability.</p>
             <div style="padding-top: 14px;">
-                <strong style="color: #34C759;">Register below for early access</strong>
+                <strong style="color: #34C759; font-size: 1.1rem;">Register below for early access</strong>
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -716,11 +708,11 @@ def main():
                     Our team will contact you within 48 hours to discuss your use case and provide access details.
                     """)
                     
-                    # Add scheduling option
+                    # Add partnership option
                     st.markdown("""
-                    <div style="margin: 1.5rem 0; padding: 1.5rem; background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%); border-radius: 12px; border-left: 4px solid #6B4EFF;">
-                        <h4 style="color: #0A1F44; margin-top: 0;">🗓️ Schedule a Call</h4>
-                        <p style="color: #3C3C4E; margin-bottom: 1rem;">Want to discuss your specific use case right away? Book a 30-minute consultation call.</p>
+                    <div style="margin: 1.5rem 0; padding: 1.5rem; background: white; border: 2px solid #6B4EFF; border-radius: 12px; box-shadow: 0 4px 12px rgba(107, 78, 255, 0.15);">
+                        <h4 style="color: #0A1F44; margin-top: 0; font-weight: 700;">Design Partnership Interest</h4>
+                        <p style="color: #3C3C4E; margin-bottom: 1rem; line-height: 1.5;">Interested in shaping the future of synthetic EHR technology? Explore a design partnership tailored to your research needs.</p>
                         <a href="https://calendly.com/andrew-scarpitta-cscb/30min" target="_blank" style="
                             display: inline-block;
                             background: linear-gradient(135deg, #6B4EFF 0%, #8B5FFF 100%);
@@ -732,7 +724,7 @@ def main():
                             transition: all 0.3s ease;
                             border: none;
                             box-shadow: 0 4px 12px rgba(107, 78, 255, 0.25);
-                        ">Schedule Call Now</a>
+                        ">Explore Partnership</a>
                     </div>
                     """, unsafe_allow_html=True)
                     
