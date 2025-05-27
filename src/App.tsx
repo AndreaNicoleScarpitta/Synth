@@ -474,7 +474,7 @@ const features = [
   }
 ]
 
-function App() {
+function AppContent() {
   const [currentView, setCurrentView] = useState('landing')
   const [isGenerating, setIsGenerating] = useState(false)
   const [progress, setProgress] = useState(0)
