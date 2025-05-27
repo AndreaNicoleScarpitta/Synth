@@ -156,14 +156,14 @@ def main():
     
     /* Brand Header Component */
     .brand-header {
-        background: linear-gradient(135deg, var(--ascension-blue) 0%, #1a2b5c 50%, #2a3f7e 100%);
+        background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
         padding: calc(var(--base-unit) * 6);
         border-radius: calc(var(--base-unit) * 2);
-        color: white;
+        color: var(--ascension-blue);
         text-align: center;
         margin-bottom: calc(var(--base-unit) * 4);
-        box-shadow: 0 calc(var(--base-unit) * 3) calc(var(--base-unit) * 6) rgba(10, 31, 68, 0.2);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 calc(var(--base-unit) * 3) calc(var(--base-unit) * 6) rgba(10, 31, 68, 0.1);
+        border: 2px solid #e2e8f0;
     }
     
     .brand-logo {
@@ -209,14 +209,14 @@ def main():
     
     /* Component: Stats Cards */
     .stats-card {
-        background: linear-gradient(135deg, var(--signal-violet) 0%, #8B5FFF 100%);
-        color: white;
+        background: white;
+        color: var(--ascension-blue);
         padding: calc(var(--base-unit) * 3);
         border-radius: calc(var(--base-unit) * 2);
         text-align: center;
         margin: var(--base-unit);
-        box-shadow: 0 calc(var(--base-unit) * 2) calc(var(--base-unit) * 4) rgba(107, 78, 255, 0.25);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 calc(var(--base-unit) * 2) calc(var(--base-unit) * 4) rgba(10, 31, 68, 0.15);
+        border: 2px solid var(--signal-violet);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
@@ -234,6 +234,7 @@ def main():
         margin: calc(var(--base-unit) * 2) 0;
         box-shadow: 0 calc(var(--base-unit)) calc(var(--base-unit) * 4) rgba(60, 60, 78, 0.04);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        color: var(--text-dark);
     }
     
     .feature-card:hover {
