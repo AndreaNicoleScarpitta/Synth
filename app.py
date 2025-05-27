@@ -600,10 +600,56 @@ def main():
     </div>
     """, unsafe_allow_html=True)
     
+    # Call-to-action section with scheduling
+    st.markdown("""
+    <div style="margin: 3rem 0; text-align: center;">
+        <h2 style="font-family: 'Syne', sans-serif; color: #0A1F44; font-weight: 600; font-size: 2.2rem; margin-bottom: 1rem;">
+            Ready to Transform Your Research?
+        </h2>
+        <p style="font-size: 1.2rem; color: #3C3C4E; margin-bottom: 2rem;">
+            Join leading pharmaceutical companies and research institutions using Synthetic Ascension
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Dual call-to-action buttons
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.markdown("""
+        <div style="text-align: center; padding: 1.5rem; background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%); border-radius: 12px; margin-bottom: 2rem;">
+            <h3 style="color: #0A1F44; margin-top: 0;">🗓️ Schedule a Consultation</h3>
+            <p style="color: #3C3C4E; margin-bottom: 1.5rem;">Book a 30-minute call to discuss your specific use case and see a personalized demo.</p>
+            <a href="https://calendly.com/andrew-scarpitta-cscb/30min" target="_blank" style="
+                display: inline-block;
+                background: linear-gradient(135deg, #6B4EFF 0%, #8B5FFF 100%);
+                color: white;
+                padding: 14px 28px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 1.1rem;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 12px rgba(107, 78, 255, 0.25);
+            ">Book Call Now</a>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        st.markdown("""
+        <div style="text-align: center; padding: 1.5rem; background: linear-gradient(135deg, #f0fff4 0%, #dcfce7 100%); border-radius: 12px; margin-bottom: 2rem;">
+            <h3 style="color: #0A1F44; margin-top: 0;">📋 Join Waitlist</h3>
+            <p style="color: #3C3C4E; margin-bottom: 1.5rem;">Get priority access and updates on platform availability.</p>
+            <div style="padding-top: 14px;">
+                <strong style="color: #34C759;">Register below for early access</strong>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+    
     # Registration section
     st.markdown("""
-    <div style="margin: 3rem 0;">
-        <h2 style="font-family: 'Syne', sans-serif; color: #0A1F44; font-weight: 600; font-size: 2.2rem; text-align: center; margin-bottom: 2rem;">
+    <div style="margin: 2rem 0;">
+        <h2 style="font-family: 'Syne', sans-serif; color: #0A1F44; font-weight: 600; font-size: 2rem; text-align: center; margin-bottom: 2rem;">
             Get Early Access
         </h2>
     </div>
@@ -669,6 +715,26 @@ def main():
                     
                     Our team will contact you within 48 hours to discuss your use case and provide access details.
                     """)
+                    
+                    # Add scheduling option
+                    st.markdown("""
+                    <div style="margin: 1.5rem 0; padding: 1.5rem; background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%); border-radius: 12px; border-left: 4px solid #6B4EFF;">
+                        <h4 style="color: #0A1F44; margin-top: 0;">🗓️ Schedule a Call</h4>
+                        <p style="color: #3C3C4E; margin-bottom: 1rem;">Want to discuss your specific use case right away? Book a 30-minute consultation call.</p>
+                        <a href="https://calendly.com/andrew-scarpitta-cscb/30min" target="_blank" style="
+                            display: inline-block;
+                            background: linear-gradient(135deg, #6B4EFF 0%, #8B5FFF 100%);
+                            color: white;
+                            padding: 12px 24px;
+                            border-radius: 8px;
+                            text-decoration: none;
+                            font-weight: 600;
+                            transition: all 0.3s ease;
+                            border: none;
+                            box-shadow: 0 4px 12px rgba(107, 78, 255, 0.25);
+                        ">Schedule Call Now</a>
+                    </div>
+                    """, unsafe_allow_html=True)
                     
                     if demo_requested:
                         st.info("**Priority Demo Access Requested** - You'll receive demo credentials via email within 24 hours.")
