@@ -511,23 +511,28 @@ const PatientRecord: React.FC = () => {
         return (
           <div style={styles.sectionContent}>
             <h3 style={styles.sectionTitle}>Laboratory Results</h3>
-            {patientData.laboratory_results.map((lab, index) => (
+            {patientData.laboratory_results?.panels?.map((lab, index) => (
               <div key={index} style={styles.labCard}>
                 <div style={styles.labHeader}>
-                  <h4 style={styles.labTitle}>{lab.test_name}</h4>
+                  <h4 style={styles.labTitle}>{lab.panel_name}</h4>
                   <div style={styles.labMeta}>
                     <span>LOINC: {lab.loinc_code}</span>
-                    <span>Date: {lab.date_collected}</span>
+                    <span>Date: {lab.collected_date}</span>
+                    <span>Status: {lab.status}</span>
+                  </div>
+                  <div style={styles.labProvider}>
+                    <span>Provider: {lab.ordering_provider}</span>
                   </div>
                 </div>
                 <div style={styles.labResults}>
-                  {Object.entries(lab.results).map(([key, value]) => (
-                    <div key={key} style={styles.labResult}>
-                      <span style={styles.dataLabel}>{key.replace(/_/g, ' ').toUpperCase()}:</span>
-                      <span style={styles.dataValue}>{value}</span>
+                  {lab.results?.map((result, resultIndex) => (
+                    <div key={resultIndex} style={styles.labResult}>
+                      <span style={styles.dataLabel}>{result.test}:</span>
+                      <span style={styles.dataValue}>{result.value} {result.unit}</span>
                       <span style={styles.referenceRange}>
-                        (Ref: {lab.reference_ranges[key]})
+                        (Ref: {result.reference_range})
                       </span>
+                      {result.flag && <span style={{color: result.flag === 'H' ? '#e74c3c' : '#f39c12', fontWeight: 'bold'}}> {result.flag}</span>}
                     </div>
                   ))}
                 </div>
