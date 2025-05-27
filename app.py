@@ -640,7 +640,7 @@ def main():
         
         demo_requested = st.checkbox("Request priority demo access")
         
-        submitted = st.form_submit_button("🚀 Join Waitlist", use_container_width=True)
+        submitted = st.form_submit_button("Join Waitlist", use_container_width=True)
         
         if submitted:
             if full_name and email and company and job_title:
@@ -774,25 +774,25 @@ def main():
     with col1:
         st.markdown("""
         **Contact**
-        - 📧 hello@syntheticascension.com
-        - 📞 Schedule a call
-        - 💬 Book a demo
+        - hello@syntheticascension.com
+        - Schedule a call
+        - Book a demo
         """)
     
     with col2:
         st.markdown("""
         **Resources**
-        - 📚 Documentation
-        - 🎥 Video demos
-        - 📊 Case studies
+        - Documentation
+        - Video demos
+        - Case studies
         """)
     
     with col3:
         st.markdown("""
         **Security**
-        - 🔒 SOC 2 Type II
-        - 🏥 HIPAA Compliant
-        - 🌍 GDPR Ready
+        - SOC 2 Type II
+        - HIPAA Compliant
+        - GDPR Ready
         """)
     
     st.markdown("""
