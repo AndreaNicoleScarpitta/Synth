@@ -1,0 +1,155 @@
+🧾 Synthetic Ascension Overview & Summary Reports
+
+Purpose: Help all personas—technical and non-technical—quickly understand what was generated, how it behaves, and how it can be used.
+1. 🧬 Synthetic Cohort Summary Report
+
+    “What’s in this synthetic dataset?”
+
+Key Fields:
+
+    Cohort Name / UUID
+
+    N (Patient Count): e.g., 2,000 records
+
+    Vertical: Rare Disease, Pediatrics, Cardiology, Oncology, etc.
+
+    Configured Diagnoses: e.g., Turner Syndrome, Cystic Hygroma
+
+    Associated Modalities: Ultrasound, Labs, Genetics, Notes, etc.
+
+    Data Range: e.g., 10–22 gestational weeks
+
+    Simulation Settings: Bias controls, label noise, edge cases
+
+    Generated On / By: Timestamp + generation config fingerprint
+
+    Reproducibility Hash: For validation & audit
+
+Visuals:
+
+    Pie/bar charts: diagnosis distribution, outcome rates
+
+    Timeline heatmaps: GA at diagnosis, delivery, intervention
+
+    Modalities matrix: % completeness per data type
+
+2. 🧠 Synthetic Patient Snapshot Report
+
+    “Show me a sample record in depth.”
+
+Key Panels:
+
+    Demographics & Pregnancy Info
+
+    Diagnosis Timeline
+
+    Ultrasound Summary: NT, septation, findings
+
+    Genetic Report: Diagnostic method, karyotype, interpretation
+
+    Lab Summary: PAPP-A, HCG, cfDNA
+
+    Clinical Notes (Synthetic): Generated SOAP or counseling notes
+
+    Outcome: Live birth / stillbirth / termination
+
+    Agent Trace Log: Which models contributed to which fields
+
+Visuals:
+
+    Scrollable clinical timeline
+
+    Structured + free-text sections
+
+    Inline flags: “Edge case,” “Label noise injected,” “Outlier: Yes”
+
+3. 📊 Population Health Analytics Report
+
+    “What can I infer about this synthetic population?”
+
+Key Metrics:
+
+    Demographic Distribution: Age, sex, SES, race
+
+    Comorbidity Prevalence
+
+    Genetic Abnormality Rates
+
+    Outcome by Diagnosis: e.g., survival rate by NT tier or karyotype
+
+    Synthetic Fidelity:
+
+        Label noise %
+
+        Unrealistic timelines detected
+
+        Prompt realism scores (if LLM-generated notes)
+
+Visuals:
+
+    Sankey: diagnosis → intervention → outcome
+
+    Divergence maps (synthetic vs. known real-world benchmarks)
+
+    Cohort integrity indicators: completeness, imbalance, bias warnings
+
+4. 🧾 Modality Coverage Report
+
+    “What structured and unstructured data is present, and how well?”
+
+Modality	Coverage Rate	Fidelity Score	Notes
+Ultrasound	100%	High	Includes septation flags
+Genetic Reports	90%	Medium	Missing fields in 10%
+Labs	75%	High	Values within expected range
+Clinical Notes	60%	Variable	LLM-generated, flagged 8% for hallucination
+Outcome Labels	100%	High	Matches configured ratios
+
+Useful for QA, modeler trust, and clinical validation.
+5. 🧾 Export / Distribution Summary Report
+
+    “Where did this data go?”
+
+Key Fields:
+
+    Export Format(s): JSON, FHIR, Langflow YAML, CSV
+
+    # Downloads or Clones
+
+    Linked Agents / Consumers: e.g., “Fed to BioGPT RAG pipeline”
+
+    Downstream Apps: Langflow chains, LLM fine-tuning, dashboards
+
+    Expiration Date / Regeneration Required?: for time-limited datasets
+
+Visuals:
+
+    Timeline of use: generation → QA → export → downstream use
+
+    “Footprint” map: where the synthetic data was used internally or externally
+
+6. 🔐 Audit & Lineage Summary Report
+
+    “How was this dataset generated and modified?”
+
+Key Sections:
+
+    Generation Config Snapshot: YAML spec
+
+    Model Lineage: Which base models were used (e.g., GPT-4-tuned, MedPaLM, Claude)
+
+    Transformations Applied: Bias correction, LLM post-processing, validation layers
+
+    Version History: Changes made, fields added/removed, regen logs
+
+    Signed Manifest: For reproducibility and regulatory review
+
+🔁 Integration into Platform UX
+
+These reports would show up as:
+
+    Tabbed views in a cohort details page
+
+    PDF or JSON exports for buyer demos, trials, or regulatory submission
+
+    Modular embeds inside Langflow, Replit, or custom front ends
+
