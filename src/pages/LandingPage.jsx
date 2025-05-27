@@ -14,7 +14,7 @@ const LandingPage = () => {
           <p className="text-2xl font-syne font-semibold mb-4 max-w-3xl mx-auto" style={{color: '#3C3C4E'}}>
             Simulate. Validate. Ascend.
           </p>
-          <p className="text-lg font-inter text-slate-gray mb-8 max-w-2xl mx-auto">
+          <p className="text-lg font-inter mb-8 max-w-2xl mx-auto" style={{color: '#3C3C4E'}}>
             Your launchpad to validated, privacy-safe EHR simulation—fueling the next generation of AI, research, and healthtech.
           </p>
           

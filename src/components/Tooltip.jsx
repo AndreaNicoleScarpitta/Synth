@@ -19,16 +19,18 @@ const Tooltip = ({ children, content, position = 'top' }) => {
       {children}
       {isVisible && (
         <div 
-          className={`absolute z-50 px-2 py-1 text-sm font-inter text-white bg-slate-gray rounded shadow-lg whitespace-nowrap ${positionClasses[position]}`}
+          className={`absolute z-50 px-2 py-1 text-sm font-inter text-white rounded shadow-lg whitespace-nowrap ${positionClasses[position]}`}
+          style={{backgroundColor: '#3C3C4E'}}
         >
           {content}
           <div 
-            className={`absolute w-2 h-2 bg-slate-gray transform rotate-45 ${
+            className={`absolute w-2 h-2 transform rotate-45 ${
               position === 'top' ? 'top-full left-1/2 -translate-x-1/2 -mt-1' :
               position === 'bottom' ? 'bottom-full left-1/2 -translate-x-1/2 -mb-1' :
               position === 'left' ? 'left-full top-1/2 -translate-y-1/2 -ml-1' :
               'right-full top-1/2 -translate-y-1/2 -mr-1'
             }`}
+            style={{backgroundColor: '#3C3C4E'}}
           />
         </div>
       )}
