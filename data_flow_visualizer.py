@@ -244,11 +244,7 @@ def create_compliance_framework_diagram():
 def main():
     """Main visualization dashboard"""
     
-    st.set_page_config(
-        page_title="Synthetic Ascension - System Architecture",
-        page_icon="🏗️",
-        layout="wide"
-    )
+
     
     st.title("🏗️ Synthetic Ascension System Architecture")
     st.markdown("**Complete data flow visualization and compliance framework**")
