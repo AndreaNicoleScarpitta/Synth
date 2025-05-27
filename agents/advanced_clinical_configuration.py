@@ -31,23 +31,77 @@ class AdvancedClinicalConfigurator:
     
     def __init__(self):
         self.cohort_tiers = {
-            "prototype": CohortConfiguration(
-                tier="prototype",
+            "prototype_100_500": CohortConfiguration(
+                tier="prototype_100_500",
                 size_range=(100, 500),
-                use_case="Prototype physiologic profiles for specific subtypes",
+                use_case="Prototype physiologic profiles for specific subtypes (e.g., HLHS + coagulopathy)",
                 target_users=["AI researchers", "early clinical reviewers"],
                 synthetic_focus=[
-                    "high_fidelity_multimodal_samples",
-                    "deep_attributes",
-                    "lab_trends",
-                    "echo_findings", 
-                    "genetic_mutations"
+                    "High-fidelity multimodal samples with deep attributes",
+                    "Lab trends and temporal patterns",
+                    "Echo findings with detailed measurements", 
+                    "Genetic mutations and phenotype correlations",
+                    "Thrombosis risk modeling in complex CHD"
                 ],
-                complexity_level="high_fidelity",
+                complexity_level="high_fidelity_prototype",
                 adversarial_validation=True,
                 longitudinal_depth=6,
-                rare_case_percentage=0.15,
+                rare_case_percentage=0.20,
                 cross_condition_overlap=False
+            ),
+            "simulation_1k_5k": CohortConfiguration(
+                tier="simulation_1k_5k",
+                size_range=(1000, 5000),
+                use_case="Simulate cross-condition overlaps (e.g., Fontan + thrombophilia; CoA + renal dysfunction)",
+                target_users=["Hospital research teams", "data scientists"],
+                synthetic_focus=[
+                    "Longitudinal records with temporal evolution",
+                    "Failed and successful intervention outcomes",
+                    "Medication + dose interaction modeling",
+                    "Multi-system pathophysiology simulation",
+                    "Cross-condition overlap patterns"
+                ],
+                complexity_level="longitudinal_simulation",
+                adversarial_validation=True,
+                longitudinal_depth=24,
+                rare_case_percentage=0.15,
+                cross_condition_overlap=True
+            ),
+            "ai_testing_10k_50k": CohortConfiguration(
+                tier="ai_testing_10k_50k",
+                size_range=(10000, 50000),
+                use_case="Test AI models for phenotype clustering and outcome prediction across CHD variants",
+                target_users=["Academic consortia", "AI companies"],
+                synthetic_focus=[
+                    "Full-range variability across labs, demographics, vitals",
+                    "Rare case infill for edge case coverage",
+                    "Adversarial cohort insertions for robustness testing",
+                    "Phenotype clustering validation datasets",
+                    "Outcome prediction training cohorts"
+                ],
+                complexity_level="ai_training_scale",
+                adversarial_validation=True,
+                longitudinal_depth=36,
+                rare_case_percentage=0.10,
+                cross_condition_overlap=True
+            ),
+            "population_100k_plus": CohortConfiguration(
+                tier="population_100k_plus",
+                size_range=(100000, 1000000),
+                use_case="Population-scale inference of pathophysiologic phenotypes",
+                target_users=["Pharma R&D", "regulatory reviewers"],
+                synthetic_focus=[
+                    "Stratified cohorts by physiology, lab flags, genotypes",
+                    "Outcome-linked trajectories for regulatory analysis",
+                    "Population-scale epidemiological patterns",
+                    "Drug safety and efficacy modeling",
+                    "Regulatory-grade validation datasets"
+                ],
+                complexity_level="population_scale",
+                adversarial_validation=True,
+                longitudinal_depth=60,
+                rare_case_percentage=0.05,
+                cross_condition_overlap=True
             ),
             "research": CohortConfiguration(
                 tier="research", 

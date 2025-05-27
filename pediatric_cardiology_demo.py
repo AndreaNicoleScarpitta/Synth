@@ -52,6 +52,66 @@ def main():
     
     # Enhanced Clinical Parameter Selection
     st.subheader("🔬 Advanced Clinical Configuration")
+    st.markdown("*Simulate granular physiologic states, lab profiles, hemodynamic models, and multi-system interactions—e.g., thrombosis risk in Tetralogy of Fallot with polycythemia.*")
+    
+    # Cohort Tier Selection
+    st.subheader("📊 Research Cohort Tier Selection")
+    
+    tier_descriptions = {
+        "100–500 (Prototype)": {
+            "use_case": "Prototype physiologic profiles for specific subtypes (e.g., HLHS + coagulopathy)",
+            "target_users": "AI researchers, early clinical reviewers",
+            "synthetic_focus": "High-fidelity multimodal samples with deep attributes (e.g., lab trends, echo findings, mutations)"
+        },
+        "1,000–5,000 (Simulation)": {
+            "use_case": "Simulate cross-condition overlaps (e.g., Fontan + thrombophilia; CoA + renal dysfunction)",
+            "target_users": "Hospital research teams, data scientists",
+            "synthetic_focus": "Longitudinal records, failed and successful interventions, medication + dose interactions"
+        },
+        "10,000–50,000 (AI Testing)": {
+            "use_case": "Test AI models for phenotype clustering and outcome prediction across CHD variants",
+            "target_users": "Academic consortia, AI companies",
+            "synthetic_focus": "Full-range variability across labs, demographics, vitals; rare case infill; adversarial cohort insertions"
+        },
+        "100,000+ (Population Scale)": {
+            "use_case": "Population-scale inference of pathophysiologic phenotypes",
+            "target_users": "Pharma R&D, regulatory reviewers",
+            "synthetic_focus": "Stratified cohorts by physiology, lab flags, genotypes, outcome-linked trajectories"
+        }
+    }
+    
+    selected_tier = st.selectbox(
+        "Select Research Cohort Tier",
+        list(tier_descriptions.keys()),
+        help="Choose the appropriate cohort size and complexity for your research needs"
+    )
+    
+    # Display tier details
+    tier_info = tier_descriptions[selected_tier]
+    
+    col_tier1, col_tier2 = st.columns(2)
+    
+    with col_tier1:
+        st.info(f"""
+        **Use Case:** {tier_info['use_case']}
+        
+        **Target Users:** {tier_info['target_users']}
+        """)
+    
+    with col_tier2:
+        st.success(f"""
+        **Synthetic Focus:** {tier_info['synthetic_focus']}
+        """)
+    
+    # Cohort size based on tier
+    tier_ranges = {
+        "100–500 (Prototype)": (100, 500),
+        "1,000–5,000 (Simulation)": (1000, 5000),
+        "10,000–50,000 (AI Testing)": (10000, 50000),
+        "100,000+ (Population Scale)": (100000, 1000000)
+    }
+    
+    min_size, max_size = tier_ranges[selected_tier]
     
     # Primary clinical parameters
     col1, col2, col3 = st.columns(3)
@@ -94,7 +154,32 @@ def main():
         )
     
     with col3:
-        cohort_size = st.number_input("Cohort Size", min_value=5, max_value=100, value=15)
+        # Dynamic cohort size based on selected tier
+        default_size = min_size if min_size <= 500 else 500
+        cohort_size = st.number_input(
+            f"Cohort Size ({min_size:,}-{max_size:,})", 
+            min_value=min_size, 
+            max_value=max_size, 
+            value=default_size,
+            help=f"Select cohort size within the {selected_tier} range"
+        )
+        
+        # Multi-system interaction modeling
+        st.selectbox(
+            "Multi-System Interactions",
+            [
+                "Isolated CHD (Single System)",
+                "CHD + Coagulopathy",
+                "CHD + Thrombophilia", 
+                "CHD + Renal Dysfunction",
+                "CHD + Pulmonary Hypertension",
+                "CHD + Neurodevelopmental Delays",
+                "CHD + Genetic Syndrome",
+                "CHD + Failure to Thrive",
+                "Complex Multi-System (3+ interactions)"
+            ],
+            help="Model granular physiologic states and multi-system interactions"
+        )
     
     # Advanced Clinical Parameters
     st.subheader("🏥 Surgical & Treatment Strategy")
