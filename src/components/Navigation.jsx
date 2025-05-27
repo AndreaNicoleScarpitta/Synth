@@ -24,7 +24,7 @@ const Navigation = () => {
               <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">SA</span>
               </div>
-              <span className="heading-syne text-xl font-bold text-gray-900">
+              <span className="font-syne text-xl font-bold text-gray-900">
                 Synthetic Ascension
               </span>
             </Link>
