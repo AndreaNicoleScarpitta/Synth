@@ -18,12 +18,6 @@ from agents.adversarial_validation_agent import AdversarialValidationOrchestrato
 from agents.multimodal_ehr_agent import MultimodalEHRAgent
 
 def main():
-    st.set_page_config(
-        page_title="Synthetic Ascension Research Dashboard",
-        page_icon="🏥",
-        layout="wide",
-        initial_sidebar_state="expanded"
-    )
     
     # Initialize session state
     if 'orchestrator' not in st.session_state:
