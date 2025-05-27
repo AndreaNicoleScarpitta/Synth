@@ -1,5 +1,39 @@
 import React, { useState } from 'react'
 
+// Progress tracking component
+const ProgressBar = ({ progress, currentStep, steps }) => {
+  return (
+    <div style={{ width: '100%', margin: '20px 0' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+        <span style={{ fontSize: '14px', fontWeight: '500', color: '#374151' }}>
+          {currentStep}
+        </span>
+        <span style={{ fontSize: '14px', color: '#6b7280' }}>
+          {Math.round(progress)}%
+        </span>
+      </div>
+      <div style={{
+        width: '100%',
+        height: '8px',
+        backgroundColor: '#e5e7eb',
+        borderRadius: '4px',
+        overflow: 'hidden'
+      }}>
+        <div style={{
+          width: `${progress}%`,
+          height: '100%',
+          backgroundColor: '#3b82f6',
+          borderRadius: '4px',
+          transition: 'width 0.3s ease'
+        }} />
+      </div>
+      <div style={{ marginTop: '8px', fontSize: '12px', color: '#6b7280' }}>
+        {steps.find(step => step.active)?.description || 'Processing...'}
+      </div>
+    </div>
+  );
+};
+
 // Custom Multi-Select Component
 const MultiSelectDropdown = ({ label, options, placeholder = "Select options...", emoji = "" }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -439,6 +473,23 @@ const features = [
 
 function App() {
   const [currentView, setCurrentView] = useState('landing')
+  const [isGenerating, setIsGenerating] = useState(false)
+  const [progress, setProgress] = useState(0)
+  const [currentStep, setCurrentStep] = useState('')
+  const [generationSteps, setGenerationSteps] = useState([])
+  const [generationResults, setGenerationResults] = useState(null)
+  const [selectedConfigurations, setSelectedConfigurations] = useState({
+    populationSize: '',
+    cardiacConditions: [],
+    hematologicConditions: [],
+    demographics: [],
+    geneticMarkers: [],
+    labParameters: [],
+    dataTypes: [],
+    procedureTypes: [],
+    medications: [],
+    specialtyFocus: []
+  })
 
   const handleLaunchDemo = () => {
     setCurrentView('demo')
@@ -757,13 +808,64 @@ function App() {
 
                 {/* Generation Button */}
                 <div style={{textAlign: 'center'}}>
-                  <button style={{...styles.primaryButton, padding: '16px 32px', fontSize: '16px'}}>
-                    🎯 Generate Synthetic Dataset
+                  <button 
+                    style={{
+                      ...styles.primaryButton, 
+                      padding: '16px 32px', 
+                      fontSize: '16px',
+                      opacity: isGenerating ? 0.7 : 1,
+                      cursor: isGenerating ? 'not-allowed' : 'pointer'
+                    }}
+                    onClick={handleGenerateDataset}
+                    disabled={isGenerating}
+                  >
+                    {isGenerating ? '🔄 Generating...' : '🎯 Generate Synthetic Dataset'}
                   </button>
                   <p style={{marginTop: '12px', color: '#6b7280', fontSize: '14px'}}>
-                    Your synthetic EHR dataset will be generated with full audit trails and validation reports
+                    {isGenerating 
+                      ? 'Your synthetic EHR dataset is being generated with full medical validation'
+                      : 'Your synthetic EHR dataset will be generated with full audit trails and validation reports'
+                    }
                   </p>
                 </div>
+
+                {/* Progress Bar */}
+                {isGenerating && (
+                  <div style={{marginTop: '32px', padding: '24px', backgroundColor: '#f8fafc', borderRadius: '8px', border: '1px solid #e5e7eb'}}>
+                    <h3 style={{margin: '0 0 16px 0', color: '#374151', fontSize: '18px', fontWeight: '600'}}>
+                      🔬 Generating Synthetic EHR Dataset
+                    </h3>
+                    <ProgressBar 
+                      progress={progress} 
+                      currentStep={currentStep}
+                      steps={generationSteps}
+                    />
+                    
+                    {/* Active Steps Display */}
+                    <div style={{marginTop: '16px'}}>
+                      <h4 style={{margin: '0 0 12px 0', color: '#374151', fontSize: '14px', fontWeight: '600'}}>
+                        Pipeline Status:
+                      </h4>
+                      <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '8px'}}>
+                        {generationSteps.map(step => (
+                          <div 
+                            key={step.id}
+                            style={{
+                              padding: '8px 12px',
+                              borderRadius: '6px',
+                              fontSize: '12px',
+                              backgroundColor: step.active ? '#dbeafe' : '#f3f4f6',
+                              color: step.active ? '#1d4ed8' : '#6b7280',
+                              border: step.active ? '1px solid #3b82f6' : '1px solid #e5e7eb'
+                            }}
+                          >
+                            {step.active ? '🔄' : '✓'} {step.name}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </section>

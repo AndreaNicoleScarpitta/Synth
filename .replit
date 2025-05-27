@@ -28,6 +28,10 @@ args = "Research Dashboard"
 task = "workflow.run"
 args = "React Frontend"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Enhanced API Server"
+
 [[workflows.workflow]]
 name = "API Server"
 author = "agent"
@@ -54,6 +58,15 @@ author = "agent"
 task = "shell.exec"
 args = "npx vite --host 0.0.0.0 --port 5000"
 waitForPort = 5000
+
+[[workflows.workflow]]
+name = "Enhanced API Server"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python api_server_enhanced.py"
+waitForPort = 8000
 
 [[ports]]
 localPort = 5000

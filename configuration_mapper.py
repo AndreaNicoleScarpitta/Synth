@@ -5,6 +5,7 @@ Translates frontend multi-select configurations into EHR schema generation param
 
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass
+import random
 from ehr_schema_generator import *
 
 @dataclass
@@ -13,23 +14,23 @@ class SyntheticDataConfiguration:
     
     # Population parameters
     population_size: int = 1000
-    age_ranges: List[str] = None
-    demographics: List[str] = None
+    age_ranges: Optional[List[str]] = None
+    demographics: Optional[List[str]] = None
     
     # Medical conditions
-    cardiac_conditions: List[str] = None
-    hematologic_conditions: List[str] = None
-    genetic_markers: List[str] = None
+    cardiac_conditions: Optional[List[str]] = None
+    hematologic_conditions: Optional[List[str]] = None
+    genetic_markers: Optional[List[str]] = None
     
     # Data modalities
-    data_types: List[str] = None
-    lab_parameters: List[str] = None
-    procedure_types: List[str] = None
-    medications: List[str] = None
+    data_types: Optional[List[str]] = None
+    lab_parameters: Optional[List[str]] = None
+    procedure_types: Optional[List[str]] = None
+    medications: Optional[List[str]] = None
     
     # Configuration metadata
     use_case_name: str = ""
-    specialty_focus: List[str] = None
+    specialty_focus: Optional[List[str]] = None
     timeline_coverage: str = ""
     validation_rigor: str = ""
 
