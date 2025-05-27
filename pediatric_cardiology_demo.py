@@ -602,7 +602,7 @@ def main():
                 'trace_data': {
                     'agent_progress': agent_progress,
                     'reasoning_steps': reasoning_steps,
-                    'context_sources': [source.__dict__ for source in trace.context_sources]
+                    'context_sources': getattr(trace, 'context_sources', [])
                 },
                 'generation_metadata': {
                     'generation_time': datetime.now().isoformat(),
