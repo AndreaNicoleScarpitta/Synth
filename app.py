@@ -769,27 +769,36 @@ def main():
     
     if st.session_state.get('show_demo_login', False):
         with st.form("demo_login_form"):
-            st.markdown("**Enter your demo credentials**")
+            st.markdown("**Enter your demo credentials (optional)**")
+            st.markdown("*You can access the demo with or without credentials*")
             
-            demo_email = st.text_input("Email", placeholder="your.email@company.com")
-            demo_password = st.text_input("Password", type="password", placeholder="Enter demo password")
+            demo_email = st.text_input("Email (optional)", placeholder="your.email@company.com")
+            demo_password = st.text_input("Password (optional)", type="password", placeholder="Enter demo password")
             
             login_submitted = st.form_submit_button("Access Demo")
             
             if login_submitted:
-                if validate_demo_login(demo_email, demo_password):
-                    session_id = log_demo_session(demo_email)
+                # Allow access with or without credentials
+                if demo_email and demo_password:
+                    # Try to validate if credentials are provided
+                    if validate_demo_login(demo_email, demo_password):
+                        session_id = log_demo_session(demo_email)
+                        st.session_state.demo_authenticated = True
+                        st.session_state.demo_session_id = session_id
+                        
+                        st.success("**Demo Access Granted with Credentials!**")
+                    else:
+                        st.warning("**Invalid credentials, but granting demo access anyway**")
+                        session_id = log_demo_session(demo_email or "anonymous_user")
+                        st.session_state.demo_authenticated = True
+                        st.session_state.demo_session_id = session_id
+                else:
+                    # Grant access without credentials
+                    session_id = log_demo_session("anonymous_user")
                     st.session_state.demo_authenticated = True
                     st.session_state.demo_session_id = session_id
                     
                     st.success("**Demo Access Granted!**")
-                    
-                    # Store demo authentication state
-                    st.session_state.demo_authenticated = True
-                    st.session_state.demo_session_id = session_id
-                        
-                else:
-                    st.error("**Access Denied** - Invalid email or password. Please contact our team for demo credentials.")
     
     # Demo navigation - outside of forms
     if st.session_state.get('demo_authenticated', False):
