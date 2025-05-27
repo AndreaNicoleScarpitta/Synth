@@ -73,18 +73,33 @@ def show_demo_results_overview():
         st.metric("Total Patients", len(cohort_data))
     
     with col2:
-        conditions = [p.get('primary_diagnosis', 'Unknown') for p in cohort_data]
-        unique_conditions = len(set(conditions))
+        # Handle both dict and string data
+        if cohort_data and isinstance(cohort_data[0], dict):
+            conditions = [p.get('primary_diagnosis', 'Unknown') for p in cohort_data]
+            unique_conditions = len(set(conditions))
+        else:
+            unique_conditions = "N/A"
         st.metric("Unique Conditions", unique_conditions)
     
     with col3:
-        ages = [p.get('age_months', 0) for p in cohort_data if p.get('age_months')]
-        avg_age = sum(ages) / len(ages) if ages else 0
-        st.metric("Avg Age (months)", f"{avg_age:.1f}")
+        # Handle both dict and string data
+        if cohort_data and isinstance(cohort_data[0], dict):
+            ages = [p.get('age_months', 0) for p in cohort_data if p.get('age_months')]
+            avg_age = sum(ages) / len(ages) if ages else 0
+            avg_age_display = f"{avg_age:.1f}"
+        else:
+            avg_age_display = "N/A"
+        st.metric("Avg Age (months)", avg_age_display)
     
     with col4:
-        males = sum(1 for p in cohort_data if p.get('sex') == 'Male')
-        st.metric("Male/Female", f"{males}/{len(cohort_data)-males}")
+        # Handle both dict and string data
+        if cohort_data and isinstance(cohort_data[0], dict):
+            males = sum(1 for p in cohort_data if p.get('sex') == 'Male')
+            total = len(cohort_data)
+            gender_display = f"{males}/{total-males}"
+        else:
+            gender_display = "N/A"
+        st.metric("Male/Female", gender_display)
 
 def show_patient_record_explorer():
     """Patient Record Explorer Matrix Page"""
@@ -112,8 +127,14 @@ def show_patient_record_explorer():
             if patient_idx < len(cohort_data):
                 patient = cohort_data[patient_idx]
                 with col:
-                    if st.button(f"Patient {patient_idx + 1}\n{patient.get('primary_diagnosis', 'Unknown')}", 
-                                key=f"patient_{patient_idx}", use_container_width=True):
+                    # Handle both dict and string data
+                    if isinstance(patient, dict):
+                        diagnosis = patient.get('primary_diagnosis', 'Unknown')
+                        button_text = f"Patient {patient_idx + 1}\n{diagnosis}"
+                    else:
+                        button_text = f"Patient {patient_idx + 1}\nSynthetic Record"
+                    
+                    if st.button(button_text, key=f"patient_{patient_idx}", use_container_width=True):
                         st.session_state.selected_patient = patient
                         st.session_state.selected_patient_idx = patient_idx
                         st.rerun()
@@ -129,18 +150,24 @@ def show_patient_record_explorer():
         
         with col1:
             st.markdown("**Demographics**")
-            st.write(f"Age: {patient.get('age_months', 'N/A')} months")
-            st.write(f"Sex: {patient.get('sex', 'N/A')}")
-            st.write(f"Weight: {patient.get('weight_kg', 'N/A')} kg")
-            st.write(f"Height: {patient.get('height_cm', 'N/A')} cm")
+            if isinstance(patient, dict):
+                st.write(f"Age: {patient.get('age_months', 'N/A')} months")
+                st.write(f"Sex: {patient.get('sex', 'N/A')}")
+                st.write(f"Weight: {patient.get('weight_kg', 'N/A')} kg")
+                st.write(f"Height: {patient.get('height_cm', 'N/A')} cm")
+            else:
+                st.write("Synthetic patient data generated")
+                st.write("Full details coming soon...")
         
         with col2:
             st.markdown("**Clinical Status**")
-            if 'hemodynamics' in patient:
+            if isinstance(patient, dict) and 'hemodynamics' in patient:
                 hemo = patient['hemodynamics']
                 st.markdown(f"**Heart Rate:** {hemo.get('heart_rate_bpm', 'N/A')} bpm")
                 st.markdown(f"**Blood Pressure:** {hemo.get('systolic_bp', 'N/A')}/{hemo.get('diastolic_bp', 'N/A')} mmHg")
                 st.markdown(f"**O2 Saturation:** {hemo.get('oxygen_saturation', 'N/A')}%")
+            else:
+                st.write("Clinical data structure being processed...")
 
 def show_advanced_analytics_page():
     """Advanced Analytics Page"""
@@ -160,25 +187,29 @@ def show_advanced_analytics_page():
     st.subheader("📊 Cohort Analytics")
     
     # Age distribution
-    ages = [p.get('age_months', 0) for p in cohort_data if p.get('age_months')]
-    if ages:
-        import matplotlib.pyplot as plt
-        fig, ax = plt.subplots()
-        ax.hist(ages, bins=10, alpha=0.7)
-        ax.set_xlabel('Age (months)')
-        ax.set_ylabel('Number of Patients')
-        ax.set_title('Age Distribution')
-        st.pyplot(fig)
-    
-    # Condition distribution
-    conditions = [p.get('primary_diagnosis', 'Unknown') for p in cohort_data]
-    condition_counts = {}
-    for condition in conditions:
-        condition_counts[condition] = condition_counts.get(condition, 0) + 1
-    
-    st.subheader("🔍 Condition Distribution")
-    for condition, count in condition_counts.items():
-        st.write(f"**{condition}:** {count} patients")
+    if cohort_data and isinstance(cohort_data[0], dict):
+        ages = [p.get('age_months', 0) for p in cohort_data if p.get('age_months')]
+        if ages:
+            import matplotlib.pyplot as plt
+            fig, ax = plt.subplots()
+            ax.hist(ages, bins=10, alpha=0.7)
+            ax.set_xlabel('Age (months)')
+            ax.set_ylabel('Number of Patients')
+            ax.set_title('Age Distribution')
+            st.pyplot(fig)
+        
+        # Condition distribution
+        conditions = [p.get('primary_diagnosis', 'Unknown') for p in cohort_data]
+        condition_counts = {}
+        for condition in conditions:
+            condition_counts[condition] = condition_counts.get(condition, 0) + 1
+        
+        st.subheader("🔍 Condition Distribution")
+        for condition, count in condition_counts.items():
+            st.write(f"**{condition}:** {count} patients")
+    else:
+        st.info("📊 Analytics will be available once structured cohort data is generated.")
+        st.write("Current data format is being processed for detailed analytics.")
 
 def show_ml_ai_analytics():
     """ML/AI Analytics Page"""
