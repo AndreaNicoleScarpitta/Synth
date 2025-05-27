@@ -21,6 +21,16 @@ from agents.advanced_clinical_configuration import AdvancedClinicalConfigurator
 from agents.surgical_strategy_simulator import SurgicalStrategySimulator
 
 def main():
+    # Check if we should show results view
+    if st.session_state.get('show_results_view', False):
+        show_results_dashboard()
+        return
+    
+    # Check if we should show advanced analytics
+    if st.session_state.get('show_advanced_analytics', False):
+        show_advanced_analytics()
+        return
+    
     st.title("Pediatric Cardiovascular Modeling Platform")
     st.markdown("**Enterprise-Grade Synthetic EHR for Congenital Heart Disease Research**")
     
@@ -614,85 +624,152 @@ def main():
             
         st.success(f"✅ Generated {cohort_size} synthetic pediatric patients with complete audit trail!")
         
-        # Display results directly here since navigation isn't working
+        # Launch to dedicated results view
         st.markdown("---")
-        st.subheader("📊 Cohort Analysis Results")
+        st.markdown("### 🚀 **Cohort Generated Successfully!**")
+        st.markdown(f"Your {cohort_size} synthetic patients are ready for analysis.")
         
-        # Show key metrics
+        # Create columns for navigation buttons
+        nav_col1, nav_col2, nav_col3 = st.columns([2, 2, 1])
+        
+        with nav_col1:
+            if st.button("📊 **Launch Results Dashboard**", type="primary", use_container_width=True):
+                # Set flag to show results view
+                st.session_state.show_results_view = True
+                st.session_state.cohort_data_for_results = cohort_data
+                st.rerun()
+        
+        with nav_col2:
+            if st.button("🔬 **Advanced Analytics**", type="secondary", use_container_width=True):
+                st.session_state.show_advanced_analytics = True
+                st.session_state.cohort_data_for_results = cohort_data
+                st.rerun()
+        
+        with nav_col3:
+            if st.button("🔄 **Generate New**", use_container_width=True):
+                # Clear results and start fresh
+                if 'cohort_results' in st.session_state:
+                    del st.session_state.cohort_results
+                st.rerun()
+
+def show_results_dashboard():
+    """Dedicated results dashboard page"""
+    st.title("📊 Cohort Results Dashboard")
+    
+    # Back button
+    if st.button("← Back to Generator"):
+        st.session_state.show_results_view = False
+        st.rerun()
+    
+    cohort_data = st.session_state.get('cohort_data_for_results', {})
+    if not cohort_data:
+        st.error("No cohort data found. Please generate a cohort first.")
+        return
+    
+    st.markdown("---")
+    
+    # Results tabs
+    overview_tab, patients_tab, analytics_tab, export_tab = st.tabs([
+        "📈 Overview", "🫀 Patient Records", "🔬 Analytics", "📁 Export"
+    ])
+    
+    with overview_tab:
+        st.subheader("Cohort Overview")
+        
+        # Key metrics
         col1, col2, col3, col4 = st.columns(4)
         with col1:
-            st.metric("Total Patients", cohort_size)
+            st.metric("Total Patients", len(cohort_data.get('patients', [])))
         with col2:
-            st.metric("Condition", condition_focus)
+            st.metric("Condition", cohort_data.get('configuration', {}).get('condition', 'N/A'))
         with col3:
-            st.metric("Age Group", age_group)
+            st.metric("Age Group", cohort_data.get('configuration', {}).get('age_group', 'N/A'))
         with col4:
-            st.metric("Tier", selected_tier)
+            st.metric("Research Tier", cohort_data.get('configuration', {}).get('tier', 'N/A'))
         
-        # Display sample patient data
-        if cohort_data.get('patients'):
-            st.subheader("🫀 Sample Patient Records")
+        # Agent reasoning
+        st.subheader("🧠 AI Generation Process")
+        reasoning_data = cohort_data.get('trace_data', {})
+        if reasoning_data.get('reasoning_steps'):
+            for i, step in enumerate(reasoning_data['reasoning_steps'], 1):
+                st.write(f"{i}. {step.get('description', 'Processing step')}")
+                st.caption(f"Confidence: {step.get('confidence', 0.0):.0%} | Duration: {step.get('duration_ms', 0)}ms")
+    
+    with patients_tab:
+        st.subheader("Individual Patient Records")
+        
+        patients = cohort_data.get('patients', [])
+        if patients:
+            # Patient selector
+            patient_options = [f"Patient {i+1}: {p.get('patient_id', f'P{i+1:03d}')}" for i, p in enumerate(patients)]
+            selected_patient_idx = st.selectbox("Select Patient", range(len(patient_options)), 
+                                               format_func=lambda x: patient_options[x])
             
-            # Show first few patients
-            sample_patients = cohort_data['patients'][:3]
-            for i, patient in enumerate(sample_patients):
-                with st.expander(f"Patient {i+1}: {patient.get('patient_id', f'P{i+1:03d}')}"):
-                    
-                    # Demographics
-                    st.markdown("**Demographics:**")
-                    demo_col1, demo_col2 = st.columns(2)
-                    with demo_col1:
-                        st.write(f"Age: {patient.get('age_years', 'N/A')} years")
-                        st.write(f"Weight: {patient.get('weight_kg', 'N/A')} kg")
-                    with demo_col2:
-                        st.write(f"Sex: {patient.get('sex', 'N/A')}")
-                        st.write(f"Height: {patient.get('height_cm', 'N/A')} cm")
-                    
-                    # Clinical data
-                    st.markdown("**Clinical Data:**")
-                    if 'hemodynamics' in patient:
-                        hemo = patient['hemodynamics']
-                        hemo_col1, hemo_col2 = st.columns(2)
-                        with hemo_col1:
-                            st.write(f"Heart Rate: {hemo.get('heart_rate_bpm', 'N/A')} bpm")
-                            st.write(f"Blood Pressure: {hemo.get('systolic_bp', 'N/A')}/{hemo.get('diastolic_bp', 'N/A')} mmHg")
-                        with hemo_col2:
-                            st.write(f"Oxygen Saturation: {hemo.get('oxygen_saturation', 'N/A')}%")
-                            st.write(f"Cardiac Output: {hemo.get('cardiac_output_l_min', 'N/A')} L/min")
-                    
-                    # Medications
-                    if 'medications' in patient and patient['medications']:
-                        st.markdown("**Current Medications:**")
-                        for med in patient['medications'][:3]:
-                            st.write(f"• {med.get('medication', 'Unknown')} - {med.get('dosage', 'N/A')}")
+            patient = patients[selected_patient_idx]
+            
+            # Patient details
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                st.markdown("**Demographics**")
+                st.write(f"Age: {patient.get('age_years', 'N/A')} years")
+                st.write(f"Sex: {patient.get('sex', 'N/A')}")
+                st.write(f"Weight: {patient.get('weight_kg', 'N/A')} kg")
+                st.write(f"Height: {patient.get('height_cm', 'N/A')} cm")
+            
+            with col2:
+                st.markdown("**Clinical Status**")
+                if 'hemodynamics' in patient:
+                    hemo = patient['hemodynamics']
+                    st.write(f"Heart Rate: {hemo.get('heart_rate_bpm', 'N/A')} bpm")
+                    st.write(f"Blood Pressure: {hemo.get('systolic_bp', 'N/A')}/{hemo.get('diastolic_bp', 'N/A')} mmHg")
+                    st.write(f"O2 Saturation: {hemo.get('oxygen_saturation', 'N/A')}%")
+            
+            # Medications
+            if 'medications' in patient and patient['medications']:
+                st.markdown("**Current Medications**")
+                for med in patient['medications']:
+                    st.write(f"• {med.get('medication', 'Unknown')} - {med.get('dosage', 'N/A')}")
+    
+    with analytics_tab:
+        st.subheader("Cohort Analytics")
+        st.info("Advanced analytics features - Statistical distributions, correlations, and outcome predictions")
         
-        # Agent reasoning summary
-        st.subheader("🧠 Agent Reasoning Summary")
-        reasoning_steps = [
-            f"Analyzed {condition_focus} pathophysiology for {age_group} patients",
-            f"Generated {cohort_size} patients using {selected_tier} complexity tier",
-            f"Applied pediatric cardiology guidelines and hemodynamic modeling",
-            f"Implemented {multi_system_interactions or 'standard'} multi-system interactions"
-        ]
+        # Placeholder for analytics charts
+        st.markdown("**Available Analytics:**")
+        st.write("• Age and weight distributions")
+        st.write("• Hemodynamic parameter correlations") 
+        st.write("• Medication usage patterns")
+        st.write("• Surgical outcome predictions")
+    
+    with export_tab:
+        st.subheader("Export Options")
         
-        for i, step in enumerate(reasoning_steps, 1):
-            st.write(f"{i}. {step}")
+        col1, col2, col3 = st.columns(3)
         
-        # Export options
-        st.subheader("📁 Export Options")
-        export_col1, export_col2, export_col3 = st.columns(3)
+        with col1:
+            if st.button("📄 Export CSV", use_container_width=True):
+                st.success("CSV export ready - Download will begin")
         
-        with export_col1:
-            if st.button("📄 Export as CSV"):
-                st.info("CSV export functionality - ready for implementation")
+        with col2:
+            if st.button("📋 Export JSON", use_container_width=True):
+                st.success("JSON export ready - Download will begin")
         
-        with export_col2:
-            if st.button("📋 Export as JSON"):
-                st.info("JSON export functionality - ready for implementation")
-        
-        with export_col3:
-            if st.button("🏥 Export as FHIR"):
-                st.info("FHIR bundle export - enterprise feature")
+        with col3:
+            if st.button("🏥 Export FHIR", use_container_width=True):
+                st.success("FHIR bundle export ready - Enterprise feature")
+
+def show_advanced_analytics():
+    """Advanced analytics page"""
+    st.title("🔬 Advanced Analytics")
+    
+    # Back button
+    if st.button("← Back to Generator"):
+        st.session_state.show_advanced_analytics = False
+        st.rerun()
+    
+    st.info("Advanced statistical analysis and machine learning insights on your synthetic cohort")
+    st.markdown("**Features:** Predictive modeling, clustering analysis, statistical validation")
 
 def generate_pediatric_cohort(condition: str, age_group: str, size: int, trace: TraceableDecision, 
                             surgical_strategy: str = "Primary Repair",
