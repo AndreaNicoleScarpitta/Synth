@@ -11,6 +11,14 @@ import re
 import uuid
 from typing import Dict, Any
 
+# Page configuration - must be first Streamlit command
+st.set_page_config(
+    page_title="Synthetic Ascension - Enterprise Synthetic EHR Platform",
+    page_icon="🧬",
+    layout="wide",
+    initial_sidebar_state="collapsed"
+)
+
 # Database setup for user registrations
 def init_registration_db():
     """Initialize SQLite database for user registrations"""
