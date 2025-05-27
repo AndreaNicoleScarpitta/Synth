@@ -20,24 +20,33 @@ from agents.pediatric_cardiology_enhanced_generator import PediatricCardiologyGe
 from agents.advanced_clinical_configuration import AdvancedClinicalConfigurator
 from agents.surgical_strategy_simulator import SurgicalStrategySimulator
 
-def medical_tooltip(term: str, definition: str) -> str:
-    """Create a medical term with tooltip explanation"""
-    return f'<span title="{definition}" style="border-bottom: 1px dotted #666; cursor: help;">{term}</span>'
+def help_icon(definition: str) -> str:
+    """Create a clickable help icon with explanation"""
+    help_id = f"help_{hash(definition) % 10000}"
+    return f'<span onclick="alert(\'{definition}\')" style="cursor: pointer; color: #1f77b4; margin-left: 5px;" title="{definition}">ℹ️</span>'
 
-def display_with_tooltip(text: str, tooltip: str):
-    """Display text with tooltip using HTML"""
-    st.markdown(f'<span title="{tooltip}" style="border-bottom: 1px dotted #666; cursor: help;">{text}</span>', unsafe_allow_html=True)
+def term_with_help(term: str, definition: str):
+    """Display term with clickable help icon"""
+    st.markdown(f"{term} {help_icon(definition)}", unsafe_allow_html=True)
 
 def main():
-    # Initialize page state
-    if 'current_view' not in st.session_state:
-        st.session_state.current_view = 'generator'
+    # Simple navigation using radio buttons at the top
+    if 'nav_page' not in st.session_state:
+        st.session_state.nav_page = 'Generator'
+    
+    # Navigation selector
+    nav_option = st.radio("", ['Generator', 'Results Dashboard', 'Advanced Analytics'], 
+                         horizontal=True, key='main_nav')
+    
+    if nav_option != st.session_state.nav_page:
+        st.session_state.nav_page = nav_option
+        st.rerun()
     
     # Route to appropriate view
-    if st.session_state.current_view == 'results':
+    if st.session_state.nav_page == 'Results Dashboard':
         show_results_dashboard()
         return
-    elif st.session_state.current_view == 'analytics':
+    elif st.session_state.nav_page == 'Advanced Analytics':
         show_advanced_analytics()
         return
     
@@ -59,13 +68,35 @@ def main():
             """)
         
         with col2:
-            st.markdown("""
-            **Target Conditions:**
-            """)
-            st.markdown("• " + medical_tooltip("Tetralogy of Fallot", "A heart defect with four abnormalities: hole between heart chambers, narrowed pulmonary valve, enlarged right ventricle, and displaced aorta"), unsafe_allow_html=True)
-            st.markdown("• " + medical_tooltip("Hypoplastic Left Heart Syndrome", "A severe birth defect where the left side of the heart is critically underdeveloped"), unsafe_allow_html=True)
-            st.markdown("• " + medical_tooltip("Coarctation of Aorta", "A narrowing of the body's main artery (aorta) that reduces blood flow"), unsafe_allow_html=True)
-            st.markdown("• " + medical_tooltip("Ventricular Septal Defects", "Holes in the wall separating the heart's two lower chambers"), unsafe_allow_html=True)
+            st.markdown("**Target Conditions:**")
+            
+            col2a, col2b = st.columns([4, 1])
+            with col2a:
+                st.write("• Tetralogy of Fallot")
+            with col2b:
+                with st.expander("ℹ️", expanded=False):
+                    st.caption("A heart defect with four abnormalities: hole between heart chambers, narrowed pulmonary valve, enlarged right ventricle, and displaced aorta")
+            
+            col2a, col2b = st.columns([4, 1])
+            with col2a:
+                st.write("• Hypoplastic Left Heart Syndrome")
+            with col2b:
+                with st.expander("ℹ️", expanded=False):
+                    st.caption("A severe birth defect where the left side of the heart is critically underdeveloped")
+            
+            col2a, col2b = st.columns([4, 1])
+            with col2a:
+                st.write("• Coarctation of Aorta")
+            with col2b:
+                with st.expander("ℹ️", expanded=False):
+                    st.caption("A narrowing of the body's main artery (aorta) that reduces blood flow")
+            
+            col2a, col2b = st.columns([4, 1])
+            with col2a:
+                st.write("• Ventricular Septal Defects")
+            with col2b:
+                with st.expander("ℹ️", expanded=False):
+                    st.caption("Holes in the wall separating the heart's two lower chambers")
     
     # Generate synthetic pediatric cohort
     st.header("🎯 Generate Synthetic Pediatric Cohort")
@@ -639,25 +670,10 @@ def main():
         st.markdown("### 🚀 **Cohort Generated Successfully!**")
         st.markdown(f"Your {cohort_size} synthetic patients are ready for analysis.")
         
-        # Create columns for navigation buttons
-        nav_col1, nav_col2, nav_col3 = st.columns([2, 2, 1])
+        # Store results for other views
+        st.session_state.cohort_data_for_results = cohort_data
         
-        with nav_col1:
-            if st.button("📊 **Launch Results Dashboard**", type="primary", use_container_width=True):
-                st.session_state.current_view = 'results'
-                st.session_state.cohort_data_for_results = cohort_data
-                st.rerun()
-        
-        with nav_col2:
-            if st.button("🔬 **Advanced Analytics**", type="secondary", use_container_width=True):
-                st.session_state.current_view = 'analytics'
-                st.session_state.cohort_data_for_results = cohort_data
-                st.rerun()
-        
-        with nav_col3:
-            if st.button("🔄 **Generate New**", use_container_width=True):
-                st.session_state.current_view = 'generator'
-                st.rerun()
+        st.success("✅ **Cohort Generated Successfully!** Switch to 'Results Dashboard' or 'Advanced Analytics' tabs above to explore your data.")
 
 def show_results_dashboard():
     """Dedicated results dashboard page"""
@@ -728,9 +744,27 @@ def show_results_dashboard():
                 st.markdown("**Clinical Status**")
                 if 'hemodynamics' in patient:
                     hemo = patient['hemodynamics']
-                    st.markdown("Heart Rate: " + medical_tooltip(f"{hemo.get('heart_rate_bpm', 'N/A')} bpm", "Beats per minute - normal pediatric range varies by age"), unsafe_allow_html=True)
-                    st.markdown("Blood Pressure: " + medical_tooltip(f"{hemo.get('systolic_bp', 'N/A')}/{hemo.get('diastolic_bp', 'N/A')} mmHg", "Systolic/Diastolic pressure - force of blood against artery walls"), unsafe_allow_html=True)
-                    st.markdown("O2 Saturation: " + medical_tooltip(f"{hemo.get('oxygen_saturation', 'N/A')}%", "Percentage of oxygen in blood - normal is 95-100%"), unsafe_allow_html=True)
+                    
+                    col2_1, col2_2 = st.columns([3, 1])
+                    with col2_1:
+                        st.write(f"Heart Rate: {hemo.get('heart_rate_bpm', 'N/A')} bpm")
+                    with col2_2:
+                        with st.expander("ℹ️", expanded=False):
+                            st.caption("Beats per minute - normal pediatric range varies by age")
+                    
+                    col2_1, col2_2 = st.columns([3, 1])
+                    with col2_1:
+                        st.write(f"Blood Pressure: {hemo.get('systolic_bp', 'N/A')}/{hemo.get('diastolic_bp', 'N/A')} mmHg")
+                    with col2_2:
+                        with st.expander("ℹ️", expanded=False):
+                            st.caption("Systolic/Diastolic pressure - force of blood against artery walls")
+                    
+                    col2_1, col2_2 = st.columns([3, 1])
+                    with col2_1:
+                        st.write(f"O2 Saturation: {hemo.get('oxygen_saturation', 'N/A')}%")
+                    with col2_2:
+                        with st.expander("ℹ️", expanded=False):
+                            st.caption("Percentage of oxygen in blood - normal is 95-100%")
             
             # Medications
             if 'medications' in patient and patient['medications']:
