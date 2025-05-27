@@ -18,6 +18,8 @@ from sqlalchemy.orm import Session
 from models.database_models import db_manager, DatabaseSession
 from models.database_models import Patient, AgentExecution, AuditLog, WorkflowState, ValidationResult
 from agents.rag_orchestrator import RAGOrchestrator
+from agents.biomedical_database_connector import BiomedicalDatabaseConnector
+from agents.enhanced_literature_agent import EnhancedLiteratureAgent
 
 # Initialize FastAPI with comprehensive documentation
 app = FastAPI(
@@ -104,6 +106,10 @@ class ConnectionManager:
             self.active_connections.remove(connection)
 
 manager = ConnectionManager()
+
+# Initialize biomedical database systems
+biomedical_connector = BiomedicalDatabaseConnector()
+literature_agent = EnhancedLiteratureAgent()
 
 # Pydantic models for API requests/responses
 class ProblemStatement(BaseModel):
@@ -664,6 +670,222 @@ async def health_check():
             "timestamp": datetime.now().isoformat(),
             "error": str(e)
         }
+
+# Biomedical Database Integration Endpoints
+@app.post("/biomedical/comprehensive-search", 
+          response_model=Dict[str, Any],
+          tags=["Biomedical Research"],
+          summary="Comprehensive Biomedical Database Search",
+          description="Search across multiple biomedical databases including PubMed, ClinicalTrials.gov, FDA, NIH Reporter, and UniProt")
+async def comprehensive_biomedical_search(
+    query: str = Field(description="Search query (e.g., 'diabetes type 2', 'Alzheimer disease')"),
+    databases: Optional[List[str]] = Field(default=None, description="Specific databases to search. Options: pubmed, clinicaltrials, fda_drugs, nih_reporter, uniprot"),
+    max_results_per_db: int = Field(default=20, ge=1, le=100, description="Maximum results per database"),
+    background_tasks: BackgroundTasks = None
+):
+    """
+    Perform comprehensive search across multiple biomedical databases
+    
+    **Databases Available:**
+    - **PubMed**: Medical literature and research articles
+    - **ClinicalTrials.gov**: Clinical trial registry
+    - **FDA Drugs**: Approved drug labels and information
+    - **NIH Reporter**: Funded research projects
+    - **UniProt**: Protein sequence and functional information
+    
+    **Example queries:**
+    - "diabetes mellitus type 2"
+    - "breast cancer immunotherapy"
+    - "COVID-19 vaccines"
+    """
+    try:
+        results = biomedical_connector.comprehensive_biomedical_search(
+            query=query,
+            databases=databases,
+            max_results_per_db=max_results_per_db
+        )
+        
+        return {
+            "status": "success",
+            "results": results,
+            "query_metadata": {
+                "search_timestamp": datetime.now().isoformat(),
+                "query": query,
+                "databases_searched": databases or ["all"],
+                "total_results": results.get('summary', {}).get('total_results_found', 0)
+            }
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Search failed: {str(e)}")
+
+@app.post("/biomedical/enhanced-literature-search",
+          response_model=Dict[str, Any],
+          tags=["Biomedical Research"],
+          summary="Enhanced Literature Search with AI Analysis",
+          description="Perform literature search with advanced AI-powered analysis and insights")
+async def enhanced_literature_search(
+    query: str = Field(description="Research query"),
+    max_results_per_source: int = Field(default=25, ge=1, le=100),
+    include_clinical_trials: bool = Field(default=True, description="Include clinical trials data"),
+    include_drug_data: bool = Field(default=True, description="Include FDA drug information"),
+    include_protein_data: bool = Field(default=False, description="Include protein/genomics data"),
+    background_tasks: BackgroundTasks = None
+):
+    """
+    Enhanced literature search with comprehensive analysis including:
+    
+    - **Research themes extraction** from keywords and MeSH terms
+    - **Evidence quality assessment** based on study types
+    - **Clinical relevance analysis** from trial data
+    - **Cross-database insights** correlating research with clinical applications
+    """
+    try:
+        results = await literature_agent.comprehensive_literature_search(
+            query=query,
+            max_results_per_source=max_results_per_source,
+            include_clinical_trials=include_clinical_trials,
+            include_drug_data=include_drug_data,
+            include_protein_data=include_protein_data
+        )
+        
+        return {
+            "status": "success",
+            "enhanced_results": results,
+            "analysis_summary": {
+                "total_sources": len(results.get('database_results', {})),
+                "research_themes_found": len(results.get('research_themes', {}).get('top_research_themes', [])),
+                "evidence_strength": results.get('evidence_quality', {}).get('evidence_strength', 'unknown'),
+                "clinical_maturity": results.get('clinical_relevance', {}).get('clinical_maturity', 'unknown')
+            }
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Enhanced search failed: {str(e)}")
+
+@app.post("/biomedical/disease-profile",
+          response_model=Dict[str, Any],
+          tags=["Biomedical Research"],
+          summary="Comprehensive Disease Research Profile",
+          description="Generate comprehensive research profile for specific diseases")
+async def generate_disease_profile(
+    disease: str = Field(description="Disease name (e.g., 'Alzheimer disease', 'Type 2 diabetes')"),
+    include_genetics: bool = Field(default=True, description="Include genetic/genomic research"),
+    include_treatments: bool = Field(default=True, description="Include treatment research"),
+    background_tasks: BackgroundTasks = None
+):
+    """
+    Generate comprehensive disease profile including:
+    
+    - **Research maturity assessment**
+    - **Clinical pipeline strength**
+    - **Genetic understanding level**
+    - **Treatment landscape overview**
+    - **Specialized research areas** (genetics, treatments)
+    """
+    try:
+        profile = await literature_agent.focused_disease_research(
+            disease=disease,
+            include_genetics=include_genetics,
+            include_treatments=include_treatments
+        )
+        
+        return {
+            "status": "success",
+            "disease_profile": profile,
+            "profile_summary": profile.get('disease_profile', {}),
+            "generated_at": datetime.now().isoformat()
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Disease profile generation failed: {str(e)}")
+
+@app.get("/biomedical/research-trends/{topic}",
+         response_model=Dict[str, Any],
+         tags=["Biomedical Research"],
+         summary="Research Trends Analysis",
+         description="Analyze publication trends for research topics over time")
+async def get_research_trends(
+    topic: str = Field(description="Research topic to analyze"),
+    years: Optional[str] = Field(default=None, description="Comma-separated years (e.g., '2020,2021,2022')")
+):
+    """
+    Analyze research trends including:
+    
+    - **Publication volume over time**
+    - **Growth rate analysis**
+    - **Research momentum assessment**
+    - **Peak activity periods**
+    """
+    try:
+        year_list = None
+        if years:
+            year_list = [int(year.strip()) for year in years.split(',')]
+        
+        trends = await literature_agent.get_research_trends(topic, year_list)
+        
+        return {
+            "status": "success",
+            "trends": trends,
+            "analysis_metadata": {
+                "topic": topic,
+                "years_analyzed": year_list or "default range",
+                "generated_at": datetime.now().isoformat()
+            }
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Trend analysis failed: {str(e)}")
+
+@app.get("/biomedical/databases/status",
+         response_model=Dict[str, Any],
+         tags=["Biomedical Research"],
+         summary="Database Connectivity Status",
+         description="Check status and connectivity of all biomedical databases")
+async def check_biomedical_database_status():
+    """
+    Check the status and availability of all integrated biomedical databases
+    """
+    try:
+        # Test connectivity to each database with a simple query
+        status_results = {}
+        
+        test_queries = {
+            "pubmed": "cancer",
+            "clinicaltrials": "diabetes", 
+            "fda_drugs": "aspirin",
+            "nih_reporter": "COVID-19",
+            "uniprot": "insulin"
+        }
+        
+        for db_name, test_query in test_queries.items():
+            try:
+                if db_name == "pubmed":
+                    result = biomedical_connector.search_pubmed_enhanced(test_query, max_results=1)
+                elif db_name == "clinicaltrials":
+                    result = biomedical_connector.search_clinical_trials(test_query, max_results=1)
+                elif db_name == "fda_drugs":
+                    result = biomedical_connector.search_fda_drugs(test_query, max_results=1)
+                elif db_name == "nih_reporter":
+                    result = biomedical_connector.search_nih_reporter(test_query, max_results=1)
+                elif db_name == "uniprot":
+                    result = biomedical_connector.search_uniprot_proteins(test_query, max_results=1)
+                
+                if 'error' in result:
+                    status_results[db_name] = {"status": "error", "message": result['error']}
+                else:
+                    status_results[db_name] = {"status": "connected", "test_results": result.get('total_count', 0)}
+                    
+            except Exception as e:
+                status_results[db_name] = {"status": "error", "message": str(e)}
+        
+        overall_status = "healthy" if all(status["status"] == "connected" for status in status_results.values()) else "degraded"
+        
+        return {
+            "overall_status": overall_status,
+            "individual_databases": status_results,
+            "checked_at": datetime.now().isoformat(),
+            "available_databases": [db for db, status in status_results.items() if status["status"] == "connected"]
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Status check failed: {str(e)}")
 
 if __name__ == "__main__":
     import uvicorn
