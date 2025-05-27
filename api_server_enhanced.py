@@ -329,6 +329,20 @@ async def get_workflow_status(workflow_id: str):
     
     return active_workflows[workflow_id]
 
+@app.get("/api/patients/{patient_id}")
+async def get_patient_record(patient_id: str):
+    """Get complete patient record with comprehensive EHR data including medical imaging"""
+    try:
+        # Import the comprehensive EHR database service
+        from ehr_database_service import ehr_db
+        
+        # Get complete patient record with all clinical modalities
+        patient_data = ehr_db.generate_synthetic_patient_record(patient_id)
+        return patient_data
+    except Exception as e:
+        logger.error(f"Error retrieving patient data for {patient_id}: {e}")
+        raise HTTPException(status_code=500, detail="Failed to retrieve patient record")
+
 @app.get("/api/health")
 async def health_check():
     """Health check endpoint"""

@@ -91,6 +91,24 @@ const PatientRecord: React.FC = () => {
         },
         medical_record_number: `MRN-${Math.floor(Math.random() * 1000000)}`
       },
+      cardiac_profile: {
+        primary_diagnosis: ['Tetralogy of Fallot', 'Ventricular Septal Defect', 'Atrial Septal Defect', 'Hypoplastic Left Heart Syndrome'][Math.floor(Math.random() * 4)],
+        severity: ['Mild', 'Moderate', 'Severe'][Math.floor(Math.random() * 3)],
+        surgical_history: [
+          {
+            procedure: 'Complete Intracardiac Repair',
+            date: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            surgeon: 'Dr. Johnson',
+            outcome: 'Successful'
+          }
+        ],
+        echo_findings: {
+          ejection_fraction: Math.round((55 + Math.random() * 15) * 10) / 10,
+          left_ventricular_function: ['Normal', 'Mildly Impaired', 'Moderately Impaired'][Math.floor(Math.random() * 3)],
+          valve_function: 'Normal',
+          wall_motion: 'Normal'
+        }
+      },
       problem_list: {
         active_diagnoses: [
           {
