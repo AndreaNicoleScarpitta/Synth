@@ -1,0 +1,71 @@
+Great question. For a synthetic hematology-focused EHR system—especially in cardiac or congenital heart contexts—the overview dashboard should help users (clinicians, researchers, AI modelers) quickly:
+
+    Understand cohort characteristics
+
+    Explore disease progression trends
+
+    Identify treatment-response patterns
+
+    Inspect agent validation and rejection reasons
+
+Here’s a breakdown of what your Overview Dashboard should include:
+🧬 1. Cohort Composition Panel
+
+High-level metrics summarizing your synthetic patient population.
+Metric	Description
+Total synthetic patients	e.g., 5,000
+CHD subtype distribution	% Tetralogy of Fallot, HLHS, CoA, etc.
+Hematologic comorbidities	e.g., % with thrombophilia, anemia, thrombocytopenia
+Age distribution	Median age, pediatric stage buckets (neonates, infants, etc.)
+Sex distribution	% Male / Female / Intersex
+Record length	Avg. timeline length (days/months per patient)
+🩸 2. Hematology-Specific Lab Trends Panel
+
+Visualize how key blood parameters change over time or differ by subgroup.
+Chart Type	Analytics
+Time-series line chart	Hemoglobin & platelet trends post-surgery
+Box plots by cohort	INR, PT, aPTT distribution per CHD type
+Correlation heatmap	Anticoagulant dosage vs. bleeding risk or INR
+Incidence bars	Frequency of DVT/PE or thrombosis by condition & age group
+💉 3. Treatment Protocols & Intervention Overview
+
+How synthetic patients were managed therapeutically.
+Metric / Chart	Description
+Anticoagulant usage breakdown	% on Warfarin, Heparin, DOACs
+Transfusion heatmap	Volume & frequency by timeline stage
+Therapy timelines	Sankey or Gantt showing when meds were initiated/discontinued
+Agentic decision trace	Why treatment was chosen (agent prompt input + context)
+🧠 4. Adversarial Agent Feedback Summary
+
+Transparency into your AI agent system—what was generated, validated, or rejected.
+Panel	Insights
+✅ Accepted vs ❌ Rejected records	% accepted, top rejection reasons
+Model disagreement map	Realism agent vs. relevance agent — where did they disagree?
+Audit trace viewer	For each patient: what was generated, critiqued, revised
+Confidence calibration	Histogram of realism scores, temperature settings used
+📈 5. Outcomes and Complications Analytics
+
+Synthetic modeling of clinical endpoints.
+Chart	Details
+Outcome funnel	Mortality → complications → discharge state
+Readmission/relapse curve	Cumulative events over synthetic time
+Cause-specific event simulation	Bleeding, clotting, surgical failure patterns
+Multi-factor analysis	E.g., transfusion volume + INR + surgery = clotting outcome score
+🔍 6. Filter & Exploration Controls
+
+Allow users to drill into synthetic subcohorts.
+Filter	Example Options
+CHD Subtype	HLHS, CoA, Tetralogy, VSD
+Age Range	0–1 yr, 1–5 yrs, etc.
+Condition	Anemia, thrombophilia, thrombocytopenia
+Intervention	Anticoagulant used, transfusion received
+Validation status	Accepted, Rejected, Reworked
+Bonus Features
+
+    Download CSV / JSON for cohort slices
+
+    Prompt Replay: See original agent prompt + generation trace
+
+    Agent audit heatmap: Spot areas where agents disagree most
+
+    Synthetic-to-real comparison viewer: For benchmarking against real datasets

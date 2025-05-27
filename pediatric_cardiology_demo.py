@@ -69,10 +69,10 @@ def main():
         
         with col2:
             st.markdown("**Target Conditions:**")
-            st.write("• Tetralogy of Fallot", help="A heart defect with four abnormalities: hole between heart chambers, narrowed pulmonary valve, enlarged right ventricle, and displaced aorta")
-            st.write("• Hypoplastic Left Heart Syndrome", help="A severe birth defect where the left side of the heart is critically underdeveloped")
-            st.write("• Coarctation of Aorta", help="A narrowing of the body's main artery (aorta) that reduces blood flow")
-            st.write("• Ventricular Septal Defects", help="Holes in the wall separating the heart's two lower chambers")
+            st.markdown("• **Tetralogy of Fallot** - A heart defect with four abnormalities: hole between heart chambers, narrowed pulmonary valve, enlarged right ventricle, and displaced aorta")
+            st.markdown("• **Hypoplastic Left Heart Syndrome** - A severe birth defect where the left side of the heart is critically underdeveloped")
+            st.markdown("• **Coarctation of Aorta** - A narrowing of the body's main artery (aorta) that reduces blood flow")
+            st.markdown("• **Ventricular Septal Defects** - Holes in the wall separating the heart's two lower chambers")
     
     # Generate synthetic pediatric cohort
     st.header("🎯 Generate Synthetic Pediatric Cohort")
@@ -720,12 +720,9 @@ def show_results_dashboard():
                 st.markdown("**Clinical Status**")
                 if 'hemodynamics' in patient:
                     hemo = patient['hemodynamics']
-                    st.write(f"Heart Rate: {hemo.get('heart_rate_bpm', 'N/A')} bpm", 
-                            help="Beats per minute - normal pediatric range varies by age")
-                    st.write(f"Blood Pressure: {hemo.get('systolic_bp', 'N/A')}/{hemo.get('diastolic_bp', 'N/A')} mmHg",
-                            help="Systolic/Diastolic pressure - force of blood against artery walls")
-                    st.write(f"O2 Saturation: {hemo.get('oxygen_saturation', 'N/A')}%",
-                            help="Percentage of oxygen in blood - normal is 95-100%")
+                    st.markdown(f"**Heart Rate:** {hemo.get('heart_rate_bpm', 'N/A')} bpm *(beats per minute - normal pediatric range varies by age)*")
+                    st.markdown(f"**Blood Pressure:** {hemo.get('systolic_bp', 'N/A')}/{hemo.get('diastolic_bp', 'N/A')} mmHg *(force of blood against artery walls)*")
+                    st.markdown(f"**O2 Saturation:** {hemo.get('oxygen_saturation', 'N/A')}% *(percentage of oxygen in blood - normal is 95-100%)*")
             
             # Medications
             if 'medications' in patient and patient['medications']:
