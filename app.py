@@ -234,7 +234,13 @@ def main():
         margin: calc(var(--base-unit) * 2) 0;
         box-shadow: 0 calc(var(--base-unit)) calc(var(--base-unit) * 4) rgba(60, 60, 78, 0.04);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        color: var(--text-dark);
+        color: var(--ascension-blue);
+    }
+    
+    .feature-card p {
+        color: var(--ascension-blue);
+        line-height: 1.6;
+        margin: 0;
     }
     
     .feature-card:hover {
