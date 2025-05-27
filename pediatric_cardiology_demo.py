@@ -140,7 +140,7 @@ def generate_pediatric_cohort(condition: str, age_group: str, size: int, trace: 
     # Generate patients
     patients = []
     for i in range(size):
-        patient = generate_single_pediatric_patient(condition, min_age, max_age, trace)
+        patient = generate_single_pediatric_patient(condition, min_age, max_age, trace, i)
         patients.append(patient)
     
     return {
@@ -155,7 +155,7 @@ def generate_pediatric_cohort(condition: str, age_group: str, size: int, trace: 
         }
     }
 
-def generate_single_pediatric_patient(condition: str, min_age: float, max_age: float, trace: TraceableDecision) -> Dict[str, Any]:
+def generate_single_pediatric_patient(condition: str, min_age: float, max_age: float, trace: TraceableDecision, patient_index: int = 0) -> Dict[str, Any]:
     """Generate a single pediatric patient with realistic hemodynamic profile"""
     
     # Basic demographics
@@ -183,7 +183,7 @@ def generate_single_pediatric_patient(condition: str, min_age: float, max_age: f
     trace.add_citation("Age-appropriate medication dosing", "pediatric_pharmacy_handbook")
     
     patient = {
-        "patient_id": f"PED_CARD_{i:03d}",
+        "patient_id": f"PED_CARD_{patient_index:03d}",
         "demographics": {
             "age_years": round(age_years, 2),
             "age_months": age_months,
