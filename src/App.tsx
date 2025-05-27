@@ -512,6 +512,118 @@ function App() {
     window.history.pushState({}, '', '/')
   }
 
+  const handleGenerateDataset = async () => {
+    setIsGenerating(true)
+    setProgress(0)
+    setGenerationResults(null)
+    
+    const steps = [
+      { id: 'config', name: 'Validating Configuration', description: 'Analyzing selected parameters and validating medical logic', active: true },
+      { id: 'literature', name: 'Literature Retrieval', description: 'Searching medical databases for relevant research and clinical guidelines', active: false },
+      { id: 'schema', name: 'EHR Schema Generation', description: 'Creating comprehensive medical record structures with proper coding', active: false },
+      { id: 'patients', name: 'Patient Data Synthesis', description: 'Generating realistic patient cohorts with authentic clinical data', active: false },
+      { id: 'validation', name: 'Medical Validation', description: 'Running clinical validation and bias detection algorithms', active: false },
+      { id: 'export', name: 'Data Preparation', description: 'Preparing datasets for export with audit trails', active: false },
+      { id: 'complete', name: 'Generation Complete', description: 'Synthetic dataset ready with full documentation', active: false }
+    ]
+    
+    setGenerationSteps(steps)
+    
+    try {
+      // Step 1: Configuration Validation
+      setCurrentStep('Validating Configuration...')
+      setProgress(5)
+      await new Promise(resolve => setTimeout(resolve, 1000))
+      
+      // Step 2: Literature Retrieval
+      steps[0].active = false
+      steps[1].active = true
+      setGenerationSteps([...steps])
+      setCurrentStep('Searching Medical Literature...')
+      setProgress(15)
+      await new Promise(resolve => setTimeout(resolve, 2000))
+      
+      // Step 3: EHR Schema Generation
+      steps[1].active = false
+      steps[2].active = true
+      setGenerationSteps([...steps])
+      setCurrentStep('Building EHR Schema...')
+      setProgress(30)
+      await new Promise(resolve => setTimeout(resolve, 1500))
+      
+      // Step 4: Patient Data Synthesis
+      steps[2].active = false
+      steps[3].active = true
+      setGenerationSteps([...steps])
+      setCurrentStep('Generating Patient Cohorts...')
+      setProgress(45)
+      
+      // Call the enhanced agentic API
+      const response = await fetch('http://localhost:8000/api/generate-cohort', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          population_size: selectedConfigurations.populationSize || 'Medium Cohort (100-500 patients)',
+          cardiac_conditions: selectedConfigurations.cardiacConditions || [],
+          hematologic_conditions: selectedConfigurations.hematologicConditions || [],
+          demographics: selectedConfigurations.demographics || [],
+          genetic_markers: selectedConfigurations.geneticMarkers || [],
+          lab_parameters: selectedConfigurations.labParameters || [],
+          data_types: selectedConfigurations.dataTypes || [],
+          procedure_types: selectedConfigurations.procedureTypes || [],
+          medications: selectedConfigurations.medications || [],
+          specialty_focus: selectedConfigurations.specialtyFocus || [],
+          use_case: 'Cardiac Hematology Simulation (Pediatric & Adolescent)',
+          data_complexity: 'high',
+          validation_rigor: 'research_grade',
+          timeline_coverage: 'longitudinal_pediatric'
+        })
+      })
+      
+      setProgress(70)
+      
+      // Step 5: Medical Validation
+      steps[3].active = false
+      steps[4].active = true
+      setGenerationSteps([...steps])
+      setCurrentStep('Running Medical Validation...')
+      setProgress(80)
+      await new Promise(resolve => setTimeout(resolve, 1500))
+      
+      // Step 6: Data Preparation
+      steps[4].active = false
+      steps[5].active = true
+      setGenerationSteps([...steps])
+      setCurrentStep('Preparing Export Package...')
+      setProgress(90)
+      
+      const results = await response.json()
+      await new Promise(resolve => setTimeout(resolve, 1000))
+      
+      // Step 7: Complete
+      steps[5].active = false
+      steps[6].active = true
+      setGenerationSteps([...steps])
+      setCurrentStep('Generation Complete!')
+      setProgress(100)
+      
+      setGenerationResults(results)
+      
+      // Navigate to results after a brief pause
+      setTimeout(() => {
+        setCurrentView('results')
+        setIsGenerating(false)
+      }, 1500)
+      
+    } catch (error) {
+      console.error('Generation failed:', error)
+      setCurrentStep('Generation Failed')
+      setIsGenerating(false)
+    }
+  }
+
   // Handle browser back/forward buttons
   React.useEffect(() => {
     const handlePopState = () => {
