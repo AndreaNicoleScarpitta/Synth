@@ -4,14 +4,14 @@ import { ArrowRight, Beaker, Shield, Zap, Database } from 'lucide-react'
 
 const LandingPage = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-ascension-white to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br to-blue-50" style={{backgroundImage: 'linear-gradient(to bottom right, #F5F7FA, rgb(239 246 255))'}}>
       {/* Hero Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
         <div className="text-center">
-          <h1 className="font-syne text-5xl md:text-6xl font-extrabold text-ascension-blue mb-6">
+          <h1 className="font-syne text-5xl md:text-6xl font-extrabold mb-6" style={{color: '#0A1F44'}}>
             Synthetic Ascension
           </h1>
-          <p className="text-2xl font-syne font-semibold text-slate-gray mb-4 max-w-3xl mx-auto">
+          <p className="text-2xl font-syne font-semibold mb-4 max-w-3xl mx-auto" style={{color: '#3C3C4E'}}>
             Simulate. Validate. Ascend.
           </p>
           <p className="text-lg font-inter text-slate-gray mb-8 max-w-2xl mx-auto">
@@ -21,12 +21,13 @@ const LandingPage = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/demo"
-              className="inline-flex items-center px-8 py-3 border border-transparent text-base font-inter font-semibold rounded-md text-white bg-signal-violet hover:bg-purple-700 transition-colors"
+              className="inline-flex items-center px-8 py-3 border border-transparent text-base font-inter font-semibold rounded-md text-white hover:bg-purple-700 transition-colors"
+              style={{backgroundColor: '#6B4EFF'}}
             >
               Launch Demo
               <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
-            <button className="inline-flex items-center px-8 py-3 border border-signal-violet text-base font-inter font-semibold rounded-md text-signal-violet bg-white hover:bg-gray-50 transition-colors">
+            <button className="inline-flex items-center px-8 py-3 border text-base font-inter font-semibold rounded-md bg-white hover:bg-gray-50 transition-colors" style={{borderColor: '#6B4EFF', color: '#6B4EFF'}}>
               Design Partnership Interest
             </button>
           </div>
