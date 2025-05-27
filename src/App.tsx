@@ -687,7 +687,7 @@ function AppContent() {
     }
   }
 
-  // Handle browser back/forward buttons
+  // Handle browser back/forward buttons and initial URL
   React.useEffect(() => {
     const handlePopState = () => {
       const path = window.location.pathname
@@ -702,11 +702,14 @@ function AppContent() {
       }
     }
 
+    // Set initial view based on current URL
+    handlePopState()
+
     window.addEventListener('popstate', handlePopState)
     return () => window.removeEventListener('popstate', handlePopState)
   }, [])
 
-  if (currentView === 'results') {
+  if (currentView === 'results' && generationResults) {
     return <ResultsOverview results={generationResults} onBackToDemo={() => {
       setCurrentView('demo')
       window.history.pushState({}, '', '/demo')
