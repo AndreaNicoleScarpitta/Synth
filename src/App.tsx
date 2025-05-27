@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const styles = {
   container: {
@@ -277,6 +277,197 @@ const features = [
 ]
 
 function App() {
+  const [currentView, setCurrentView] = useState('landing')
+
+  const handleLaunchDemo = () => {
+    setCurrentView('demo')
+  }
+
+  const handleEnterprisePartnership = () => {
+    setCurrentView('enterprise')
+  }
+
+  const handleStartDemo = () => {
+    setCurrentView('demo')
+  }
+
+  const handleBackToLanding = () => {
+    setCurrentView('landing')
+  }
+
+  if (currentView === 'demo') {
+    return (
+      <div style={styles.container}>
+        <header style={styles.header}>
+          <nav style={styles.nav}>
+            <div style={styles.logo}>
+              <div style={styles.logoIcon}>SA</div>
+              <span style={styles.logoText}>Synthetic Ascension</span>
+            </div>
+            <button 
+              style={{...styles.secondaryButton, padding: '8px 16px', fontSize: '14px'}} 
+              onClick={handleBackToLanding}
+            >
+              ← Back to Home
+            </button>
+          </nav>
+        </header>
+        
+        <main style={styles.main}>
+          <section style={styles.hero}>
+            <div style={styles.heroContent}>
+              <h1 style={{...styles.heroTitle, fontSize: '48px'}}>Interactive Demo</h1>
+              <p style={styles.heroSubtitle}>Configure Your Synthetic EHR Generation</p>
+              <p style={styles.heroDescription}>
+                Explore the power of Synthetic Ascension by customizing patient cohorts, 
+                medical specialties, and research parameters in real-time.
+              </p>
+              
+              <div style={{...styles.card, maxWidth: '600px', margin: '48px auto'}}>
+                <h3 style={styles.cardTitle}>Demo Configuration</h3>
+                <div style={{display: 'flex', flexDirection: 'column', gap: '20px', marginTop: '24px'}}>
+                  <div>
+                    <label style={{display: 'block', marginBottom: '8px', fontWeight: '500', color: '#374151'}}>
+                      Patient Cohort Size
+                    </label>
+                    <select style={{width: '100%', padding: '12px', border: '1px solid #d1d5db', borderRadius: '6px'}}>
+                      <option>100 patients</option>
+                      <option>500 patients</option>
+                      <option>1,000 patients</option>
+                      <option>5,000 patients</option>
+                    </select>
+                  </div>
+                  
+                  <div>
+                    <label style={{display: 'block', marginBottom: '8px', fontWeight: '500', color: '#374151'}}>
+                      Medical Specialty
+                    </label>
+                    <select style={{width: '100%', padding: '12px', border: '1px solid #d1d5db', borderRadius: '6px'}}>
+                      <option>Pediatric Cardiology</option>
+                      <option>General Medicine</option>
+                      <option>Oncology</option>
+                      <option>Orthopedics</option>
+                    </select>
+                  </div>
+                  
+                  <div>
+                    <label style={{display: 'block', marginBottom: '8px', fontWeight: '500', color: '#374151'}}>
+                      Data Complexity
+                    </label>
+                    <select style={{width: '100%', padding: '12px', border: '1px solid #d1d5db', borderRadius: '6px'}}>
+                      <option>Standard Clinical Records</option>
+                      <option>Complex Multi-System Cases</option>
+                      <option>Longitudinal Patient Journeys</option>
+                    </select>
+                  </div>
+                  
+                  <button style={{...styles.primaryButton, width: '100%', marginTop: '16px'}}>
+                    Generate Synthetic Dataset
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    )
+  }
+
+  if (currentView === 'enterprise') {
+    return (
+      <div style={styles.container}>
+        <header style={styles.header}>
+          <nav style={styles.nav}>
+            <div style={styles.logo}>
+              <div style={styles.logoIcon}>SA</div>
+              <span style={styles.logoText}>Synthetic Ascension</span>
+            </div>
+            <button 
+              style={{...styles.secondaryButton, padding: '8px 16px', fontSize: '14px'}} 
+              onClick={handleBackToLanding}
+            >
+              ← Back to Home
+            </button>
+          </nav>
+        </header>
+        
+        <main style={styles.main}>
+          <section style={styles.hero}>
+            <div style={styles.heroContent}>
+              <h1 style={{...styles.heroTitle, fontSize: '48px'}}>Enterprise Partnership</h1>
+              <p style={styles.heroSubtitle}>Scale Your Healthcare AI with Confidence</p>
+              <p style={styles.heroDescription}>
+                Partner with Synthetic Ascension to transform your organization's approach 
+                to healthcare data and AI development.
+              </p>
+              
+              <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '32px', marginTop: '48px'}}>
+                <div style={styles.card}>
+                  <div style={{...styles.cardIcon, background: '#0ea5e9'}}>
+                    <div style={{width: '24px', height: '24px', background: 'white', borderRadius: '3px'}}></div>
+                  </div>
+                  <h3 style={styles.cardTitle}>Custom Integration</h3>
+                  <p style={styles.cardDescription}>
+                    Seamless integration with your existing healthcare systems and workflows.
+                  </p>
+                </div>
+                
+                <div style={styles.card}>
+                  <div style={{...styles.cardIcon, background: '#06b6d4'}}>
+                    <div style={{width: '24px', height: '24px', background: 'white', borderRadius: '3px'}}></div>
+                  </div>
+                  <h3 style={styles.cardTitle}>Dedicated Support</h3>
+                  <p style={styles.cardDescription}>
+                    24/7 technical support and dedicated account management for enterprise clients.
+                  </p>
+                </div>
+                
+                <div style={styles.card}>
+                  <div style={{...styles.cardIcon, background: '#0284c7'}}>
+                    <div style={{width: '24px', height: '24px', background: 'white', borderRadius: '3px'}}></div>
+                  </div>
+                  <h3 style={styles.cardTitle}>Compliance Assurance</h3>
+                  <p style={styles.cardDescription}>
+                    HIPAA, GDPR, and SOC 2 compliance with comprehensive audit trails.
+                  </p>
+                </div>
+              </div>
+              
+              <div style={{...styles.card, maxWidth: '500px', margin: '48px auto'}}>
+                <h3 style={styles.cardTitle}>Contact Enterprise Sales</h3>
+                <div style={{display: 'flex', flexDirection: 'column', gap: '16px', marginTop: '24px'}}>
+                  <input 
+                    type="text" 
+                    placeholder="Your Name" 
+                    style={{padding: '12px', border: '1px solid #d1d5db', borderRadius: '6px'}}
+                  />
+                  <input 
+                    type="email" 
+                    placeholder="Business Email" 
+                    style={{padding: '12px', border: '1px solid #d1d5db', borderRadius: '6px'}}
+                  />
+                  <input 
+                    type="text" 
+                    placeholder="Organization" 
+                    style={{padding: '12px', border: '1px solid #d1d5db', borderRadius: '6px'}}
+                  />
+                  <textarea 
+                    placeholder="Tell us about your use case and requirements..." 
+                    rows={4}
+                    style={{padding: '12px', border: '1px solid #d1d5db', borderRadius: '6px', resize: 'vertical'}}
+                  />
+                  <button style={{...styles.primaryButton, width: '100%'}}>
+                    Request Enterprise Demo
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    )
+  }
+
   return (
     <div style={styles.container}>
       <style>
@@ -361,10 +552,18 @@ function App() {
             </div>
             
             <div style={{...styles.buttonContainer, flexDirection: 'row'}} className="button-container">
-              <button style={styles.primaryButton} className="primary-button">
+              <button 
+                style={styles.primaryButton} 
+                className="primary-button"
+                onClick={handleLaunchDemo}
+              >
                 Launch Demo
               </button>
-              <button style={styles.secondaryButton} className="secondary-button">
+              <button 
+                style={styles.secondaryButton} 
+                className="secondary-button"
+                onClick={handleEnterprisePartnership}
+              >
                 Enterprise Partnership
               </button>
             </div>
@@ -398,7 +597,11 @@ function App() {
             <p style={styles.ctaSubtitle}>
               Join leading healthcare organizations and research institutions already using Synthetic Ascension.
             </p>
-            <button style={styles.ctaButton} className="cta-button">
+            <button 
+              style={styles.ctaButton} 
+              className="cta-button"
+              onClick={handleStartDemo}
+            >
               Start Your Demo
             </button>
           </div>
