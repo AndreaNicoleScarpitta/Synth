@@ -121,136 +121,307 @@ def main():
     # Initialize database
     init_registration_db()
     
-    # Custom CSS for sleek modern design
+    # Synthetic Ascension Design System Implementation
     st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
     
-    .main-header {
-        background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 25%, #16213e 50%, #0f3460 100%);
-        padding: 3rem 2rem;
-        border-radius: 20px;
+    /* Design System Color Palette */
+    :root {
+        --ascension-blue: #0A1F44;
+        --synth-white: #F5F7FA;
+        --biotech-green: #34C759;
+        --signal-violet: #6B4EFF;
+        --slate-gray: #3C3C4E;
+        --alert-red: #FF3B30;
+        --base-unit: 8px;
+    }
+    
+    /* Typography System */
+    h1 { font-family: 'Syne', sans-serif; font-size: 48px; font-weight: 800; }
+    h2 { font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 700; }
+    h3 { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 600; }
+    h4 { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 600; }
+    body, p, div { font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 400; }
+    code { font-family: 'JetBrains Mono', monospace; }
+    
+    /* Global Background */
+    .main .block-container {
+        background: var(--synth-white);
+        max-width: 1280px;
+        padding: calc(var(--base-unit) * 3);
+    }
+    
+    /* Brand Header Component */
+    .brand-header {
+        background: linear-gradient(135deg, var(--ascension-blue) 0%, #1a2b5c 50%, #2a3f7e 100%);
+        padding: calc(var(--base-unit) * 6);
+        border-radius: calc(var(--base-unit) * 2);
         color: white;
         text-align: center;
-        margin-bottom: 3rem;
-        box-shadow: 0 20px 40px rgba(15, 15, 35, 0.3);
+        margin-bottom: calc(var(--base-unit) * 4);
+        box-shadow: 0 calc(var(--base-unit) * 3) calc(var(--base-unit) * 6) rgba(10, 31, 68, 0.2);
         border: 1px solid rgba(255, 255, 255, 0.1);
     }
     
-    .logo-container {
+    .brand-logo {
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 1rem;
+        margin-bottom: calc(var(--base-unit) * 3);
+        gap: calc(var(--base-unit) * 2);
     }
     
-    .logo {
-        font-size: 3.5rem;
-        margin-right: 1rem;
-        background: linear-gradient(45deg, #00d4ff, #090979, #020024);
+    .logo-icon {
+        font-size: calc(var(--base-unit) * 8);
+        background: linear-gradient(45deg, var(--biotech-green), var(--signal-violet));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.5));
+        filter: drop-shadow(0 0 calc(var(--base-unit) * 3) rgba(52, 199, 89, 0.3));
     }
     
+    .brand-name {
+        font-family: 'Syne', sans-serif;
+        font-size: calc(var(--base-unit) * 7);
+        font-weight: 800;
+        margin: 0;
+        letter-spacing: -1px;
+    }
+    
+    .brand-tagline {
+        font-size: calc(var(--base-unit) * 2);
+        opacity: 0.8;
+        letter-spacing: 3px;
+        font-weight: 500;
+        margin-top: calc(var(--base-unit));
+        text-transform: uppercase;
+    }
+    
+    .brand-description {
+        font-size: calc(var(--base-unit) * 2.5);
+        font-weight: 300;
+        margin-top: calc(var(--base-unit) * 3);
+        opacity: 0.9;
+        line-height: 1.4;
+    }
+    
+    /* Component: Stats Cards */
+    .stats-card {
+        background: linear-gradient(135deg, var(--signal-violet) 0%, #8B5FFF 100%);
+        color: white;
+        padding: calc(var(--base-unit) * 3);
+        border-radius: calc(var(--base-unit) * 2);
+        text-align: center;
+        margin: var(--base-unit);
+        box-shadow: 0 calc(var(--base-unit) * 2) calc(var(--base-unit) * 4) rgba(107, 78, 255, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .stats-card:hover {
+        transform: translateY(calc(var(--base-unit) * -0.5));
+        box-shadow: 0 calc(var(--base-unit) * 3) calc(var(--base-unit) * 6) rgba(107, 78, 255, 0.35);
+    }
+    
+    /* Component: Feature Cards */
     .feature-card {
-        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-        padding: 2rem;
-        border-radius: 16px;
-        border: 1px solid rgba(15, 15, 35, 0.05);
-        margin: 1.5rem 0;
-        box-shadow: 0 8px 32px rgba(15, 15, 35, 0.08);
-        transition: all 0.3s ease;
+        background: white;
+        padding: calc(var(--base-unit) * 4);
+        border-radius: calc(var(--base-unit) * 2);
+        border: 1px solid rgba(60, 60, 78, 0.08);
+        margin: calc(var(--base-unit) * 2) 0;
+        box-shadow: 0 calc(var(--base-unit)) calc(var(--base-unit) * 4) rgba(60, 60, 78, 0.04);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
     .feature-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 16px 48px rgba(15, 15, 35, 0.12);
+        transform: translateY(calc(var(--base-unit) * -0.5));
+        box-shadow: 0 calc(var(--base-unit) * 2) calc(var(--base-unit) * 8) rgba(60, 60, 78, 0.12);
+        border-color: var(--signal-violet);
     }
     
-    .stats-box {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
-        color: white;
-        padding: 1.5rem;
-        border-radius: 16px;
-        text-align: center;
-        margin: 1rem;
-        box-shadow: 0 12px 24px rgba(102, 126, 234, 0.3);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+    .feature-icon {
+        font-size: calc(var(--base-unit) * 3);
+        margin-bottom: calc(var(--base-unit) * 2);
+        color: var(--signal-violet);
     }
     
-    .testimonial {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    .feature-title {
+        font-family: 'Syne', sans-serif;
+        font-size: calc(var(--base-unit) * 2.5);
+        font-weight: 600;
+        color: var(--ascension-blue);
+        margin-bottom: calc(var(--base-unit) * 1.5);
+    }
+    
+    /* Component: Testimonials */
+    .testimonial-card {
+        background: linear-gradient(135deg, var(--ascension-blue) 0%, #1a2b5c 100%);
         color: white;
-        padding: 2rem;
-        border-radius: 16px;
+        padding: calc(var(--base-unit) * 4);
+        border-radius: calc(var(--base-unit) * 2);
         font-style: italic;
-        margin: 2rem 0;
-        box-shadow: 0 12px 24px rgba(102, 126, 234, 0.2);
+        margin: calc(var(--base-unit) * 3) 0;
+        box-shadow: 0 calc(var(--base-unit) * 2) calc(var(--base-unit) * 6) rgba(10, 31, 68, 0.2);
         border: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
     }
     
+    .testimonial-card::before {
+        content: '"';
+        font-size: calc(var(--base-unit) * 8);
+        font-family: 'Syne', sans-serif;
+        font-weight: 800;
+        color: var(--biotech-green);
+        position: absolute;
+        top: calc(var(--base-unit) * -1);
+        left: calc(var(--base-unit) * 2);
+        opacity: 0.3;
+    }
+    
+    /* Component: Technology Section */
     .tech-section {
-        background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+        background: linear-gradient(135deg, var(--ascension-blue) 0%, #1a2b5c 100%);
         color: white;
-        padding: 3rem 2rem;
-        border-radius: 20px;
-        margin: 3rem 0;
-        box-shadow: 0 20px 40px rgba(15, 15, 35, 0.3);
+        padding: calc(var(--base-unit) * 6);
+        border-radius: calc(var(--base-unit) * 3);
+        margin: calc(var(--base-unit) * 6) 0;
+        box-shadow: 0 calc(var(--base-unit) * 3) calc(var(--base-unit) * 8) rgba(10, 31, 68, 0.3);
     }
     
-    .nav-button {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        border: none;
-        padding: 1rem 2rem;
-        border-radius: 12px;
-        font-weight: 600;
-        box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
-        transition: all 0.3s ease;
+    .tech-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: calc(var(--base-unit) * 4);
+        margin-top: calc(var(--base-unit) * 4);
     }
     
-    .nav-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 12px 24px rgba(102, 126, 234, 0.4);
+    .tech-column h4 {
+        color: var(--biotech-green);
+        margin-bottom: calc(var(--base-unit) * 2);
+        font-size: calc(var(--base-unit) * 2.5);
     }
     
-    body {
-        font-family: 'Inter', sans-serif;
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    .tech-column ul {
+        list-style: none;
+        padding-left: 0;
     }
     
+    .tech-column li {
+        padding: calc(var(--base-unit) * 0.5) 0;
+        padding-left: calc(var(--base-unit) * 2);
+        position: relative;
+    }
+    
+    .tech-column li::before {
+        content: '▸';
+        color: var(--signal-violet);
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+    }
+    
+    /* Component: Buttons */
     .stButton > button {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, var(--signal-violet) 0%, #8B5FFF 100%);
         color: white;
         border: none;
-        border-radius: 12px;
+        border-radius: calc(var(--base-unit) * 1.5);
+        font-family: 'Inter', sans-serif;
         font-weight: 600;
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-        transition: all 0.3s ease;
+        padding: calc(var(--base-unit) * 1.5) calc(var(--base-unit) * 3);
+        box-shadow: 0 calc(var(--base-unit)) calc(var(--base-unit) * 3) rgba(107, 78, 255, 0.25);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        font-size: calc(var(--base-unit) * 2);
     }
     
     .stButton > button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        transform: translateY(calc(var(--base-unit) * -0.25));
+        box-shadow: 0 calc(var(--base-unit) * 1.5) calc(var(--base-unit) * 4) rgba(107, 78, 255, 0.4);
+        background: linear-gradient(135deg, #7B4FEF 0%, #9B6FFF 100%);
+    }
+    
+    /* Component: Form Inputs */
+    .stTextInput > div > div > input {
+        border: 2px solid rgba(60, 60, 78, 0.1);
+        border-radius: var(--base-unit);
+        font-family: 'Inter', sans-serif;
+        transition: all 0.2s ease;
+    }
+    
+    .stTextInput > div > div > input:focus {
+        border-color: var(--signal-violet);
+        box-shadow: 0 0 0 3px rgba(107, 78, 255, 0.1);
+    }
+    
+    /* Component: Status Chips */
+    .status-chip {
+        display: inline-flex;
+        align-items: center;
+        padding: calc(var(--base-unit) * 0.5) calc(var(--base-unit) * 1.5);
+        border-radius: calc(var(--base-unit) * 3);
+        font-size: calc(var(--base-unit) * 1.5);
+        font-weight: 500;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    .status-validated {
+        background: rgba(52, 199, 89, 0.1);
+        color: var(--biotech-green);
+        border: 1px solid rgba(52, 199, 89, 0.2);
+    }
+    
+    .status-generated {
+        background: rgba(107, 78, 255, 0.1);
+        color: var(--signal-violet);
+        border: 1px solid rgba(107, 78, 255, 0.2);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .brand-name { font-size: calc(var(--base-unit) * 5); }
+        .brand-description { font-size: calc(var(--base-unit) * 2); }
+        .tech-grid { grid-template-columns: 1fr; }
+        .brand-logo { flex-direction: column; gap: var(--base-unit); }
+    }
+    
+    /* Accessibility Enhancements */
+    .stButton > button:focus {
+        outline: 2px solid var(--biotech-green);
+        outline-offset: 2px;
+    }
+    
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+        width: var(--base-unit);
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: var(--synth-white);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: var(--signal-violet);
+        border-radius: calc(var(--base-unit) * 0.5);
     }
     </style>
     """, unsafe_allow_html=True)
     
-    # Main header with new logo and branding
+    # Brand header implementing design system
     st.markdown("""
-    <div class="main-header">
-        <div class="logo-container">
-            <div class="logo">⚛️</div>
+    <div class="brand-header">
+        <div class="brand-logo">
+            <div class="logo-icon">🧬</div>
             <div>
-                <h1 style="margin: 0; font-size: 3rem; font-weight: 700;">Synthetic Ascension</h1>
-                <div style="font-size: 0.9rem; opacity: 0.8; letter-spacing: 2px; margin-top: 0.5rem;">NEXT-GEN SYNTHETIC EHR PLATFORM</div>
+                <h1 class="brand-name">Synthetic Ascension</h1>
+                <div class="brand-tagline">Simulate. Validate. Ascend.</div>
             </div>
         </div>
-        <h2 style="font-size: 1.8rem; font-weight: 300; margin: 2rem 0 1rem 0;">Enterprise AI for Pharmaceutical Research</h2>
-        <p style="font-size: 1.2rem; margin-top: 1rem; opacity: 0.9; font-weight: 300;">
-            Generate privacy-preserving, bias-aware synthetic patient data powered by AI agents and real medical literature
-        </p>
+        <div class="brand-description">
+            Your launchpad to validated, privacy-safe EHR simulation—fueling the next generation of AI, research, and healthtech
+        </div>
     </div>
     """, unsafe_allow_html=True)
     
@@ -259,25 +430,25 @@ def main():
     
     with col1:
         st.markdown("""
-        <div class="stats-box">
-            <h3>80%</h3>
-            <p>Faster Model Development</p>
+        <div class="stats-card">
+            <h3 style="margin: 0; font-size: 2.5rem; font-weight: 800;">80%</h3>
+            <p style="margin: 0.5rem 0 0 0; font-size: 1rem; opacity: 0.9;">Faster Model Development</p>
         </div>
         """, unsafe_allow_html=True)
     
     with col2:
         st.markdown("""
-        <div class="stats-box">
-            <h3>100%</h3>
-            <p>Privacy Compliant</p>
+        <div class="stats-card">
+            <h3 style="margin: 0; font-size: 2.5rem; font-weight: 800;">100%</h3>
+            <p style="margin: 0.5rem 0 0 0; font-size: 1rem; opacity: 0.9;">Privacy Compliant</p>
         </div>
         """, unsafe_allow_html=True)
     
     with col3:
         st.markdown("""
-        <div class="stats-box">
-            <h3>FDA Ready</h3>
-            <p>Regulatory Compliance</p>
+        <div class="stats-card">
+            <h3 style="margin: 0; font-size: 2.5rem; font-weight: 800;">FDA Ready</h3>
+            <p style="margin: 0.5rem 0 0 0; font-size: 1rem; opacity: 0.9;">Regulatory Compliance</p>
         </div>
         """, unsafe_allow_html=True)
     
@@ -289,17 +460,20 @@ def main():
     with col1:
         st.markdown("""
         <div class="feature-card">
-            <h4>🤖 AI-Powered Generation</h4>
+            <div class="feature-icon">🤖</div>
+            <div class="feature-title">AI-Powered Generation</div>
             <p>Multi-agent system retrieves real medical literature and generates clinically accurate synthetic patients with complete audit trails.</p>
         </div>
         
         <div class="feature-card">
-            <h4>⚖️ Bias-Aware & Fair</h4>
+            <div class="feature-icon">⚖️</div>
+            <div class="feature-title">Bias-Aware & Fair</div>
             <p>Advanced statistical validation ensures demographic representation and eliminates AI bias across all patient populations.</p>
         </div>
         
         <div class="feature-card">
-            <h4>🏥 Complete Medical Records</h4>
+            <div class="feature-icon">🏥</div>
+            <div class="feature-title">Complete Medical Records</div>
             <p>Generate full EHRs with demographics, diagnoses, medications, labs, imaging, and specialized data like hemodynamics.</p>
         </div>
         """, unsafe_allow_html=True)
@@ -307,17 +481,20 @@ def main():
     with col2:
         st.markdown("""
         <div class="feature-card">
-            <h4>📋 Regulatory Compliant</h4>
+            <div class="feature-icon">📋</div>
+            <div class="feature-title">Regulatory Compliant</div>
             <p>Meets HIPAA, GDPR, and FDA 21 CFR Part 11 requirements with complete traceability and enterprise-grade security.</p>
         </div>
         
         <div class="feature-card">
-            <h4>🔬 Literature-Backed</h4>
+            <div class="feature-icon">🔬</div>
+            <div class="feature-title">Literature-Backed</div>
             <p>Connects to PubMed, ClinicalTrials.gov, and FDA databases for authentic, up-to-date medical knowledge integration.</p>
         </div>
         
         <div class="feature-card">
-            <h4>💊 Pharma-Ready Workflows</h4>
+            <div class="feature-icon">💊</div>
+            <div class="feature-title">Pharma-Ready Workflows</div>
             <p>Specialized interfaces for CDOs, CMOs, RWE teams, and regulatory affairs with role-specific analytics.</p>
         </div>
         """, unsafe_allow_html=True)
@@ -342,7 +519,7 @@ def main():
         """)
         
         st.markdown("""
-        <div class="testimonial">
+        <div class="testimonial-card">
         "Synthetic Ascension reduced our AI model development time from 6 months to 3 weeks while ensuring demographic fairness across all patient groups."
         <br><br><strong>- Chief Data Officer, Top 10 Pharma Company</strong>
         </div>
