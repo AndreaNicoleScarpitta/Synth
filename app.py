@@ -409,21 +409,21 @@ def main():
     </style>
     """, unsafe_allow_html=True)
     
-    # Professional brand header
+    # Hero section with brand identity
     st.markdown("""
-    <div class="hero-section">
-        <div class="hero-content">
-            <div class="brand-identity">
-                <h1 class="brand-title">Synthetic Ascension</h1>
+    <div class="brand-header">
+        <div class="brand-logo">
+            <div>
+                <h1 class="brand-name">Synthetic Ascension</h1>
                 <div class="brand-tagline">Simulate. Validate. Ascend.</div>
             </div>
-            <div class="hero-description">
-                The world's most advanced platform for privacy-preserving synthetic EHR generation, 
-                powered by AI agents and validated against comprehensive medical literature.
-            </div>
-            <div class="value-proposition">
-                Accelerate pharmaceutical research while maintaining complete data privacy and regulatory compliance.
-            </div>
+        </div>
+        <div class="brand-description">
+            The world's most advanced platform for privacy-preserving synthetic EHR generation, 
+            powered by AI agents and validated against comprehensive medical literature.
+        </div>
+        <div style="margin-top: 2rem; font-size: 1.2rem; color: #34C759; font-weight: 500;">
+            Accelerate pharmaceutical research while maintaining complete data privacy and regulatory compliance.
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -455,27 +455,30 @@ def main():
         </div>
         """, unsafe_allow_html=True)
     
-    # Key benefits
-    st.markdown("## 🚀 Accelerate Your Healthcare AI Development")
+    # Core capabilities section
+    st.markdown("""
+    <div style="margin: 3rem 0;">
+        <h2 style="font-family: 'Syne', sans-serif; color: #0A1F44; font-weight: 600; font-size: 2.2rem; text-align: center; margin-bottom: 2rem;">
+            Accelerate Your Healthcare AI Development
+        </h2>
+    </div>
+    """, unsafe_allow_html=True)
     
     col1, col2 = st.columns(2)
     
     with col1:
         st.markdown("""
         <div class="feature-card">
-            <div class="feature-icon">🤖</div>
             <div class="feature-title">AI-Powered Generation</div>
             <p>Multi-agent system retrieves real medical literature and generates clinically accurate synthetic patients with complete audit trails.</p>
         </div>
         
         <div class="feature-card">
-            <div class="feature-icon">⚖️</div>
             <div class="feature-title">Bias-Aware & Fair</div>
             <p>Advanced statistical validation ensures demographic representation and eliminates AI bias across all patient populations.</p>
         </div>
         
         <div class="feature-card">
-            <div class="feature-icon">🏥</div>
             <div class="feature-title">Complete Medical Records</div>
             <p>Generate full EHRs with demographics, diagnoses, medications, labs, imaging, and specialized data like hemodynamics.</p>
         </div>
@@ -484,32 +487,35 @@ def main():
     with col2:
         st.markdown("""
         <div class="feature-card">
-            <div class="feature-icon">📋</div>
             <div class="feature-title">Regulatory Compliant</div>
             <p>Meets HIPAA, GDPR, and FDA 21 CFR Part 11 requirements with complete traceability and enterprise-grade security.</p>
         </div>
         
         <div class="feature-card">
-            <div class="feature-icon">🔬</div>
             <div class="feature-title">Literature-Backed</div>
             <p>Connects to PubMed, ClinicalTrials.gov, and FDA databases for authentic, up-to-date medical knowledge integration.</p>
         </div>
         
         <div class="feature-card">
-            <div class="feature-icon">💊</div>
             <div class="feature-title">Pharma-Ready Workflows</div>
             <p>Specialized interfaces for CDOs, CMOs, RWE teams, and regulatory affairs with role-specific analytics.</p>
         </div>
         """, unsafe_allow_html=True)
     
-    # Use cases
-    st.markdown("## 💼 Perfect For Your Use Case")
+    # Use cases section
+    st.markdown("""
+    <div style="margin: 3rem 0;">
+        <h2 style="font-family: 'Syne', sans-serif; color: #0A1F44; font-weight: 600; font-size: 2.2rem; text-align: center; margin-bottom: 2rem;">
+            Perfect For Your Use Case
+        </h2>
+    </div>
+    """, unsafe_allow_html=True)
     
     use_case_tabs = st.tabs([
-        "🏢 Pharmaceutical Companies",
-        "🏥 Healthcare Systems", 
-        "🎓 Academic Research",
-        "🤖 AI/ML Companies"
+        "Pharmaceutical Companies",
+        "Healthcare Systems", 
+        "Academic Research",
+        "AI/ML Companies"
     ])
     
     with use_case_tabs[0]:
@@ -555,47 +561,53 @@ def main():
         - Ensure regulatory compliance from day one
         """)
     
-    # Technical highlights with new styling
+    # Technical highlights with professional styling
     st.markdown("""
     <div class="tech-section">
-        <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem; font-weight: 300;">⚡ Enterprise-Grade Technology</h2>
-        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem;">
-            <div>
-                <h4 style="color: #00d4ff; margin-bottom: 1rem;">🤖 Multi-Agent Architecture</h4>
-                <ul style="list-style: none; padding-left: 0;">
-                    <li>• Literature retrieval agents</li>
-                    <li>• Synthetic cohort generators</li>
-                    <li>• Statistical validation agents</li>
-                    <li>• Medical terminology validators</li>
-                    <li>• Web monitoring & curation</li>
+        <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem; font-weight: 300;">Enterprise-Grade Technology</h2>
+        <div class="tech-grid">
+            <div class="tech-column">
+                <h4>Multi-Agent Architecture</h4>
+                <ul>
+                    <li>Literature retrieval agents</li>
+                    <li>Synthetic cohort generators</li>
+                    <li>Statistical validation agents</li>
+                    <li>Medical terminology validators</li>
+                    <li>Web monitoring & curation</li>
                 </ul>
             </div>
-            <div>
-                <h4 style="color: #00d4ff; margin-bottom: 1rem;">🛡️ Data Quality Assurance</h4>
-                <ul style="list-style: none; padding-left: 0;">
-                    <li>• Clinical realism validation</li>
-                    <li>• Statistical consistency checks</li>
-                    <li>• Demographic bias detection</li>
-                    <li>• Complete audit trails</li>
-                    <li>• Quality scoring metrics</li>
+            <div class="tech-column">
+                <h4>Data Quality Assurance</h4>
+                <ul>
+                    <li>Clinical realism validation</li>
+                    <li>Statistical consistency checks</li>
+                    <li>Demographic bias detection</li>
+                    <li>Complete audit trails</li>
+                    <li>Quality scoring metrics</li>
                 </ul>
             </div>
-            <div>
-                <h4 style="color: #00d4ff; margin-bottom: 1rem;">🔗 Integration Ready</h4>
-                <ul style="list-style: none; padding-left: 0;">
-                    <li>• REST API with Swagger docs</li>
-                    <li>• FHIR R4 bundle export</li>
-                    <li>• CSV/JSON data formats</li>
-                    <li>• PostgreSQL backend</li>
-                    <li>• Real-time WebSocket updates</li>
+            <div class="tech-column">
+                <h4>Integration Ready</h4>
+                <ul>
+                    <li>REST API with Swagger docs</li>
+                    <li>FHIR R4 bundle export</li>
+                    <li>CSV/JSON data formats</li>
+                    <li>PostgreSQL backend</li>
+                    <li>Real-time WebSocket updates</li>
                 </ul>
             </div>
         </div>
     </div>
     """, unsafe_allow_html=True)
     
-    # Registration form
-    st.markdown("## 📝 Get Early Access")
+    # Registration section
+    st.markdown("""
+    <div style="margin: 3rem 0;">
+        <h2 style="font-family: 'Syne', sans-serif; color: #0A1F44; font-weight: 600; font-size: 2.2rem; text-align: center; margin-bottom: 2rem;">
+            Get Early Access
+        </h2>
+    </div>
+    """, unsafe_allow_html=True)
     
     with st.form("registration_form", clear_on_submit=True):
         st.markdown("**Join the waitlist for early access to Synthetic Ascension**")
