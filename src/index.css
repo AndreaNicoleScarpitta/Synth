@@ -1,7 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  /* Brand Colors from Guidelines */
+  --ascension-blue: #0A1F44;
+  --synth-white: #F5F7FA;
+  --biotech-green: #34C759;
+  --signal-violet: #6B4EFF;
+  --slate-gray: #3C3C4E;
+  --alert-red: #FF3B30;
+}
 
 @layer base {
   html {

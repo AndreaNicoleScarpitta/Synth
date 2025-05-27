@@ -11,19 +11,29 @@ export default {
         'inter': ['Inter', 'sans-serif'],
       },
       colors: {
+        'ascension': {
+          'blue': '#0A1F44',
+          'white': '#F5F7FA',
+        },
+        'biotech': {
+          'green': '#34C759',
+        },
+        'signal': {
+          'violet': '#6B4EFF',
+        },
+        'slate': {
+          'gray': '#3C3C4E',
+        },
+        'alert': {
+          'red': '#FF3B30',
+        },
         primary: {
           50: '#f0f9ff',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
+          100: '#e0f2fe',
+          500: '#6B4EFF',
+          600: '#5B3EDF',
+          700: '#4B2EBF',
         },
-        sage: {
-          50: '#f6f7f6',
-          100: '#e4e7e4',
-          500: '#6b7b6b',
-          600: '#5a6b5a',
-          700: '#4a5a4a',
-        }
       }
     },
   },

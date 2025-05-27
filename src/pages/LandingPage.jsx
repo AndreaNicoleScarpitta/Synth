@@ -4,29 +4,29 @@ import { ArrowRight, Beaker, Shield, Zap, Database } from 'lucide-react'
 
 const LandingPage = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-br from-ascension-white to-blue-50">
       {/* Hero Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
         <div className="text-center">
-          <h1 className="font-syne text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+          <h1 className="font-syne text-5xl md:text-6xl font-extrabold text-ascension-blue mb-6">
             Synthetic Ascension
           </h1>
-          <p className="text-xl text-gray-600 mb-4 max-w-3xl mx-auto">
-            Enterprise-Grade Synthetic EHR Platform
-          </p>
-          <p className="text-lg text-gray-500 mb-8 max-w-2xl mx-auto">
+          <p className="text-2xl font-syne font-semibold text-slate-gray mb-4 max-w-3xl mx-auto">
             Simulate. Validate. Ascend.
+          </p>
+          <p className="text-lg font-inter text-slate-gray mb-8 max-w-2xl mx-auto">
+            Your launchpad to validated, privacy-safe EHR simulation—fueling the next generation of AI, research, and healthtech.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/demo"
-              className="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors"
+              className="inline-flex items-center px-8 py-3 border border-transparent text-base font-inter font-semibold rounded-md text-white bg-signal-violet hover:bg-purple-700 transition-colors"
             >
               Launch Demo
               <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
-            <button className="inline-flex items-center px-8 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors">
+            <button className="inline-flex items-center px-8 py-3 border border-signal-violet text-base font-inter font-semibold rounded-md text-signal-violet bg-white hover:bg-gray-50 transition-colors">
               Design Partnership Interest
             </button>
           </div>
