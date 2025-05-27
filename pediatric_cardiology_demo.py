@@ -16,6 +16,7 @@ from enterprise_framework import (
     TraceableDecision, ContextSource, ComponentType, DecisionType,
     observability_dashboard, transparency_interface
 )
+from agents.pediatric_cardiology_enhanced_generator import PediatricCardiologyGenerator
 
 def main():
     st.title("Pediatric Cardiovascular Modeling Platform")

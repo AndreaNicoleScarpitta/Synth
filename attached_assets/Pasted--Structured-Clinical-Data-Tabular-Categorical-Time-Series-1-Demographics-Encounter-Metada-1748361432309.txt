@@ -1,0 +1,118 @@
+🔬 Structured Clinical Data (Tabular / Categorical / Time-Series)
+1. Demographics & Encounter Metadata
+
+    Age, sex, weight, height, BMI
+
+    Race/ethnicity (for sickle cell, thalassemia relevance)
+
+    Family history of CVD, clotting disorders
+
+    Admission/discharge metadata (ICU flags, surgical dates)
+
+2. Cardiac-Specific Vitals & Metrics
+
+    Heart rate, blood pressure (systolic/diastolic)
+
+    Pulse pressure variation (PPV)
+
+    Central venous pressure (CVP)
+
+    Oxygen saturation (SpO₂), mixed venous O₂
+
+    Ejection fraction, stroke volume, cardiac output
+
+3. Hematologic Laboratory Results
+
+    Hemoglobin, hematocrit
+
+    Platelet count
+
+    White blood cell count (WBC) with differential
+
+    Red cell indices: MCV, MCH, RDW
+
+    Clotting factors: PT, aPTT, INR
+
+    Fibrinogen, D-dimer, antithrombin III
+
+    Reticulocyte count (especially in hemolytic conditions)
+
+4. Therapeutics
+
+    Anticoagulants: Warfarin, Heparin, DOACs (Apixaban, Rivaroxaban)
+
+    Antiplatelets: Aspirin, Clopidogrel
+
+    Erythropoietin-stimulating agents
+
+    Transfusion metadata (volume, product type, indication)
+
+📝 Unstructured Clinical Notes
+
+    Cardiologist consultation notes
+
+    Hematologist assessments (e.g., for thrombophilia workups)
+
+    Transfusion protocols
+
+    Surgical procedure narratives (e.g., valve replacement, thrombectomy)
+
+    Anticoagulation bridging plans (esp. perioperative)
+
+    Autopsy or pathology notes (for synthetic post-mortem simulation)
+
+📊 Time-Series Physiologic Monitoring
+
+    ECG waveform data (arrhythmias due to anemia or clot burden)
+
+    Invasive arterial line pressure traces (if ICU context)
+
+    Pulse oximetry over time
+
+    Blood gas data (ABG, VBG)
+
+🧬 Genomic / Molecular Data (Optional but Valuable)
+
+    Factor V Leiden, Prothrombin G20210A
+
+    JAK2 mutation status (polycythemia vera)
+
+    HBA/HBB mutations (sickle cell, thalassemia)
+
+    HFE mutations (hemochromatosis)
+
+    Platelet function gene panels (e.g., GP1BA, GP6)
+
+🖼️ Imaging (Structured & Free-Text Findings)
+Cardiac:
+
+    Echocardiograms: EF, valve function, clot presence in chambers
+
+    Cardiac MRI: late gadolinium enhancement, perfusion
+
+    Coronary angiograms (e.g., if simulating embolic events)
+
+Hematologic:
+
+    Chest X-ray: cardiomegaly, pulmonary edema
+
+    Abdominal ultrasound or CT: splenomegaly, liver congestion
+
+    Brain CT/MRI: stroke evaluation in coagulopathy
+
+💾 Other Supporting Modalities
+Medico-Administrative:
+
+    ICD-10/11 codes: D50–D89 (blood diseases), I00–I99 (cardiovascular diseases)
+
+    CPT codes for procedures: cardiac catheterization, valve repair, etc.
+
+    DRG codes for reimbursement simulation
+
+Patient-Reported Outcomes:
+
+    Fatigue scores (anemia-related)
+
+    Dyspnea rating (NYHA class)
+
+    Bruising/bleeding questionnaires
