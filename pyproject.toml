@@ -4,10 +4,23 @@ version = "0.1.0"
 description = "Add your description here"
 requires-python = ">=3.11"
 dependencies = [
+    "beautifulsoup4>=4.13.4",
     "chromadb>=1.0.10",
+    "fake-useragent>=2.2.0",
+    "feedparser>=6.0.11",
+    "matplotlib>=3.10.3",
+    "newspaper3k>=0.2.8",
+    "numpy>=2.2.6",
+    "openai>=1.82.0",
     "pandas>=2.2.3",
     "requests>=2.32.3",
+    "schedule>=1.2.2",
+    "scikit-learn>=1.6.1",
+    "scipy>=1.15.3",
+    "seaborn>=0.13.2",
+    "selenium>=4.33.0",
     "streamlit>=1.45.1",
     "trafilatura>=2.0.0",
     "uuid>=1.30",
+    "validators>=0.35.0",
 ]

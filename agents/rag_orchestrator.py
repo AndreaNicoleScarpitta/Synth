@@ -2,6 +2,9 @@ from typing import Dict, Any, Optional, Callable
 from agents.literature_agent import LiteratureAgent
 from agents.synthetic_cohort_agent import SyntheticCohortAgent
 from agents.critique_agent import CritiqueAgent
+from agents.web_monitor_agent import WebMonitorAgent
+from agents.statistical_validation_agent import StatisticalValidationAgent
+from agents.medical_terminology_agent import MedicalTerminologyAgent
 from utils.vector_store import VectorStore
 from utils.ollama_client import OllamaClient
 from models.literature_data import LiteratureResult
@@ -19,6 +22,9 @@ class RAGOrchestrator:
         self.literature_agent = LiteratureAgent(self.vector_store, self.ollama_client)
         self.cohort_agent = SyntheticCohortAgent(self.ollama_client)
         self.critique_agent = CritiqueAgent(self.ollama_client)
+        self.web_monitor_agent = WebMonitorAgent(self.vector_store, self.ollama_client)
+        self.statistical_validation_agent = StatisticalValidationAgent(self.ollama_client)
+        self.medical_terminology_agent = MedicalTerminologyAgent(self.ollama_client)
         
         # Default settings
         self.settings = {
@@ -80,7 +86,22 @@ class RAGOrchestrator:
             if progress_callback:
                 progress_callback(f"✅ Generated {len(cohort.patients)} synthetic patients")
             
-            # Step 5: Critique and validate
+            # Step 5: Statistical validation and medical terminology check
+            if progress_callback:
+                progress_callback("📊 Performing statistical validation...")
+            
+            statistical_validation = self.statistical_validation_agent.comprehensive_validation(
+                cohort=cohort,
+                literature=literature_result
+            )
+            
+            if progress_callback:
+                progress_callback("🩺 Validating medical terminology...")
+            
+            # Validate medical terminology in the query and results
+            terminology_validation = self.medical_terminology_agent.validate_medical_terminology(query)
+            
+            # Step 6: Critique and validate
             if progress_callback:
                 progress_callback("🔍 Validating cohort against literature...")
             
