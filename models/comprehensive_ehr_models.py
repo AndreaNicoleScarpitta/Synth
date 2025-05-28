@@ -303,7 +303,7 @@ class FamilyHistory(Base):
     id = Column(Integer, primary_key=True, index=True)
     patient_id = Column(String, ForeignKey("patients.patient_id"))
     
-    relationship = Column(String)  # Mother, Father, Maternal Grandmother, etc.
+    family_relationship = Column(String)  # Mother, Father, Maternal Grandmother, etc.
     condition = Column(String)
     age_of_onset = Column(Integer, nullable=True)
     current_status = Column(String)  # Living, Deceased, Unknown

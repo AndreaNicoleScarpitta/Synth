@@ -11,8 +11,50 @@ import asyncio
 import json
 import uuid
 import random
+import logging
 from datetime import datetime
-from configuration_mapper import ConfigurationMapper, SyntheticDataConfiguration
+
+# Setup logging
+logger = logging.getLogger(__name__)
+# Configuration classes moved inline
+from pydantic import BaseModel
+from typing import Dict, Any
+
+class SyntheticDataConfiguration(BaseModel):
+    """Configuration for synthetic data generation"""
+    population_size: int = 100
+    age_range: tuple = (18, 80)
+    gender_distribution: Dict[str, float] = {"M": 0.5, "F": 0.5}
+    condition_prevalence: Dict[str, float] = {}
+    
+class ConfigurationMapper:
+    """Maps UI configurations to data generation parameters"""
+    
+    @staticmethod
+    def create_configuration(**kwargs) -> SyntheticDataConfiguration:
+        return SyntheticDataConfiguration(**kwargs)
+    
+    @staticmethod
+    def generate_patient_schema(config: SyntheticDataConfiguration) -> Dict[str, Any]:
+        """Generate patient schema based on configuration"""
+        return {
+            "population_size": config.population_size,
+            "demographics": {
+                "age_range": config.age_range,
+                "gender_distribution": config.gender_distribution
+            },
+            "conditions": config.condition_prevalence
+        }
+    
+    @staticmethod
+    def map_frontend_config_to_schema(frontend_config: Dict[str, Any]) -> Dict[str, Any]:
+        """Map frontend configuration to internal schema"""
+        return {
+            "patient_count": frontend_config.get("populationSize", 100),
+            "age_min": frontend_config.get("ageRange", [18, 80])[0],
+            "age_max": frontend_config.get("ageRange", [18, 80])[1],
+            "conditions": frontend_config.get("conditions", [])
+        }
 
 # Initialize FastAPI
 app = FastAPI(

@@ -686,10 +686,8 @@ async def health_check():
           summary="Comprehensive Biomedical Database Search",
           description="Search across multiple biomedical databases including PubMed, ClinicalTrials.gov, FDA, NIH Reporter, and UniProt")
 async def comprehensive_biomedical_search(
-    query: str = Field(description="Search query (e.g., 'diabetes type 2', 'Alzheimer disease')"),
-    databases: Optional[List[str]] = Field(default=None, description="Specific databases to search. Options: pubmed, clinicaltrials, fda_drugs, nih_reporter, uniprot"),
-    max_results_per_db: int = Field(default=20, ge=1, le=100, description="Maximum results per database"),
-    background_tasks: BackgroundTasks = None
+    request: Dict[str, Any],
+    background_tasks: BackgroundTasks = BackgroundTasks()
 ):
     """
     Perform comprehensive search across multiple biomedical databases
