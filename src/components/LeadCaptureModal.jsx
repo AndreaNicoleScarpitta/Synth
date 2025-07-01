@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { X, Mail, Building, User } from 'lucide-react';
 
-const LeadCaptureModal = () => {
+const LeadCaptureModal = ({ 
+  buttonText = "Get Early Access", 
+  buttonClassName = "inline-flex items-center px-8 py-3 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 transition-colors"
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -55,9 +58,9 @@ const LeadCaptureModal = () => {
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="inline-flex items-center px-8 py-3 border border-purple-600 text-purple-600 bg-white font-semibold rounded-lg hover:bg-purple-50 transition-all duration-200 shadow-sm hover:shadow-md"
+        className={buttonClassName}
       >
-        Get Early Access
+        {buttonText}
       </button>
     );
   }
@@ -66,11 +69,14 @@ const LeadCaptureModal = () => {
     <div className="fixed inset-0 bg-black bg-opacity-50 dark:bg-black dark:bg-opacity-70 flex items-center justify-center p-4 z-50">
       <div className="bg-white dark:bg-neutral-800 rounded-xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">Join the Movement</h2>
+          <div className="flex justify-between items-start mb-6">
+            <div>
+              <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">Get Your 10,000 Free Patient Records</h2>
+              <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-2">Join 500+ teams skipping months of data delays. Early access includes instant API access and zero privacy risk.</p>
+            </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
+              className="text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors flex-shrink-0 ml-4"
             >
               <X className="w-6 h-6" />
             </button>

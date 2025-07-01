@@ -142,11 +142,28 @@ const LandingPage = ({ onStartDemo }) => {
               </span>
             </h1>
             <p className="text-xl md:text-2xl text-neutral-700 dark:text-neutral-300 max-w-4xl mx-auto mb-8 leading-relaxed">
-              Unlock Healthcare AI with unlimited, privacy-safe patient data. No PHI, no red tape.
+              Generate millions of synthetic patient records in <span className="font-bold text-accent-600">minutes, not months</span>. 
+              Cut data acquisition time by <span className="font-bold text-secondary-600">90%</span> while eliminating privacy risks entirely.
             </p>
-            <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto mb-12">
-              Synthetic EHR datasets that evolve with the latest medical knowledge — accelerating AI development, model validation, and regulatory confidence from day one.
+            <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto mb-8">
+              Replace months of IRB approvals and data partnerships with instant access to diverse, clinically-accurate synthetic EHR data.
             </p>
+            
+            {/* Value Props */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-primary-600 dark:text-primary-400">90%</div>
+                <div className="text-sm text-neutral-600 dark:text-neutral-400">Faster Time-to-Data</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-accent-600 dark:text-accent-400">$0</div>
+                <div className="text-sm text-neutral-600 dark:text-neutral-400">Privacy Risk</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-secondary-600 dark:text-secondary-400">24/7</div>
+                <div className="text-sm text-neutral-600 dark:text-neutral-400">API Access</div>
+              </div>
+            </div>
 
             <div className="flex flex-wrap justify-center gap-3 mb-8">
               {Object.entries(personas).map(([key, p]) => (
@@ -399,18 +416,45 @@ const LandingPage = ({ onStartDemo }) => {
       </div>
 
       {/* Final CTA Section */}
-      <div className="scroll-reveal py-16 lg:py-24">
+      <div className="scroll-reveal py-16 lg:py-24 bg-gradient-to-r from-primary-500 via-accent-500 to-secondary-500">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl lg:text-4xl font-heading font-bold text-neutral-900 dark:text-white mb-6">
-            Ready to accelerate your research with synthetic data?
+          <h2 className="text-3xl lg:text-4xl font-heading font-bold text-white mb-6">
+            Skip months of data delays. Start building tomorrow.
           </h2>
-          <p className="text-xl text-neutral-600 dark:text-neutral-300 mb-8">
-            Join the future of healthcare AI development with unlimited, privacy-safe patient data
+          <p className="text-xl text-neutral-100 mb-8">
+            Join 500+ AI teams already using synthetic data to accelerate healthcare innovation. 
+            <span className="font-semibold">Early access includes 10,000 free patient records.</span>
           </p>
+          
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-8 max-w-2xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-white">
+              <div className="flex items-center space-x-3">
+                <CheckCircle className="w-6 h-6 text-accent-200" />
+                <span>Instant API access</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <CheckCircle className="w-6 h-6 text-accent-200" />
+                <span>No IRB delays</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <CheckCircle className="w-6 h-6 text-accent-200" />
+                <span>Zero privacy risk</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <CheckCircle className="w-6 h-6 text-accent-200" />
+                <span>Clinical accuracy guaranteed</span>
+              </div>
+            </div>
+          </div>
+          
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <LeadCaptureModal 
+              buttonText="Join the Waitlist - Get 10K Free Records"
+              buttonClassName="inline-flex items-center px-8 py-4 bg-white text-primary-600 font-bold rounded-xl hover:bg-neutral-50 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105 text-lg"
+            />
             <button
               onClick={handleStartDemo}
-              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-500 to-accent-500 text-white font-semibold rounded-xl hover:from-primary-600 hover:to-accent-600 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105"
+              className="inline-flex items-center px-8 py-4 bg-white/20 backdrop-blur-sm text-white font-semibold rounded-xl hover:bg-white/30 transition-all duration-300 border border-white/30"
             >
               <Rocket className="mr-2 w-5 h-5" />
               Get Started Now
