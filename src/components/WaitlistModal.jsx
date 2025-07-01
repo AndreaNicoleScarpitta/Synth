@@ -8,8 +8,6 @@ const WaitlistModal = ({
   isOpen = false,
   onClose
 }) => {
-  console.log('WaitlistModal rendered with isOpen:', isOpen);
-  
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   
@@ -131,31 +129,18 @@ const WaitlistModal = ({
   }
 
   const modalContent = (
-    <div style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundColor: 'rgba(255, 0, 0, 0.9)',
-      zIndex: 999999,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '16px'
-    }}>
-      <div style={{
-        backgroundColor: 'white',
-        borderRadius: '12px',
-        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-        maxWidth: '768px',
-        width: '100%',
-        maxHeight: '90vh',
-        overflowY: 'auto',
-        border: '4px solid blue',
-        position: 'relative',
-        zIndex: 1000000
-      }}>
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 backdrop-blur-sm"
+      style={{
+        animation: 'fadeIn 0.2s ease-out'
+      }}
+    >
+      <div 
+        className="bg-white dark:bg-neutral-800 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto transform transition-all duration-200"
+        style={{
+          animation: 'slideIn 0.3s ease-out'
+        }}
+      >
         <div className="p-6">
           <div className="flex justify-between items-start mb-6">
             <div>

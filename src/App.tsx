@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import { FaBrain, FaChartBar, FaMicroscope, FaFlask, FaUserShield, FaLock } from 'react-icons/fa'
 import ResultsOverview from './pages/ResultsOverview.tsx'
 import PatientRecord from './pages/PatientRecord.tsx'
@@ -623,6 +623,8 @@ function App() {
 }
 
 function MainApp() {
+  const location = useLocation()
+  const navigate = useNavigate()
   const [currentView, setCurrentView] = useState('landing')
   const [isGenerating, setIsGenerating] = useState(false)
   const [progress, setProgress] = useState(0)
@@ -633,6 +635,13 @@ function MainApp() {
   const [showSignup, setShowSignup] = useState(false)
   const [showWaitlist, setShowWaitlist] = useState(false)
   const { showToast, ToastContainer } = useToast()
+  
+  // Handle URL-based waitlist modal opening
+  useEffect(() => {
+    if (location.pathname === '/waitlist') {
+      setShowWaitlist(true)
+    }
+  }, [location.pathname])
   const [selectedConfigurations, setSelectedConfigurations] = useState({
     populationSize: '',
     cardiacConditions: [],
@@ -1496,12 +1505,7 @@ function MainApp() {
               <button 
                 style={styles.secondaryButton}
                 className="secondary-button"
-                onClick={() => {
-                  console.log('Join Waitlist button clicked!');
-                  console.log('Current showWaitlist state:', showWaitlist);
-                  setShowWaitlist(true);
-                  console.log('setShowWaitlist(true) called');
-                }}
+                onClick={() => setShowWaitlist(true)}
               >
                 Join Waitlist
               </button>
@@ -1710,8 +1714,10 @@ function MainApp() {
         <WaitlistModal 
           isOpen={showWaitlist}
           onClose={() => {
-            console.log('Closing waitlist modal');
-            setShowWaitlist(false);
+            setShowWaitlist(false)
+            if (location.pathname === '/waitlist') {
+              navigate('/')
+            }
           }}
         />
       )}
