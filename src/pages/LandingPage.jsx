@@ -29,7 +29,7 @@ const LandingPage = ({ onStartDemo }) => {
   const { headline, description, features } = personas[persona];
 
   const handleStartDemo = () => {
-    showToast('Demo coming soon! We\'re putting the finishing touches on this feature.', 'info', 4000);
+    showToast('Early access coming soon! We\'re putting the finishing touches on this feature.', 'info', 4000);
   };
 
   // Intersection Observer for scroll animations
@@ -180,16 +180,16 @@ const LandingPage = ({ onStartDemo }) => {
 
             <div className="flex flex-col gap-4 justify-center items-center">
               <div className="flex flex-col sm:flex-row gap-4 items-center">
-                <WaitlistModal 
-                  buttonText="Join Waitlist"
-                  buttonClassName="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-500 to-accent-500 text-white font-bold rounded-xl hover:from-primary-600 hover:to-accent-600 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105 text-lg"
-                />
                 <button
                   onClick={handleStartDemo}
-                  className="inline-flex items-center px-8 py-4 bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-100 font-bold rounded-xl hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105 text-lg border border-neutral-300 dark:border-neutral-600"
+                  className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-500 to-accent-500 text-white font-bold rounded-xl hover:from-primary-600 hover:to-accent-600 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105 text-lg"
                 >
-                  Start Demo
+                  Get Early Access
                 </button>
+                <WaitlistModal 
+                  buttonText="Join Waitlist"
+                  buttonClassName="inline-flex items-center px-8 py-4 bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-100 font-bold rounded-xl hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105 text-lg border border-neutral-300 dark:border-neutral-600"
+                />
               </div>
               <p className="text-sm text-neutral-600 dark:text-neutral-400">
                 Join researchers from Stanford, Mayo Clinic, and 500+ healthcare organizations
