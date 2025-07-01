@@ -7,6 +7,8 @@ const WaitlistModal = ({
   isOpen = false,
   onClose
 }) => {
+  console.log('WaitlistModal rendered with isOpen:', isOpen);
+  
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   
@@ -128,8 +130,11 @@ const WaitlistModal = ({
   }
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 dark:bg-black dark:bg-opacity-70 flex items-center justify-center p-4 z-50" style={{zIndex: 9999}}>
-      <div className="bg-white dark:bg-neutral-800 rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 flex items-center justify-center p-4" style={{
+      backgroundColor: 'rgba(255, 0, 0, 0.8)', // Red background to make it super obvious
+      zIndex: 99999
+    }}>
+      <div className="bg-white dark:bg-neutral-800 rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border-4 border-blue-500">
         <div className="p-6">
           <div className="flex justify-between items-start mb-6">
             <div>
