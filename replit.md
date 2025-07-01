@@ -45,9 +45,9 @@ An advanced AI-powered Electronic Health Record (EHR) synthesis platform that ge
 ✅ **Status Indicator Removal** - Removed "System online" status indicator for cleaner header design
 ✅ **Code Cleanup** - Removed unused logoIcon and status-related CSS styles
 ✅ **Professional Branding** - DNA helix logo aligns with synthetic EHR/medical data theme
-✅ **Oversized Background Logo** - Added prominent oversized DNA helix as fixed background element
-✅ **Cross-Section Overlay** - Logo spans entire viewport (120vw) and overlaps all sections centrally
-✅ **Subtle Transparency** - Background logo at 2.5% opacity for professional watermark effect
+✅ **Semi-Transparent Background Logo** - Added DNA helix as subtle background overlay (800px, 4% opacity)
+✅ **Fixed Join Waitlist Modal** - Resolved z-index issues preventing modal from displaying properly
+✅ **Enhanced Modal Visibility** - Increased z-index to 99999 to ensure modal appears above all content
 
 ### 2025-07-01 - Comprehensive Waitlist Modal Implementation
 ✅ **Enhanced Waitlist Modal** - Created comprehensive WaitlistModal component with detailed form fields
