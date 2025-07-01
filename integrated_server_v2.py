@@ -18,6 +18,7 @@ import uvicorn
 
 # Import the integrated orchestrator
 from agents.integrated.orchestrator import IntegratedAgentOrchestrator
+from agents.integrated.langflow_orchestrator import LangflowOrchestrator, LANGFLOW_TEMPLATES
 
 # Request/Response models
 class IntegratedGenerationRequest(BaseModel):
@@ -177,6 +178,11 @@ app.add_middleware(
 # Initialize components
 job_manager = SimpleJobManager()
 orchestrator = IntegratedAgentOrchestrator()
+langflow_orchestrator = LangflowOrchestrator()
+
+# Register predefined Langflow templates
+for template_name, template_def in LANGFLOW_TEMPLATES.items():
+    langflow_orchestrator.register_flow(template_name, template_def)
 
 # Background task executor
 async def execute_generation_pipeline(job_id: str, request: IntegratedGenerationRequest):
@@ -403,6 +409,152 @@ async def get_job_results(job_id: str):
         "quality_metrics": job.get("result_summary", {}).get("quality_summary", {}),
         "data_summary": job.get("result_summary", {}).get("data_summary", {})
     }
+
+# Langflow-specific endpoints
+@app.get("/api/v2/langflow/templates")
+async def get_langflow_templates():
+    """Get available Langflow workflow templates"""
+    
+    templates = []
+    for template_name, template_data in LANGFLOW_TEMPLATES.items():
+        templates.append({
+            "name": template_name,
+            "display_name": template_data["name"],
+            "description": template_data["description"],
+            "node_count": len(template_data["nodes"]),
+            "edge_count": len(template_data["edges"]),
+            "estimated_duration": "1-3 minutes"
+        })
+    
+    return {
+        "templates": templates,
+        "langflow_enabled": True,
+        "custom_flows_supported": True
+    }
+
+@app.post("/api/v2/langflow/generate")
+async def generate_with_langflow(
+    request: dict,
+    background_tasks: BackgroundTasks
+):
+    """Generate using Langflow-based orchestration"""
+    
+    flow_name = request.get("flow_name", "comprehensive_ehr")
+    population_size = request.get("population_size", 100)
+    condition = request.get("condition", "hypertension")
+    flow_config = request.get("flow_config", {})
+    
+    # Create job
+    job_id = str(uuid.uuid4())
+    job_data = {
+        "flow_name": flow_name,
+        "population_size": population_size,
+        "condition": condition,
+        "flow_config": flow_config,
+        "orchestration_type": "langflow"
+    }
+    
+    job_manager.create_job(job_id, job_data)
+    
+    # Start Langflow execution
+    background_tasks.add_task(
+        execute_langflow_pipeline,
+        job_id,
+        flow_name,
+        job_data
+    )
+    
+    return {
+        "job_id": job_id,
+        "status": "pending",
+        "message": f"Langflow pipeline '{flow_name}' started",
+        "flow_name": flow_name,
+        "orchestration_type": "langflow",
+        "visual_flow": True,
+        "estimated_completion": "2-4 minutes"
+    }
+
+@app.get("/api/v2/langflow/flows/{flow_name}")
+async def get_langflow_definition(flow_name: str):
+    """Get Langflow workflow definition"""
+    
+    if flow_name not in LANGFLOW_TEMPLATES:
+        raise HTTPException(status_code=404, detail="Flow template not found")
+    
+    template = LANGFLOW_TEMPLATES[flow_name]
+    
+    return {
+        "flow_name": flow_name,
+        "definition": template,
+        "node_details": [
+            {
+                "id": node["id"],
+                "type": node["type"],
+                "agent_name": node.get("data", {}).get("agent_name", "N/A"),
+                "agent_type": node.get("data", {}).get("agent_type", "N/A")
+            }
+            for node in template["nodes"]
+        ],
+        "execution_graph": {
+            "nodes": len(template["nodes"]),
+            "edges": len(template["edges"]),
+            "parallel_sections": len([n for n in template["nodes"] if n["type"] == "parallel_group"])
+        }
+    }
+
+@app.post("/api/v2/langflow/flows")
+async def create_custom_flow(flow_definition: dict):
+    """Create a custom Langflow workflow"""
+    
+    flow_name = flow_definition.get("name")
+    if not flow_name:
+        raise HTTPException(status_code=400, detail="Flow name is required")
+    
+    # Validate flow definition
+    required_fields = ["nodes", "edges"]
+    for field in required_fields:
+        if field not in flow_definition:
+            raise HTTPException(status_code=400, detail=f"Missing required field: {field}")
+    
+    # Register the custom flow
+    langflow_orchestrator.register_flow(flow_name, flow_definition)
+    
+    return {
+        "flow_name": flow_name,
+        "status": "registered",
+        "message": "Custom flow registered successfully",
+        "node_count": len(flow_definition["nodes"]),
+        "edge_count": len(flow_definition["edges"])
+    }
+
+# Background task for Langflow execution
+async def execute_langflow_pipeline(job_id: str, flow_name: str, request_data: dict):
+    """Execute Langflow pipeline in background"""
+    
+    try:
+        job_manager.update_job_status(job_id, "running")
+        
+        # Execute the Langflow pipeline
+        result = await langflow_orchestrator.execute_langflow_pipeline(
+            flow_name,
+            uuid.UUID(job_id),
+            request_data
+        )
+        
+        # Store agent runs
+        for agent_run in result.get("agent_runs", []):
+            job_manager.add_agent_run(job_id, agent_run)
+        
+        # Update job with results
+        result_summary = result.get("generation_summary", {})
+        result_summary["orchestration_type"] = "langflow"
+        result_summary["flow_name"] = flow_name
+        
+        job_manager.update_job_status(job_id, "completed", result_summary)
+        
+    except Exception as e:
+        job_manager.update_job_status(job_id, "failed", {"error": str(e), "orchestration_type": "langflow"})
+        print(f"Error in Langflow pipeline execution: {e}")
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8003)
