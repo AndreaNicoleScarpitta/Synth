@@ -1682,25 +1682,7 @@ function MainApp() {
             </div>
           </div>
 
-          <div style={{
-            textAlign: 'center',
-            marginTop: designSystem.spacing['4xl']
-          }}>
-            <button style={{
-              padding: `${designSystem.spacing.lg} ${designSystem.spacing['2xl']}`,
-              background: designSystem.colors.primary,
-              color: 'white',
-              border: 'none',
-              borderRadius: designSystem.spacing.lg,
-              fontSize: designSystem.typography.fontSize.lg,
-              fontWeight: '600',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease',
-              boxShadow: `0 4px 12px ${designSystem.colors.primary}40`
-            }}>
-              Get Early Access
-            </button>
-          </div>
+
         </section>
 
         <section style={styles.cta}>
@@ -1709,13 +1691,6 @@ function MainApp() {
             <p style={styles.ctaSubtitle}>
               Join leading healthcare organizations and research institutions already using Synthetic Ascension.
             </p>
-            <button 
-              style={styles.ctaButton} 
-              className="cta-button"
-              onClick={handleStartDemo}
-            >
-              Start Your Demo
-            </button>
           </div>
         </section>
       </main>

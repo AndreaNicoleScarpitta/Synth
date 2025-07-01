@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { X, Mail, Building, User } from 'lucide-react';
 
 const LeadCaptureModal = ({ 
-  buttonText = "Get Early Access", 
+  buttonText = "Join Waitlist", 
   buttonClassName = "inline-flex items-center px-8 py-3 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 transition-colors"
 }) => {
   const [isOpen, setIsOpen] = useState(false);

@@ -30,27 +30,7 @@ export function LandingPage() {
               Next-generation synthetic EHR platform powered by AI—where genetic data meets matrix intelligence.
             </p>
             
-            {/* Early Sign Up CTA */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-              <Button 
-                asChild 
-                className="bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 text-black-950 font-bold py-3 px-8 rounded-lg shadow-lg animate-glow-pulse"
-                size="xl"
-              >
-                <Link to="/signup">
-                  <User className="mr-2 w-5 h-5" />
-                  Get Early Access
-                </Link>
-              </Button>
-              <Button 
-                variant="outline" 
-                size="xl"
-                className="border-gold-400 text-gold-400 hover:bg-gold-400/10"
-              >
-                <Mail className="mr-2 w-5 h-5" />
-                Join Waitlist
-              </Button>
-            </div>
+
           </div>
         </div>
       </section>
