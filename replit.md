@@ -39,6 +39,13 @@ An advanced AI-powered Electronic Health Record (EHR) synthesis platform that ge
 
 ## Recent Changes
 
+### 2025-07-01 - Beautiful Landing Page & Database Integration
+✅ **New Landing Page** - Replaced old design with beautiful persona-based landing page
+✅ **Persona Targeting** - AI Builder, Medical Researcher, Healthcare Executive personas
+✅ **Interactive Features** - Dynamic content switching, lead capture modal
+✅ **Supabase Integration** - Lead capture connected to DATABASE_URL with auto table creation
+✅ **Complete Database Access** - Maintained all existing Supabase functionality
+
 ### 2025-07-01 - Complete Backend Integration
 ✅ **User Backend Integration** - Successfully integrated comprehensive multi-agent backend from ZIP file
 ✅ **18+ Specialized Agents** - Deployed cohort, QA, research, and reporting agents

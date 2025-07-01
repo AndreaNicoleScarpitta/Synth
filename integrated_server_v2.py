@@ -14,6 +14,8 @@ from fastapi import FastAPI, HTTPException, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
+from sqlalchemy import create_engine, text
+from sqlalchemy.orm import Session
 import uvicorn
 
 # Import the integrated orchestrator
@@ -175,6 +177,14 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Initialize Supabase database connection
+database_url = os.getenv("DATABASE_URL")
+if database_url:
+    engine = create_engine(database_url)
+else:
+    # Fallback to SQLite for development
+    engine = create_engine("sqlite:///./leads.db")
 
 # Initialize components
 job_manager = SimpleJobManager()
@@ -658,6 +668,58 @@ async def replay_node_subtree(node_id: str):
             "total_execution_time_ms": sum(step["execution_time_ms"] for step in replay_sequence)
         }
     }
+
+@app.post("/api/v2/leads")
+async def capture_lead(lead_data: dict):
+    """Capture lead information from landing page"""
+    
+    with Session(engine) as session:
+        try:
+            # Create leads table if it doesn't exist
+            session.execute(text("""
+                CREATE TABLE IF NOT EXISTS leads (
+                    id SERIAL PRIMARY KEY,
+                    name VARCHAR(255),
+                    email VARCHAR(255),
+                    company VARCHAR(255),
+                    role VARCHAR(255),
+                    message TEXT,
+                    source VARCHAR(100),
+                    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+            """))
+            
+            # Insert lead data
+            session.execute(text("""
+                INSERT INTO leads (name, email, company, role, message, source, timestamp)
+                VALUES (:name, :email, :company, :role, :message, :source, :timestamp)
+            """), {
+                "name": lead_data.get("name"),
+                "email": lead_data.get("email"),
+                "company": lead_data.get("company"),
+                "role": lead_data.get("role"),
+                "message": lead_data.get("message"),
+                "source": lead_data.get("source", "landing_page"),
+                "timestamp": lead_data.get("timestamp")
+            })
+            
+            session.commit()
+            
+            return {
+                "status": "success",
+                "message": "Lead captured successfully",
+                "lead_id": "captured"
+            }
+            
+        except Exception as e:
+            session.rollback()
+            print(f"Error capturing lead: {e}")
+            return {
+                "status": "error",
+                "message": "Failed to capture lead",
+                "error": str(e)
+            }
 
 @app.post("/api/v2/mindmap/generate")
 async def generate_with_mindmap(
