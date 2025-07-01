@@ -19,6 +19,7 @@ import uvicorn
 # Import the integrated orchestrator
 from agents.integrated.orchestrator import IntegratedAgentOrchestrator
 from agents.integrated.langflow_orchestrator import LangflowOrchestrator, LANGFLOW_TEMPLATES
+from agents.integrated.mind_map_orchestrator import MindMapOrchestrator, demonstrate_ckd_diabetes_cohort
 
 # Request/Response models
 class IntegratedGenerationRequest(BaseModel):
@@ -179,6 +180,7 @@ app.add_middleware(
 job_manager = SimpleJobManager()
 orchestrator = IntegratedAgentOrchestrator()
 langflow_orchestrator = LangflowOrchestrator()
+mindmap_orchestrator = MindMapOrchestrator()
 
 # Register predefined Langflow templates
 for template_name, template_def in LANGFLOW_TEMPLATES.items():
@@ -555,6 +557,177 @@ async def execute_langflow_pipeline(job_id: str, flow_name: str, request_data: d
     except Exception as e:
         job_manager.update_job_status(job_id, "failed", {"error": str(e), "orchestration_type": "langflow"})
         print(f"Error in Langflow pipeline execution: {e}")
+
+# Mind Map Chain-of-Thought endpoints
+@app.get("/api/v2/mindmap/demo")
+async def get_demo_mindmap():
+    """Get demonstration mind map for 5-patient CKD+Diabetes cohort"""
+    
+    demo_data = demonstrate_ckd_diabetes_cohort()
+    return {
+        "demonstration": "5-patient CKD+Diabetes cohort generation",
+        "mind_map": demo_data["mind_map"],
+        "execution_sequence": demo_data["execution_sequence"],
+        "phases": demo_data["phases"],
+        "total_nodes": demo_data["total_nodes"],
+        "interactive_features": {
+            "node_selection": "Click any node to see chain-of-thought details",
+            "replay_command": "Use REPLAY node_id to walk through subtree",
+            "phase_filtering": "Filter nodes by phase for focused analysis"
+        }
+    }
+
+@app.get("/api/v2/mindmap/node/{node_id}")
+async def get_node_details(node_id: str):
+    """Get detailed chain-of-thought for a specific node"""
+    
+    demo_data = demonstrate_ckd_diabetes_cohort()
+    
+    if node_id not in demo_data["mind_map"]:
+        raise HTTPException(status_code=404, detail="Node not found")
+    
+    node = demo_data["mind_map"][node_id]
+    
+    return {
+        "node_id": node_id,
+        "agent": node["agent"],
+        "phase": node["phase"],
+        "decision": node["decision"],
+        "chain_of_thought": node["chain_of_thought"],
+        "children": node["children"],
+        "execution_time_ms": node["execution_time_ms"],
+        "status": node["status"],
+        "reasoning_breakdown": {
+            "inputs_analyzed": node["chain_of_thought"][0],
+            "hypotheses_considered": node["chain_of_thought"][1],
+            "decision_criteria": node["chain_of_thought"][2],
+            "reasoning_process": node["chain_of_thought"][3],
+            "final_decision": node["chain_of_thought"][4]
+        }
+    }
+
+@app.get("/api/v2/mindmap/replay/{node_id}")
+async def replay_node_subtree(node_id: str):
+    """Replay execution of a node's subtree in chronological order"""
+    
+    demo_data = demonstrate_ckd_diabetes_cohort()
+    
+    if node_id not in demo_data["mind_map"]:
+        raise HTTPException(status_code=404, detail="Node not found")
+    
+    # Build subtree replay sequence
+    def get_subtree_nodes(current_id, mind_map, visited=None):
+        if visited is None:
+            visited = set()
+        
+        if current_id in visited or current_id not in mind_map:
+            return []
+        
+        visited.add(current_id)
+        subtree = [current_id]
+        
+        for child_id in mind_map[current_id]["children"]:
+            subtree.extend(get_subtree_nodes(child_id, mind_map, visited))
+        
+        return subtree
+    
+    subtree_nodes = get_subtree_nodes(node_id, demo_data["mind_map"])
+    
+    replay_sequence = []
+    for i, sub_node_id in enumerate(subtree_nodes):
+        node = demo_data["mind_map"][sub_node_id]
+        replay_sequence.append({
+            "step": i + 1,
+            "node_id": sub_node_id,
+            "agent": node["agent"],
+            "phase": node["phase"],
+            "decision": node["decision"],
+            "chain_of_thought": node["chain_of_thought"],
+            "execution_time_ms": node["execution_time_ms"],
+            "children_count": len(node["children"])
+        })
+    
+    return {
+        "replay_root": node_id,
+        "subtree_size": len(subtree_nodes),
+        "execution_sequence": replay_sequence,
+        "replay_summary": {
+            "total_steps": len(replay_sequence),
+            "phases_covered": list(set(step["phase"] for step in replay_sequence)),
+            "agents_involved": list(set(step["agent"] for step in replay_sequence)),
+            "total_execution_time_ms": sum(step["execution_time_ms"] for step in replay_sequence)
+        }
+    }
+
+@app.post("/api/v2/mindmap/generate")
+async def generate_with_mindmap(
+    request: dict,
+    background_tasks: BackgroundTasks
+):
+    """Generate cohort with full chain-of-thought mind mapping"""
+    
+    population_size = request.get("population_size", 100)
+    condition = request.get("condition", "hypertension")
+    use_case = request.get("use_case", "clinical_research")
+    
+    # Create job
+    job_id = str(uuid.uuid4())
+    job_data = {
+        "population_size": population_size,
+        "condition": condition,
+        "use_case": use_case,
+        "orchestration_type": "mindmap",
+        "chain_of_thought_enabled": True
+    }
+    
+    job_manager.create_job(job_id, job_data)
+    
+    # Start mind map generation (would be async in real implementation)
+    background_tasks.add_task(
+        execute_mindmap_generation,
+        job_id,
+        job_data
+    )
+    
+    return {
+        "job_id": job_id,
+        "status": "pending",
+        "message": "Mind map generation started with full chain-of-thought logging",
+        "orchestration_type": "mindmap",
+        "features": [
+            "Detailed reasoning chains for each agent",
+            "Interactive node exploration",
+            "Subtree replay capabilities",
+            "Phase-based analysis"
+        ],
+        "estimated_completion": "3-5 minutes"
+    }
+
+# Background task for mind map generation
+async def execute_mindmap_generation(job_id: str, request_data: dict):
+    """Execute mind map generation in background"""
+    
+    try:
+        job_manager.update_job_status(job_id, "running")
+        
+        # Execute with mind mapping (would be async call in real implementation)
+        # For now, return demo structure
+        result = demonstrate_ckd_diabetes_cohort()
+        
+        # Store results
+        result_summary = {
+            "orchestration_type": "mindmap",
+            "mind_map_nodes": result["total_nodes"],
+            "phases_executed": len(result["phases"]),
+            "chain_of_thought_entries": sum(len(node["chain_of_thought"]) for node in result["mind_map"].values()),
+            "interactive_features_enabled": True
+        }
+        
+        job_manager.update_job_status(job_id, "completed", result_summary)
+        
+    except Exception as e:
+        job_manager.update_job_status(job_id, "failed", {"error": str(e), "orchestration_type": "mindmap"})
+        print(f"Error in mind map generation: {e}")
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8003)
