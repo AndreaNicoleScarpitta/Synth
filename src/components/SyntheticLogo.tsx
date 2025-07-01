@@ -2,11 +2,11 @@ import React from 'react'
 
 export const SyntheticLogo = ({ className = "" }: { className?: string }) => {
   return (
-    <div className={`flex items-center gap-3 ${className}`}>
+    <div className={`flex flex-col items-center ${className}`}>
       <svg 
-        width="40" 
-        height="40" 
-        viewBox="0 0 100 100" 
+        width="280" 
+        height="120" 
+        viewBox="0 0 280 120" 
         className="dna-logo"
         style={{ filter: 'drop-shadow(0 0 10px rgba(251, 191, 36, 0.5))' }}
       >
@@ -18,37 +18,37 @@ export const SyntheticLogo = ({ className = "" }: { className?: string }) => {
           </linearGradient>
         </defs>
         
-        {/* DNA Strand 1 */}
+        {/* DNA Strand 1 - positioned to match original PNG */}
         <path
-          d="M20 80 Q30 60 40 40 Q50 20 60 20"
+          d="M80 80 Q110 60 140 40 Q170 20 200 15"
           stroke="url(#dnaGradient)"
-          strokeWidth="3"
+          strokeWidth="4"
           fill="none"
           className="animate-pulse"
         />
         
         {/* DNA Strand 2 */}
         <path
-          d="M20 20 Q30 40 40 60 Q50 80 60 80"
+          d="M80 15 Q110 35 140 55 Q170 75 200 80"
           stroke="url(#dnaGradient)"
-          strokeWidth="3"
+          strokeWidth="4"
           fill="none"
           className="animate-pulse"
           style={{ animationDelay: '0.5s' }}
         />
         
-        {/* Base pairs */}
-        <line x1="25" y1="70" x2="35" y2="50" stroke="#fbbf24" strokeWidth="2" opacity="0.8" />
-        <line x1="30" y1="60" x2="40" y2="50" stroke="#fbbf24" strokeWidth="2" opacity="0.8" />
-        <line x1="35" y1="50" x2="45" y2="40" stroke="#fbbf24" strokeWidth="2" opacity="0.8" />
-        <line x1="40" y1="40" x2="50" y2="30" stroke="#fbbf24" strokeWidth="2" opacity="0.8" />
-        <line x1="45" y1="30" x2="55" y2="30" stroke="#fbbf24" strokeWidth="2" opacity="0.8" />
+        {/* Base pairs - scaled and positioned to match original */}
+        <line x1="90" y1="70" x2="110" y2="50" stroke="#fbbf24" strokeWidth="3" opacity="0.8" />
+        <line x1="110" y1="60" x2="130" y2="45" stroke="#fbbf24" strokeWidth="3" opacity="0.8" />
+        <line x1="130" y1="50" x2="150" y2="35" stroke="#fbbf24" strokeWidth="3" opacity="0.8" />
+        <line x1="150" y1="40" x2="170" y2="25" stroke="#fbbf24" strokeWidth="3" opacity="0.8" />
+        <line x1="170" y1="30" x2="190" y2="20" stroke="#fbbf24" strokeWidth="3" opacity="0.8" />
         
-        {/* Upward Arrow */}
+        {/* Upward Arrow - positioned to match original PNG */}
         <path
-          d="M65 75 L75 15 M65 25 L75 15 L85 25"
+          d="M205 80 L225 15 M210 25 L225 15 L240 25"
           stroke="#fbbf24"
-          strokeWidth="4"
+          strokeWidth="5"
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -56,9 +56,26 @@ export const SyntheticLogo = ({ className = "" }: { className?: string }) => {
         />
         
         {/* Matrix code particles */}
-        <circle cx="15" cy="25" r="1" fill="#fbbf24" opacity="0.6" className="animate-ping" />
-        <circle cx="85" cy="35" r="1" fill="#fbbf24" opacity="0.4" className="animate-ping" style={{ animationDelay: '1s' }} />
-        <circle cx="25" cy="85" r="1" fill="#fbbf24" opacity="0.8" className="animate-ping" style={{ animationDelay: '2s' }} />
+        <circle cx="65" cy="25" r="1.5" fill="#fbbf24" opacity="0.6" className="animate-ping" />
+        <circle cx="255" cy="35" r="1.5" fill="#fbbf24" opacity="0.4" className="animate-ping" style={{ animationDelay: '1s' }} />
+        <circle cx="75" cy="85" r="1.5" fill="#fbbf24" opacity="0.8" className="animate-ping" style={{ animationDelay: '2s' }} />
+        
+        {/* Text positioned below DNA helix as in original PNG */}
+        <text
+          x="140"
+          y="110"
+          textAnchor="middle"
+          fontSize="24"
+          fontWeight="400"
+          fill="#fbbf24"
+          fontFamily="Hi Melody, Inter, system-ui, sans-serif"
+          style={{ 
+            filter: 'drop-shadow(0 0 8px rgba(251, 191, 36, 0.4))',
+            letterSpacing: '2px'
+          }}
+        >
+          synthetic ascendancy
+        </text>
       </svg>
       
       <span 
