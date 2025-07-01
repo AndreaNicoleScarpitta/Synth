@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { X, Mail, Building, User, Phone, CheckCircle2 } from 'lucide-react';
+import HelpBubble from './HelpBubble';
+import { getFieldHelp } from '../config/medicalFieldHelp';
 
 const WaitlistModal = ({ 
   buttonText = "Join the Waitlist", 
@@ -289,8 +291,21 @@ const WaitlistModal = ({
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
+                  <label className="flex items-center text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
                     Industry
+                    <HelpBubble
+                      title="Industry Focus"
+                      content="Your organization's primary industry focus. This helps us understand your specific regulatory environment, data requirements, and use case priorities."
+                      examples={[
+                        "Healthcare Provider: Hospitals, clinics, health systems",
+                        "Pharmaceutical: Drug development, clinical trials",
+                        "Biotechnology: Research, biomarker discovery",
+                        "Health Technology: Digital health, telemedicine platforms"
+                      ]}
+                      position="top"
+                      trigger="hover"
+                      size="lg"
+                    />
                   </label>
                   <select
                     name="industry"
@@ -311,8 +326,14 @@ const WaitlistModal = ({
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
+                  <label className="flex items-center text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
                     Current EHR System
+                    <HelpBubble
+                      {...getFieldHelp('currentEhrSystem')}
+                      position="top"
+                      trigger="hover"
+                      size="lg"
+                    />
                   </label>
                   <input
                     type="text"
@@ -333,8 +354,14 @@ const WaitlistModal = ({
               </h3>
               
               <div>
-                <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
+                <label className="flex items-center text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
                   Use Cases *
+                  <HelpBubble
+                    {...getFieldHelp('useCases')}
+                    position="top"
+                    trigger="hover"
+                    size="xl"
+                  />
                 </label>
                 <textarea
                   name="use_cases"
@@ -389,8 +416,23 @@ const WaitlistModal = ({
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
+                <label className="flex items-center text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
                   Specific Requirements
+                  <HelpBubble
+                    title="Technical & Compliance Requirements"
+                    content="Specific technical, regulatory, or operational requirements for your synthetic data project. This helps us ensure our solution meets your exact needs and constraints."
+                    examples={[
+                      "FHIR R4 format for interoperability",
+                      "HIPAA compliance certification required", 
+                      "Integration with Epic EHR system",
+                      "Real-time data streaming capabilities",
+                      "Multi-language support for global deployment",
+                      "Custom data schemas for proprietary systems"
+                    ]}
+                    position="top"
+                    trigger="hover"
+                    size="xl"
+                  />
                 </label>
                 <textarea
                   name="specific_requirements"
