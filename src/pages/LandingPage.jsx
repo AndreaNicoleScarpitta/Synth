@@ -29,6 +29,7 @@ const LandingPage = ({ onStartDemo }) => {
   const { headline, description, features } = personas[persona];
 
   const handleStartDemo = () => {
+    console.log('Get Early Access button clicked!');
     showToast('Early access coming soon! We\'re putting the finishing touches on this feature.', 'info', 4000);
   };
 
@@ -182,7 +183,8 @@ const LandingPage = ({ onStartDemo }) => {
               <div className="flex flex-col sm:flex-row gap-4 items-center">
                 <button
                   onClick={handleStartDemo}
-                  className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-500 to-accent-500 text-white font-bold rounded-xl hover:from-primary-600 hover:to-accent-600 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105 text-lg"
+                  className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-500 to-accent-500 text-white font-bold rounded-xl hover:from-primary-600 hover:to-accent-600 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105 text-lg cursor-pointer relative z-10"
+                  style={{ pointerEvents: 'auto' }}
                 >
                   Get Early Access
                 </button>
