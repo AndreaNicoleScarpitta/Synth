@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { X, Mail, Building, User, Phone, CheckCircle2 } from 'lucide-react';
 import HelpBubble from './HelpBubble';
 import { getFieldHelp } from '../config/medicalFieldHelp';
@@ -129,12 +130,32 @@ const WaitlistModal = ({
     );
   }
 
-  return (
-    <div className="fixed inset-0 flex items-center justify-center p-4" style={{
-      backgroundColor: 'rgba(255, 0, 0, 0.8)', // Red background to make it super obvious
-      zIndex: 99999
+  const modalContent = (
+    <div style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: 'rgba(255, 0, 0, 0.9)',
+      zIndex: 999999,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '16px'
     }}>
-      <div className="bg-white dark:bg-neutral-800 rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border-4 border-blue-500">
+      <div style={{
+        backgroundColor: 'white',
+        borderRadius: '12px',
+        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+        maxWidth: '768px',
+        width: '100%',
+        maxHeight: '90vh',
+        overflowY: 'auto',
+        border: '4px solid blue',
+        position: 'relative',
+        zIndex: 1000000
+      }}>
         <div className="p-6">
           <div className="flex justify-between items-start mb-6">
             <div>
@@ -459,6 +480,8 @@ const WaitlistModal = ({
       </div>
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 };
 
 export default WaitlistModal;
