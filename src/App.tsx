@@ -3,6 +3,8 @@ import { Routes, Route } from 'react-router-dom'
 import { FaBrain, FaChartBar, FaMicroscope, FaFlask, FaUserShield, FaLock } from 'react-icons/fa'
 import ResultsOverview from './pages/ResultsOverview.tsx'
 import PatientRecord from './pages/PatientRecord.tsx'
+import WaitlistModal from './components/WaitlistModal'
+import { useToast } from './components/Toast'
 
 
 // Persona data structure
@@ -630,6 +632,7 @@ function MainApp() {
   const [activePersona, setActivePersona] = useState('researcher')
   const [showSignup, setShowSignup] = useState(false)
   const [showWaitlist, setShowWaitlist] = useState(false)
+  const { showToast, ToastContainer } = useToast()
   const [selectedConfigurations, setSelectedConfigurations] = useState({
     populationSize: '',
     cardiacConditions: [],
@@ -1484,7 +1487,7 @@ function MainApp() {
               <button 
                 style={styles.primaryButton}
                 className="primary-button"
-                onClick={() => setShowSignup(true)}
+                onClick={() => showToast('Early access coming soon! We\'re putting the finishing touches on this feature.', 'info', 4000)}
               >
                 Get Early Access
               </button>
@@ -1694,6 +1697,17 @@ function MainApp() {
           </div>
         </section>
       </main>
+      
+      {/* Waitlist Modal */}
+      {showWaitlist && (
+        <WaitlistModal 
+          isOpen={showWaitlist}
+          onClose={() => setShowWaitlist(false)}
+        />
+      )}
+      
+      {/* Toast Container */}
+      <ToastContainer />
     </div>
   )
 }
