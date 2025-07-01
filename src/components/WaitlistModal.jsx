@@ -4,16 +4,9 @@ import HelpBubble from './HelpBubble';
 import { getFieldHelp } from '../config/medicalFieldHelp';
 
 const WaitlistModal = ({ 
-  buttonText = "Join the Waitlist", 
-  buttonClassName = "inline-flex items-center px-8 py-3 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 transition-colors",
   isOpen = false,
   onClose
 }) => {
-  const [internalIsOpen, setInternalIsOpen] = useState(false);
-  
-  // Use external control if provided, otherwise use internal state
-  const modalIsOpen = isOpen !== undefined ? isOpen : internalIsOpen;
-  const handleClose = onClose || (() => setInternalIsOpen(false));
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   
@@ -81,7 +74,7 @@ const WaitlistModal = ({
       // Still show success to user, but log the error
       setIsSuccess(true);
       setTimeout(() => {
-        handleClose();
+        onClose();
         setIsSuccess(false);
         setFormData({
           name: '',
@@ -112,15 +105,8 @@ const WaitlistModal = ({
     });
   };
 
-  if (!modalIsOpen) {
-    return (
-      <button
-        onClick={() => setInternalIsOpen(true)}
-        className={buttonClassName}
-      >
-        {buttonText}
-      </button>
-    );
+  if (!isOpen) {
+    return null;
   }
 
   if (isSuccess) {
@@ -155,7 +141,7 @@ const WaitlistModal = ({
               </p>
             </div>
             <button
-              onClick={handleClose}
+              onClick={onClose}
               className="text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors flex-shrink-0 ml-4"
             >
               <X className="w-6 h-6" />
@@ -480,7 +466,7 @@ const WaitlistModal = ({
             <div className="flex gap-3 pt-4">
               <button
                 type="button"
-                onClick={handleClose}
+                onClick={onClose}
                 className="flex-1 px-4 py-3 border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors"
               >
                 Cancel

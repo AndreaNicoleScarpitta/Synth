@@ -188,14 +188,19 @@ const LandingPage = ({ onStartDemo }) => {
             <div className="flex flex-col gap-4 justify-center items-center">
               <div className="flex flex-col sm:flex-row gap-4 items-center">
                 <button
-                  onClick={handleStartDemo}
-                  className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-500 to-accent-500 text-white font-bold rounded-xl hover:from-primary-600 hover:to-accent-600 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105 text-lg cursor-pointer relative z-10"
-                  style={{ pointerEvents: 'auto' }}
+                  onClick={() => {
+                    console.log('Get Early Access clicked');
+                    showToast('Early access coming soon! We\'re putting the finishing touches on this feature.', 'info', 4000);
+                  }}
+                  className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-500 to-accent-500 text-white font-bold rounded-xl hover:from-primary-600 hover:to-accent-600 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105 text-lg"
                 >
                   Get Early Access
                 </button>
                 <button
-                  onClick={handleJoinWaitlist}
+                  onClick={() => {
+                    console.log('Join Waitlist clicked');
+                    setShowWaitlist(true);
+                  }}
                   className="inline-flex items-center px-8 py-4 bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-100 font-bold rounded-xl hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105 text-lg border border-neutral-300 dark:border-neutral-600"
                 >
                   Join Waitlist
