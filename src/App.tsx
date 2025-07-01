@@ -7,23 +7,6 @@ import PatientRecord from './pages/PatientRecord.tsx'
 
 // Persona data structure
 const personaData = {
-  builder: {
-    label: 'AI Builder',
-    headline: 'Ship Clinical AI 2× Faster with PHI-Free Data',
-    description: 'Prototype, train, and fine-tune healthcare AI models instantly on demand—no more data wrangling or privacy roadblocks slowing you down.',
-    features: [
-      {
-        icon: FaBrain,
-        title: 'Seamless API Integration',
-        desc: 'Embed data generation in your CI/CD or MLOps workflows with a single endpoint call.'
-      },
-      {
-        icon: FaChartBar,
-        title: 'LLM-Optimized Records',
-        desc: 'Receive patient datasets pre-formatted for language models, slashing preparation time.'
-      },
-    ],
-  },
   researcher: {
     label: 'Clinical Researcher',
     headline: 'Validate Hypotheses in Hours, Not Months',
@@ -55,6 +38,23 @@ const personaData = {
         icon: FaChartBar,
         title: 'Protocol Optimizer',
         desc: 'Instant feedback on inclusion/exclusion criteria—refine your design in real time.'
+      },
+    ],
+  },
+  builder: {
+    label: 'AI Builder',
+    headline: 'Ship Clinical AI 2× Faster with PHI-Free Data',
+    description: 'Prototype, train, and fine-tune healthcare AI models instantly on demand—no more data wrangling or privacy roadblocks slowing you down.',
+    features: [
+      {
+        icon: FaBrain,
+        title: 'Seamless API Integration',
+        desc: 'Embed data generation in your CI/CD or MLOps workflows with a single endpoint call.'
+      },
+      {
+        icon: FaChartBar,
+        title: 'LLM-Optimized Records',
+        desc: 'Receive patient datasets pre-formatted for language models, slashing preparation time.'
       },
     ],
   },
@@ -627,7 +627,7 @@ function MainApp() {
   const [currentStep, setCurrentStep] = useState('')
   const [generationSteps, setGenerationSteps] = useState([])
   const [generationResults, setGenerationResults] = useState(null)
-  const [activePersona, setActivePersona] = useState('builder')
+  const [activePersona, setActivePersona] = useState('researcher')
   const [showSignup, setShowSignup] = useState(false)
   const [showWaitlist, setShowWaitlist] = useState(false)
   const [selectedConfigurations, setSelectedConfigurations] = useState({
@@ -1571,22 +1571,135 @@ function MainApp() {
 
         <section style={styles.features}>
           <div style={styles.featuresHeader}>
-            <h2 style={styles.featuresTitle}>Enterprise-Grade Synthetic EHR Platform</h2>
+            <h2 style={styles.featuresTitle}>Next-Generation Clinical Data Platform</h2>
             <p style={styles.featuresSubtitle}>
-              Generate realistic, privacy-compliant patient data with advanced AI validation and comprehensive analytics.
+              Synthetic Ascension is your on-demand engine for high-fidelity, privacy-safe patient records. Spin up thousands—or millions—of synthetic EHR profiles instantly to train AI models, run "what-if" studies, and prove compliance.
             </p>
           </div>
 
-          <div style={styles.grid}>
-            {features.map((feature, index) => (
-              <div key={index} style={styles.card} className="card">
-                <div style={{...styles.cardIcon, background: feature.color}}>
-                  <div style={{width: '24px', height: '24px', background: 'white', borderRadius: '3px'}}></div>
-                </div>
-                <h3 style={styles.cardTitle}>{feature.title}</h3>
-                <p style={styles.cardDescription}>{feature.description}</p>
-              </div>
-            ))}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: designSystem.spacing['2xl'],
+            maxWidth: '1200px',
+            margin: '0 auto',
+            padding: `0 ${designSystem.spacing.lg}`
+          }}>
+            <div style={{
+              padding: designSystem.spacing['2xl'],
+              background: 'white',
+              borderRadius: designSystem.spacing.lg,
+              border: `1px solid ${designSystem.colors.neutral.gray200}`,
+              boxShadow: '0 4px 6px rgba(0,0,0,0.05)'
+            }}>
+              <h3 style={{
+                fontSize: designSystem.typography.fontSize.xl,
+                fontWeight: '600',
+                color: designSystem.colors.neutral.gray900,
+                marginBottom: designSystem.spacing.md
+              }}>
+                Synthetic EHR Generation
+              </h3>
+              <p style={{
+                fontSize: designSystem.typography.fontSize.base,
+                color: designSystem.colors.neutral.gray600,
+                lineHeight: '1.6'
+              }}>
+                Build realistic cohorts—demographics, diagnoses, longitudinal histories—without touching PHI.
+              </p>
+            </div>
+
+            <div style={{
+              padding: designSystem.spacing['2xl'],
+              background: 'white',
+              borderRadius: designSystem.spacing.lg,
+              border: `1px solid ${designSystem.colors.neutral.gray200}`,
+              boxShadow: '0 4px 6px rgba(0,0,0,0.05)'
+            }}>
+              <h3 style={{
+                fontSize: designSystem.typography.fontSize.xl,
+                fontWeight: '600',
+                color: designSystem.colors.neutral.gray900,
+                marginBottom: designSystem.spacing.md
+              }}>
+                Simulation & Discovery
+              </h3>
+              <p style={{
+                fontSize: designSystem.typography.fontSize.base,
+                color: designSystem.colors.neutral.gray600,
+                lineHeight: '1.6'
+              }}>
+                Model rare conditions and protocol variations before your first real patient enrolls.
+              </p>
+            </div>
+
+            <div style={{
+              padding: designSystem.spacing['2xl'],
+              background: 'white',
+              borderRadius: designSystem.spacing.lg,
+              border: `1px solid ${designSystem.colors.neutral.gray200}`,
+              boxShadow: '0 4px 6px rgba(0,0,0,0.05)'
+            }}>
+              <h3 style={{
+                fontSize: designSystem.typography.fontSize.xl,
+                fontWeight: '600',
+                color: designSystem.colors.neutral.gray900,
+                marginBottom: designSystem.spacing.md
+              }}>
+                Audit-Ready Data
+              </h3>
+              <p style={{
+                fontSize: designSystem.typography.fontSize.base,
+                color: designSystem.colors.neutral.gray600,
+                lineHeight: '1.6'
+              }}>
+                Every dataset ships with traceable QA logs and full lineage for FDA, EMA, HIPAA, or GDPR review.
+              </p>
+            </div>
+
+            <div style={{
+              padding: designSystem.spacing['2xl'],
+              background: 'white',
+              borderRadius: designSystem.spacing.lg,
+              border: `1px solid ${designSystem.colors.neutral.gray200}`,
+              boxShadow: '0 4px 6px rgba(0,0,0,0.05)'
+            }}>
+              <h3 style={{
+                fontSize: designSystem.typography.fontSize.xl,
+                fontWeight: '600',
+                color: designSystem.colors.neutral.gray900,
+                marginBottom: designSystem.spacing.md
+              }}>
+                Infinite Scale
+              </h3>
+              <p style={{
+                fontSize: designSystem.typography.fontSize.base,
+                color: designSystem.colors.neutral.gray600,
+                lineHeight: '1.6'
+              }}>
+                From hundreds to millions of records, our cloud-native pipelines grow with your needs.
+              </p>
+            </div>
+          </div>
+
+          <div style={{
+            textAlign: 'center',
+            marginTop: designSystem.spacing['4xl']
+          }}>
+            <button style={{
+              padding: `${designSystem.spacing.lg} ${designSystem.spacing['2xl']}`,
+              background: designSystem.colors.primary,
+              color: 'white',
+              border: 'none',
+              borderRadius: designSystem.spacing.lg,
+              fontSize: designSystem.typography.fontSize.lg,
+              fontWeight: '600',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease',
+              boxShadow: `0 4px 12px ${designSystem.colors.primary}40`
+            }}>
+              Get Early Access
+            </button>
           </div>
         </section>
 

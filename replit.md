@@ -39,6 +39,14 @@ An advanced AI-powered Electronic Health Record (EHR) synthesis platform that ge
 
 ## Recent Changes
 
+### 2025-07-01 - Persona Navigation & Content Updates
+✅ **Persona Navigation Fix** - Fixed persona switching functionality with enhanced styling and debugging
+✅ **Persona Reordering** - Moved Clinical Researcher and R&D Scientist to first two tabs as requested
+✅ **Enhanced Tab Styling** - Made persona tabs more prominent with better hover states, shadows, and transforms
+✅ **Content Section Update** - Replaced "Enterprise-Grade Synthetic EHR Platform" with "Next-Generation Clinical Data Platform"
+✅ **New Feature Cards** - Updated content to focus on Synthetic EHR Generation, Simulation & Discovery, Audit-Ready Data, and Infinite Scale
+✅ **Design System Enhancement** - Added primaryLight color and improved visual feedback throughout interface
+
 ### 2025-07-01 - Comprehensive Healthcare Design System Implementation
 ✅ **Professional Healthcare Design System** - Implemented complete design system with healthcare-grade color palette
 ✅ **Clean White Background** - Reverted from matrix theme to professional white background design
