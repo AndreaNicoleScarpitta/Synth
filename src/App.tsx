@@ -380,6 +380,18 @@ const styles = {
     overflow: 'hidden',
     padding: '80px 24px 64px'
   },
+  heroBackground: {
+    position: 'absolute' as const,
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    opacity: 0.04,
+    zIndex: 0,
+    pointerEvents: 'none' as const,
+    width: '800px',
+    height: 'auto',
+    maxWidth: '90vw'
+  },
   heroContent: {
     maxWidth: '1200px',
     margin: '0 auto',
@@ -1368,6 +1380,12 @@ function MainApp() {
 
       <main style={styles.main}>
         <section style={styles.hero}>
+          {/* Background Logo */}
+          <img 
+            src="/attached_assets/ChatGPT Image Jul 1, 2025, 03_18_27 PM_1751408321666.png"
+            alt=""
+            style={styles.heroBackground}
+          />
           <div style={styles.heroContent}>
             {/* Persona Navigation */}
             <div style={{
