@@ -451,30 +451,12 @@ const LandingPage = ({ onStartDemo }) => {
             </div>
           </div>
           
-          <div className="flex flex-col gap-4 justify-center items-center">
-            <div className="flex flex-col sm:flex-row gap-4 items-center">
-              <WaitlistModal 
-                buttonText="Join Waitlist"
-                buttonClassName="inline-flex items-center px-8 py-4 bg-white text-primary-600 font-bold rounded-xl hover:bg-neutral-50 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105 text-lg"
-              />
-              <button
-                onClick={handleStartDemo}
-                className="inline-flex items-center px-8 py-4 bg-neutral-100/10 backdrop-blur-sm text-white font-bold rounded-xl hover:bg-neutral-100/20 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105 text-lg border border-neutral-300/30"
-              >
-                Start Demo
-              </button>
-            </div>
-            <p className="text-neutral-100/80 text-sm">
-              🔥 Limited time: First 1,000 members get premium features free for 6 months
-            </p>
-          </div>
+
         </div>
       </div>
       <ToastContainer />
     </div>
   );
 };
-
-export default LandingPage;
 
 export default LandingPage;
