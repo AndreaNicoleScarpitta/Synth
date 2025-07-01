@@ -365,37 +365,13 @@ const styles = {
     alignItems: 'center',
     gap: '12px'
   },
-  logoIcon: {
-    width: '32px',
-    height: '32px',
-    borderRadius: '6px',
-    background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: '#0a0a0a',
-    fontWeight: 'bold',
-    fontSize: '14px'
-  },
+
   logoText: {
     fontWeight: '600',
     fontSize: '20px',
     color: '#6366f1'
   },
-  status: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '8px',
-    fontSize: '14px',
-    color: '#6b7280'
-  },
-  statusDot: {
-    width: '8px',
-    height: '8px',
-    backgroundColor: '#06b6d4',
-    borderRadius: '50%',
-    animation: 'pulse 2s infinite'
-  },
+
   main: {
     paddingTop: '64px'
   },
@@ -883,7 +859,14 @@ function MainApp() {
         <header style={styles.header}>
           <nav style={styles.nav}>
             <div style={styles.logo}>
-              <div style={styles.logoIcon}>SA</div>
+              <img 
+                src="/attached_assets/ChatGPT Image Jul 1, 2025, 03_18_27 PM_1751408321666.png" 
+                alt="Synthetic Ascension Logo"
+                style={{
+                  height: '32px',
+                  width: 'auto'
+                }}
+              />
               <span style={styles.logoText}>Synthetic Ascension</span>
             </div>
             <button 
@@ -1228,7 +1211,14 @@ function MainApp() {
         <header style={styles.header}>
           <nav style={styles.nav}>
             <div style={styles.logo}>
-              <div style={styles.logoIcon}>SA</div>
+              <img 
+                src="/attached_assets/ChatGPT Image Jul 1, 2025, 03_18_27 PM_1751408321666.png" 
+                alt="Synthetic Ascension Logo"
+                style={{
+                  height: '32px',
+                  width: 'auto'
+                }}
+              />
               <span style={styles.logoText}>Synthetic Ascension</span>
             </div>
             <button 
@@ -1363,12 +1353,15 @@ function MainApp() {
       <header style={styles.header}>
         <nav style={styles.nav}>
           <div style={styles.logo}>
-            <div style={styles.logoIcon}>SA</div>
+            <img 
+              src="/attached_assets/ChatGPT Image Jul 1, 2025, 03_18_27 PM_1751408321666.png" 
+              alt="Synthetic Ascension Logo"
+              style={{
+                height: '32px',
+                width: 'auto'
+              }}
+            />
             <span style={styles.logoText}>Synthetic Ascension</span>
-          </div>
-          <div style={styles.status}>
-            <div style={styles.statusDot}></div>
-            <span>System Online</span>
           </div>
         </nav>
       </header>

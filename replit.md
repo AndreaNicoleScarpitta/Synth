@@ -39,6 +39,13 @@ An advanced AI-powered Electronic Health Record (EHR) synthesis platform that ge
 
 ## Recent Changes
 
+### 2025-07-01 - Custom Logo Integration & UI Cleanup
+✅ **Custom DNA Helix Logo** - Replaced "SA" orange box with custom blue DNA helix logo across all views
+✅ **Logo Implementation** - Updated demo, enterprise, and main landing page headers with new logo image
+✅ **Status Indicator Removal** - Removed "System online" status indicator for cleaner header design
+✅ **Code Cleanup** - Removed unused logoIcon and status-related CSS styles
+✅ **Professional Branding** - DNA helix logo aligns with synthetic EHR/medical data theme
+
 ### 2025-07-01 - Comprehensive Waitlist Modal Implementation
 ✅ **Enhanced Waitlist Modal** - Created comprehensive WaitlistModal component with detailed form fields
 ✅ **Database Schema Update** - Expanded leads table to capture: organization, use cases, design partner interest, phone, company size, industry, current EHR system, timeline, budget range, specific requirements
