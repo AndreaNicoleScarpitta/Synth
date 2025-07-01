@@ -276,6 +276,7 @@ const MultiSelectDropdown = ({ label, options, placeholder = "Select options..."
 const designSystem = {
   colors: {
     primary: '#1e40af', // Professional navy blue for trust and sophistication
+    primaryLight: '#dbeafe', // Light blue for subtle backgrounds
     secondary: '#059669', // Muted teal for health, growth, and innovation
     accent: '#0891b2', // Vibrant turquoise for secondary accents
     neutral: {
@@ -1374,23 +1375,32 @@ function MainApp() {
               {Object.entries(personaData).map(([key, persona]) => (
                 <button
                   key={key}
-                  onClick={() => setActivePersona(key)}
+                  onClick={() => {
+                    console.log('Switching to persona:', key);
+                    setActivePersona(key);
+                  }}
                   style={{
-                    padding: `${designSystem.spacing.sm} ${designSystem.spacing.lg}`,
-                    borderRadius: designSystem.spacing.lg,
+                    padding: `${designSystem.spacing.md} ${designSystem.spacing.xl}`,
+                    borderRadius: '12px',
                     border: activePersona === key 
-                      ? `2px solid ${designSystem.colors.primary}` 
-                      : `1px solid ${designSystem.colors.neutral.gray300}`,
+                      ? `3px solid ${designSystem.colors.primary}` 
+                      : `2px solid ${designSystem.colors.neutral.gray200}`,
                     background: activePersona === key 
                       ? designSystem.colors.primary 
                       : 'white',
                     color: activePersona === key 
                       ? 'white' 
                       : designSystem.colors.neutral.gray700,
-                    fontSize: designSystem.typography.fontSize.sm,
-                    fontWeight: '500',
+                    fontSize: designSystem.typography.fontSize.base,
+                    fontWeight: activePersona === key ? '700' : '500',
                     cursor: 'pointer',
-                    transition: 'all 0.2s ease-in-out'
+                    transition: 'all 0.3s ease',
+                    minWidth: '140px',
+                    boxShadow: activePersona === key 
+                      ? `0 8px 24px ${designSystem.colors.primary}40` 
+                      : '0 2px 8px rgba(0,0,0,0.08)',
+                    transform: activePersona === key ? 'translateY(-2px)' : 'translateY(0)',
+                    textAlign: 'center' as const
                   }}
                 >
                   {persona.label}
