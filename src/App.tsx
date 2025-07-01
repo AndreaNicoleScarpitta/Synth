@@ -3,7 +3,7 @@ import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import { FaBrain, FaChartBar, FaMicroscope, FaFlask, FaUserShield, FaLock } from 'react-icons/fa'
 import ResultsOverview from './pages/ResultsOverview.tsx'
 import PatientRecord from './pages/PatientRecord.tsx'
-import SimpleTestModal from './components/SimpleTestModal.jsx'
+import WaitlistModal from './components/WaitlistModal.jsx'
 import { useToast } from './components/DynamicToast.jsx'
 
 
@@ -1724,9 +1724,9 @@ function MainApp() {
         </section>
       </main>
       
-      {/* Test Modal */}
+      {/* Waitlist Modal */}
       {showWaitlist && (
-        <SimpleTestModal 
+        <WaitlistModal 
           isOpen={showWaitlist}
           onClose={() => {
             setShowWaitlist(false)

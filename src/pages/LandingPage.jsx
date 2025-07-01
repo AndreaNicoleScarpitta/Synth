@@ -515,13 +515,13 @@ const LandingPage = ({ onStartDemo }) => {
         </div>
       </div>
       
-      {/* Waitlist Modal */}
-      {showWaitlist && (
+      {/* Waitlist Modal - COMMENTED OUT - Using App.tsx modal instead */}
+      {/* {showWaitlist && (
         <WaitlistModal 
           isOpen={showWaitlist}
           onClose={() => setShowWaitlist(false)}
         />
-      )}
+      )} */}
       
       <ToastContainer />
     </div>
