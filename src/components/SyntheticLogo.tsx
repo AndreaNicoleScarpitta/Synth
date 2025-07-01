@@ -77,17 +77,6 @@ export const SyntheticLogo = ({ className = "" }: { className?: string }) => {
           synthetic ascendancy
         </text>
       </svg>
-      
-      <span 
-        className="text-2xl font-bold tracking-wider"
-        style={{ 
-          fontFamily: 'Hi, Inter, system-ui, sans-serif',
-          color: '#fbbf24',
-          textShadow: '0 0 10px rgba(251, 191, 36, 0.3)'
-        }}
-      >
-        synthetic ascendancy
-      </span>
     </div>
   )
 }
