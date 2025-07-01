@@ -4,7 +4,6 @@ import { FaBrain, FaChartBar, FaMicroscope, FaFlask, FaUserShield, FaLock } from
 import ResultsOverview from './pages/ResultsOverview.tsx'
 import PatientRecord from './pages/PatientRecord.tsx'
 import WaitlistModal from './components/WaitlistModal.jsx'
-import { useToast } from './components/Toast.jsx'
 
 
 // Persona data structure
@@ -632,7 +631,6 @@ function MainApp() {
   const [activePersona, setActivePersona] = useState('researcher')
   const [showSignup, setShowSignup] = useState(false)
   const [showWaitlist, setShowWaitlist] = useState(false)
-  const { showToast, ToastContainer } = useToast()
   const [selectedConfigurations, setSelectedConfigurations] = useState({
     populationSize: '',
     cardiacConditions: [],
@@ -1488,8 +1486,7 @@ function MainApp() {
                 style={styles.primaryButton}
                 className="primary-button"
                 onClick={() => {
-                  console.log('Get Early Access clicked!');
-                  showToast('Early access coming soon! We\'re putting the finishing touches on this feature.', 'info', 4000);
+                  alert('Early access coming soon! We\'re putting the finishing touches on this feature.');
                 }}
               >
                 Get Early Access
@@ -1711,9 +1708,6 @@ function MainApp() {
           onClose={() => setShowWaitlist(false)}
         />
       )}
-      
-      {/* Toast Container */}
-      <ToastContainer />
     </div>
   )
 }
