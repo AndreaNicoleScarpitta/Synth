@@ -48,7 +48,7 @@ const WaitlistModal = ({
         setIsSuccess(true);
         // Reset form after 3 seconds
         setTimeout(() => {
-          handleClose();
+          onClose();
           setIsSuccess(false);
           setFormData({
             name: '',
@@ -111,7 +111,7 @@ const WaitlistModal = ({
 
   if (isSuccess) {
     return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 dark:bg-black dark:bg-opacity-70 flex items-center justify-center p-4 z-50">
+      <div className="fixed inset-0 bg-black bg-opacity-50 dark:bg-black dark:bg-opacity-70 flex items-center justify-center p-4 z-50" style={{zIndex: 9999}}>
         <div className="bg-white dark:bg-neutral-800 rounded-xl shadow-2xl max-w-md w-full p-8 text-center">
           <div className="mb-6">
             <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-4" />
@@ -119,7 +119,7 @@ const WaitlistModal = ({
               Welcome to the Waitlist!
             </h2>
             <p className="text-neutral-600 dark:text-neutral-400">
-              Thank you for joining! We'll reach out soon with early access to our platform.
+              Thank you for your interest. We'll be in touch soon with exclusive early access.
             </p>
           </div>
         </div>
@@ -128,7 +128,7 @@ const WaitlistModal = ({
   }
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 dark:bg-black dark:bg-opacity-70 flex items-center justify-center p-4 z-50">
+    <div className="fixed inset-0 bg-black bg-opacity-50 dark:bg-black dark:bg-opacity-70 flex items-center justify-center p-4 z-50" style={{zIndex: 9999}}>
       <div className="bg-white dark:bg-neutral-800 rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           <div className="flex justify-between items-start mb-6">
@@ -214,19 +214,33 @@ const WaitlistModal = ({
 
                 <div>
                   <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
-                    Phone Number
+                    Role/Title
                   </label>
-                  <div className="relative">
-                    <Phone className="absolute left-3 top-3 w-4 h-4 text-neutral-400 dark:text-neutral-500" />
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className="w-full pl-10 pr-3 py-2 border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                      placeholder="+1 (555) 123-4567"
-                    />
-                  </div>
+                  <input
+                    type="text"
+                    name="role"
+                    value={formData.role}
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    placeholder="Your role/title"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
+                  Phone Number (Optional)
+                </label>
+                <div className="relative">
+                  <Phone className="absolute left-3 top-3 w-4 h-4 text-neutral-400 dark:text-neutral-500" />
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className="w-full pl-10 pr-3 py-2 border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    placeholder="+1 (555) 123-4567"
+                  />
                 </div>
               </div>
             </div>
@@ -239,32 +253,12 @@ const WaitlistModal = ({
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
-                    Role *
-                  </label>
-                  <select
-                    name="role"
-                    required
-                    value={formData.role}
-                    onChange={handleChange}
-                    className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  >
-                    <option value="">Select your role</option>
-                    <option value="ai-researcher">AI Researcher</option>
-                    <option value="data-scientist">Data Scientist</option>
-                    <option value="clinical-researcher">Clinical Researcher</option>
-                    <option value="healthcare-executive">Healthcare Executive</option>
-                    <option value="product-manager">Product Manager</option>
-                    <option value="software-engineer">Software Engineer</option>
-                    <option value="compliance-officer">Compliance Officer</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
-                    Company Size
-                  </label>
+                  <div className="flex items-center gap-2 mb-1">
+                    <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                      Company Size
+                    </label>
+                    <HelpBubble content={getFieldHelp('company_size')} />
+                  </div>
                   <select
                     name="company_size"
                     value={formData.company_size}
@@ -275,30 +269,18 @@ const WaitlistModal = ({
                     <option value="1-10">1-10 employees</option>
                     <option value="11-50">11-50 employees</option>
                     <option value="51-200">51-200 employees</option>
-                    <option value="201-1000">201-1,000 employees</option>
-                    <option value="1000+">1,000+ employees</option>
+                    <option value="201-1000">201-1000 employees</option>
+                    <option value="1000+">1000+ employees</option>
                   </select>
                 </div>
-              </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="flex items-center text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
-                    Industry
-                    <HelpBubble
-                      title="Industry Focus"
-                      content="Your organization's primary industry focus. This helps us understand your specific regulatory environment, data requirements, and use case priorities."
-                      examples={[
-                        "Healthcare Provider: Hospitals, clinics, health systems",
-                        "Pharmaceutical: Drug development, clinical trials",
-                        "Biotechnology: Research, biomarker discovery",
-                        "Health Technology: Digital health, telemedicine platforms"
-                      ]}
-                      position="top"
-                      trigger="hover"
-                      size="lg"
-                    />
-                  </label>
+                  <div className="flex items-center gap-2 mb-1">
+                    <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                      Industry
+                    </label>
+                    <HelpBubble content={getFieldHelp('industry')} />
+                  </div>
                   <select
                     name="industry"
                     value={formData.industry}
@@ -306,71 +288,68 @@ const WaitlistModal = ({
                     className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   >
                     <option value="">Select industry</option>
-                    <option value="healthcare-provider">Healthcare Provider</option>
-                    <option value="pharmaceutical">Pharmaceutical</option>
-                    <option value="biotech">Biotechnology</option>
-                    <option value="medical-device">Medical Device</option>
-                    <option value="health-tech">Health Technology</option>
-                    <option value="research-institution">Research Institution</option>
-                    <option value="consulting">Consulting</option>
-                    <option value="other">Other</option>
+                    <option value="Healthcare Provider">Healthcare Provider</option>
+                    <option value="Pharmaceutical">Pharmaceutical</option>
+                    <option value="Medical Device">Medical Device</option>
+                    <option value="Health Technology">Health Technology</option>
+                    <option value="Insurance/Payer">Insurance/Payer</option>
+                    <option value="Academic/Research">Academic/Research</option>
+                    <option value="Consulting">Consulting</option>
+                    <option value="Other">Other</option>
                   </select>
                 </div>
+              </div>
 
-                <div>
-                  <label className="flex items-center text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
                     Current EHR System
-                    <HelpBubble
-                      {...getFieldHelp('currentEhrSystem')}
-                      position="top"
-                      trigger="hover"
-                      size="lg"
-                    />
                   </label>
-                  <input
-                    type="text"
-                    name="current_ehr_system"
-                    value={formData.current_ehr_system}
-                    onChange={handleChange}
-                    className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    placeholder="Epic, Cerner, Allscripts, etc."
-                  />
+                  <HelpBubble content={getFieldHelp('current_ehr_system')} />
                 </div>
+                <input
+                  type="text"
+                  name="current_ehr_system"
+                  value={formData.current_ehr_system}
+                  onChange={handleChange}
+                  className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  placeholder="e.g., Epic, Cerner, Allscripts, or custom solution"
+                />
               </div>
             </div>
 
-            {/* Project Details */}
+            {/* Project Requirements */}
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-700 pb-2">
                 Project Requirements
               </h3>
               
               <div>
-                <label className="flex items-center text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
-                  Use Cases *
-                  <HelpBubble
-                    {...getFieldHelp('useCases')}
-                    position="top"
-                    trigger="hover"
-                    size="xl"
-                  />
-                </label>
+                <div className="flex items-center gap-2 mb-1">
+                  <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                    Primary Use Cases *
+                  </label>
+                  <HelpBubble content={getFieldHelp('use_cases')} />
+                </div>
                 <textarea
                   name="use_cases"
                   required
                   value={formData.use_cases}
                   onChange={handleChange}
-                  rows={3}
-                  className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
-                  placeholder="Describe your specific use cases for synthetic EHR data (e.g., ML model training, clinical research, software testing, etc.)"
+                  rows="3"
+                  className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  placeholder="Describe your intended use cases (e.g., AI model training, clinical research, compliance testing, software development)"
                 />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
-                    Timeline
-                  </label>
+                  <div className="flex items-center gap-2 mb-1">
+                    <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                      Implementation Timeline
+                    </label>
+                    <HelpBubble content={getFieldHelp('timeline')} />
+                  </div>
                   <select
                     name="timeline"
                     value={formData.timeline}
@@ -378,18 +357,21 @@ const WaitlistModal = ({
                     className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   >
                     <option value="">Select timeline</option>
-                    <option value="immediate">Immediate (within 1 month)</option>
-                    <option value="short-term">Short-term (1-3 months)</option>
-                    <option value="medium-term">Medium-term (3-6 months)</option>
-                    <option value="long-term">Long-term (6+ months)</option>
-                    <option value="exploring">Just exploring</option>
+                    <option value="Immediate (within 1 month)">Immediate (within 1 month)</option>
+                    <option value="Short-term (1-3 months)">Short-term (1-3 months)</option>
+                    <option value="Medium-term (3-6 months)">Medium-term (3-6 months)</option>
+                    <option value="Long-term (6+ months)">Long-term (6+ months)</option>
+                    <option value="Exploring options">Just exploring options</option>
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
-                    Budget Range
-                  </label>
+                  <div className="flex items-center gap-2 mb-1">
+                    <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                      Budget Range (Annual)
+                    </label>
+                    <HelpBubble content={getFieldHelp('budget_range')} />
+                  </div>
                   <select
                     name="budget_range"
                     value={formData.budget_range}
@@ -397,67 +379,55 @@ const WaitlistModal = ({
                     className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   >
                     <option value="">Select budget range</option>
-                    <option value="under-10k">Under $10K</option>
-                    <option value="10k-50k">$10K - $50K</option>
-                    <option value="50k-100k">$50K - $100K</option>
-                    <option value="100k-500k">$100K - $500K</option>
-                    <option value="500k+">$500K+</option>
-                    <option value="undecided">Not sure yet</option>
+                    <option value="Under $10K">Under $10K</option>
+                    <option value="$10K - $50K">$10K - $50K</option>
+                    <option value="$50K - $100K">$50K - $100K</option>
+                    <option value="$100K - $500K">$100K - $500K</option>
+                    <option value="$500K+">$500K+</option>
+                    <option value="Not determined">Not determined</option>
                   </select>
                 </div>
               </div>
 
               <div>
-                <label className="flex items-center text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
-                  Specific Requirements
-                  <HelpBubble
-                    title="Technical & Compliance Requirements"
-                    content="Specific technical, regulatory, or operational requirements for your synthetic data project. This helps us ensure our solution meets your exact needs and constraints."
-                    examples={[
-                      "FHIR R4 format for interoperability",
-                      "HIPAA compliance certification required", 
-                      "Integration with Epic EHR system",
-                      "Real-time data streaming capabilities",
-                      "Multi-language support for global deployment",
-                      "Custom data schemas for proprietary systems"
-                    ]}
-                    position="top"
-                    trigger="hover"
-                    size="xl"
-                  />
-                </label>
+                <div className="flex items-center gap-2 mb-1">
+                  <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                    Specific Requirements or Technical Needs
+                  </label>
+                  <HelpBubble content={getFieldHelp('specific_requirements')} />
+                </div>
                 <textarea
                   name="specific_requirements"
                   value={formData.specific_requirements}
                   onChange={handleChange}
-                  rows={3}
-                  className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
-                  placeholder="Any specific requirements, compliance needs, data formats, or technical specifications?"
+                  rows="3"
+                  className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  placeholder="Any specific compliance requirements, integration needs, data volume expectations, or technical specifications"
                 />
               </div>
             </div>
 
-            {/* Design Partner Option */}
+            {/* Partnership Opportunity */}
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-700 pb-2">
                 Partnership Opportunity
               </h3>
               
-              <div className="flex items-start space-x-3">
+              <div className="flex items-start gap-3">
                 <input
                   type="checkbox"
                   id="design_partner"
                   name="interested_in_design_partner"
                   checked={formData.interested_in_design_partner}
                   onChange={handleChange}
-                  className="mt-1 w-4 h-4 text-primary-600 bg-white dark:bg-neutral-700 border-neutral-300 dark:border-neutral-600 rounded focus:ring-primary-500 focus:ring-2"
+                  className="mt-1 rounded border-neutral-300 dark:border-neutral-600 text-primary-600 focus:ring-primary-500"
                 />
                 <div>
                   <label htmlFor="design_partner" className="text-sm font-medium text-neutral-700 dark:text-neutral-300 cursor-pointer">
                     I'm interested in being a design partner
                   </label>
-                  <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
-                    Work closely with our team to shape the product roadmap and get early access to new features. Includes regular feedback sessions and potential co-marketing opportunities.
+                  <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+                    Design partners get early access, influence product direction, and receive preferential pricing in exchange for feedback and case studies.
                   </p>
                 </div>
               </div>
@@ -467,16 +437,16 @@ const WaitlistModal = ({
               <button
                 type="button"
                 onClick={onClose}
-                className="flex-1 px-4 py-3 border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors"
+                className="flex-1 px-4 py-2 border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex-1 px-4 py-3 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
-                {isSubmitting ? 'Submitting...' : 'Join Waitlist'}
+                {isSubmitting ? 'Joining...' : 'Join Waitlist'}
               </button>
             </div>
           </form>

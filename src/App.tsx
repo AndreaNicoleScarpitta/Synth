@@ -1706,9 +1706,14 @@ function MainApp() {
       {showWaitlist && (
         <WaitlistModal 
           isOpen={showWaitlist}
-          onClose={() => setShowWaitlist(false)}
+          onClose={() => {
+            console.log('Closing waitlist modal');
+            setShowWaitlist(false);
+          }}
         />
       )}
+      
+
       
       {/* Toast Container */}
       <ToastContainer />
