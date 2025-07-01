@@ -60,6 +60,18 @@ export default {
           800: '#454545',
           900: '#3d3d3d',
         },
+        tertiary: {
+          50: '#ecfeff',
+          100: '#cffafe',
+          200: '#a5f3fc',
+          300: '#67e8f9',
+          400: '#22d3ee',
+          500: '#06b6d4', // Cyan tertiary
+          600: '#0891b2',
+          700: '#0e7490',
+          800: '#155e75',
+          900: '#164e63',
+        },
         accent: {
           50: '#fffef7',
           100: '#fffbeb',
@@ -90,6 +102,7 @@ export default {
         heading: ['Montserrat', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif'],
         'syne': ['Syne', 'sans-serif'],
         'inter': ['Inter', 'sans-serif'],
+        'hi': ['Hi Melody', 'Inter', 'sans-serif'],
       },
       spacing: {
         '18': '4.5rem',

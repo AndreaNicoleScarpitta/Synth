@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import ResultsOverview from './pages/ResultsOverview.tsx'
 import PatientRecord from './pages/PatientRecord.tsx'
 import { MatrixBackground } from './components/MatrixBackground'
-import { DNALogo } from './components/DNALogo'
+import { SyntheticLogo } from './components/SyntheticLogo'
 
 // Progress tracking component
 const ProgressBar = ({ progress, currentStep, steps }) => {
@@ -200,12 +200,27 @@ const MultiSelectDropdown = ({ label, options, placeholder = "Select options..."
   );
 };
 
+// Comprehensive color palette
+const colors = {
+  primary: '#fbbf24',     // Gold primary
+  secondary: '#f59e0b',   // Amber secondary
+  tertiary: '#06b6d4',    // Cyan tertiary (replaces blue)
+  accent: '#10b981',      // Emerald accent
+  dark: '#0a0a0a',        // Pure black
+  darkCard: 'rgba(10, 10, 10, 0.8)', // Semi-transparent black
+  text: '#fbbf24',        // Gold text
+  textSecondary: '#f59e0b', // Amber secondary text
+  textTertiary: '#06b6d4', // Cyan for highlights
+  border: '#fbbf24',      // Gold borders
+  shadow: 'rgba(251, 191, 36, 0.2)', // Gold shadow
+}
+
 const styles = {
   container: {
     minHeight: '100vh',
-    background: '#0a0a0a',
-    fontFamily: 'Inter, system-ui, sans-serif',
-    color: '#fbbf24'
+    background: colors.dark,
+    fontFamily: "'Hi Melody', Inter, system-ui, sans-serif",
+    color: colors.text
   },
   header: {
     position: 'fixed' as const,
@@ -450,34 +465,40 @@ const styles = {
 
 const features = [
   {
-    title: "Synthetic Patient Generation",
-    description: "Create realistic patient cohorts with complex medical histories, demographics, and clinical pathways.",
-    color: "#0ea5e9"
+    title: "Genetic Algorithm Synthesis",
+    description: "Neural networks evolve synthetic patient cohorts with complex genetic markers and phenotypic expressions.",
+    color: colors.tertiary,
+    icon: "🧬"
   },
   {
-    title: "Privacy-First Architecture", 
-    description: "HIPAA-compliant synthetic data generation with zero risk of patient privacy exposure.",
-    color: "#06b6d4"
+    title: "Quantum-Secured Privacy", 
+    description: "Quantum-encrypted synthetic data generation with mathematically proven zero-knowledge privacy.",
+    color: colors.accent,
+    icon: "🔐"
   },
   {
-    title: "AI-Powered Validation",
-    description: "Advanced statistical validation and bias detection to ensure data quality and representativeness.",
-    color: "#0284c7"
+    title: "Consciousness-Level Validation",
+    description: "AI consciousness models validate synthetic patterns for biological authenticity and emergent behaviors.",
+    color: colors.primary,
+    icon: "🧠"
   },
   {
-    title: "Clinical Accuracy",
-    description: "Medically precise synthetic records that maintain clinical integrity and diagnostic consistency.",
-    color: "#0891b2"
+    title: "Synthetic Biology Integration",
+    description: "Biomarker-precise synthetic records that model cellular-level processes and genetic interactions.",
+    color: colors.secondary,
+    icon: "🔬"
   },
   {
-    title: "Scalable Infrastructure",
-    description: "Generate cohorts from hundreds to millions of patients with enterprise-grade performance.",
-    color: "#0e7490"
+    title: "Quantum-Scale Infrastructure",
+    description: "Generate patient universes from thousands to billions with quantum-parallel processing power.",
+    color: colors.tertiary,
+    icon: "⚡"
   },
   {
-    title: "Research Ready",
-    description: "Pre-configured templates for clinical trials, drug discovery, and healthcare AI development.",
-    color: "#155e75"
+    title: "Evolutionary Research Platform",
+    description: "Self-evolving templates for pharmaceutical discovery, genetic research, and consciousness studies.",
+    color: colors.accent,
+    icon: "🔬"
   }
 ]
 
@@ -497,6 +518,7 @@ function MainApp() {
   const [currentStep, setCurrentStep] = useState('')
   const [generationSteps, setGenerationSteps] = useState([])
   const [generationResults, setGenerationResults] = useState(null)
+  const [showSignupForm, setShowSignupForm] = useState(false)
   const [selectedConfigurations, setSelectedConfigurations] = useState({
     populationSize: '',
     cardiacConditions: [],
@@ -1218,8 +1240,7 @@ function MainApp() {
       <header style={styles.header}>
         <nav style={styles.nav}>
           <div style={styles.logo}>
-            <DNALogo />
-            <span style={styles.logoText}>Synthetic Ascension</span>
+            <SyntheticLogo />
           </div>
           <div style={styles.status}>
             <div style={styles.statusDot}></div>
@@ -1287,7 +1308,7 @@ function MainApp() {
             {features.map((feature, index) => (
               <div key={index} style={styles.card} className="card">
                 <div style={{...styles.cardIcon, background: feature.color}}>
-                  <div style={{width: '24px', height: '24px', background: 'white', borderRadius: '3px'}}></div>
+                  <span style={{fontSize: '24px', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))'}}>{feature.icon}</span>
                 </div>
                 <h3 style={styles.cardTitle}>{feature.title}</h3>
                 <p style={styles.cardDescription}>{feature.description}</p>
@@ -1296,18 +1317,57 @@ function MainApp() {
           </div>
         </section>
 
-        <section style={styles.cta}>
+        <section style={{
+          ...styles.cta,
+          background: `linear-gradient(135deg, ${colors.darkCard} 0%, rgba(16, 185, 129, 0.1) 100%)`,
+          border: `1px solid ${colors.tertiary}`,
+          borderRadius: '20px',
+          margin: '60px 0',
+          boxShadow: `0 20px 40px ${colors.shadow}`,
+        }}>
           <div style={styles.ctaContent}>
-            <h2 style={styles.ctaTitle}>Ready to Transform Your Healthcare Data?</h2>
-            <p style={styles.ctaSubtitle}>
-              Join leading healthcare organizations and research institutions already using Synthetic Ascension.
-            </p>
+            <div style={{textAlign: 'center', marginBottom: '32px'}}>
+              <span style={{fontSize: '48px', marginBottom: '16px', display: 'block'}}>🧬</span>
+              <h2 style={{
+                ...styles.ctaTitle, 
+                color: colors.text,
+                fontFamily: "'Hi Melody', Inter, system-ui, sans-serif",
+                background: `linear-gradient(45deg, ${colors.primary}, ${colors.tertiary})`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                textShadow: 'none'
+              }}>
+                Ready to Ascend to Synthetic Consciousness?
+              </h2>
+              <p style={{
+                ...styles.ctaSubtitle,
+                color: colors.textTertiary,
+                maxWidth: '600px',
+                margin: '0 auto'
+              }}>
+                Join the neural revolution. Experience quantum-level synthetic biology that transcends traditional healthcare data limitations.
+              </p>
+            </div>
             <button 
-              style={styles.ctaButton} 
+              style={{
+                ...styles.ctaButton,
+                background: `linear-gradient(45deg, ${colors.primary}, ${colors.secondary})`,
+                color: colors.dark,
+                fontWeight: 'bold',
+                padding: '16px 32px',
+                fontSize: '18px',
+                border: 'none',
+                borderRadius: '12px',
+                cursor: 'pointer',
+                textTransform: 'uppercase',
+                letterSpacing: '1px',
+                boxShadow: `0 8px 20px ${colors.shadow}`,
+                fontFamily: "'Hi Melody', Inter, system-ui, sans-serif"
+              }} 
               className="cta-button"
-              onClick={handleStartDemo}
+              onClick={() => setShowSignupForm(true)}
             >
-              Start Your Demo
+              Begin Neural Ascension
             </button>
           </div>
         </section>
