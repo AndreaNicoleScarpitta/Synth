@@ -8,6 +8,7 @@ const WaitlistModal = ({
   isOpen = false,
   onClose
 }) => {
+  console.log('WaitlistModal rendering, isOpen:', isOpen);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   
@@ -467,7 +468,7 @@ const WaitlistModal = ({
     </div>
   );
 
-  return createPortal(modalContent, document.body);
+  return modalContent;
 };
 
 export default WaitlistModal;

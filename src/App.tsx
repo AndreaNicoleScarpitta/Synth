@@ -3,7 +3,7 @@ import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import { FaBrain, FaChartBar, FaMicroscope, FaFlask, FaUserShield, FaLock } from 'react-icons/fa'
 import ResultsOverview from './pages/ResultsOverview.tsx'
 import PatientRecord from './pages/PatientRecord.tsx'
-import WaitlistModal from './components/WaitlistModal.jsx'
+import SimpleTestModal from './components/SimpleTestModal.jsx'
 import { useToast } from './components/DynamicToast.jsx'
 
 
@@ -1516,7 +1516,11 @@ function MainApp() {
               <button 
                 style={styles.secondaryButton}
                 className="secondary-button"
-                onClick={() => setShowWaitlist(true)}
+                onClick={() => {
+                  console.log('Join Waitlist button clicked');
+                  setShowWaitlist(true);
+                  console.log('showWaitlist set to true');
+                }}
               >
                 Join Waitlist
               </button>
@@ -1720,9 +1724,9 @@ function MainApp() {
         </section>
       </main>
       
-      {/* Waitlist Modal */}
+      {/* Test Modal */}
       {showWaitlist && (
-        <WaitlistModal 
+        <SimpleTestModal 
           isOpen={showWaitlist}
           onClose={() => {
             setShowWaitlist(false)
