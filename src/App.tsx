@@ -3,8 +3,8 @@ import { Routes, Route } from 'react-router-dom'
 import { FaBrain, FaChartBar, FaMicroscope, FaFlask, FaUserShield, FaLock } from 'react-icons/fa'
 import ResultsOverview from './pages/ResultsOverview.tsx'
 import PatientRecord from './pages/PatientRecord.tsx'
-import WaitlistModal from './components/WaitlistModal'
-import { useToast } from './components/Toast'
+import WaitlistModal from './components/WaitlistModal.jsx'
+import { useToast } from './components/Toast.jsx'
 
 
 // Persona data structure
