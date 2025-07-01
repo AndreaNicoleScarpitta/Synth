@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import ResultsOverview from './pages/ResultsOverview.tsx'
 import PatientRecord from './pages/PatientRecord.tsx'
+import { MatrixBackground } from './components/MatrixBackground'
+import { DNALogo } from './components/DNALogo'
 
 // Progress tracking component
 const ProgressBar = ({ progress, currentStep, steps }) => {
@@ -201,8 +203,9 @@ const MultiSelectDropdown = ({ label, options, placeholder = "Select options..."
 const styles = {
   container: {
     minHeight: '100vh',
-    background: '#ffffff',
-    fontFamily: 'Inter, system-ui, sans-serif'
+    background: '#0a0a0a',
+    fontFamily: 'Inter, system-ui, sans-serif',
+    color: '#fbbf24'
   },
   header: {
     position: 'fixed' as const,
@@ -210,10 +213,10 @@ const styles = {
     left: 0,
     right: 0,
     zIndex: 50,
-    background: 'rgba(255, 255, 255, 0.98)',
+    background: 'rgba(10, 10, 10, 0.95)',
     backdropFilter: 'blur(10px)',
-    borderBottom: '1px solid #f1f5f9',
-    boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)'
+    borderBottom: '1px solid #fbbf24',
+    boxShadow: '0 1px 2px rgba(251, 191, 36, 0.2)'
   },
   nav: {
     maxWidth: '1200px',
@@ -233,18 +236,18 @@ const styles = {
     width: '32px',
     height: '32px',
     borderRadius: '6px',
-    background: 'linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%)',
+    background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: 'white',
+    color: '#0a0a0a',
     fontWeight: 'bold',
     fontSize: '14px'
   },
   logoText: {
     fontWeight: '600',
     fontSize: '20px',
-    color: '#0f172a'
+    color: '#fbbf24'
   },
   status: {
     display: 'flex',
@@ -276,16 +279,17 @@ const styles = {
   heroTitle: {
     fontSize: '56px',
     fontWeight: '700',
-    color: '#0f172a',
+    color: '#fbbf24',
     marginBottom: '24px',
     lineHeight: '1.1',
     textAlign: 'center' as const,
-    letterSpacing: '-0.02em'
+    letterSpacing: '-0.02em',
+    textShadow: '0 0 20px rgba(251, 191, 36, 0.5)'
   },
   heroSubtitle: {
     fontSize: '24px',
     fontWeight: '500',
-    color: '#0ea5e9',
+    color: '#f59e0b',
     marginBottom: '32px',
     maxWidth: '800px',
     margin: '0 auto 32px',
@@ -293,11 +297,12 @@ const styles = {
   },
   heroDescription: {
     fontSize: '18px',
-    color: '#475569',
+    color: '#fbbf24',
     marginBottom: '48px',
     maxWidth: '680px',
     margin: '0 auto 48px',
-    lineHeight: '1.6'
+    lineHeight: '1.6',
+    opacity: 0.8
   },
   heroStats: {
     display: 'flex',
@@ -364,12 +369,12 @@ const styles = {
   featuresTitle: {
     fontSize: '32px',
     fontWeight: '600',
-    color: '#0f172a',
+    color: '#fbbf24',
     marginBottom: '16px'
   },
   featuresSubtitle: {
     fontSize: '18px',
-    color: '#475569',
+    color: '#f59e0b',
     maxWidth: '800px',
     margin: '0 auto'
   },
@@ -379,12 +384,13 @@ const styles = {
     gap: '32px'
   },
   card: {
-    background: 'white',
+    background: 'rgba(10, 10, 10, 0.8)',
     borderRadius: '8px',
     padding: '28px',
-    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)',
-    border: '1px solid #f1f5f9',
-    transition: 'all 0.3s'
+    boxShadow: '0 1px 3px rgba(251, 191, 36, 0.2)',
+    border: '1px solid #fbbf24',
+    transition: 'all 0.3s',
+    backdropFilter: 'blur(10px)'
   },
   cardIcon: {
     width: '48px',
@@ -399,11 +405,12 @@ const styles = {
     fontSize: '20px',
     fontWeight: '600',
     marginBottom: '8px',
-    color: '#1f2937'
+    color: '#fbbf24'
   },
   cardDescription: {
-    color: '#6b7280',
-    lineHeight: '1.6'
+    color: '#f59e0b',
+    lineHeight: '1.6',
+    opacity: 0.9
   },
   cta: {
     background: '#f8fafc',
@@ -1207,11 +1214,12 @@ function MainApp() {
         `}
       </style>
 
+      <MatrixBackground />
       <header style={styles.header}>
         <nav style={styles.nav}>
           <div style={styles.logo}>
-            <div style={styles.logoIcon}>SA</div>
-            <div style={styles.logoText}>Synthetic Ascension</div>
+            <DNALogo />
+            <span style={styles.logoText}>Synthetic Ascension</span>
           </div>
           <div style={styles.status}>
             <div style={styles.statusDot}></div>
@@ -1224,9 +1232,9 @@ function MainApp() {
         <section style={styles.hero}>
           <div style={styles.heroContent}>
             <h1 style={styles.heroTitle} className="hero-title">Synthetic Ascension</h1>
-            <p style={styles.heroSubtitle}>Simulate. Validate. Ascend.</p>
+            <p style={styles.heroSubtitle}>Decode. Synthesize. Evolve.</p>
             <p style={styles.heroDescription}>
-              The world's most advanced synthetic EHR platform. Generate privacy-safe, clinically accurate patient data that powers breakthrough AI research and accelerates medical innovation—without compromising patient privacy.
+              Next-generation synthetic EHR platform powered by AI—where genetic data meets matrix intelligence. Transform medical research through quantum-encrypted synthetic patients and neural evolution algorithms.
             </p>
             
             <div style={styles.heroStats}>
@@ -1250,18 +1258,18 @@ function MainApp() {
             
             <div style={{...styles.buttonContainer, flexDirection: 'row'}} className="button-container">
               <button 
-                style={styles.primaryButton} 
+                style={{...styles.primaryButton, background: 'linear-gradient(to right, #f59e0b, #d97706)', color: '#0a0a0a', fontWeight: 'bold'}} 
                 className="primary-button"
-                onClick={handleLaunchDemo}
+                onClick={() => {}}
               >
-                Launch Demo
+                Get Early Access
               </button>
               <button 
-                style={styles.secondaryButton} 
+                style={{...styles.secondaryButton, border: '2px solid #fbbf24', color: '#fbbf24'}} 
                 className="secondary-button"
-                onClick={handleEnterprisePartnership}
+                onClick={() => {}}
               >
-                Enterprise Partnership
+                Join Waitlist
               </button>
             </div>
           </div>
