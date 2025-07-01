@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import ResultsOverview from './pages/ResultsOverview.tsx'
 import PatientRecord from './pages/PatientRecord.tsx'
 import { MatrixBackground } from './components/MatrixBackground'
-import { SyntheticLogo } from './components/SyntheticLogo'
+import { DNALogo } from './components/DNALogo'
 
 // Progress tracking component
 const ProgressBar = ({ progress, currentStep, steps }) => {
@@ -200,27 +200,12 @@ const MultiSelectDropdown = ({ label, options, placeholder = "Select options..."
   );
 };
 
-// Comprehensive color palette
-const colors = {
-  primary: '#fbbf24',     // Gold primary
-  secondary: '#f59e0b',   // Amber secondary
-  tertiary: '#06b6d4',    // Cyan tertiary (replaces blue)
-  accent: '#10b981',      // Emerald accent
-  dark: '#0a0a0a',        // Pure black
-  darkCard: 'rgba(10, 10, 10, 0.8)', // Semi-transparent black
-  text: '#fbbf24',        // Gold text
-  textSecondary: '#f59e0b', // Amber secondary text
-  textTertiary: '#06b6d4', // Cyan for highlights
-  border: '#fbbf24',      // Gold borders
-  shadow: 'rgba(251, 191, 36, 0.2)', // Gold shadow
-}
-
 const styles = {
   container: {
     minHeight: '100vh',
-    background: colors.dark,
-    fontFamily: "'Hi Melody', Inter, system-ui, sans-serif",
-    color: colors.text
+    background: '#0a0a0a',
+    fontFamily: 'Inter, system-ui, sans-serif',
+    color: '#fbbf24'
   },
   header: {
     position: 'fixed' as const,
@@ -465,40 +450,34 @@ const styles = {
 
 const features = [
   {
-    title: "Genetic Algorithm Synthesis",
-    description: "Neural networks evolve synthetic patient cohorts with complex genetic markers and phenotypic expressions.",
-    color: colors.tertiary,
-    icon: "🧬"
+    title: "Synthetic Patient Generation",
+    description: "Create realistic patient cohorts with complex medical histories, demographics, and clinical pathways.",
+    color: "#0ea5e9"
   },
   {
-    title: "Quantum-Secured Privacy", 
-    description: "Quantum-encrypted synthetic data generation with mathematically proven zero-knowledge privacy.",
-    color: colors.accent,
-    icon: "🔐"
+    title: "Privacy-First Architecture", 
+    description: "HIPAA-compliant synthetic data generation with zero risk of patient privacy exposure.",
+    color: "#06b6d4"
   },
   {
-    title: "Consciousness-Level Validation",
-    description: "AI consciousness models validate synthetic patterns for biological authenticity and emergent behaviors.",
-    color: colors.primary,
-    icon: "🧠"
+    title: "AI-Powered Validation",
+    description: "Advanced statistical validation and bias detection to ensure data quality and representativeness.",
+    color: "#0284c7"
   },
   {
-    title: "Synthetic Biology Integration",
-    description: "Biomarker-precise synthetic records that model cellular-level processes and genetic interactions.",
-    color: colors.secondary,
-    icon: "🔬"
+    title: "Clinical Accuracy",
+    description: "Medically precise synthetic records that maintain clinical integrity and diagnostic consistency.",
+    color: "#0891b2"
   },
   {
-    title: "Quantum-Scale Infrastructure",
-    description: "Generate patient universes from thousands to billions with quantum-parallel processing power.",
-    color: colors.tertiary,
-    icon: "⚡"
+    title: "Scalable Infrastructure",
+    description: "Generate cohorts from hundreds to millions of patients with enterprise-grade performance.",
+    color: "#0e7490"
   },
   {
-    title: "Evolutionary Research Platform",
-    description: "Self-evolving templates for pharmaceutical discovery, genetic research, and consciousness studies.",
-    color: colors.accent,
-    icon: "🔬"
+    title: "Research Ready",
+    description: "Pre-configured templates for clinical trials, drug discovery, and healthcare AI development.",
+    color: "#155e75"
   }
 ]
 
@@ -518,7 +497,6 @@ function MainApp() {
   const [currentStep, setCurrentStep] = useState('')
   const [generationSteps, setGenerationSteps] = useState([])
   const [generationResults, setGenerationResults] = useState(null)
-  const [showSignupForm, setShowSignupForm] = useState(false)
   const [selectedConfigurations, setSelectedConfigurations] = useState({
     populationSize: '',
     cardiacConditions: [],
@@ -1195,423 +1173,145 @@ function MainApp() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div style={styles.container}>
       <style>
         {`
-          @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700&display=swap');
-          
+          @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+          @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+          }
+          @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+          }
+          .hero-title {
+            animation: shimmer 3s ease-in-out infinite;
+            background-size: 200% 100%;
+          }
           .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(8, 145, 178, 0.12);
-            transition: all 0.3s ease;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
           }
-          
           .primary-button:hover {
-            background: #0e7490;
+            background: #0284c7;
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(8, 145, 178, 0.3);
-            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(14, 165, 233, 0.25);
           }
-          
           .secondary-button:hover {
-            background: #f0fdf4;
-            border-color: #10b981;
-            color: #047857;
-            transition: all 0.3s ease;
+            background: #f8fafc;
+            border-color: #94a3b8;
           }
-          
-          .trust-badge {
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
+          .cta-button:hover {
+            background: #0284c7;
+            transform: translateY(-1px);
           }
-          
-          .trust-badge:hover {
-            opacity: 1;
-          }
-          
-          @media (max-width: 768px) {
-            .hero-title {
-              font-size: 2.5rem !important;
-            }
-            .hero-subtitle {
-              font-size: 1.2rem !important;
+          @media (min-width: 640px) {
+            .button-container {
+              flex-direction: row;
             }
           }
         `}
       </style>
 
-      {/* Navigation */}
-      <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <SyntheticLogo />
-          
-          <div className="hidden md:flex items-center space-x-8">
-            <a href="#features" className="text-slate-600 hover:text-primary-600 font-medium transition-colors">Features</a>
-            <a href="#use-cases" className="text-slate-600 hover:text-primary-600 font-medium transition-colors">Use Cases</a>
-            <a href="#contact" className="text-slate-600 hover:text-primary-600 font-medium transition-colors">Contact</a>
-            <button 
-              className="bg-primary-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-primary-700 transition-colors"
-              onClick={() => setShowSignupForm(true)}
-            >
-              Request Demo
-            </button>
+      <MatrixBackground />
+      <header style={styles.header}>
+        <nav style={styles.nav}>
+          <div style={styles.logo}>
+            <DNALogo />
+            <span style={styles.logoText}>Synthetic Ascension</span>
+          </div>
+          <div style={styles.status}>
+            <div style={styles.statusDot}></div>
+            <span>System Online</span>
           </div>
         </nav>
       </header>
 
-      <main>
-        {/* Hero Section */}
-        <section className="bg-gradient-to-br from-slate-50 to-primary-50 py-20 lg:py-28">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-4xl mx-auto">
-              <h1 className="text-4xl md:text-6xl font-bold text-slate-900 mb-6 hero-title" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                Unlock Healthcare AI with <span className="text-primary-600">Privacy-Safe</span> Patient Data
-              </h1>
-              <p className="text-xl text-slate-600 mb-8 hero-subtitle">
-                Synthetic EHR datasets that evolve with the latest medical knowledge – no PHI, no red tape.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-                <button 
-                  className="bg-primary-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary-700 transition-colors primary-button"
-                  onClick={() => setShowSignupForm(true)}
-                >
-                  Request a Demo
-                </button>
-                <button 
-                  className="border-2 border-secondary-500 text-secondary-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-secondary-50 transition-colors secondary-button"
-                  onClick={() => setShowSignupForm(true)}
-                >
-                  Get Early Access
-                </button>
-              </div>
-              
-              {/* Trust indicators */}
-              <div className="flex flex-wrap justify-center items-center gap-8 text-sm text-slate-500">
-                <div className="flex items-center gap-2 trust-badge">
-                  <span className="w-3 h-3 bg-secondary-500 rounded-full"></span>
-                  HIPAA Compliant
-                </div>
-                <div className="flex items-center gap-2 trust-badge">
-                  <span className="w-3 h-3 bg-secondary-500 rounded-full"></span>
-                  100% Synthetic Data
-                </div>
-                <div className="flex items-center gap-2 trust-badge">
-                  <span className="w-3 h-3 bg-secondary-500 rounded-full"></span>
-                  No Patient Privacy Risk
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Problem & Solution Section */}
-        <section className="py-20 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <h2 className="text-3xl font-bold text-slate-900 mb-6">The Challenge</h2>
-                <p className="text-lg text-slate-600 mb-6">
-                  AI healthcare models are starving for diverse, representative data – but real patient data is siloed, biased, and hard to obtain.
-                </p>
-                <ul className="space-y-3 text-slate-600">
-                  <li className="flex items-start gap-3">
-                    <span className="text-red-500 font-semibold">×</span>
-                    Long approval processes and IRB hurdles
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-red-500 font-semibold">×</span>
-                    Biased datasets with limited population diversity
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-red-500 font-semibold">×</span>
-                    Privacy risks and compliance complexity
-                  </li>
-                </ul>
-              </div>
-              
-              <div>
-                <h2 className="text-3xl font-bold text-slate-900 mb-6">Our Solution</h2>
-                <p className="text-lg text-slate-600 mb-6">
-                  Synthetic Ascension generates unlimited, privacy-safe EHR data that mirrors real-world populations while eliminating compliance barriers.
-                </p>
-                <ul className="space-y-3 text-slate-600">
-                  <li className="flex items-start gap-3">
-                    <span className="text-secondary-500 font-semibold">✓</span>
-                    Instant access to diverse synthetic datasets
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-secondary-500 font-semibold">✓</span>
-                    Zero patient privacy risk with 100% synthetic data
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-secondary-500 font-semibold">✓</span>
-                    Statistically equivalent to real populations
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Key Features Section */}
-        <section id="features" className="py-20 bg-slate-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold text-slate-900 mb-4">Key Features</h2>
-              <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-                Enterprise-grade synthetic EHR generation with advanced AI validation and comprehensive analytics
-              </p>
-            </div>
-            
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow card min-h-[180px]">
-                <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-6">
-                  <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">Privacy by Design</h3>
-                <p className="text-slate-600">100% synthetic records with zero PHI, compliant with HIPAA and GDPR from day one.</p>
-              </div>
-              
-              <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow card min-h-[180px]">
-                <div className="w-12 h-12 bg-secondary-100 rounded-lg flex items-center justify-center mb-6">
-                  <svg className="w-6 h-6 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">Diverse & Realistic Data</h3>
-                <p className="text-slate-600">Statistically mirrors real patient populations, including rare conditions and underrepresented groups.</p>
-              </div>
-              
-              <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow card min-h-[180px]">
-                <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-6">
-                  <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">Continuously Updated</h3>
-                <p className="text-slate-600">AI agents ingest new medical research continuously, so your data never goes stale.</p>
-              </div>
-              
-              <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow card min-h-[180px]">
-                <div className="w-12 h-12 bg-secondary-100 rounded-lg flex items-center justify-center mb-6">
-                  <svg className="w-6 h-6 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">On-Demand & Scalable</h3>
-                <p className="text-slate-600">Access via API or UI; generate millions of records in minutes.</p>
-              </div>
-              
-              <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow card min-h-[180px]">
-                <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-6">
-                  <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">Validated Accuracy</h3>
-                <p className="text-slate-600">Benchmarked against real-world stats to ensure clinical credibility.</p>
-              </div>
-              
-              <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow card min-h-[180px]">
-                <div className="w-12 h-12 bg-secondary-100 rounded-lg flex items-center justify-center mb-6">
-                  <svg className="w-6 h-6 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">Lightning Fast</h3>
-                <p className="text-slate-600">Generate complex patient cohorts in seconds, not months of data collection.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Use Cases Section */}
-        <section id="use-cases" className="py-20 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold text-slate-900 mb-4">Use Cases</h2>
-              <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-                Our synthetic EHR platform powers innovation across healthcare research, AI development, and pharmaceutical studies
-              </p>
-            </div>
-            
-            <div className="grid lg:grid-cols-3 gap-8">
-              <div className="bg-slate-50 p-6 rounded-xl">
-                <div className="w-8 h-8 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
-                  <svg className="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-4">AI Model Training</h3>
-                <p className="text-slate-600 mb-4 text-sm">
-                  Train diagnostic algorithms, risk prediction models, and clinical decision support systems with diverse, validated synthetic data.
-                </p>
-                <ul className="text-xs text-slate-500 space-y-2">
-                  <li>• Diagnostic accuracy improvement</li>
-                  <li>• Risk stratification algorithms</li>
-                  <li>• Population health analytics</li>
-                </ul>
-              </div>
-              
-              <div className="bg-slate-50 p-6 rounded-xl">
-                <div className="w-8 h-8 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
-                  <svg className="w-4 h-4 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-4">Clinical Research</h3>
-                <p className="text-slate-600 mb-4 text-sm">
-                  Accelerate clinical studies with ready-to-use synthetic cohorts that match your research criteria exactly.
-                </p>
-                <ul className="text-xs text-slate-500 space-y-2">
-                  <li>• Clinical trial design</li>
-                  <li>• Longitudinal studies</li>
-                  <li>• Rare disease research</li>
-                </ul>
-              </div>
-              
-              <div className="bg-slate-50 p-6 rounded-xl">
-                <div className="w-8 h-8 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
-                  <svg className="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-4">Drug Development</h3>
-                <p className="text-slate-600 mb-4 text-sm">
-                  Support pharmaceutical research with synthetic patient populations for safety studies and efficacy modeling.
-                </p>
-                <ul className="text-xs text-slate-500 space-y-2">
-                  <li>• Drug safety assessment</li>
-                  <li>• Efficacy modeling</li>
-                  <li>• Regulatory submissions</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Contact Section */}
-        <section id="contact" className="py-20 bg-slate-50">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">
-              Ready to Transform Your Research?
-            </h2>
-            <p className="text-xl text-slate-600 mb-8">
-              Contact us for a personalized demo and see how synthetic EHR data can accelerate your projects
+      <main style={styles.main}>
+        <section style={styles.hero}>
+          <div style={styles.heroContent}>
+            <h1 style={styles.heroTitle} className="hero-title">Synthetic Ascension</h1>
+            <p style={styles.heroSubtitle}>Decode. Synthesize. Evolve.</p>
+            <p style={styles.heroDescription}>
+              Next-generation synthetic EHR platform powered by AI—where genetic data meets matrix intelligence. Transform medical research through quantum-encrypted synthetic patients and neural evolution algorithms.
             </p>
             
-            <div className="grid md:grid-cols-3 gap-8 mb-12">
-              <div className="text-center">
-                <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <h3 className="font-semibold text-slate-900 mb-2">Quick Setup</h3>
-                <p className="text-slate-600 text-sm">Get started in minutes with our API or web interface</p>
+            <div style={styles.heroStats}>
+              <div style={styles.statItem}>
+                <span style={styles.statNumber}>10M+</span>
+                <span style={styles.statLabel}>Synthetic Patients</span>
               </div>
-              
-              <div className="text-center">
-                <div className="w-12 h-12 bg-secondary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-5 h-5 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <h3 className="font-semibold text-slate-900 mb-2">Expert Support</h3>
-                <p className="text-slate-600 text-sm">Our team helps optimize synthetic data for your specific needs</p>
+              <div style={styles.statItem}>
+                <span style={styles.statNumber}>99.9%</span>
+                <span style={styles.statLabel}>Privacy Compliance</span>
               </div>
-              
-              <div className="text-center">
-                <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                  </svg>
-                </div>
-                <h3 className="font-semibold text-slate-900 mb-2">Compliance Ready</h3>
-                <p className="text-slate-600 text-sm">Built-in HIPAA and GDPR compliance with zero privacy risk</p>
+              <div style={styles.statItem}>
+                <span style={styles.statNumber}>500+</span>
+                <span style={styles.statLabel}>Research Studies</span>
+              </div>
+              <div style={styles.statItem}>
+                <span style={styles.statNumber}>24/7</span>
+                <span style={styles.statLabel}>AI Validation</span>
               </div>
             </div>
             
+            <div style={{...styles.buttonContainer, flexDirection: 'row'}} className="button-container">
+              <button 
+                style={{...styles.primaryButton, background: 'linear-gradient(to right, #f59e0b, #d97706)', color: '#0a0a0a', fontWeight: 'bold'}} 
+                className="primary-button"
+                onClick={() => {}}
+              >
+                Get Early Access
+              </button>
+              <button 
+                style={{...styles.secondaryButton, border: '2px solid #fbbf24', color: '#fbbf24'}} 
+                className="secondary-button"
+                onClick={() => {}}
+              >
+                Join Waitlist
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section style={styles.features}>
+          <div style={styles.featuresHeader}>
+            <h2 style={styles.featuresTitle}>Enterprise-Grade Synthetic EHR Platform</h2>
+            <p style={styles.featuresSubtitle}>
+              Generate realistic, privacy-compliant patient data with advanced AI validation and comprehensive analytics.
+            </p>
+          </div>
+
+          <div style={styles.grid}>
+            {features.map((feature, index) => (
+              <div key={index} style={styles.card} className="card">
+                <div style={{...styles.cardIcon, background: feature.color}}>
+                  <div style={{width: '24px', height: '24px', background: 'white', borderRadius: '3px'}}></div>
+                </div>
+                <h3 style={styles.cardTitle}>{feature.title}</h3>
+                <p style={styles.cardDescription}>{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section style={styles.cta}>
+          <div style={styles.ctaContent}>
+            <h2 style={styles.ctaTitle}>Ready to Transform Your Healthcare Data?</h2>
+            <p style={styles.ctaSubtitle}>
+              Join leading healthcare organizations and research institutions already using Synthetic Ascension.
+            </p>
             <button 
-              className="bg-primary-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary-700 transition-colors"
-              onClick={() => setShowSignupForm(true)}
+              style={styles.ctaButton} 
+              className="cta-button"
+              onClick={handleStartDemo}
             >
-              Schedule a Demo
+              Start Your Demo
             </button>
           </div>
         </section>
       </main>
-
-      {/* Signup Form Modal */}
-      {showSignupForm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl max-w-md w-full p-8">
-            <div className="text-center mb-6">
-              <h3 className="text-2xl font-bold text-slate-900 mb-2">Request Demo Access</h3>
-              <p className="text-slate-600">Get early access to Synthetic Ascension's EHR platform</p>
-            </div>
-            
-            <form className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Full Name</label>
-                <input 
-                  type="text" 
-                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  placeholder="Dr. Jane Smith"
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Email Address</label>
-                <input 
-                  type="email" 
-                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  placeholder="jane@hospital.com"
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Organization</label>
-                <input 
-                  type="text" 
-                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  placeholder="Healthcare Research Institute"
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Use Case</label>
-                <select className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                  <option value="">Select your primary use case</option>
-                  <option value="ai-training">AI Model Training</option>
-                  <option value="clinical-research">Clinical Research</option>
-                  <option value="drug-development">Drug Development</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-              
-              <div className="flex gap-3 mt-6">
-                <button 
-                  type="button"
-                  className="flex-1 bg-slate-200 text-slate-700 py-3 rounded-lg font-medium hover:bg-slate-300 transition-colors"
-                  onClick={() => setShowSignupForm(false)}
-                >
-                  Cancel
-                </button>
-                <button 
-                  type="submit"
-                  className="flex-1 bg-primary-600 text-white py-3 rounded-lg font-medium hover:bg-primary-700 transition-colors"
-                >
-                  Request Demo
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
     </div>
   )
 }

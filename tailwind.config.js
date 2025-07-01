@@ -37,40 +37,28 @@ export default {
         },
         // Legacy colors for backward compatibility
         primary: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0891b2', // Muted teal primary for healthcare trust
-          600: '#0e7490',
-          700: '#155e75',
-          800: '#164e63',
-          900: '#0c4a6e',
+          50: '#fffef7',
+          100: '#fffbeb',
+          200: '#fef3c7',
+          300: '#fde68a',
+          400: '#fcd34d',
+          500: '#fbbf24', // Gold as primary
+          600: '#f59e0b',
+          700: '#d97706',
+          800: '#b45309',
+          900: '#92400e',
         },
         secondary: {
-          50: '#f0fdf4',
-          100: '#dcfce7',
-          200: '#bbf7d0',
-          300: '#86efac',
-          400: '#4ade80',
-          500: '#10b981', // Vibrant green secondary for health/growth
-          600: '#059669',
-          700: '#047857',
-          800: '#065f46',
-          900: '#064e3b',
-        },
-        tertiary: {
-          50: '#ecfeff',
-          100: '#cffafe',
-          200: '#a5f3fc',
-          300: '#67e8f9',
-          400: '#22d3ee',
-          500: '#06b6d4', // Cyan tertiary
-          600: '#0891b2',
-          700: '#0e7490',
-          800: '#155e75',
-          900: '#164e63',
+          50: '#f6f6f6',
+          100: '#e7e7e7',
+          200: '#d1d1d1',
+          300: '#b0b0b0',
+          400: '#888888',
+          500: '#6d6d6d', // Dark gray as secondary
+          600: '#5d5d5d',
+          700: '#4f4f4f',
+          800: '#454545',
+          900: '#3d3d3d',
         },
         accent: {
           50: '#fffef7',
@@ -102,7 +90,6 @@ export default {
         heading: ['Montserrat', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif'],
         'syne': ['Syne', 'sans-serif'],
         'inter': ['Inter', 'sans-serif'],
-        'hi': ['Hi Melody', 'Inter', 'sans-serif'],
       },
       spacing: {
         '18': '4.5rem',
