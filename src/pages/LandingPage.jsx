@@ -18,21 +18,18 @@ import {
 } from 'lucide-react';
 import FeatureCard from '../components/FeatureCard';
 import WaitlistModal from '../components/WaitlistModal';
+import { useToast } from '../components/Toast';
 import personas from '../config/personas';
 import verticals from '../config/verticals';
 
 const LandingPage = ({ onStartDemo }) => {
   const [persona, setPersona] = useState('builder');
   const [visibleSection, setVisibleSection] = useState(0);
+  const { showToast, ToastContainer } = useToast();
   const { headline, description, features } = personas[persona];
 
   const handleStartDemo = () => {
-    if (onStartDemo) {
-      onStartDemo();
-    } else {
-      // Fallback navigation to demo route
-      window.location.href = '/demo';
-    }
+    showToast('Demo coming soon! We\'re putting the finishing touches on this feature.', 'info', 4000);
   };
 
   // Intersection Observer for scroll animations
@@ -182,10 +179,18 @@ const LandingPage = ({ onStartDemo }) => {
             </div>
 
             <div className="flex flex-col gap-4 justify-center items-center">
-              <WaitlistModal 
-                buttonText="Join 500+ Teams - Get Free Access"
-                buttonClassName="inline-flex items-center px-12 py-4 bg-gradient-to-r from-primary-500 to-accent-500 text-white font-bold rounded-xl hover:from-primary-600 hover:to-accent-600 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105 text-lg"
-              />
+              <div className="flex flex-col sm:flex-row gap-4 items-center">
+                <WaitlistModal 
+                  buttonText="Join Waitlist"
+                  buttonClassName="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-500 to-accent-500 text-white font-bold rounded-xl hover:from-primary-600 hover:to-accent-600 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105 text-lg"
+                />
+                <button
+                  onClick={handleStartDemo}
+                  className="inline-flex items-center px-8 py-4 bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-100 font-bold rounded-xl hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105 text-lg border border-neutral-300 dark:border-neutral-600"
+                >
+                  Start Demo
+                </button>
+              </div>
               <p className="text-sm text-neutral-600 dark:text-neutral-400">
                 Join researchers from Stanford, Mayo Clinic, and 500+ healthcare organizations
               </p>
@@ -447,18 +452,29 @@ const LandingPage = ({ onStartDemo }) => {
           </div>
           
           <div className="flex flex-col gap-4 justify-center items-center">
-            <WaitlistModal 
-              buttonText="Join the Waitlist - Get 10K Free Records"
-              buttonClassName="inline-flex items-center px-12 py-5 bg-white text-primary-600 font-bold rounded-xl hover:bg-neutral-50 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105 text-xl"
-            />
+            <div className="flex flex-col sm:flex-row gap-4 items-center">
+              <WaitlistModal 
+                buttonText="Join Waitlist"
+                buttonClassName="inline-flex items-center px-8 py-4 bg-white text-primary-600 font-bold rounded-xl hover:bg-neutral-50 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105 text-lg"
+              />
+              <button
+                onClick={handleStartDemo}
+                className="inline-flex items-center px-8 py-4 bg-neutral-100/10 backdrop-blur-sm text-white font-bold rounded-xl hover:bg-neutral-100/20 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105 text-lg border border-neutral-300/30"
+              >
+                Start Demo
+              </button>
+            </div>
             <p className="text-neutral-100/80 text-sm">
               🔥 Limited time: First 1,000 members get premium features free for 6 months
             </p>
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
+
+export default LandingPage;
 
 export default LandingPage;
