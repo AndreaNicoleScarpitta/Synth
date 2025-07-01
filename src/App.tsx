@@ -1487,14 +1487,20 @@ function MainApp() {
               <button 
                 style={styles.primaryButton}
                 className="primary-button"
-                onClick={() => showToast('Early access coming soon! We\'re putting the finishing touches on this feature.', 'info', 4000)}
+                onClick={() => {
+                  console.log('Get Early Access clicked!');
+                  showToast('Early access coming soon! We\'re putting the finishing touches on this feature.', 'info', 4000);
+                }}
               >
                 Get Early Access
               </button>
               <button 
                 style={styles.secondaryButton}
                 className="secondary-button"
-                onClick={() => setShowWaitlist(true)}
+                onClick={() => {
+                  console.log('Join Waitlist clicked!');
+                  setShowWaitlist(true);
+                }}
               >
                 Join Waitlist
               </button>
