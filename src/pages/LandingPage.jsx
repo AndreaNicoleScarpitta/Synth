@@ -96,8 +96,8 @@ const LandingPage = ({ onStartDemo }) => {
     },
     {
       step: "02", 
-      title: "AI-Generates Synthetic Data",
-      description: "Our engine creates a synthetic dataset matching those specs, backed by the latest medical insights.",
+      title: "AI-Generates Multimodal Synthetic Data",
+      description: "Our engine creates comprehensive synthetic datasets with EHR records, imaging data, genomics, and clinical notes - all linked and clinically consistent.",
       icon: Zap
     },
     {
@@ -181,15 +181,14 @@ const LandingPage = ({ onStartDemo }) => {
               ))}
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <button
-                onClick={handleStartDemo}
-                className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-500 to-accent-500 text-white font-semibold rounded-xl hover:from-primary-600 hover:to-accent-600 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105"
-              >
-                <Rocket className="mr-2 w-5 h-5" />
-                Start Demo
-              </button>
-              <LeadCaptureModal />
+            <div className="flex flex-col gap-4 justify-center items-center">
+              <LeadCaptureModal 
+                buttonText="Join 500+ Teams - Get Free Access"
+                buttonClassName="inline-flex items-center px-12 py-4 bg-gradient-to-r from-primary-500 to-accent-500 text-white font-bold rounded-xl hover:from-primary-600 hover:to-accent-600 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105 text-lg"
+              />
+              <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                Join researchers from Stanford, Mayo Clinic, and 500+ healthcare organizations
+              </p>
             </div>
 
             <div className="mt-12 text-center">
@@ -447,23 +446,15 @@ const LandingPage = ({ onStartDemo }) => {
             </div>
           </div>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="flex flex-col gap-4 justify-center items-center">
             <LeadCaptureModal 
               buttonText="Join the Waitlist - Get 10K Free Records"
-              buttonClassName="inline-flex items-center px-8 py-4 bg-white text-primary-600 font-bold rounded-xl hover:bg-neutral-50 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105 text-lg"
+              buttonClassName="inline-flex items-center px-12 py-5 bg-white text-primary-600 font-bold rounded-xl hover:bg-neutral-50 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105 text-xl"
             />
-            <button
-              onClick={handleStartDemo}
-              className="inline-flex items-center px-8 py-4 bg-white/20 backdrop-blur-sm text-white font-semibold rounded-xl hover:bg-white/30 transition-all duration-300 border border-white/30"
-            >
-              <Rocket className="mr-2 w-5 h-5" />
-              Get Started Now
-            </button>
-            <LeadCaptureModal />
+            <p className="text-neutral-100/80 text-sm">
+              🔥 Limited time: First 1,000 members get premium features free for 6 months
+            </p>
           </div>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-6">
-            Contact us for a custom demo — see our synthetic EHR in action
-          </p>
         </div>
       </div>
     </div>
