@@ -39,6 +39,15 @@ An advanced AI-powered Electronic Health Record (EHR) synthesis platform that ge
 
 ## Recent Changes
 
+### 2025-07-01 - Comprehensive Waitlist Modal Implementation
+✅ **Enhanced Waitlist Modal** - Created comprehensive WaitlistModal component with detailed form fields
+✅ **Database Schema Update** - Expanded leads table to capture: organization, use cases, design partner interest, phone, company size, industry, current EHR system, timeline, budget range, specific requirements
+✅ **Supabase Integration** - Connected waitlist form to existing DATABASE_URL for Supabase storage
+✅ **Professional Form Design** - Organized form into sections: Basic Information, Professional Details, Project Requirements, Partnership Opportunity
+✅ **Success State Handling** - Added success confirmation with auto-dismiss and form reset
+✅ **Backend API Enhancement** - Updated /api/v2/leads endpoint to handle comprehensive waitlist data structure
+✅ **Landing Page Integration** - Replaced old LeadCaptureModal with new WaitlistModal across landing page
+
 ### 2025-07-01 - Persona Navigation & Content Updates
 ✅ **Persona Navigation Fix** - Fixed persona switching functionality with enhanced styling and debugging
 ✅ **Persona Reordering** - Moved Clinical Researcher and R&D Scientist to first two tabs as requested

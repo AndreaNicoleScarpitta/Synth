@@ -17,7 +17,7 @@ import {
   TrendingUp
 } from 'lucide-react';
 import FeatureCard from '../components/FeatureCard';
-import LeadCaptureModal from '../components/LeadCaptureModal';
+import WaitlistModal from '../components/WaitlistModal';
 import personas from '../config/personas';
 import verticals from '../config/verticals';
 
@@ -182,7 +182,7 @@ const LandingPage = ({ onStartDemo }) => {
             </div>
 
             <div className="flex flex-col gap-4 justify-center items-center">
-              <LeadCaptureModal 
+              <WaitlistModal 
                 buttonText="Join 500+ Teams - Get Free Access"
                 buttonClassName="inline-flex items-center px-12 py-4 bg-gradient-to-r from-primary-500 to-accent-500 text-white font-bold rounded-xl hover:from-primary-600 hover:to-accent-600 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105 text-lg"
               />
@@ -447,7 +447,7 @@ const LandingPage = ({ onStartDemo }) => {
           </div>
           
           <div className="flex flex-col gap-4 justify-center items-center">
-            <LeadCaptureModal 
+            <WaitlistModal 
               buttonText="Join the Waitlist - Get 10K Free Records"
               buttonClassName="inline-flex items-center px-12 py-5 bg-white text-primary-600 font-bold rounded-xl hover:bg-neutral-50 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105 text-xl"
             />

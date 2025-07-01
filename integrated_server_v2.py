@@ -671,37 +671,64 @@ async def replay_node_subtree(node_id: str):
 
 @app.post("/api/v2/leads")
 async def capture_lead(lead_data: dict):
-    """Capture lead information from landing page"""
+    """Capture comprehensive waitlist information from landing page"""
     
     with Session(engine) as session:
         try:
-            # Create leads table if it doesn't exist
+            # Create leads table with expanded schema for waitlist
             session.execute(text("""
                 CREATE TABLE IF NOT EXISTS leads (
                     id SERIAL PRIMARY KEY,
-                    name VARCHAR(255),
-                    email VARCHAR(255),
-                    company VARCHAR(255),
+                    name VARCHAR(255) NOT NULL,
+                    email VARCHAR(255) NOT NULL,
+                    organization VARCHAR(255),
                     role VARCHAR(255),
-                    message TEXT,
-                    source VARCHAR(100),
+                    use_cases TEXT,
+                    interested_in_design_partner BOOLEAN DEFAULT FALSE,
+                    phone VARCHAR(50),
+                    company_size VARCHAR(100),
+                    industry VARCHAR(100),
+                    current_ehr_system VARCHAR(255),
+                    timeline VARCHAR(100),
+                    budget_range VARCHAR(100),
+                    specific_requirements TEXT,
+                    source VARCHAR(100) DEFAULT 'waitlist',
                     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
             """))
             
-            # Insert lead data
+            # Insert lead data with comprehensive fields
             session.execute(text("""
-                INSERT INTO leads (name, email, company, role, message, source, timestamp)
-                VALUES (:name, :email, :company, :role, :message, :source, :timestamp)
+                INSERT INTO leads (
+                    name, email, organization, role, use_cases, 
+                    interested_in_design_partner, phone, company_size, 
+                    industry, current_ehr_system, timeline, budget_range,
+                    specific_requirements, source, timestamp
+                )
+                VALUES (
+                    :name, :email, :organization, :role, :use_cases,
+                    :interested_in_design_partner, :phone, :company_size,
+                    :industry, :current_ehr_system, :timeline, :budget_range,
+                    :specific_requirements, :source, :timestamp
+                )
             """), {
                 "name": lead_data.get("name"),
                 "email": lead_data.get("email"),
-                "company": lead_data.get("company"),
+                "organization": lead_data.get("organization"),
                 "role": lead_data.get("role"),
-                "message": lead_data.get("message"),
-                "source": lead_data.get("source", "landing_page"),
-                "timestamp": lead_data.get("timestamp")
+                "use_cases": lead_data.get("use_cases"),
+                "interested_in_design_partner": lead_data.get("interested_in_design_partner", False),
+                "phone": lead_data.get("phone"),
+                "company_size": lead_data.get("company_size"),
+                "industry": lead_data.get("industry"),
+                "current_ehr_system": lead_data.get("current_ehr_system"),
+                "timeline": lead_data.get("timeline"),
+                "budget_range": lead_data.get("budget_range"),
+                "specific_requirements": lead_data.get("specific_requirements"),
+                "source": lead_data.get("source", "waitlist"),
+                "timestamp": lead_data.get("timestamp", datetime.utcnow().isoformat())
             })
             
             session.commit()
