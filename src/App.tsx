@@ -381,16 +381,16 @@ const styles = {
     padding: '80px 24px 64px'
   },
   heroBackground: {
-    position: 'absolute' as const,
+    position: 'fixed' as const,
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    opacity: 0.04,
-    zIndex: 0,
+    opacity: 0.025,
+    zIndex: -1,
     pointerEvents: 'none' as const,
-    width: '800px',
+    width: '120vw',
     height: 'auto',
-    maxWidth: '90vw'
+    minWidth: '1600px'
   },
   heroContent: {
     maxWidth: '1200px',
