@@ -185,23 +185,68 @@ const LandingPage = ({ onStartDemo }) => {
               ))}
             </div>
 
-            <div className="flex flex-col gap-4 justify-center items-center">
+            {/* DEBUG: Simple test buttons */}
+            <div style={{ 
+              position: 'fixed', 
+              top: '10px', 
+              right: '10px', 
+              zIndex: 9999, 
+              background: 'red', 
+              padding: '20px',
+              color: 'white' 
+            }}>
+              <button 
+                onClick={() => alert('TEST BUTTON WORKS!')}
+                style={{ 
+                  background: 'blue', 
+                  color: 'white', 
+                  padding: '10px 20px', 
+                  border: 'none',
+                  cursor: 'pointer',
+                  marginRight: '10px'
+                }}
+              >
+                TEST
+              </button>
+              <button 
+                onClick={() => setShowWaitlist(true)}
+                style={{ 
+                  background: 'green', 
+                  color: 'white', 
+                  padding: '10px 20px', 
+                  border: 'none',
+                  cursor: 'pointer'
+                }}
+              >
+                OPEN MODAL
+              </button>
+            </div>
+
+            <div className="flex flex-col gap-4 justify-center items-center" style={{ zIndex: 10, position: 'relative' }}>
               <div className="flex flex-col sm:flex-row gap-4 items-center">
                 <button
-                  onClick={() => {
-                    console.log('Get Early Access clicked');
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Get Early Access clicked - Event triggered!');
+                    alert('Get Early Access clicked!'); // Temporary debug
                     showToast('Early access coming soon! We\'re putting the finishing touches on this feature.', 'info', 4000);
                   }}
-                  className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-500 to-accent-500 text-white font-bold rounded-xl hover:from-primary-600 hover:to-accent-600 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105 text-lg"
+                  className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-500 to-accent-500 text-white font-bold rounded-xl hover:from-primary-600 hover:to-accent-600 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105 text-lg cursor-pointer"
+                  style={{ pointerEvents: 'all', zIndex: 20 }}
                 >
                   Get Early Access
                 </button>
                 <button
-                  onClick={() => {
-                    console.log('Join Waitlist clicked');
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Join Waitlist clicked - Event triggered!');
+                    alert('Join Waitlist clicked!'); // Temporary debug
                     setShowWaitlist(true);
                   }}
-                  className="inline-flex items-center px-8 py-4 bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-100 font-bold rounded-xl hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105 text-lg border border-neutral-300 dark:border-neutral-600"
+                  className="inline-flex items-center px-8 py-4 bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-100 font-bold rounded-xl hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105 text-lg border border-neutral-300 dark:border-neutral-600 cursor-pointer"
+                  style={{ pointerEvents: 'all', zIndex: 20 }}
                 >
                   Join Waitlist
                 </button>
