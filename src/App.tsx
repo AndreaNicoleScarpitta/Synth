@@ -1365,64 +1365,64 @@ function MainApp() {
             </div>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow card">
-                <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-6">
-                  <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow card">
+                <div className="w-8 h-8 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+                  <svg className="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">Privacy by Design</h3>
-                <p className="text-slate-600">100% synthetic records with zero PHI, compliant with HIPAA and GDPR from day one.</p>
+                <h3 className="text-lg font-semibold text-slate-900 mb-3">Privacy by Design</h3>
+                <p className="text-slate-600 text-sm">100% synthetic records with zero PHI, compliant with HIPAA and GDPR from day one.</p>
               </div>
               
-              <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow card">
-                <div className="w-12 h-12 bg-secondary-100 rounded-lg flex items-center justify-center mb-6">
-                  <svg className="w-6 h-6 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow card">
+                <div className="w-8 h-8 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+                  <svg className="w-4 h-4 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">Diverse & Realistic Data</h3>
-                <p className="text-slate-600">Statistically mirrors real patient populations, including rare conditions and underrepresented groups.</p>
+                <h3 className="text-lg font-semibold text-slate-900 mb-3">Diverse & Realistic Data</h3>
+                <p className="text-slate-600 text-sm">Statistically mirrors real patient populations, including rare conditions and underrepresented groups.</p>
               </div>
               
-              <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow card">
-                <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-6">
-                  <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow card">
+                <div className="w-8 h-8 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+                  <svg className="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">Continuously Updated</h3>
-                <p className="text-slate-600">AI agents ingest new medical research continuously, so your data never goes stale.</p>
+                <h3 className="text-lg font-semibold text-slate-900 mb-3">Continuously Updated</h3>
+                <p className="text-slate-600 text-sm">AI agents ingest new medical research continuously, so your data never goes stale.</p>
               </div>
               
-              <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow card">
-                <div className="w-12 h-12 bg-secondary-100 rounded-lg flex items-center justify-center mb-6">
-                  <svg className="w-6 h-6 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow card">
+                <div className="w-8 h-8 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+                  <svg className="w-4 h-4 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">On-Demand & Scalable</h3>
-                <p className="text-slate-600">Access via API or UI; generate millions of records in minutes.</p>
+                <h3 className="text-lg font-semibold text-slate-900 mb-3">On-Demand & Scalable</h3>
+                <p className="text-slate-600 text-sm">Access via API or UI; generate millions of records in minutes.</p>
               </div>
               
-              <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow card">
-                <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-6">
-                  <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow card">
+                <div className="w-8 h-8 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+                  <svg className="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">Validated Accuracy</h3>
-                <p className="text-slate-600">Benchmarked against real-world stats to ensure clinical credibility.</p>
+                <h3 className="text-lg font-semibold text-slate-900 mb-3">Validated Accuracy</h3>
+                <p className="text-slate-600 text-sm">Benchmarked against real-world stats to ensure clinical credibility.</p>
               </div>
               
-              <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow card">
-                <div className="w-12 h-12 bg-secondary-100 rounded-lg flex items-center justify-center mb-6">
-                  <svg className="w-6 h-6 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow card">
+                <div className="w-8 h-8 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+                  <svg className="w-4 h-4 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">Lightning Fast</h3>
-                <p className="text-slate-600">Generate complex patient cohorts in seconds, not months of data collection.</p>
+                <h3 className="text-lg font-semibold text-slate-900 mb-3">Lightning Fast</h3>
+                <p className="text-slate-600 text-sm">Generate complex patient cohorts in seconds, not months of data collection.</p>
               </div>
             </div>
           </div>
@@ -1439,51 +1439,51 @@ function MainApp() {
             </div>
             
             <div className="grid lg:grid-cols-3 gap-8">
-              <div className="bg-slate-50 p-8 rounded-xl">
-                <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-6">
-                  <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="bg-slate-50 p-6 rounded-xl">
+                <div className="w-8 h-8 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+                  <svg className="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-4">AI Model Training</h3>
-                <p className="text-slate-600 mb-4">
+                <h3 className="text-lg font-semibold text-slate-900 mb-4">AI Model Training</h3>
+                <p className="text-slate-600 mb-4 text-sm">
                   Train diagnostic algorithms, risk prediction models, and clinical decision support systems with diverse, validated synthetic data.
                 </p>
-                <ul className="text-sm text-slate-500 space-y-2">
+                <ul className="text-xs text-slate-500 space-y-2">
                   <li>• Diagnostic accuracy improvement</li>
                   <li>• Risk stratification algorithms</li>
                   <li>• Population health analytics</li>
                 </ul>
               </div>
               
-              <div className="bg-slate-50 p-8 rounded-xl">
-                <div className="w-12 h-12 bg-secondary-100 rounded-lg flex items-center justify-center mb-6">
-                  <svg className="w-6 h-6 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="bg-slate-50 p-6 rounded-xl">
+                <div className="w-8 h-8 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+                  <svg className="w-4 h-4 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-4">Clinical Research</h3>
-                <p className="text-slate-600 mb-4">
+                <h3 className="text-lg font-semibold text-slate-900 mb-4">Clinical Research</h3>
+                <p className="text-slate-600 mb-4 text-sm">
                   Accelerate clinical studies with ready-to-use synthetic cohorts that match your research criteria exactly.
                 </p>
-                <ul className="text-sm text-slate-500 space-y-2">
+                <ul className="text-xs text-slate-500 space-y-2">
                   <li>• Clinical trial design</li>
                   <li>• Longitudinal studies</li>
                   <li>• Rare disease research</li>
                 </ul>
               </div>
               
-              <div className="bg-slate-50 p-8 rounded-xl">
-                <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-6">
-                  <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="bg-slate-50 p-6 rounded-xl">
+                <div className="w-8 h-8 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+                  <svg className="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-4">Drug Development</h3>
-                <p className="text-slate-600 mb-4">
+                <h3 className="text-lg font-semibold text-slate-900 mb-4">Drug Development</h3>
+                <p className="text-slate-600 mb-4 text-sm">
                   Support pharmaceutical research with synthetic patient populations for safety studies and efficacy modeling.
                 </p>
-                <ul className="text-sm text-slate-500 space-y-2">
+                <ul className="text-xs text-slate-500 space-y-2">
                   <li>• Drug safety assessment</li>
                   <li>• Efficacy modeling</li>
                   <li>• Regulatory submissions</li>
@@ -1505,33 +1505,33 @@ function MainApp() {
             
             <div className="grid md:grid-cols-3 gap-8 mb-12">
               <div className="text-center">
-                <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
                 <h3 className="font-semibold text-slate-900 mb-2">Quick Setup</h3>
-                <p className="text-slate-600">Get started in minutes with our API or web interface</p>
+                <p className="text-slate-600 text-sm">Get started in minutes with our API or web interface</p>
               </div>
               
               <div className="text-center">
-                <div className="w-16 h-16 bg-secondary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-12 h-12 bg-secondary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-5 h-5 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
                 <h3 className="font-semibold text-slate-900 mb-2">Expert Support</h3>
-                <p className="text-slate-600">Our team helps optimize synthetic data for your specific needs</p>
+                <p className="text-slate-600 text-sm">Our team helps optimize synthetic data for your specific needs</p>
               </div>
               
               <div className="text-center">
-                <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
                 </div>
                 <h3 className="font-semibold text-slate-900 mb-2">Compliance Ready</h3>
-                <p className="text-slate-600">Built-in HIPAA and GDPR compliance with zero privacy risk</p>
+                <p className="text-slate-600 text-sm">Built-in HIPAA and GDPR compliance with zero privacy risk</p>
               </div>
             </div>
             
