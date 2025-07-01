@@ -1,13 +1,30 @@
 import React, { useState } from 'react';
-import { createPortal } from 'react-dom';
-import { X, Mail, Building, User, Phone, CheckCircle2 } from 'lucide-react';
+import { X, Mail, Building, User, Phone, CheckCircle2, Loader } from 'lucide-react';
 import HelpBubble from './HelpBubble';
 import { getFieldHelp } from '../config/medicalFieldHelp';
 
-const WaitlistModal = ({ 
-  isOpen = false,
-  onClose
-}) => {
+// Design system constants
+const designSystem = {
+  colors: {
+    primary: '#1e40af',
+    primaryLight: '#3b82f6',
+    secondary: '#6b7280',
+    accent: '#10b981',
+    neutral: {
+      50: '#f9fafb',
+      100: '#f3f4f6',
+      200: '#e5e7eb',
+      300: '#d1d5db',
+      500: '#6b7280',
+      600: '#4b5563',
+      700: '#374151',
+      800: '#1f2937',
+      900: '#111827'
+    }
+  }
+};
+
+const WaitlistModal = ({ isOpen = false, onClose }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   
@@ -32,7 +49,6 @@ const WaitlistModal = ({
     setIsSubmitting(true);
     
     try {
-      // Send waitlist data to your Integrated Backend Server
       const response = await fetch('http://localhost:8003/api/v2/leads', {
         method: 'POST',
         headers: {
@@ -47,9 +63,7 @@ const WaitlistModal = ({
 
       if (response.ok) {
         setIsSuccess(true);
-        // Reset form after 3 seconds
         setTimeout(() => {
-          onClose();
           setIsSuccess(false);
           setFormData({
             name: '',
@@ -66,71 +80,30 @@ const WaitlistModal = ({
             budget_range: '',
             specific_requirements: ''
           });
+          onClose();
         }, 3000);
       } else {
-        throw new Error('Failed to submit');
+        console.error('Failed to submit waitlist form');
       }
     } catch (error) {
-      console.error('Error submitting waitlist:', error);
-      // Still show success to user, but log the error
-      setIsSuccess(true);
-      setTimeout(() => {
-        onClose();
-        setIsSuccess(false);
-        setFormData({
-          name: '',
-          email: '',
-          organization: '',
-          role: '',
-          use_cases: '',
-          interested_in_design_partner: false,
-          phone: '',
-          company_size: '',
-          industry: '',
-          current_ehr_system: '',
-          timeline: '',
-          budget_range: '',
-          specific_requirements: ''
-        });
-      }, 3000);
+      console.error('Error submitting form:', error);
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === 'checkbox' ? checked : value
-    });
+  const handleInputChange = (field, value) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
   };
 
-  if (!isOpen) {
-    return null;
-  }
+  if (!isOpen) return null;
 
   if (isSuccess) {
     return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 dark:bg-black dark:bg-opacity-70 flex items-center justify-center p-4 z-50" style={{zIndex: 9999}}>
-        <div className="bg-white dark:bg-neutral-800 rounded-xl shadow-2xl max-w-md w-full p-8 text-center">
-          <div className="mb-6">
-            <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-4" />
-            <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
-              Welcome to the Waitlist!
-            </h2>
-            <p className="text-neutral-600 dark:text-neutral-400">
-              Thank you for your interest. We'll be in touch soon with exclusive early access.
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  const modalContent = (
-    <div 
-      style={{
+      <div style={{
         position: 'fixed',
         top: 0,
         left: 0,
@@ -142,347 +115,446 @@ const WaitlistModal = ({
         justifyContent: 'center',
         padding: '16px',
         zIndex: 999999
-      }}
-      onClick={onClose}
-    >
-      <div 
-        style={{
+      }}>
+        <div style={{
           backgroundColor: 'white',
           borderRadius: '16px',
-          maxWidth: '600px',
+          padding: '48px',
+          textAlign: 'center',
+          maxWidth: '400px',
           width: '100%',
-          maxHeight: '90vh',
-          overflowY: 'auto',
-          boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
-        }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="p-6">
-          <div className="flex justify-between items-start mb-6">
-            <div>
-              <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
-                Join Our Exclusive Waitlist
-              </h2>
-              <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-2">
-                Get priority access to our AI-powered synthetic EHR platform. Help us build the future of healthcare data.
-              </p>
-            </div>
+          boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)'
+        }}>
+          <CheckCircle2 size={64} style={{ color: designSystem.colors.accent, margin: '0 auto 24px' }} />
+          <h3 style={{
+            fontSize: '24px',
+            fontWeight: '600',
+            color: designSystem.colors.neutral[900],
+            marginBottom: '16px'
+          }}>
+            Welcome to the Waitlist!
+          </h3>
+          <p style={{
+            color: designSystem.colors.neutral[600],
+            fontSize: '16px',
+            lineHeight: '1.5'
+          }}>
+            Thank you for your interest. We'll notify you as soon as early access becomes available.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '16px',
+      zIndex: 999999
+    }} onClick={onClose}>
+      <div style={{
+        backgroundColor: 'white',
+        borderRadius: '16px',
+        maxWidth: '600px',
+        width: '100%',
+        maxHeight: '90vh',
+        overflowY: 'auto',
+        boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)',
+        position: 'relative'
+      }} onClick={(e) => e.stopPropagation()}>
+        
+        {/* Header */}
+        <div style={{
+          padding: '24px 24px 0',
+          borderBottom: `1px solid ${designSystem.colors.neutral[200]}`
+        }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginBottom: '16px'
+          }}>
+            <h2 style={{
+              fontSize: '24px',
+              fontWeight: '700',
+              color: designSystem.colors.neutral[900],
+              margin: 0
+            }}>
+              Join the Waitlist
+            </h2>
             <button
               onClick={onClose}
-              className="text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors flex-shrink-0 ml-4"
+              style={{
+                background: 'none',
+                border: 'none',
+                padding: '8px',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                color: designSystem.colors.neutral[500],
+                transition: 'all 0.2s',
+                ':hover': {
+                  backgroundColor: designSystem.colors.neutral[100]
+                }
+              }}
             >
-              <X className="w-6 h-6" />
+              <X size={20} />
             </button>
           </div>
+          <p style={{
+            color: designSystem.colors.neutral[600],
+            fontSize: '16px',
+            margin: '0 0 24px',
+            lineHeight: '1.5'
+          }}>
+            Get early access to Synthetic Ascension's advanced EHR platform. We'll notify you when it's ready.
+          </p>
+        </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Basic Information */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-700 pb-2">
+        {/* Form */}
+        <form onSubmit={handleSubmit} style={{ padding: '24px' }}>
+          <div style={{ display: 'grid', gap: '20px' }}>
+            
+            {/* Basic Information Section */}
+            <div>
+              <h3 style={{
+                fontSize: '18px',
+                fontWeight: '600',
+                color: designSystem.colors.neutral[900],
+                marginBottom: '16px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}>
+                <User size={20} style={{ color: designSystem.colors.primary }} />
                 Basic Information
               </h3>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
-                    Full Name *
-                  </label>
-                  <div className="relative">
-                    <User className="absolute left-3 top-3 w-4 h-4 text-neutral-400 dark:text-neutral-500" />
+              <div style={{ display: 'grid', gap: '16px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                  <div>
+                    <label style={{
+                      display: 'block',
+                      fontSize: '14px',
+                      fontWeight: '500',
+                      color: designSystem.colors.neutral[700],
+                      marginBottom: '6px'
+                    }}>
+                      Full Name *
+                    </label>
                     <input
                       type="text"
-                      name="name"
                       required
                       value={formData.name}
-                      onChange={handleChange}
-                      className="w-full pl-10 pr-3 py-2 border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      onChange={(e) => handleInputChange('name', e.target.value)}
+                      style={{
+                        width: '100%',
+                        padding: '12px',
+                        border: `1px solid ${designSystem.colors.neutral[300]}`,
+                        borderRadius: '8px',
+                        fontSize: '16px',
+                        outline: 'none',
+                        transition: 'border-color 0.2s',
+                        ':focus': {
+                          borderColor: designSystem.colors.primary
+                        }
+                      }}
                       placeholder="Your full name"
                     />
                   </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
-                    Work Email Address *
-                  </label>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-3 w-4 h-4 text-neutral-400 dark:text-neutral-500" />
+                  
+                  <div>
+                    <label style={{
+                      display: 'block',
+                      fontSize: '14px',
+                      fontWeight: '500',
+                      color: designSystem.colors.neutral[700],
+                      marginBottom: '6px'
+                    }}>
+                      Work Email *
+                    </label>
                     <input
                       type="email"
-                      name="email"
                       required
                       value={formData.email}
-                      onChange={handleChange}
-                      className="w-full pl-10 pr-3 py-2 border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                      placeholder="your.email@company.com"
+                      onChange={(e) => handleInputChange('email', e.target.value)}
+                      style={{
+                        width: '100%',
+                        padding: '12px',
+                        border: `1px solid ${designSystem.colors.neutral[300]}`,
+                        borderRadius: '8px',
+                        fontSize: '16px',
+                        outline: 'none',
+                        transition: 'border-color 0.2s'
+                      }}
+                      placeholder="work@company.com"
                     />
                   </div>
                 </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
-                    Organization *
-                  </label>
-                  <div className="relative">
-                    <Building className="absolute left-3 top-3 w-4 h-4 text-neutral-400 dark:text-neutral-500" />
+                
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                  <div>
+                    <label style={{
+                      display: 'block',
+                      fontSize: '14px',
+                      fontWeight: '500',
+                      color: designSystem.colors.neutral[700],
+                      marginBottom: '6px'
+                    }}>
+                      Organization *
+                    </label>
                     <input
                       type="text"
-                      name="organization"
                       required
                       value={formData.organization}
-                      onChange={handleChange}
-                      className="w-full pl-10 pr-3 py-2 border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                      placeholder="Your organization"
+                      onChange={(e) => handleInputChange('organization', e.target.value)}
+                      style={{
+                        width: '100%',
+                        padding: '12px',
+                        border: `1px solid ${designSystem.colors.neutral[300]}`,
+                        borderRadius: '8px',
+                        fontSize: '16px',
+                        outline: 'none'
+                      }}
+                      placeholder="Company or institution"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label style={{
+                      display: 'block',
+                      fontSize: '14px',
+                      fontWeight: '500',
+                      color: designSystem.colors.neutral[700],
+                      marginBottom: '6px'
+                    }}>
+                      Role
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.role}
+                      onChange={(e) => handleInputChange('role', e.target.value)}
+                      style={{
+                        width: '100%',
+                        padding: '12px',
+                        border: `1px solid ${designSystem.colors.neutral[300]}`,
+                        borderRadius: '8px',
+                        fontSize: '16px',
+                        outline: 'none'
+                      }}
+                      placeholder="Your role or title"
                     />
                   </div>
                 </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
-                    Role/Title
-                  </label>
-                  <input
-                    type="text"
-                    name="role"
-                    value={formData.role}
-                    onChange={handleChange}
-                    className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    placeholder="Your role/title"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
-                  Phone Number (Optional)
-                </label>
-                <div className="relative">
-                  <Phone className="absolute left-3 top-3 w-4 h-4 text-neutral-400 dark:text-neutral-500" />
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className="w-full pl-10 pr-3 py-2 border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    placeholder="+1 (555) 123-4567"
-                  />
-                </div>
               </div>
             </div>
 
-            {/* Professional Details */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-700 pb-2">
-                Professional Details
+            {/* Project Details Section */}
+            <div>
+              <h3 style={{
+                fontSize: '18px',
+                fontWeight: '600',
+                color: designSystem.colors.neutral[900],
+                marginBottom: '16px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}>
+                <Building size={20} style={{ color: designSystem.colors.primary }} />
+                Project Details
               </h3>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div style={{ display: 'grid', gap: '16px' }}>
                 <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                  <label style={{
+                    display: 'block',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    color: designSystem.colors.neutral[700],
+                    marginBottom: '6px'
+                  }}>
+                    Primary Use Cases
+                  </label>
+                  <textarea
+                    value={formData.use_cases}
+                    onChange={(e) => handleInputChange('use_cases', e.target.value)}
+                    rows={3}
+                    style={{
+                      width: '100%',
+                      padding: '12px',
+                      border: `1px solid ${designSystem.colors.neutral[300]}`,
+                      borderRadius: '8px',
+                      fontSize: '16px',
+                      outline: 'none',
+                      resize: 'vertical'
+                    }}
+                    placeholder="Describe how you plan to use synthetic EHR data..."
+                  />
+                </div>
+                
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                  <div>
+                    <label style={{
+                      display: 'block',
+                      fontSize: '14px',
+                      fontWeight: '500',
+                      color: designSystem.colors.neutral[700],
+                      marginBottom: '6px'
+                    }}>
                       Company Size
                     </label>
-                    <HelpBubble content={getFieldHelp('company_size')} />
+                    <select
+                      value={formData.company_size}
+                      onChange={(e) => handleInputChange('company_size', e.target.value)}
+                      style={{
+                        width: '100%',
+                        padding: '12px',
+                        border: `1px solid ${designSystem.colors.neutral[300]}`,
+                        borderRadius: '8px',
+                        fontSize: '16px',
+                        outline: 'none',
+                        backgroundColor: 'white'
+                      }}
+                    >
+                      <option value="">Select size</option>
+                      <option value="1-10">1-10 employees</option>
+                      <option value="11-50">11-50 employees</option>
+                      <option value="51-200">51-200 employees</option>
+                      <option value="201-1000">201-1000 employees</option>
+                      <option value="1000+">1000+ employees</option>
+                    </select>
                   </div>
-                  <select
-                    name="company_size"
-                    value={formData.company_size}
-                    onChange={handleChange}
-                    className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  >
-                    <option value="">Select company size</option>
-                    <option value="1-10">1-10 employees</option>
-                    <option value="11-50">11-50 employees</option>
-                    <option value="51-200">51-200 employees</option>
-                    <option value="201-1000">201-1000 employees</option>
-                    <option value="1000+">1000+ employees</option>
-                  </select>
-                </div>
-
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                      Industry
+                  
+                  <div>
+                    <label style={{
+                      display: 'block',
+                      fontSize: '14px',
+                      fontWeight: '500',
+                      color: designSystem.colors.neutral[700],
+                      marginBottom: '6px'
+                    }}>
+                      Timeline
                     </label>
-                    <HelpBubble content={getFieldHelp('industry')} />
+                    <select
+                      value={formData.timeline}
+                      onChange={(e) => handleInputChange('timeline', e.target.value)}
+                      style={{
+                        width: '100%',
+                        padding: '12px',
+                        border: `1px solid ${designSystem.colors.neutral[300]}`,
+                        borderRadius: '8px',
+                        fontSize: '16px',
+                        outline: 'none',
+                        backgroundColor: 'white'
+                      }}
+                    >
+                      <option value="">When do you need this?</option>
+                      <option value="immediately">Immediately</option>
+                      <option value="1-3 months">1-3 months</option>
+                      <option value="3-6 months">3-6 months</option>
+                      <option value="6+ months">6+ months</option>
+                    </select>
                   </div>
-                  <select
-                    name="industry"
-                    value={formData.industry}
-                    onChange={handleChange}
-                    className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  >
-                    <option value="">Select industry</option>
-                    <option value="Healthcare Provider">Healthcare Provider</option>
-                    <option value="Pharmaceutical">Pharmaceutical</option>
-                    <option value="Medical Device">Medical Device</option>
-                    <option value="Health Technology">Health Technology</option>
-                    <option value="Insurance/Payer">Insurance/Payer</option>
-                    <option value="Academic/Research">Academic/Research</option>
-                    <option value="Consulting">Consulting</option>
-                    <option value="Other">Other</option>
-                  </select>
                 </div>
-              </div>
-
-              <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                    Current EHR System
-                  </label>
-                  <HelpBubble content={getFieldHelp('current_ehr_system')} />
-                </div>
-                <input
-                  type="text"
-                  name="current_ehr_system"
-                  value={formData.current_ehr_system}
-                  onChange={handleChange}
-                  className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  placeholder="e.g., Epic, Cerner, Allscripts, or custom solution"
-                />
               </div>
             </div>
 
-            {/* Project Requirements */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-700 pb-2">
-                Project Requirements
-              </h3>
-              
-              <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                    Primary Use Cases *
-                  </label>
-                  <HelpBubble content={getFieldHelp('use_cases')} />
-                </div>
-                <textarea
-                  name="use_cases"
-                  required
-                  value={formData.use_cases}
-                  onChange={handleChange}
-                  rows="3"
-                  className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  placeholder="Describe your intended use cases (e.g., AI model training, clinical research, compliance testing, software development)"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                      Implementation Timeline
-                    </label>
-                    <HelpBubble content={getFieldHelp('timeline')} />
-                  </div>
-                  <select
-                    name="timeline"
-                    value={formData.timeline}
-                    onChange={handleChange}
-                    className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  >
-                    <option value="">Select timeline</option>
-                    <option value="Immediate (within 1 month)">Immediate (within 1 month)</option>
-                    <option value="Short-term (1-3 months)">Short-term (1-3 months)</option>
-                    <option value="Medium-term (3-6 months)">Medium-term (3-6 months)</option>
-                    <option value="Long-term (6+ months)">Long-term (6+ months)</option>
-                    <option value="Exploring options">Just exploring options</option>
-                  </select>
-                </div>
-
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                      Budget Range (Annual)
-                    </label>
-                    <HelpBubble content={getFieldHelp('budget_range')} />
-                  </div>
-                  <select
-                    name="budget_range"
-                    value={formData.budget_range}
-                    onChange={handleChange}
-                    className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  >
-                    <option value="">Select budget range</option>
-                    <option value="Under $10K">Under $10K</option>
-                    <option value="$10K - $50K">$10K - $50K</option>
-                    <option value="$50K - $100K">$50K - $100K</option>
-                    <option value="$100K - $500K">$100K - $500K</option>
-                    <option value="$500K+">$500K+</option>
-                    <option value="Not determined">Not determined</option>
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                    Specific Requirements or Technical Needs
-                  </label>
-                  <HelpBubble content={getFieldHelp('specific_requirements')} />
-                </div>
-                <textarea
-                  name="specific_requirements"
-                  value={formData.specific_requirements}
-                  onChange={handleChange}
-                  rows="3"
-                  className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  placeholder="Any specific compliance requirements, integration needs, data volume expectations, or technical specifications"
-                />
-              </div>
-            </div>
-
-            {/* Partnership Opportunity */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-700 pb-2">
-                Partnership Opportunity
-              </h3>
-              
-              <div className="flex items-start gap-3">
+            {/* Design Partner Option */}
+            <div style={{
+              padding: '20px',
+              backgroundColor: designSystem.colors.neutral[50],
+              borderRadius: '12px',
+              border: `1px solid ${designSystem.colors.neutral[200]}`
+            }}>
+              <label style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                cursor: 'pointer',
+                fontSize: '16px',
+                fontWeight: '500',
+                color: designSystem.colors.neutral[800]
+              }}>
                 <input
                   type="checkbox"
-                  id="design_partner"
-                  name="interested_in_design_partner"
                   checked={formData.interested_in_design_partner}
-                  onChange={handleChange}
-                  className="mt-1 rounded border-neutral-300 dark:border-neutral-600 text-primary-600 focus:ring-primary-500"
+                  onChange={(e) => handleInputChange('interested_in_design_partner', e.target.checked)}
+                  style={{
+                    width: '18px',
+                    height: '18px',
+                    accentColor: designSystem.colors.primary
+                  }}
                 />
-                <div>
-                  <label htmlFor="design_partner" className="text-sm font-medium text-neutral-700 dark:text-neutral-300 cursor-pointer">
-                    I'm interested in being a design partner
-                  </label>
-                  <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
-                    Design partners get early access, influence product direction, and receive preferential pricing in exchange for feedback and case studies.
-                  </p>
-                </div>
-              </div>
+                Interested in becoming a design partner
+              </label>
+              <p style={{
+                marginTop: '8px',
+                marginLeft: '30px',
+                fontSize: '14px',
+                color: designSystem.colors.neutral[600],
+                margin: '8px 0 0 30px'
+              }}>
+                Get early access and help shape the product roadmap
+              </p>
             </div>
+          </div>
 
-            <div className="flex gap-3 pt-4">
-              <button
-                type="button"
-                onClick={onClose}
-                className="flex-1 px-4 py-2 border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors"
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="flex-1 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              >
-                {isSubmitting ? 'Joining...' : 'Join Waitlist'}
-              </button>
-            </div>
-          </form>
-        </div>
+          {/* Submit Button */}
+          <div style={{ marginTop: '32px' }}>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              style={{
+                width: '100%',
+                padding: '14px 24px',
+                backgroundColor: isSubmitting ? designSystem.colors.neutral[300] : designSystem.colors.primary,
+                color: 'white',
+                border: 'none',
+                borderRadius: '8px',
+                fontSize: '16px',
+                fontWeight: '600',
+                cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                transition: 'all 0.2s',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px'
+              }}
+            >
+              {isSubmitting ? (
+                <>
+                  <Loader size={20} style={{ animation: 'spin 1s linear infinite' }} />
+                  Joining Waitlist...
+                </>
+              ) : (
+                <>
+                  <Mail size={20} />
+                  Join Waitlist
+                </>
+              )}
+            </button>
+          </div>
+
+          <p style={{
+            textAlign: 'center',
+            fontSize: '12px',
+            color: designSystem.colors.neutral[500],
+            marginTop: '16px',
+            lineHeight: '1.5'
+          }}>
+            By joining, you agree to receive updates about Synthetic Ascension. We respect your privacy and won't spam you.
+          </p>
+        </form>
       </div>
     </div>
   );
-
-  return modalContent;
 };
 
 export default WaitlistModal;
