@@ -13,19 +13,24 @@ An advanced AI-powered Electronic Health Record (EHR) synthesis platform that ge
 - Real-time data visualization and analytics
 
 ### Backend Services
-1. **FastAPI MCP Server** (Port 8002) - **PRIMARY** - Latest integration
+1. **Integrated Backend Server** (Port 8003) - **PRIMARY** - Your comprehensive multi-agent system
+   - Complete integration of user's sophisticated backend
+   - 18+ specialized agents across 4 categories
+   - Literature mining, demographics, clinical data, validation, and export
+   - SQLite job tracking with comprehensive audit trails
+
+2. **FastAPI MCP Server** (Port 8002) - MCP integration
    - Combines REST API endpoints with Model Context Protocol
    - AI agent integration capabilities
    - Enhanced patient generation with specialty focus
-   - MCP tools for AI model interaction
 
-2. **Simple API Server** (Port 8000) - Operational backup
-   - Clean REST endpoints for basic functionality
-   - Patient cohort generation and analytics
-
-3. **Comprehensive EHR API** (Port 8080) - Running
+3. **Comprehensive EHR API** (Port 8080) - Legacy system
    - Full EHR database models and relationships
    - Complex medical data structures
+
+4. **Enhanced API Server** (Port 8000) - Basic functionality
+   - Clean REST endpoints for simple operations
+   - Patient cohort generation and analytics
 
 ### AI Agent Layer
 - **MCP Integration** - Model Context Protocol for AI agent interaction
@@ -33,6 +38,13 @@ An advanced AI-powered Electronic Health Record (EHR) synthesis platform that ge
 - **Multi-agent orchestration** capabilities
 
 ## Recent Changes
+
+### 2025-07-01 - Complete Backend Integration
+✅ **User Backend Integration** - Successfully integrated comprehensive multi-agent backend from ZIP file
+✅ **18+ Specialized Agents** - Deployed cohort, QA, research, and reporting agents
+✅ **New Integrated Server** - Running on Port 8003 with full agent orchestration
+✅ **Real Agent Implementation** - Replaced mock agents with actual sophisticated implementations
+✅ **Comprehensive Pipeline** - Literature mining → Demographics → Clinical data → Validation → Export
 
 ### 2025-06-28 - Major Architecture Update
 ✅ **Security Fix** - Replaced vulnerable XML parser with defusedxml library
@@ -57,14 +69,29 @@ An advanced AI-powered Electronic Health Record (EHR) synthesis platform that ge
 
 ## API Architecture
 
-### REST Endpoints (FastAPI MCP Server - Port 8002)
+### REST Endpoints (Integrated Backend Server - Port 8003) - PRIMARY
+```
+GET  /                          - Comprehensive system overview and agent architecture
+POST /api/v2/generate           - Generate comprehensive synthetic EHR data using 18+ agents
+GET  /api/v2/jobs/{job_id}      - Check multi-agent generation job status with real-time progress
+GET  /api/v2/jobs/{job_id}/results - Get detailed generation results and quality metrics
+GET  /api/v2/analytics          - Platform analytics and agent performance metrics
+GET  /docs                      - Interactive API documentation
+```
+
+### Integrated Agent Categories
+```
+Cohort Agents (6):        Demographics, Clinical Journeys, Comorbidities, Medications, Labs, Vitals
+QA Agents (3):            Statistical Validation, Bias Detection, Realism Checking
+Research Agents (4):      Literature Mining, Ontology Mapping, Pattern Analysis, Regulatory Compliance
+Reporting Agents (4):     FHIR Export, Audit Trails, Trust Reports, Cohort Summaries
+```
+
+### Legacy REST Endpoints (FastAPI MCP Server - Port 8002)
 ```
 GET  /                          - Health check and service info
-GET  /health                    - Comprehensive health check  
 POST /api/v1/generate/cohort    - Generate patient cohorts
 GET  /api/v1/cohorts           - List all generated cohorts
-GET  /api/v1/cohort/{id}       - Get specific cohort details
-GET  /api/v1/analytics/dashboard - Platform analytics
 GET  /mcp                      - MCP endpoint information
 ```
 
@@ -72,11 +99,6 @@ GET  /mcp                      - MCP endpoint information
 ```
 mcp_generate_patients  - Generate synthetic patient cohorts
 mcp_analyze_cohort    - Analyze demographics and clinical data
-```
-
-### MCP Resources
-```
-platform_capabilities - Platform documentation and capabilities
 ```
 
 ## User Preferences

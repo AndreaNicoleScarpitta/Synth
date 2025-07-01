@@ -1,0 +1,9 @@
+name: literature_synthesizer
+version: 1.0.0
+description: "Extracts relevant biomedical context from input use case"
+entrypoint: run.py
+docker_image: null
+llm:
+  name: BioGPT
+  type: huggingface
+  model_id: microsoft/BioGPT

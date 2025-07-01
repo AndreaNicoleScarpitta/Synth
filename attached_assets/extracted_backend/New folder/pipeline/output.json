@@ -1,0 +1,3 @@
+{"output": {"audit_trail_explainer": "stubbed output"}, "log": "AuditTrailExplainer executed with stub output."}
+{"output": {"cohort_summary": "stubbed output"}, "log": "CohortSummary executed with stub output."}
+{"csv": "", "error": "No records to flatten"}

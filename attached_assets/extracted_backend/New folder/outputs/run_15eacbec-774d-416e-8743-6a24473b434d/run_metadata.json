@@ -1,0 +1,8 @@
+{
+  "run_id": "15eacbec-774d-416e-8743-6a24473b434d",
+  "use_case": "ckd_diabetes_africa",
+  "start_time": "2025-06-04T19:49:56.689170",
+  "agent_list": [
+    "literature_synthesizer"
+  ]
+}

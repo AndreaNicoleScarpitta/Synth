@@ -1,0 +1,24 @@
+{
+  "run_name": "tof_pediatrics_demo",
+  "patient_count": 5,
+  "target_condition": "Tetralogy of Fallot",
+  "age_range": [8, 16],
+  "sex_distribution": {
+    "male": 0.6,
+    "female": 0.4
+  },
+  "include_comorbidities": true,
+  "comorbidities": ["asthma", "developmental delay"],
+  "medication_preferences": ["albuterol", "lisinopril"],
+  "procedure_preferences": ["cardiac catheterization", "ventricular repair"],
+  "timeline_style": "longitudinal",
+  "output_format": "json",
+  "enabled_agents": [
+    "literature_miner",
+    "phenotype_assembler",
+    "demographic_stratifier",
+    "clinical_journey_builder",
+    "realism_checker",
+    "trust_report_writer"
+  ]
+}

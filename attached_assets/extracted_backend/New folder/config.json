@@ -1,0 +1,12 @@
+{
+  "output_path": "pipeline/output.json",
+  "max_retries": 3,
+  "backoff_factor": 2,
+  "initial_backoff": 1,
+  "realism_threshold": 0.8,
+  "privacy_threshold": 0.1,
+  "bias_threshold": 0.05,
+  "max_loops": 3,
+  "log_file": "pipeline.log",
+  "max_workers": 4
+}

@@ -40,6 +40,10 @@ args = "Simple API Server"
 task = "workflow.run"
 args = "FastAPI MCP Server"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Integrated Backend Server"
+
 [[workflows.workflow]]
 name = "API Server"
 author = "agent"
@@ -94,6 +98,15 @@ task = "shell.exec"
 args = "python fastapi_mcp_server.py"
 waitForPort = 8002
 
+[[workflows.workflow]]
+name = "Integrated Backend Server"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python integrated_server_v2.py"
+waitForPort = 8003
+
 [[ports]]
 localPort = 5000
 externalPort = 80
@@ -113,6 +126,10 @@ externalPort = 3000
 [[ports]]
 localPort = 8002
 externalPort = 3002
+
+[[ports]]
+localPort = 8003
+externalPort = 3003
 
 [[ports]]
 localPort = 8080

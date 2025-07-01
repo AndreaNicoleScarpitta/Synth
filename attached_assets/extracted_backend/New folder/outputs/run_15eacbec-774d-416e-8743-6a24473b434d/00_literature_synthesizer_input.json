@@ -1,0 +1,7 @@
+{
+  "run_name": "ckd_diabetes_africa",
+  "patient_count": 5,
+  "enabled_agents": [
+    "literature_synthesizer"
+  ]
+}
