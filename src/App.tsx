@@ -199,12 +199,70 @@ const MultiSelectDropdown = ({ label, options, placeholder = "Select options..."
   );
 };
 
+// Professional Healthcare Design System - Based on Design Recommendations
+const designSystem = {
+  colors: {
+    primary: '#1e40af', // Professional navy blue for trust and sophistication
+    secondary: '#059669', // Muted teal for health, growth, and innovation
+    accent: '#0891b2', // Vibrant turquoise for secondary accents
+    neutral: {
+      white: '#ffffff',
+      gray50: '#f9fafb',
+      gray100: '#f3f4f6',
+      gray200: '#e5e7eb',
+      gray300: '#d1d5db',
+      gray400: '#9ca3af',
+      gray500: '#6b7280',
+      gray600: '#4b5563',
+      gray700: '#374151',
+      gray800: '#1f2937',
+      gray900: '#111827'
+    },
+    success: '#10b981',
+    warning: '#f59e0b',
+    error: '#ef4444'
+  },
+  typography: {
+    fontFamily: {
+      primary: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+      heading: '"Montserrat", "Inter", sans-serif'
+    },
+    fontSize: {
+      xs: '12px',
+      sm: '14px',
+      base: '16px',
+      lg: '18px',
+      xl: '20px',
+      '2xl': '24px',
+      '3xl': '30px',
+      '4xl': '36px',
+      '5xl': '48px',
+      '6xl': '60px'
+    }
+  },
+  spacing: {
+    xs: '4px',
+    sm: '8px',
+    md: '16px',
+    lg: '24px',
+    xl: '32px',
+    '2xl': '48px',
+    '3xl': '64px',
+    '4xl': '96px'
+  },
+  shadows: {
+    sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+    md: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+    lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+  }
+};
+
 const styles = {
   container: {
     minHeight: '100vh',
-    background: '#ffffff',
-    fontFamily: 'Inter, system-ui, sans-serif',
-    color: '#1f2937'
+    background: designSystem.colors.neutral.white,
+    fontFamily: designSystem.typography.fontFamily.primary,
+    color: designSystem.colors.neutral.gray800
   },
   header: {
     position: 'fixed' as const,
@@ -276,32 +334,31 @@ const styles = {
     textAlign: 'center' as const
   },
   heroTitle: {
-    fontSize: '56px',
+    fontSize: designSystem.typography.fontSize['5xl'],
     fontWeight: '700',
-    color: '#fbbf24',
-    marginBottom: '24px',
+    color: designSystem.colors.neutral.gray900,
+    marginBottom: designSystem.spacing.lg,
     lineHeight: '1.1',
     textAlign: 'center' as const,
     letterSpacing: '-0.02em',
-    textShadow: '0 0 20px rgba(251, 191, 36, 0.5)'
+    fontFamily: designSystem.typography.fontFamily.heading
   },
   heroSubtitle: {
-    fontSize: '24px',
+    fontSize: designSystem.typography.fontSize['2xl'],
     fontWeight: '500',
-    color: '#f59e0b',
-    marginBottom: '32px',
+    color: designSystem.colors.primary,
+    marginBottom: designSystem.spacing.xl,
     maxWidth: '800px',
-    margin: '0 auto 32px',
-    letterSpacing: '0.05em'
+    margin: `0 auto ${designSystem.spacing.xl}`,
+    letterSpacing: '0.025em'
   },
   heroDescription: {
-    fontSize: '18px',
-    color: '#fbbf24',
-    marginBottom: '48px',
+    fontSize: designSystem.typography.fontSize.lg,
+    color: designSystem.colors.neutral.gray600,
+    marginBottom: designSystem.spacing['3xl'],
     maxWidth: '680px',
-    margin: '0 auto 48px',
-    lineHeight: '1.6',
-    opacity: 0.8
+    margin: `0 auto ${designSystem.spacing['3xl']}`,
+    lineHeight: '1.6'
   },
   heroStats: {
     display: 'flex',
@@ -334,27 +391,29 @@ const styles = {
     marginBottom: '64px'
   },
   primaryButton: {
-    background: '#0ea5e9',
-    color: 'white',
-    padding: '14px 28px',
-    borderRadius: '6px',
-    fontWeight: '500',
+    background: designSystem.colors.primary,
+    color: designSystem.colors.neutral.white,
+    padding: `${designSystem.spacing.sm} ${designSystem.spacing.lg}`,
+    borderRadius: designSystem.spacing.sm,
+    fontWeight: '600',
     border: 'none',
     cursor: 'pointer',
-    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
-    transition: 'all 0.2s',
-    fontSize: '16px'
+    boxShadow: designSystem.shadows.md,
+    transition: 'all 0.2s ease-in-out',
+    fontSize: designSystem.typography.fontSize.base,
+    fontFamily: designSystem.typography.fontFamily.primary
   },
   secondaryButton: {
-    border: '1px solid #cbd5e1',
-    color: '#475569',
-    padding: '14px 28px',
-    borderRadius: '6px',
+    border: `1px solid ${designSystem.colors.neutral.gray300}`,
+    color: designSystem.colors.neutral.gray600,
+    padding: `${designSystem.spacing.sm} ${designSystem.spacing.lg}`,
+    borderRadius: designSystem.spacing.sm,
     fontWeight: '500',
-    background: 'white',
+    background: designSystem.colors.neutral.white,
     cursor: 'pointer',
-    transition: 'all 0.2s',
-    fontSize: '16px'
+    transition: 'all 0.2s ease-in-out',
+    fontSize: designSystem.typography.fontSize.base,
+    fontFamily: designSystem.typography.fontFamily.primary
   },
   features: {
     maxWidth: '1200px',
@@ -1229,9 +1288,9 @@ function MainApp() {
         <section style={styles.hero}>
           <div style={styles.heroContent}>
             <h1 style={styles.heroTitle} className="hero-title">Synthetic Ascension</h1>
-            <p style={styles.heroSubtitle}>Decode. Synthesize. Evolve.</p>
+            <p style={styles.heroSubtitle}>Unlock Healthcare AI with Privacy-Safe Patient Data</p>
             <p style={styles.heroDescription}>
-              Next-generation synthetic EHR platform powered by AI—where genetic data meets matrix intelligence. Transform medical research through quantum-encrypted synthetic patients and neural evolution algorithms.
+              Generate comprehensive synthetic EHR datasets that mirror real patient populations—no PHI, no compliance hurdles. Accelerate your AI research with medically accurate data that's ready to use.
             </p>
             
             <div style={styles.heroStats}>
@@ -1253,18 +1312,64 @@ function MainApp() {
               </div>
             </div>
             
+            {/* Trust Indicators */}
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: designSystem.spacing.lg,
+              marginBottom: designSystem.spacing['2xl'],
+              fontSize: designSystem.typography.fontSize.sm,
+              color: designSystem.colors.neutral.gray500,
+              flexWrap: 'wrap'
+            }}>
+              <span style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: designSystem.spacing.xs,
+                padding: `${designSystem.spacing.xs} ${designSystem.spacing.md}`,
+                border: `1px solid ${designSystem.colors.neutral.gray200}`,
+                borderRadius: designSystem.spacing.sm,
+                background: designSystem.colors.neutral.gray50
+              }}>
+                🛡️ HIPAA Compliant
+              </span>
+              <span style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: designSystem.spacing.xs,
+                padding: `${designSystem.spacing.xs} ${designSystem.spacing.md}`,
+                border: `1px solid ${designSystem.colors.neutral.gray200}`,
+                borderRadius: designSystem.spacing.sm,
+                background: designSystem.colors.neutral.gray50
+              }}>
+                🔒 100% Synthetic Data
+              </span>
+              <span style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: designSystem.spacing.xs,
+                padding: `${designSystem.spacing.xs} ${designSystem.spacing.md}`,
+                border: `1px solid ${designSystem.colors.neutral.gray200}`,
+                borderRadius: designSystem.spacing.sm,
+                background: designSystem.colors.neutral.gray50
+              }}>
+                ⚡ No Privacy Risk
+              </span>
+            </div>
+
             <div style={{...styles.buttonContainer, flexDirection: 'row'}} className="button-container">
               <button 
-                style={{...styles.primaryButton, background: 'linear-gradient(to right, #f59e0b, #d97706)', color: '#0a0a0a', fontWeight: 'bold'}} 
+                style={styles.primaryButton}
                 className="primary-button"
-                onClick={() => {}}
+                onClick={() => setShowSignup(true)}
               >
                 Get Early Access
               </button>
               <button 
-                style={{...styles.secondaryButton, border: '2px solid #fbbf24', color: '#fbbf24'}} 
+                style={styles.secondaryButton}
                 className="secondary-button"
-                onClick={() => {}}
+                onClick={() => setShowWaitlist(true)}
               >
                 Join Waitlist
               </button>
