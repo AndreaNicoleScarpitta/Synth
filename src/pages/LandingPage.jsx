@@ -1,20 +1,29 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Rocket } from 'lucide-react';
 import FeatureCard from '../components/FeatureCard';
 import LeadCaptureModal from '../components/LeadCaptureModal';
 import personas from '../config/personas';
 import verticals from '../config/verticals';
 
-const LandingPage = () => {
+const LandingPage = ({ onStartDemo }) => {
   const [persona, setPersona] = useState('builder');
   const { headline, description, features } = personas[persona];
+
+  const handleStartDemo = () => {
+    if (onStartDemo) {
+      onStartDemo();
+    } else {
+      // Fallback navigation to demo route
+      window.location.href = '/demo';
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 py-20">
       {/* Hero Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 transform transition-all duration-600 animate-in slide-in-from-top-8">
           <h1 className="text-5xl md:text-6xl font-extrabold mb-6 bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent">
             Synthetic Ascension
           </h1>
@@ -37,6 +46,17 @@ const LandingPage = () => {
                 {p.label}
               </button>
             ))}
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
+            <button
+              onClick={handleStartDemo}
+              className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-500 text-white font-semibold rounded-lg hover:from-purple-700 hover:to-blue-600 transition-all duration-200 shadow-lg hover:shadow-xl"
+            >
+              <Rocket className="mr-2 w-5 h-5" />
+              Start Demo
+            </button>
+            <LeadCaptureModal />
           </div>
         </div>
 

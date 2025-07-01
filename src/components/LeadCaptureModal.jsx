@@ -55,7 +55,7 @@ const LeadCaptureModal = () => {
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-500 text-white font-semibold rounded-lg hover:from-purple-700 hover:to-blue-600 transition-all duration-200 shadow-lg hover:shadow-xl"
+        className="inline-flex items-center px-8 py-3 border border-purple-600 text-purple-600 bg-white font-semibold rounded-lg hover:bg-purple-50 transition-all duration-200 shadow-sm hover:shadow-md"
       >
         Get Early Access
       </button>
