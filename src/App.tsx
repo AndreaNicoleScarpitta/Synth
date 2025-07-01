@@ -1,8 +1,81 @@
 import React, { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import { FaBrain, FaChartBar, FaMicroscope, FaFlask, FaUserShield, FaLock } from 'react-icons/fa'
 import ResultsOverview from './pages/ResultsOverview.tsx'
 import PatientRecord from './pages/PatientRecord.tsx'
 
+
+// Persona data structure
+const personaData = {
+  builder: {
+    label: 'AI Builder',
+    headline: 'Ship Clinical AI 2× Faster with PHI-Free Data',
+    description: 'Prototype, train, and fine-tune healthcare AI models instantly on demand—no more data wrangling or privacy roadblocks slowing you down.',
+    features: [
+      {
+        icon: FaBrain,
+        title: 'Seamless API Integration',
+        desc: 'Embed data generation in your CI/CD or MLOps workflows with a single endpoint call.'
+      },
+      {
+        icon: FaChartBar,
+        title: 'LLM-Optimized Records',
+        desc: 'Receive patient datasets pre-formatted for language models, slashing preparation time.'
+      },
+    ],
+  },
+  researcher: {
+    label: 'Clinical Researcher',
+    headline: 'Validate Hypotheses in Hours, Not Months',
+    description: 'Design and iterate on studies using rich synthetic cohorts—run edge-case experiments and rare disease simulations without IRB delays.',
+    features: [
+      {
+        icon: FaMicroscope,
+        title: 'Custom Cohort Builder',
+        desc: 'Define demographics, conditions, and timelines with a few clicks—no SQL required.'
+      },
+      {
+        icon: FaFlask,
+        title: 'Audit-Ready Outputs',
+        desc: 'Each dataset includes QA reports and lineage logs for seamless publication or grant submission.'
+      },
+    ],
+  },
+  scientist: {
+    label: 'R&D Scientist',
+    headline: 'De-Risk Trials with Virtual Patient Populations',
+    description: 'Simulate protocols and safety scenarios across millions of synthetic patients to optimize trial design before first dosing.',
+    features: [
+      {
+        icon: FaFlask,
+        title: 'Adverse-Event Modeling',
+        desc: 'Stress-test safety signals across diverse cohorts to anticipate rare side-effects early.'
+      },
+      {
+        icon: FaChartBar,
+        title: 'Protocol Optimizer',
+        desc: 'Instant feedback on inclusion/exclusion criteria—refine your design in real time.'
+      },
+    ],
+  },
+  compliance: {
+    label: 'Compliance Lead',
+    headline: 'Regulatory Confidence with Built-In Traceability',
+    description: 'Leverage fully de-identified, privacy-by-design EHRs plus end-to-end audit trails that satisfy HIPAA, GDPR, and FDA requirements out of the box.',
+    features: [
+      {
+        icon: FaUserShield,
+        title: 'Comprehensive Audit Logs',
+        desc: 'Every generation step is recorded, timestamped, and review-ready for inspections.'
+      },
+      {
+        icon: FaLock,
+        title: 'Policy-Driven Access',
+        desc: 'Fine-grained, role-based controls let you lock down data to precise governance policies.'
+      },
+    ],
+  },
+};
 
 // Progress tracking component
 const ProgressBar = ({ progress, currentStep, steps }) => {
@@ -553,6 +626,9 @@ function MainApp() {
   const [currentStep, setCurrentStep] = useState('')
   const [generationSteps, setGenerationSteps] = useState([])
   const [generationResults, setGenerationResults] = useState(null)
+  const [activePersona, setActivePersona] = useState('builder')
+  const [showSignup, setShowSignup] = useState(false)
+  const [showWaitlist, setShowWaitlist] = useState(false)
   const [selectedConfigurations, setSelectedConfigurations] = useState({
     populationSize: '',
     cardiacConditions: [],
@@ -1287,10 +1363,46 @@ function MainApp() {
       <main style={styles.main}>
         <section style={styles.hero}>
           <div style={styles.heroContent}>
-            <h1 style={styles.heroTitle} className="hero-title">Synthetic Ascension</h1>
-            <p style={styles.heroSubtitle}>Unlock Healthcare AI with Privacy-Safe Patient Data</p>
+            {/* Persona Navigation */}
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              marginBottom: designSystem.spacing['2xl'],
+              gap: designSystem.spacing.xs,
+              flexWrap: 'wrap'
+            }}>
+              {Object.entries(personaData).map(([key, persona]) => (
+                <button
+                  key={key}
+                  onClick={() => setActivePersona(key)}
+                  style={{
+                    padding: `${designSystem.spacing.sm} ${designSystem.spacing.lg}`,
+                    borderRadius: designSystem.spacing.lg,
+                    border: activePersona === key 
+                      ? `2px solid ${designSystem.colors.primary}` 
+                      : `1px solid ${designSystem.colors.neutral.gray300}`,
+                    background: activePersona === key 
+                      ? designSystem.colors.primary 
+                      : 'white',
+                    color: activePersona === key 
+                      ? 'white' 
+                      : designSystem.colors.neutral.gray700,
+                    fontSize: designSystem.typography.fontSize.sm,
+                    fontWeight: '500',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease-in-out'
+                  }}
+                >
+                  {persona.label}
+                </button>
+              ))}
+            </div>
+
+            <h1 style={styles.heroTitle} className="hero-title">
+              {personaData[activePersona].headline}
+            </h1>
             <p style={styles.heroDescription}>
-              Generate comprehensive synthetic EHR datasets that mirror real patient populations—no PHI, no compliance hurdles. Accelerate your AI research with medically accurate data that's ready to use.
+              {personaData[activePersona].description}
             </p>
             
             <div style={styles.heroStats}>
@@ -1373,6 +1485,76 @@ function MainApp() {
               >
                 Join Waitlist
               </button>
+            </div>
+          </div>
+        </section>
+
+        {/* Persona Features Section */}
+        <section style={{
+          padding: `${designSystem.spacing['4xl']} ${designSystem.spacing.lg}`,
+          background: designSystem.colors.neutral.gray50,
+          borderTop: `1px solid ${designSystem.colors.neutral.gray200}`
+        }}>
+          <div style={{
+            maxWidth: '1200px',
+            margin: '0 auto',
+            textAlign: 'center'
+          }}>
+            <h2 style={{
+              fontSize: designSystem.typography.fontSize['3xl'],
+              fontWeight: '700',
+              color: designSystem.colors.neutral.gray900,
+              marginBottom: designSystem.spacing['3xl']
+            }}>
+              Built for {personaData[activePersona].label}s
+            </h2>
+            
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: designSystem.spacing['2xl'],
+              marginTop: designSystem.spacing['2xl']
+            }}>
+              {personaData[activePersona].features.map((feature, index) => {
+                const IconComponent = feature.icon;
+                return (
+                  <div key={index} style={{
+                    padding: designSystem.spacing['2xl'],
+                    background: 'white',
+                    borderRadius: designSystem.spacing.lg,
+                    border: `1px solid ${designSystem.colors.neutral.gray200}`,
+                    textAlign: 'left'
+                  }}>
+                    <div style={{
+                      width: '48px',
+                      height: '48px',
+                      borderRadius: designSystem.spacing.md,
+                      background: designSystem.colors.primaryLight,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      marginBottom: designSystem.spacing.lg
+                    }}>
+                      <IconComponent size={24} color={designSystem.colors.primary} />
+                    </div>
+                    <h3 style={{
+                      fontSize: designSystem.typography.fontSize.xl,
+                      fontWeight: '600',
+                      color: designSystem.colors.neutral.gray900,
+                      marginBottom: designSystem.spacing.md
+                    }}>
+                      {feature.title}
+                    </h3>
+                    <p style={{
+                      fontSize: designSystem.typography.fontSize.base,
+                      color: designSystem.colors.neutral.gray600,
+                      lineHeight: '1.6'
+                    }}>
+                      {feature.desc}
+                    </p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>

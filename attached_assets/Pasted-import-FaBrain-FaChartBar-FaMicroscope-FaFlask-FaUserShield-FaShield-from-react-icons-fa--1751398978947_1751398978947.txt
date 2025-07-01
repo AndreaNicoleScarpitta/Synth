@@ -1,0 +1,79 @@
+import { FaBrain, FaChartBar, FaMicroscope, FaFlask, FaUserShield, FaShield } from 'react-icons/fa'
+
+export default {
+  builder: {
+    label: 'AI Builder',
+    headline: 'Ship Clinical AI 2× Faster with PHI-Free Data',
+    description:
+      'Prototype, train, and fine-tune healthcare AI models instantly on demand—no more data wrangling or privacy roadblocks slowing you down.',
+    features: [
+      {
+        icon: FaBrain,
+        title: 'Seamless API Integration',
+        desc: 'Embed data generation in your CI/CD or MLOps workflows with a single endpoint call.'
+      },
+      {
+        icon: FaChartBar,
+        title: 'LLM-Optimized Records',
+        desc: 'Receive patient datasets pre-formatted for language models, slashing preparation time.'
+      },
+    ],
+  },
+
+  researcher: {
+    label: 'Clinical Researcher',
+    headline: 'Validate Hypotheses in Hours, Not Months',
+    description:
+      'Design and iterate on studies using rich synthetic cohorts—run edge-case experiments and rare disease simulations without IRB delays.',
+    features: [
+      {
+        icon: FaMicroscope,
+        title: 'Custom Cohort Builder',
+        desc: 'Define demographics, conditions, and timelines with a few clicks—no SQL required.'
+      },
+      {
+        icon: FaFlask,
+        title: 'Audit-Ready Outputs',
+        desc: 'Each dataset includes QA reports and lineage logs for seamless publication or grant submission.'
+      },
+    ],
+  },
+
+  scientist: {
+    label: 'R&D Scientist',
+    headline: 'De-Risk Trials with Virtual Patient Populations',
+    description:
+      'Simulate protocols and safety scenarios across millions of synthetic patients to optimize trial design before first dosing.',
+    features: [
+      {
+        icon: FaFlask,
+        title: 'Adverse-Event Modeling',
+        desc: 'Stress-test safety signals across diverse cohorts to anticipate rare side-effects early.'
+      },
+      {
+        icon: FaChartBar,
+        title: 'Protocol Optimizer',
+        desc: 'Instant feedback on inclusion/exclusion criteria—refine your design in real time.'
+      },
+    ],
+  },
+
+  compliance: {
+    label: 'Compliance Lead',
+    headline: 'Regulatory Confidence with Built-In Traceability',
+    description:
+      'Leverage fully de-identified, privacy-by-design EHRs plus end-to-end audit trails that satisfy HIPAA, GDPR, and FDA requirements out of the box.',
+    features: [
+      {
+        icon: FaUserShield,
+        title: 'Comprehensive Audit Logs',
+        desc: 'Every generation step is recorded, timestamped, and review-ready for inspections.'
+      },
+      {
+        icon: FaShield,
+        title: 'Policy-Driven Access',
+        desc: 'Fine-grained, role-based controls let you lock down data to precise governance policies.'
+      },
+    ],
+  },
+}
