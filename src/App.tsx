@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import ResultsOverview from './pages/ResultsOverview.tsx'
 import PatientRecord from './pages/PatientRecord.tsx'
-import { MatrixBackground } from './components/MatrixBackground'
-import { DNALogo } from './components/DNALogo'
+
 
 // Progress tracking component
 const ProgressBar = ({ progress, currentStep, steps }) => {
@@ -203,9 +202,9 @@ const MultiSelectDropdown = ({ label, options, placeholder = "Select options..."
 const styles = {
   container: {
     minHeight: '100vh',
-    background: '#0a0a0a',
+    background: '#ffffff',
     fontFamily: 'Inter, system-ui, sans-serif',
-    color: '#fbbf24'
+    color: '#1f2937'
   },
   header: {
     position: 'fixed' as const,
@@ -213,10 +212,10 @@ const styles = {
     left: 0,
     right: 0,
     zIndex: 50,
-    background: 'rgba(10, 10, 10, 0.95)',
+    background: 'rgba(255, 255, 255, 0.95)',
     backdropFilter: 'blur(10px)',
-    borderBottom: '1px solid #fbbf24',
-    boxShadow: '0 1px 2px rgba(251, 191, 36, 0.2)'
+    borderBottom: '1px solid #e5e7eb',
+    boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)'
   },
   nav: {
     maxWidth: '1200px',
@@ -247,7 +246,7 @@ const styles = {
   logoText: {
     fontWeight: '600',
     fontSize: '20px',
-    color: '#fbbf24'
+    color: '#6366f1'
   },
   status: {
     display: 'flex',
@@ -369,12 +368,12 @@ const styles = {
   featuresTitle: {
     fontSize: '32px',
     fontWeight: '600',
-    color: '#fbbf24',
+    color: '#1f2937',
     marginBottom: '16px'
   },
   featuresSubtitle: {
     fontSize: '18px',
-    color: '#f59e0b',
+    color: '#6b7280',
     maxWidth: '800px',
     margin: '0 auto'
   },
@@ -384,13 +383,12 @@ const styles = {
     gap: '32px'
   },
   card: {
-    background: 'rgba(10, 10, 10, 0.8)',
+    background: 'white',
     borderRadius: '8px',
     padding: '28px',
-    boxShadow: '0 1px 3px rgba(251, 191, 36, 0.2)',
-    border: '1px solid #fbbf24',
-    transition: 'all 0.3s',
-    backdropFilter: 'blur(10px)'
+    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)',
+    border: '1px solid #f1f5f9',
+    transition: 'all 0.3s'
   },
   cardIcon: {
     width: '48px',
@@ -405,12 +403,11 @@ const styles = {
     fontSize: '20px',
     fontWeight: '600',
     marginBottom: '8px',
-    color: '#fbbf24'
+    color: '#1f2937'
   },
   cardDescription: {
-    color: '#f59e0b',
-    lineHeight: '1.6',
-    opacity: 0.9
+    color: '#6b7280',
+    lineHeight: '1.6'
   },
   cta: {
     background: '#f8fafc',
@@ -1214,11 +1211,11 @@ function MainApp() {
         `}
       </style>
 
-      <MatrixBackground />
+
       <header style={styles.header}>
         <nav style={styles.nav}>
           <div style={styles.logo}>
-            <DNALogo />
+            <div style={styles.logoIcon}>SA</div>
             <span style={styles.logoText}>Synthetic Ascension</span>
           </div>
           <div style={styles.status}>
