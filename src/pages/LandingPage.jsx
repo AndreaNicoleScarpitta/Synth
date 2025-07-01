@@ -25,12 +25,18 @@ import verticals from '../config/verticals';
 const LandingPage = ({ onStartDemo }) => {
   const [persona, setPersona] = useState('builder');
   const [visibleSection, setVisibleSection] = useState(0);
+  const [showWaitlist, setShowWaitlist] = useState(false);
   const { showToast, ToastContainer } = useToast();
   const { headline, description, features } = personas[persona];
 
   const handleStartDemo = () => {
     console.log('Get Early Access button clicked!');
     showToast('Early access coming soon! We\'re putting the finishing touches on this feature.', 'info', 4000);
+  };
+
+  const handleJoinWaitlist = () => {
+    console.log('Join Waitlist button clicked!');
+    setShowWaitlist(true);
   };
 
   // Intersection Observer for scroll animations
@@ -188,10 +194,12 @@ const LandingPage = ({ onStartDemo }) => {
                 >
                   Get Early Access
                 </button>
-                <WaitlistModal 
-                  buttonText="Join Waitlist"
-                  buttonClassName="inline-flex items-center px-8 py-4 bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-100 font-bold rounded-xl hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105 text-lg border border-neutral-300 dark:border-neutral-600"
-                />
+                <button
+                  onClick={handleJoinWaitlist}
+                  className="inline-flex items-center px-8 py-4 bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-100 font-bold rounded-xl hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105 text-lg border border-neutral-300 dark:border-neutral-600"
+                >
+                  Join Waitlist
+                </button>
               </div>
               <p className="text-sm text-neutral-600 dark:text-neutral-400">
                 Join researchers from Stanford, Mayo Clinic, and 500+ healthcare organizations
@@ -456,6 +464,15 @@ const LandingPage = ({ onStartDemo }) => {
 
         </div>
       </div>
+      
+      {/* Waitlist Modal */}
+      {showWaitlist && (
+        <WaitlistModal 
+          isOpen={showWaitlist}
+          onClose={() => setShowWaitlist(false)}
+        />
+      )}
+      
       <ToastContainer />
     </div>
   );

@@ -5,9 +5,15 @@ import { getFieldHelp } from '../config/medicalFieldHelp';
 
 const WaitlistModal = ({ 
   buttonText = "Join the Waitlist", 
-  buttonClassName = "inline-flex items-center px-8 py-3 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 transition-colors"
+  buttonClassName = "inline-flex items-center px-8 py-3 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 transition-colors",
+  isOpen = false,
+  onClose
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [internalIsOpen, setInternalIsOpen] = useState(false);
+  
+  // Use external control if provided, otherwise use internal state
+  const modalIsOpen = isOpen !== undefined ? isOpen : internalIsOpen;
+  const handleClose = onClose || (() => setInternalIsOpen(false));
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   
@@ -49,7 +55,7 @@ const WaitlistModal = ({
         setIsSuccess(true);
         // Reset form after 3 seconds
         setTimeout(() => {
-          setIsOpen(false);
+          handleClose();
           setIsSuccess(false);
           setFormData({
             name: '',
@@ -75,7 +81,7 @@ const WaitlistModal = ({
       // Still show success to user, but log the error
       setIsSuccess(true);
       setTimeout(() => {
-        setIsOpen(false);
+        handleClose();
         setIsSuccess(false);
         setFormData({
           name: '',
@@ -106,10 +112,10 @@ const WaitlistModal = ({
     });
   };
 
-  if (!isOpen) {
+  if (!modalIsOpen) {
     return (
       <button
-        onClick={() => setIsOpen(true)}
+        onClick={() => setInternalIsOpen(true)}
         className={buttonClassName}
       >
         {buttonText}
@@ -149,7 +155,7 @@ const WaitlistModal = ({
               </p>
             </div>
             <button
-              onClick={() => setIsOpen(false)}
+              onClick={handleClose}
               className="text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors flex-shrink-0 ml-4"
             >
               <X className="w-6 h-6" />
@@ -474,7 +480,7 @@ const WaitlistModal = ({
             <div className="flex gap-3 pt-4">
               <button
                 type="button"
-                onClick={() => setIsOpen(false)}
+                onClick={handleClose}
                 className="flex-1 px-4 py-3 border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors"
               >
                 Cancel
