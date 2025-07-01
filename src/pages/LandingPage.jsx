@@ -1,6 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Rocket } from 'lucide-react';
+import { 
+  ArrowRight, 
+  Rocket, 
+  Shield, 
+  RefreshCw, 
+  Cloud, 
+  CheckCircle, 
+  Users, 
+  BarChart3, 
+  Database,
+  Globe,
+  Lock,
+  Zap,
+  Award,
+  TrendingUp
+} from 'lucide-react';
 import FeatureCard from '../components/FeatureCard';
 import LeadCaptureModal from '../components/LeadCaptureModal';
 import personas from '../config/personas';
@@ -8,6 +23,7 @@ import verticals from '../config/verticals';
 
 const LandingPage = ({ onStartDemo }) => {
   const [persona, setPersona] = useState('builder');
+  const [visibleSection, setVisibleSection] = useState(0);
   const { headline, description, features } = personas[persona];
 
   const handleStartDemo = () => {
@@ -19,133 +35,391 @@ const LandingPage = ({ onStartDemo }) => {
     }
   };
 
-  return (
-    <div className="min-h-screen bg-gray-50 py-20">
-      {/* Hero Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 transform transition-all duration-600 animate-in slide-in-from-top-8">
-          <h1 className="text-5xl md:text-6xl font-extrabold mb-6 bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent">
-            Synthetic Ascension
-          </h1>
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto mb-8">
-            Privacy-safe synthetic EHRs to accelerate clinical AI development, model validation,
-            and regulatory confidence — from day one.
-          </p>
+  // Intersection Observer for scroll animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
 
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
-            {Object.entries(personas).map(([key, p]) => (
+    const sections = document.querySelectorAll('.scroll-reveal');
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, []);
+
+  const keyFeatures = [
+    {
+      icon: Globe,
+      title: "Diverse & Realistic Data",
+      description: "Statistically mirrors real patient populations, including rare conditions and underrepresented groups.",
+      color: "text-secondary-500"
+    },
+    {
+      icon: Shield,
+      title: "Privacy by Design",
+      description: "100% synthetic records with zero PHI, compliant with HIPAA and GDPR from day one.",
+      color: "text-primary-500"
+    },
+    {
+      icon: RefreshCw,
+      title: "Continuously Updated",
+      description: "AI agents ingest new medical research continuously, so your data never goes stale.",
+      color: "text-accent-500"
+    },
+    {
+      icon: Cloud,
+      title: "On-Demand & Scalable",
+      description: "Access via API or UI; generate millions of records in minutes.",
+      color: "text-primary-500"
+    },
+    {
+      icon: CheckCircle,
+      title: "Validated Accuracy",
+      description: "Benchmarked against real-world stats to ensure clinical credibility.",
+      color: "text-secondary-500"
+    }
+  ];
+
+  const howItWorks = [
+    {
+      step: "01",
+      title: "Input Your Criteria",
+      description: "Researchers or clinicians define the patient cohort or parameters via our no-code UI.",
+      icon: Database
+    },
+    {
+      step: "02", 
+      title: "AI-Generates Synthetic Data",
+      description: "Our engine creates a synthetic dataset matching those specs, backed by the latest medical insights.",
+      icon: Zap
+    },
+    {
+      step: "03",
+      title: "Integrate & Innovate", 
+      description: "Download via API or CSV and plug into your AI models, studies, or applications immediately.",
+      icon: TrendingUp
+    }
+  ];
+
+  const useCases = [
+    {
+      title: "Pharma & Biotech",
+      description: "Simulate trials on virtual patients to accelerate drug discovery.",
+      icon: Award,
+      accent: "accent"
+    },
+    {
+      title: "AI/MedTech Companies",
+      description: "Train models on bias-free synthetic data to improve accuracy and reduce hallucinations.",
+      icon: BarChart3,
+      accent: "primary"
+    },
+    {
+      title: "Clinical Researchers",
+      description: "Access a trove of EHR data for hypothesis testing without IRB hurdles.",
+      icon: Users,
+      accent: "secondary"
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-white dark:bg-neutral-900 transition-colors duration-300">
+      {/* Hero Section */}
+      <div className="relative pt-20 pb-16 sm:pt-24 sm:pb-20 lg:pt-32 lg:pb-28 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-50 via-white to-secondary-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center animate-slide-up">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-heading font-extrabold mb-6">
+              <span className="bg-gradient-to-r from-primary-600 via-accent-500 to-secondary-600 bg-clip-text text-transparent">
+                Synthetic Ascension
+              </span>
+            </h1>
+            <p className="text-xl md:text-2xl text-neutral-700 dark:text-neutral-300 max-w-4xl mx-auto mb-8 leading-relaxed">
+              Unlock Healthcare AI with unlimited, privacy-safe patient data. No PHI, no red tape.
+            </p>
+            <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto mb-12">
+              Synthetic EHR datasets that evolve with the latest medical knowledge — accelerating AI development, model validation, and regulatory confidence from day one.
+            </p>
+
+            <div className="flex flex-wrap justify-center gap-3 mb-8">
+              {Object.entries(personas).map(([key, p]) => (
+                <button
+                  key={key}
+                  onClick={() => setPersona(key)}
+                  className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 border ${
+                    persona === key
+                      ? 'bg-primary-500 text-white border-primary-500 shadow-soft-lg transform scale-105'
+                      : 'bg-white dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border-neutral-200 dark:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-700 hover:border-primary-300 dark:hover:border-primary-500'
+                  }`}
+                >
+                  {p.label}
+                </button>
+              ))}
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <button
-                key={key}
-                onClick={() => setPersona(key)}
-                className={`px-6 py-2 rounded-lg font-medium transition-all duration-200 ${
-                  persona === key
-                    ? 'bg-purple-600 text-white shadow-lg'
-                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-                }`}
+                onClick={handleStartDemo}
+                className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-500 to-accent-500 text-white font-semibold rounded-xl hover:from-primary-600 hover:to-accent-600 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105"
               >
-                {p.label}
+                <Rocket className="mr-2 w-5 h-5" />
+                Start Demo
               </button>
-            ))}
+              <LeadCaptureModal />
+            </div>
+
+            <div className="mt-12 text-center">
+              <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-4">
+                <Shield className="inline w-4 h-4 mr-1" />
+                HIPAA Compliant • 100% Synthetic Data • No Patient Privacy Risk
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Problem & Solution Overview */}
+      <div className="scroll-reveal py-16 lg:py-24 bg-neutral-50 dark:bg-neutral-800/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl lg:text-4xl font-heading font-bold text-neutral-900 dark:text-white mb-6">
+                AI healthcare models are starving for diverse, representative data
+              </h2>
+              <div className="space-y-4 text-lg text-neutral-600 dark:text-neutral-300">
+                <div className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-red-500 rounded-full mt-3"></div>
+                  <p>Real patient data is siloed, biased, and hard to obtain</p>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-red-500 rounded-full mt-3"></div>
+                  <p>IRB approvals take months and limit research scope</p>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-red-500 rounded-full mt-3"></div>
+                  <p>80% of healthcare data goes unused due to privacy constraints</p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3 className="text-2xl lg:text-3xl font-heading font-bold text-neutral-900 dark:text-white mb-6">
+                The answer? A new kind of data.
+              </h3>
+              <div className="space-y-4 text-lg text-neutral-600 dark:text-neutral-300">
+                <div className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-secondary-500 rounded-full mt-3"></div>
+                  <p>Unlimited synthetic patients with no privacy risk</p>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-secondary-500 rounded-full mt-3"></div>
+                  <p>Statistically validated against real-world data</p>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-secondary-500 rounded-full mt-3"></div>
+                  <p>Ready to use immediately via API or download</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Key Features Section */}
+      <div className="scroll-reveal py-16 lg:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-heading font-bold text-neutral-900 dark:text-white mb-4">
+              Why Leading AI Teams Choose Synthetic Ascension
+            </h2>
+            <p className="text-xl text-neutral-600 dark:text-neutral-300 max-w-3xl mx-auto">
+              Built for AI researchers, validated by clinicians, trusted by enterprise teams
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {keyFeatures.map((feature, index) => {
+              const Icon = feature.icon;
+              return (
+                <div
+                  key={index}
+                  className="bg-white dark:bg-neutral-800 p-8 rounded-2xl shadow-soft hover:shadow-soft-lg transition-all duration-300 border border-neutral-100 dark:border-neutral-700 group hover:border-primary-200 dark:hover:border-primary-600"
+                >
+                  <div className={`inline-flex p-3 rounded-xl ${feature.color} bg-opacity-10 mb-6 group-hover:bg-opacity-20 transition-all duration-300`}>
+                    <Icon className={`w-6 h-6 ${feature.color}`} />
+                  </div>
+                  <h3 className="text-xl font-heading font-semibold text-neutral-900 dark:text-white mb-3">
+                    {feature.title}
+                  </h3>
+                  <p className="text-neutral-600 dark:text-neutral-300 leading-relaxed">
+                    {feature.description}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* How It Works Section */}
+      <div className="scroll-reveal py-16 lg:py-24 bg-neutral-50 dark:bg-neutral-800/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-heading font-bold text-neutral-900 dark:text-white mb-4">
+              How It Works
+            </h2>
+            <p className="text-xl text-neutral-600 dark:text-neutral-300 max-w-3xl mx-auto">
+              From criteria to data in minutes, not months
+            </p>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {howItWorks.map((step, index) => {
+              const Icon = step.icon;
+              return (
+                <div key={index} className="relative">
+                  <div className="bg-white dark:bg-neutral-800 p-8 rounded-2xl shadow-soft border border-neutral-100 dark:border-neutral-700">
+                    <div className="text-center">
+                      <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-primary-500 to-accent-500 text-white rounded-2xl font-bold text-xl mb-6">
+                        {step.step}
+                      </div>
+                      <Icon className="w-12 h-12 text-primary-500 mx-auto mb-6" />
+                      <h3 className="text-xl font-heading font-semibold text-neutral-900 dark:text-white mb-4">
+                        {step.title}
+                      </h3>
+                      <p className="text-neutral-600 dark:text-neutral-300 leading-relaxed">
+                        {step.description}
+                      </p>
+                    </div>
+                  </div>
+                  {index < howItWorks.length - 1 && (
+                    <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2">
+                      <ArrowRight className="w-8 h-8 text-primary-300" />
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Use Cases Section */}
+      <div className="scroll-reveal py-16 lg:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-heading font-bold text-neutral-900 dark:text-white mb-4">
+              Built for Every Healthcare AI Team
+            </h2>
+            <p className="text-xl text-neutral-600 dark:text-neutral-300 max-w-3xl mx-auto">
+              Tailored solutions for your specific research and development needs
+            </p>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {useCases.map((useCase, index) => {
+              const Icon = useCase.icon;
+              const colorClass = {
+                primary: 'from-primary-500 to-primary-600',
+                secondary: 'from-secondary-500 to-secondary-600',
+                accent: 'from-accent-500 to-accent-600'
+              };
+              return (
+                <div
+                  key={index}
+                  className="relative overflow-hidden bg-white dark:bg-neutral-800 rounded-2xl shadow-soft hover:shadow-soft-lg transition-all duration-300 border border-neutral-100 dark:border-neutral-700 group"
+                >
+                  <div className={`absolute inset-0 bg-gradient-to-br ${colorClass[useCase.accent]} opacity-5 group-hover:opacity-10 transition-opacity duration-300`}></div>
+                  <div className="relative p-8">
+                    <Icon className={`w-12 h-12 text-${useCase.accent}-500 mb-6`} />
+                    <h3 className="text-xl font-heading font-semibold text-neutral-900 dark:text-white mb-4">
+                      {useCase.title}
+                    </h3>
+                    <p className="text-neutral-600 dark:text-neutral-300 leading-relaxed">
+                      {useCase.description}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Trust & Testimonials Section */}
+      <div className="scroll-reveal py-16 lg:py-24 bg-neutral-50 dark:bg-neutral-800/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-heading font-bold text-neutral-900 dark:text-white mb-4">
+              Trusted by Leading Research Teams
+            </h2>
+            <p className="text-xl text-neutral-600 dark:text-neutral-300 max-w-3xl mx-auto">
+              Join the growing community of AI researchers accelerating healthcare innovation
+            </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
+          {/* Trust Metrics */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            <div className="text-center">
+              <div className="text-4xl font-bold text-primary-500 mb-2">10x</div>
+              <div className="text-lg font-medium text-neutral-900 dark:text-white mb-1">Faster Data Access</div>
+              <div className="text-neutral-600 dark:text-neutral-300">vs traditional IRB approvals</div>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl font-bold text-secondary-500 mb-2">100%</div>
+              <div className="text-lg font-medium text-neutral-900 dark:text-white mb-1">Privacy Compliant</div>
+              <div className="text-neutral-600 dark:text-neutral-300">HIPAA, GDPR, and CCPA ready</div>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl font-bold text-accent-500 mb-2">86%</div>
+              <div className="text-lg font-medium text-neutral-900 dark:text-white mb-1">Reduction in Prep Time</div>
+              <div className="text-neutral-600 dark:text-neutral-300">from data request to model training</div>
+            </div>
+          </div>
+
+          {/* Trust Badges */}
+          <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
+            <div className="flex items-center space-x-2 bg-white dark:bg-neutral-800 px-4 py-2 rounded-lg">
+              <Shield className="w-5 h-5 text-primary-500" />
+              <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">HIPAA Compliant</span>
+            </div>
+            <div className="flex items-center space-x-2 bg-white dark:bg-neutral-800 px-4 py-2 rounded-lg">
+              <Lock className="w-5 h-5 text-primary-500" />
+              <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">Enterprise Security</span>
+            </div>
+            <div className="flex items-center space-x-2 bg-white dark:bg-neutral-800 px-4 py-2 rounded-lg">
+              <CheckCircle className="w-5 h-5 text-secondary-500" />
+              <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">Clinically Validated</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Final CTA Section */}
+      <div className="scroll-reveal py-16 lg:py-24">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl lg:text-4xl font-heading font-bold text-neutral-900 dark:text-white mb-6">
+            Ready to accelerate your research with synthetic data?
+          </h2>
+          <p className="text-xl text-neutral-600 dark:text-neutral-300 mb-8">
+            Join the future of healthcare AI development with unlimited, privacy-safe patient data
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <button
               onClick={handleStartDemo}
-              className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-500 text-white font-semibold rounded-lg hover:from-purple-700 hover:to-blue-600 transition-all duration-200 shadow-lg hover:shadow-xl"
+              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-500 to-accent-500 text-white font-semibold rounded-xl hover:from-primary-600 hover:to-accent-600 transition-all duration-300 shadow-soft-lg hover:shadow-soft-lg transform hover:scale-105"
             >
               <Rocket className="mr-2 w-5 h-5" />
-              Start Demo
+              Get Started Now
             </button>
             <LeadCaptureModal />
           </div>
-        </div>
-
-        {/* Vision Section */}
-        <div className="text-center mb-16 px-4">
-          <h2 className="text-3xl font-bold mb-8">Our Vision</h2>
-          <div className="max-w-4xl mx-auto space-y-6">
-            <p className="text-gray-700 leading-relaxed">
-              Synthetic Ascension is building the foundation for next-generation clinical innovation.
-              We generate lifelike synthetic Electronic Health Records that empower AI teams, medical
-              researchers, and regulators to iterate faster, safer, and earlier — without risking real
-              patient privacy.
-            </p>
-            <p className="text-gray-700 leading-relaxed">
-              Our agentic QA systems continuously audit synthetic reports and datasets for plausibility,
-              consistency, and completeness — ensuring every output is usable, traceable, and review-ready.
-              This isn't a replacement for real-world evidence — it's the way to design it better.
-            </p>
-          </div>
-        </div>
-
-        {/* Persona Section */}
-        <div className="mb-16 px-4">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold mb-4">{headline}</h2>
-            <p className="text-gray-600 max-w-3xl mx-auto">{description}</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {features.map((feature, i) => (
-              <FeatureCard key={i} icon={feature.icon} title={feature.title} desc={feature.desc} />
-            ))}
-          </div>
-        </div>
-
-        {/* Why Now Section */}
-        <div className="text-center mb-20 px-4">
-          <h2 className="text-3xl font-bold mb-8">Why Now?</h2>
-          <div className="max-w-4xl mx-auto space-y-6">
-            <p className="text-gray-700 leading-relaxed">
-              AI in healthcare is outpacing access to safe and structured data. Privacy laws like HIPAA and
-              GDPR are tightening. Regulators now demand explainability, fairness, and reproducibility in
-              clinical AI.
-            </p>
-            <p className="text-gray-700 leading-relaxed">
-              Synthetic Ascension is purpose-built for this inflection point — delivering the simulation,
-              auditability, and speed required to innovate responsibly.
-            </p>
-          </div>
-        </div>
-
-        {/* Industry Verticals */}
-        <div className="mb-20 px-4">
-          <h2 className="text-2xl font-bold text-center mb-12">Real Use Cases. Real Value.</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {verticals.map((vertical, i) => (
-              <FeatureCard key={i} icon={vertical.icon} title={vertical.title} desc={vertical.desc} />
-            ))}
-          </div>
-        </div>
-
-        {/* Impact Section */}
-        <div className="bg-gray-100 p-10 rounded-lg shadow-sm max-w-6xl mx-auto mb-20">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold mb-4">Why This Matters</h2>
-            <p className="text-gray-700 max-w-4xl mx-auto leading-relaxed">
-              The world's most vulnerable patients are often the least represented in data. We built
-              Synthetic Ascension not just for speed or scalability — but to enable safer innovation,
-              equitable research, and accessible care. No PHI. No delays. Just progress.
-            </p>
-          </div>
-        </div>
-
-        {/* Final CTA */}
-        <div className="text-center px-4">
-          <h2 className="text-2xl font-bold mb-4">Join the movement.</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto mb-8">
-            Synthetic Ascension is already powering dozens of teams across healthcare, life sciences,
-            and AI. Be part of the next wave of safer, smarter clinical innovation.
+          <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-6">
+            Contact us for a custom demo — see our synthetic EHR in action
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <LeadCaptureModal />
-            <Link
-              to="/demo"
-              className="inline-flex items-center px-8 py-3 border border-purple-600 text-purple-600 font-semibold rounded-lg hover:bg-purple-50 transition-colors"
-            >
-              Explore Demo
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Link>
-          </div>
         </div>
       </div>
     </div>
