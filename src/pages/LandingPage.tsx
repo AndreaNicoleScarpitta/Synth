@@ -1,36 +1,54 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Beaker, Shield, Zap, Database, Activity, Brain } from 'lucide-react'
+import { Shield, Zap, Database, Activity, Brain, Mail, User, Beaker } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { DNALogo } from '@/components/DNALogo'
+import { MatrixBackground } from '@/components/MatrixBackground'
 
 export function LandingPage() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-black-950 text-gold-400 relative">
+      <MatrixBackground />
+      
       {/* Hero Section */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-signal-violet/5 to-ascension-blue/10"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-black-900/80 to-black-950/90"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
           <div className="text-center">
-            <h1 className="font-syne text-5xl md:text-6xl font-extrabold text-ascension-blue mb-6 leading-tight">
+            {/* DNA Logo */}
+            <div className="flex justify-center mb-8">
+              <DNALogo size="xl" className="animate-float" />
+            </div>
+            
+            <h1 className="font-syne text-5xl md:text-7xl font-extrabold text-gold-400 mb-6 leading-tight animate-glow-pulse">
               Synthetic Ascension
             </h1>
-            <p className="text-2xl font-syne font-semibold text-slate-gray mb-4 max-w-3xl mx-auto">
-              Simulate. Validate. Ascend.
+            <p className="text-2xl font-syne font-semibold text-gold-300 mb-4 max-w-3xl mx-auto">
+              Decode. Synthesize. Evolve.
             </p>
-            <p className="text-lg font-inter text-gray-600 mb-8 max-w-2xl mx-auto">
-              Your launchpad to validated, privacy-safe EHR simulation—fueling the next generation of AI, research, and healthtech.
+            <p className="text-lg font-inter text-gold-200/80 mb-8 max-w-2xl mx-auto">
+              Next-generation synthetic EHR platform powered by AI—where genetic data meets matrix intelligence.
             </p>
             
+            {/* Early Sign Up CTA */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-              <Button asChild variant="brand" size="xl" className="animate-pulse-glow">
-                <Link to="/demo">
-                  Launch Demo
-                  <ArrowRight className="ml-2 w-5 h-5" />
+              <Button 
+                asChild 
+                className="bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 text-black-950 font-bold py-3 px-8 rounded-lg shadow-lg animate-glow-pulse"
+                size="xl"
+              >
+                <Link to="/signup">
+                  <User className="mr-2 w-5 h-5" />
+                  Get Early Access
                 </Link>
               </Button>
-              <Button variant="brandOutline" size="xl">
-                Design Partnership Interest
+              <Button 
+                variant="outline" 
+                size="xl"
+                className="border-gold-400 text-gold-400 hover:bg-gold-400/10"
+              >
+                <Mail className="mr-2 w-5 h-5" />
+                Join Waitlist
               </Button>
             </div>
           </div>
@@ -38,107 +56,125 @@ export function LandingPage() {
       </section>
 
       {/* Features Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-16">
-          <h2 className="font-syne text-3xl md:text-4xl font-bold text-ascension-blue mb-4">
-            Enterprise-Grade Synthetic EHR Platform
+          <h2 className="font-syne text-3xl md:text-4xl font-bold text-gold-400 mb-4">
+            Matrix-Grade Synthetic Intelligence
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Generate realistic, privacy-compliant patient data with advanced AI validation and comprehensive analytics.
+          <p className="text-lg text-gold-200/80 max-w-3xl mx-auto">
+            Harness the power of genetic algorithms and neural networks to generate unprecedented synthetic medical data.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <Card className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg">
+          <Card className="group hover:shadow-2xl transition-all duration-500 bg-black-900/50 border border-gold-600/20 backdrop-blur-sm hover:border-gold-400/40">
             <CardHeader>
-              <div className="w-12 h-12 bg-gradient-to-br from-signal-violet to-purple-600 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <Database className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 bg-gradient-to-br from-gold-500 to-gold-600 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform animate-glow-pulse">
+                <Database className="w-6 h-6 text-black-950" />
               </div>
-              <CardTitle className="font-syne text-xl">Synthetic Patient Generation</CardTitle>
-              <CardDescription>
-                Create realistic patient cohorts with complex medical histories, demographics, and clinical pathways.
+              <CardTitle className="font-syne text-xl text-gold-300">Neural EHR Genesis</CardTitle>
+              <CardDescription className="text-gold-200/70">
+                Generate hyper-realistic patient cohorts using advanced genetic algorithms and deep neural networks.
               </CardDescription>
             </CardHeader>
           </Card>
 
-          <Card className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg">
+          <Card className="group hover:shadow-2xl transition-all duration-500 bg-black-900/50 border border-gold-600/20 backdrop-blur-sm hover:border-gold-400/40">
             <CardHeader>
-              <div className="w-12 h-12 bg-gradient-to-br from-biotech-green to-green-600 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <Shield className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 bg-gradient-to-br from-gold-500 to-gold-600 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform animate-glow-pulse">
+                <Shield className="w-6 h-6 text-black-950" />
               </div>
-              <CardTitle className="font-syne text-xl">Privacy-First Architecture</CardTitle>
-              <CardDescription>
-                HIPAA-compliant synthetic data generation with zero risk of patient privacy exposure.
+              <CardTitle className="font-syne text-xl text-gold-300">Quantum Privacy Shield</CardTitle>
+              <CardDescription className="text-gold-200/70">
+                Unhackable privacy architecture with quantum-encrypted synthetic data generation protocols.
               </CardDescription>
             </CardHeader>
           </Card>
 
-          <Card className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg">
+          <Card className="group hover:shadow-2xl transition-all duration-500 bg-black-900/50 border border-gold-600/20 backdrop-blur-sm hover:border-gold-400/40">
             <CardHeader>
-              <div className="w-12 h-12 bg-gradient-to-br from-ascension-blue to-blue-600 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <Brain className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 bg-gradient-to-br from-gold-500 to-gold-600 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform animate-glow-pulse">
+                <Brain className="w-6 h-6 text-black-950" />
               </div>
-              <CardTitle className="font-syne text-xl">AI-Powered Validation</CardTitle>
-              <CardDescription>
-                Advanced statistical validation and bias detection to ensure data quality and representativeness.
+              <CardTitle className="font-syne text-xl text-gold-300">AI Consciousness Engine</CardTitle>
+              <CardDescription className="text-gold-200/70">
+                Self-learning validation systems that evolve with your data, ensuring unprecedented accuracy.
               </CardDescription>
             </CardHeader>
           </Card>
 
-          <Card className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg">
+          <Card className="group hover:shadow-2xl transition-all duration-500 bg-black-900/50 border border-gold-600/20 backdrop-blur-sm hover:border-gold-400/40">
             <CardHeader>
-              <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <Activity className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 bg-gradient-to-br from-gold-500 to-gold-600 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform animate-glow-pulse">
+                <Activity className="w-6 h-6 text-black-950" />
               </div>
-              <CardTitle className="font-syne text-xl">Real-time Analytics</CardTitle>
-              <CardDescription>
-                Interactive dashboards and comprehensive audit trails for complete transparency and control.
+              <CardTitle className="font-syne text-xl text-gold-300">Holographic Analytics</CardTitle>
+              <CardDescription className="text-gold-200/70">
+                Multi-dimensional data visualization with real-time matrix-style analytical interfaces.
               </CardDescription>
             </CardHeader>
           </Card>
 
-          <Card className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg">
+          <Card className="group hover:shadow-2xl transition-all duration-500 bg-black-900/50 border border-gold-600/20 backdrop-blur-sm hover:border-gold-400/40">
             <CardHeader>
-              <div className="w-12 h-12 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <Zap className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 bg-gradient-to-br from-gold-500 to-gold-600 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform animate-glow-pulse">
+                <Zap className="w-6 h-6 text-black-950" />
               </div>
-              <CardTitle className="font-syne text-xl">Scalable Infrastructure</CardTitle>
-              <CardDescription>
-                Generate cohorts from hundreds to millions of patients with enterprise-grade performance.
+              <CardTitle className="font-syne text-xl text-gold-300">Infinite Scalability</CardTitle>
+              <CardDescription className="text-gold-200/70">
+                Cloud-native architecture capable of generating billions of synthetic patients instantaneously.
               </CardDescription>
             </CardHeader>
           </Card>
 
-          <Card className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg">
+          <Card className="group hover:shadow-2xl transition-all duration-500 bg-black-900/50 border border-gold-600/20 backdrop-blur-sm hover:border-gold-400/40">
             <CardHeader>
-              <div className="w-12 h-12 bg-gradient-to-br from-pink-500 to-rose-500 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <Beaker className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 bg-gradient-to-br from-gold-500 to-gold-600 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform animate-glow-pulse">
+                <Beaker className="w-6 h-6 text-black-950" />
               </div>
-              <CardTitle className="font-syne text-xl">Research Ready</CardTitle>
-              <CardDescription>
-                Pre-configured templates for clinical trials, drug discovery, and healthcare AI development.
+              <CardTitle className="font-syne text-xl text-gold-300">Research Nexus</CardTitle>
+              <CardDescription className="text-gold-200/70">
+                Pre-loaded with genetic markers and clinical pathways for breakthrough medical research.
               </CardDescription>
             </CardHeader>
           </Card>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="bg-gradient-to-r from-signal-violet to-ascension-blue text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      {/* Final CTA Section */}
+      <section className="relative bg-gradient-to-r from-black-950 via-black-900 to-black-950">
+        <div className="absolute inset-0 bg-gradient-to-r from-gold-600/10 via-gold-500/5 to-gold-600/10"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center">
-            <h2 className="font-syne text-3xl md:text-4xl font-bold mb-6">
-              Ready to Transform Your Healthcare Data?
+            <div className="flex justify-center mb-6">
+              <DNALogo size="lg" className="animate-dna-helix" />
+            </div>
+            <h2 className="font-syne text-3xl md:text-4xl font-bold mb-6 text-gold-400">
+              Ascend to the Next Level
             </h2>
-            <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
-              Join leading healthcare organizations and research institutions already using Synthetic Ascension.
+            <p className="text-xl mb-8 max-w-2xl mx-auto text-gold-200/80">
+              Join the matrix of medical intelligence. Your synthetic evolution begins now.
             </p>
-            <Button asChild variant="secondary" size="xl" className="bg-white text-ascension-blue hover:bg-gray-100">
-              <Link to="/demo">
-                Start Your Demo
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button 
+                asChild 
+                className="bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 text-black-950 font-bold py-3 px-8 rounded-lg shadow-xl animate-glow-pulse"
+                size="xl"
+              >
+                <Link to="/signup">
+                  <User className="mr-2 w-5 h-5" />
+                  Enter the Matrix
+                </Link>
+              </Button>
+              <Button 
+                variant="outline"
+                size="xl"
+                className="border-gold-400 text-gold-400 hover:bg-gold-400/10 hover:border-gold-300"
+              >
+                <Mail className="mr-2 w-5 h-5" />
+                Request Access
+              </Button>
+            </div>
           </div>
         </div>
       </section>
