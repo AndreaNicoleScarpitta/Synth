@@ -1495,8 +1495,7 @@ function MainApp() {
                 style={styles.secondaryButton}
                 className="secondary-button"
                 onClick={() => {
-                  console.log('Join Waitlist clicked!');
-                  setShowWaitlist(true);
+                  alert('Waitlist signup form coming soon! In the meantime, please check back later.');
                 }}
               >
                 Join Waitlist
