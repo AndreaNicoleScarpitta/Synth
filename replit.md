@@ -39,6 +39,15 @@ An advanced AI-powered Electronic Health Record (EHR) synthesis platform that ge
 
 ## Recent Changes
 
+### 2025-07-01 - Frontend Cleanup & TypeScript Migration 
+✅ **Complete Frontend Cleanup** - Removed all duplicate JSX files and migrated to TypeScript-only architecture
+✅ **TypeScript Migration** - Converted key components (WaitlistModal, DynamicToast, HelpBubble) to TypeScript with proper type definitions
+✅ **Project Structure Cleanup** - Removed duplicate frontend files, cleaned up attached assets folder, and removed unused backend files
+✅ **Workflow Optimization** - Streamlined to two core workflows: React Frontend (Port 5000) and Integrated Backend Server (Port 8003)
+✅ **Import Updates** - Fixed all import statements to use TypeScript files instead of JSX
+✅ **Asset Cleanup** - Removed outdated pasted content files and extracted backend duplicates
+✅ **Architecture Simplification** - Focused on single primary backend (Integrated Backend Server) for consistency
+
 ### 2025-07-01 - Waitlist Modal System Completion & Agent Architecture Overview
 ✅ **Professional Waitlist Modal** - Completely redesigned with healthcare-grade design system 
 ✅ **Clean Modal Structure** - Fixed rendering issues by simplifying component structure and removing problematic createPortal
@@ -190,10 +199,8 @@ mcp_analyze_cohort    - Analyze demographics and clinical data
 - Document all API changes and architectural decisions
 
 ## Deployment Configuration
-- **Frontend:** Port 5000 (React + Vite)
-- **Primary API:** Port 8002 (FastAPI + MCP)
-- **Backup API:** Port 8000 (Simple FastAPI)
-- **Legacy API:** Port 8080 (Comprehensive EHR)
+- **Frontend:** Port 5000 (React + Vite + TypeScript)
+- **Primary API:** Port 8003 (Integrated Backend Server - All-in-one multi-agent system)
 
 ## Integration Points
 1. **React ↔ FastAPI:** Standard HTTP/JSON communication

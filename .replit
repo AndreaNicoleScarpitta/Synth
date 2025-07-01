@@ -18,40 +18,11 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "API Server"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
 args = "React Frontend"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Enhanced API Server"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Comprehensive EHR API"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Simple API Server"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "FastAPI MCP Server"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
 args = "Integrated Backend Server"
-
-[[workflows.workflow]]
-name = "API Server"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "python api_server.py"
-waitForPort = 8000
 
 [[workflows.workflow]]
 name = "React Frontend"
@@ -61,42 +32,6 @@ author = "agent"
 task = "shell.exec"
 args = "npx vite --host 0.0.0.0 --port 5000"
 waitForPort = 5000
-
-[[workflows.workflow]]
-name = "Enhanced API Server"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "python api_server_enhanced.py"
-waitForPort = 8000
-
-[[workflows.workflow]]
-name = "Comprehensive EHR API"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "python api_server_comprehensive.py"
-waitForPort = 8080
-
-[[workflows.workflow]]
-name = "Simple API Server"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "python simple_api_server.py"
-waitForPort = 8000
-
-[[workflows.workflow]]
-name = "FastAPI MCP Server"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "python fastapi_mcp_server.py"
-waitForPort = 8002
 
 [[workflows.workflow]]
 name = "Integrated Backend Server"
