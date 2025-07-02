@@ -1,0 +1,869 @@
+openapi: 3.0.3
+info:
+  title: Synthetic Ascension EHR Platform API
+  description: |
+    Advanced AI-powered Electronic Health Record (EHR) synthesis platform with comprehensive agentic architecture.
+    
+    ## Features
+    - 50+ specialized agents across 6 categories
+    - 6-phase pipeline execution with real-time monitoring  
+    - Enterprise-grade privacy and security safeguards
+    - Full Langflow integration for visual workflow editing
+    - Clinical realism certification and compliance validation
+    
+    ## Agent Architecture
+    - **Cohort Constructor (11 agents)** - Demographics and population modeling
+    - **Clinical Journey Generator (11 agents)** - Healthcare pathways and encounters  
+    - **Data Robustness & Noise (10 agents)** - Privacy protection and data variability
+    - **QA & Validation (13 agents)** - Quality assurance and compliance verification
+    - **Explanation & Provenance (13 agents)** - Reporting and audit trail management
+    - **Supervision & Orchestration (9 agents)** - System monitoring and coordination
+    
+    ## Security & Privacy
+    - Differential privacy with k-anonymity scoring
+    - Clinical realism certification with human-in-the-loop validation
+    - HIPAA, FDA, and healthcare regulatory compliance
+    - Re-identification risk assessment and mitigation
+  version: 3.0.0
+  contact:
+    name: Synthetic Ascension API Support
+    url: https://synthetic-ascension.com/support
+    email: api-support@synthetic-ascension.com
+  license:
+    name: Proprietary
+    url: https://synthetic-ascension.com/license
+
+servers:
+  - url: http://localhost:8004
+    description: Enhanced Backend Server V3 (Primary)
+  - url: http://localhost:8003  
+    description: Integrated Backend Server (Legacy)
+  - url: http://localhost:5000
+    description: React Frontend
+
+tags:
+  - name: Core Generation
+    description: Primary EHR data generation endpoints
+  - name: Job Management
+    description: Generation job tracking and status
+  - name: Agent Architecture
+    description: Agent system information and monitoring
+  - name: Langflow Integration
+    description: Visual workflow export and execution
+  - name: UX Dashboard
+    description: Frontend-optimized UI endpoints
+  - name: System Monitoring
+    description: Performance metrics and health checks
+  - name: Patient Data
+    description: Generated patient information access
+  - name: Workflow Templates
+    description: Pre-configured generation workflows
+
+paths:
+  # Core Generation Endpoints
+  /api/v3/generate:
+    post:
+      tags: [Core Generation]
+      summary: Generate Synthetic EHR Data
+      description: |
+        Generate comprehensive synthetic EHR data using the complete 50+ agent pipeline
+        with 6-phase execution, privacy safeguards, and clinical validation.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnhancedGenerationRequest'
+            examples:
+              diabetes_cohort:
+                summary: Diabetes Patient Cohort
+                value:
+                  use_case: "comprehensive_ehr_v2"
+                  population_size: 100
+                  condition: "diabetes"
+                  enable_adversarial_testing: true
+                  require_clinical_review: true
+                  privacy_level: "high"
+              hypertension_study:
+                summary: Hypertension Research Study
+                value:
+                  use_case: "research_study"
+                  population_size: 500
+                  condition: "hypertension"
+                  pipeline_config:
+                    focus_areas: ["medication_adherence", "lifestyle_factors"]
+                  enable_adversarial_testing: true
+                  privacy_level: "medium"
+      responses:
+        '200':
+          description: Generation job started successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobStartResponse'
+        '400':
+          description: Invalid request parameters
+        '500':
+          description: Internal server error
+
+  /api/v3/jobs/{job_id}:
+    get:
+      tags: [Job Management]
+      summary: Get Enhanced Job Status
+      description: Get detailed job status with phase-by-phase progress tracking
+      parameters:
+        - name: job_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: Unique job identifier
+      responses:
+        '200':
+          description: Job status retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnhancedJobStatus'
+        '404':
+          description: Job not found
+
+  /api/v3/jobs/{job_id}/results:
+    get:
+      tags: [Job Management]
+      summary: Get Detailed Job Results
+      description: Get comprehensive results including privacy assessments and clinical reviews
+      parameters:
+        - name: job_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Job results retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobResults'
+
+  # Agent Architecture Endpoints
+  /api/v3/architecture:
+    get:
+      tags: [Agent Architecture]
+      summary: Get Agent Architecture Overview
+      description: Complete overview of all 50+ agents and their roles
+      responses:
+        '200':
+          description: Agent architecture retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentArchitecture'
+
+  /api/v3/analytics:
+    get:
+      tags: [System Monitoring]
+      summary: Get Platform Analytics
+      description: Enhanced platform analytics with agent performance by role
+      responses:
+        '200':
+          description: Analytics retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformAnalytics'
+
+  # Langflow Integration Endpoints
+  /api/v3/langflow/export:
+    get:
+      tags: [Langflow Integration]
+      summary: Export Langflow Workflows
+      description: Export all agent workflows as Langflow-compatible JSON files
+      responses:
+        '200':
+          description: Workflows exported successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LangflowExportResponse'
+
+  /api/v3/langflow/download:
+    get:
+      tags: [Langflow Integration]
+      summary: Download Langflow Export
+      description: Download complete Langflow export as ZIP file
+      responses:
+        '200':
+          description: ZIP file download
+          content:
+            application/zip:
+              schema:
+                type: string
+                format: binary
+
+  /api/v3/langflow/templates:
+    get:
+      tags: [Langflow Integration]
+      summary: Get Langflow Templates
+      description: Get available Langflow workflow templates
+      responses:
+        '200':
+          description: Templates retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LangflowTemplates'
+
+  /api/v3/langflow/execute:
+    post:
+      tags: [Langflow Integration]
+      summary: Execute Langflow Workflow
+      description: Execute a Langflow workflow with backend integration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LangflowExecutionRequest'
+      responses:
+        '200':
+          description: Workflow execution started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobStartResponse'
+
+  # UX Dashboard Endpoints
+  /api/ux/dashboard/summary:
+    get:
+      tags: [UX Dashboard]
+      summary: Get Dashboard Summary
+      description: Overview data for main dashboard UI
+      responses:
+        '200':
+          description: Dashboard summary retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardSummary'
+
+  /api/ux/dashboard/recent-jobs:
+    get:
+      tags: [UX Dashboard]
+      summary: Get Recent Jobs
+      description: Recent jobs for dashboard display
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 5
+            minimum: 1
+            maximum: 50
+          description: Number of recent jobs to return
+      responses:
+        '200':
+          description: Recent jobs retrieved
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JobCard'
+
+  /api/ux/agents/status:
+    get:
+      tags: [UX Dashboard]
+      summary: Get Agent Status
+      description: Agent status for monitoring dashboard
+      responses:
+        '200':
+          description: Agent status retrieved
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AgentStatusCard'
+
+  /api/ux/system/metrics:
+    get:
+      tags: [System Monitoring]
+      summary: Get System Metrics
+      description: System performance metrics for monitoring UI
+      responses:
+        '200':
+          description: System metrics retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemMetrics'
+
+  /api/ux/patients/preview:
+    get:
+      tags: [Patient Data]
+      summary: Get Patient Previews
+      description: Patient data previews for UI display
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+        - name: job_id
+          in: query
+          schema:
+            type: string
+          description: Filter by specific job ID
+      responses:
+        '200':
+          description: Patient previews retrieved
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PatientPreview'
+
+  /api/ux/templates:
+    get:
+      tags: [Workflow Templates]
+      summary: Get Workflow Templates
+      description: Available workflow templates for UI selection
+      responses:
+        '200':
+          description: Templates retrieved
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WorkflowTemplate'
+
+components:
+  schemas:
+    EnhancedGenerationRequest:
+      type: object
+      required: [use_case, population_size, condition]
+      properties:
+        use_case:
+          type: string
+          description: Target use case for generation
+          default: "comprehensive_ehr_v2"
+          examples: ["comprehensive_ehr_v2", "research_study", "clinical_trial"]
+        population_size:
+          type: integer
+          description: Number of patients to generate
+          minimum: 1
+          maximum: 10000
+          default: 100
+        condition:
+          type: string
+          description: Primary medical condition
+          examples: ["diabetes", "hypertension", "heart_disease", "cancer"]
+        pipeline_config:
+          type: object
+          description: Advanced pipeline configuration
+          additionalProperties: true
+        agent_selection:
+          type: array
+          items:
+            type: string
+          description: Specific agents to include (empty = all agents)
+        enable_adversarial_testing:
+          type: boolean
+          description: Enable adversarial robustness testing
+          default: true
+        require_clinical_review:
+          type: boolean
+          description: Require human clinical validation
+          default: true
+        privacy_level:
+          type: string
+          enum: [low, medium, high]
+          description: Level of privacy protection
+          default: "high"
+
+    EnhancedJobStatus:
+      type: object
+      properties:
+        job_id:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum: [pending, running, completed, failed, cancelled]
+        started_at:
+          type: string
+          format: date-time
+        ended_at:
+          type: string
+          format: date-time
+          nullable: true
+        progress:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 100
+        current_phase:
+          type: string
+          nullable: true
+          examples: ["Literature Mining", "Cohort Construction", "Clinical Journey Generation"]
+        current_agent:
+          type: string
+          nullable: true
+        result_summary:
+          type: object
+          nullable: true
+        agent_runs:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentRun'
+        phase_results:
+          type: object
+          additionalProperties: true
+
+    JobResults:
+      type: object
+      properties:
+        job_id:
+          type: string
+          format: uuid
+        status:
+          type: string
+        execution_summary:
+          type: object
+        phase_results:
+          type: object
+        agent_execution_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentRun'
+        privacy_assessments:
+          type: array
+          items:
+            $ref: '#/components/schemas/PrivacyAssessment'
+        clinical_reviews:
+          type: array
+          items:
+            type: string
+        performance_metrics:
+          $ref: '#/components/schemas/PerformanceMetrics'
+
+    AgentRun:
+      type: object
+      properties:
+        agent_name:
+          type: string
+        agent_role:
+          type: string
+          enum: [doer, coordinator, adversarial]
+        status:
+          type: string
+          enum: [success, failed, timeout]
+        execution_time_ms:
+          type: integer
+        input_data:
+          type: object
+        output_data:
+          type: object
+        privacy_assessment:
+          $ref: '#/components/schemas/PrivacyAssessment'
+        clinical_review_status:
+          type: string
+
+    PrivacyAssessment:
+      type: object
+      properties:
+        k_anonymity_score:
+          type: number
+          format: float
+        differential_privacy_epsilon:
+          type: number
+          format: float
+        re_identification_risk:
+          type: string
+          enum: [low, medium, high]
+        privacy_safeguards_applied:
+          type: array
+          items:
+            type: string
+
+    PerformanceMetrics:
+      type: object
+      properties:
+        total_agents_executed:
+          type: integer
+        successful_executions:
+          type: integer
+        average_execution_time_ms:
+          type: number
+          format: float
+
+    AgentArchitecture:
+      type: object
+      properties:
+        total_agents:
+          type: integer
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentCategory'
+        role_distribution:
+          $ref: '#/components/schemas/RoleDistribution'
+        pipeline_phases:
+          type: array
+          items:
+            $ref: '#/components/schemas/PipelinePhase'
+
+    AgentCategory:
+      type: object
+      properties:
+        name:
+          type: string
+        agent_count:
+          type: integer
+        description:
+          type: string
+        agents:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentInfo'
+
+    AgentInfo:
+      type: object
+      properties:
+        name:
+          type: string
+        role:
+          type: string
+          enum: [doer, coordinator, adversarial]
+        description:
+          type: string
+        input_types:
+          type: array
+          items:
+            type: string
+        output_types:
+          type: array
+          items:
+            type: string
+
+    RoleDistribution:
+      type: object
+      properties:
+        doer_agents:
+          type: integer
+        coordinator_agents:
+          type: integer
+        adversarial_agents:
+          type: integer
+
+    PipelinePhase:
+      type: object
+      properties:
+        phase_number:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        estimated_duration:
+          type: string
+
+    JobStartResponse:
+      type: object
+      properties:
+        job_id:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum: [started]
+        message:
+          type: string
+        estimated_completion_time:
+          type: string
+        check_status_url:
+          type: string
+
+    PlatformAnalytics:
+      type: object
+      properties:
+        platform_version:
+          type: string
+        analytics_timestamp:
+          type: string
+          format: date-time
+        job_statistics:
+          type: object
+          additionalProperties:
+            type: integer
+        agent_performance_by_role:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentPerformance'
+        architecture_metrics:
+          $ref: '#/components/schemas/AgentArchitecture'
+        system_health:
+          $ref: '#/components/schemas/SystemHealth'
+
+    AgentPerformance:
+      type: object
+      properties:
+        role:
+          type: string
+        total_executions:
+          type: integer
+        avg_execution_time_ms:
+          type: number
+          format: float
+        success_rate:
+          type: number
+          format: float
+
+    SystemHealth:
+      type: object
+      properties:
+        total_jobs_processed:
+          type: integer
+        system_uptime:
+          type: string
+        agent_availability:
+          type: string
+
+    LangflowExportResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+        export_directory:
+          type: string
+        download_url:
+          type: string
+        files_exported:
+          type: array
+          items:
+            type: string
+        langflow_compatibility:
+          type: string
+        agent_count:
+          type: integer
+        workflow_phases:
+          type: integer
+
+    LangflowTemplates:
+      type: object
+      properties:
+        templates:
+          type: array
+          items:
+            $ref: '#/components/schemas/LangflowTemplate'
+        langflow_setup_instructions:
+          $ref: '#/components/schemas/LangflowSetupInstructions'
+
+    LangflowTemplate:
+      type: object
+      properties:
+        name:
+          type: string
+        id:
+          type: string
+        description:
+          type: string
+        phases:
+          type: integer
+        agent_count:
+          type: integer
+        estimated_runtime:
+          type: string
+        complexity:
+          type: string
+          enum: [beginner, intermediate, advanced]
+
+    LangflowSetupInstructions:
+      type: object
+      properties:
+        install:
+          type: string
+        run:
+          type: string
+        import_url:
+          type: string
+        backend_connection:
+          type: string
+
+    LangflowExecutionRequest:
+      type: object
+      properties:
+        id:
+          type: string
+        population_size:
+          type: integer
+        condition:
+          type: string
+        config:
+          type: object
+        selected_agents:
+          type: array
+          items:
+            type: string
+
+    # UX Models
+    DashboardSummary:
+      type: object
+      properties:
+        total_jobs:
+          type: integer
+        active_jobs:
+          type: integer
+        completed_jobs:
+          type: integer
+        total_patients_generated:
+          type: integer
+        system_status:
+          type: string
+        last_updated:
+          type: string
+          format: date-time
+
+    JobCard:
+      type: object
+      properties:
+        job_id:
+          type: string
+          format: uuid
+        job_name:
+          type: string
+        status:
+          type: string
+          enum: [running, completed, failed]
+        progress:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 100
+        current_phase:
+          type: string
+          nullable: true
+        started_at:
+          type: string
+          format: date-time
+        estimated_completion:
+          type: string
+          format: date-time
+          nullable: true
+        population_size:
+          type: integer
+        condition:
+          type: string
+
+    AgentStatusCard:
+      type: object
+      properties:
+        agent_name:
+          type: string
+        agent_type:
+          type: string
+        status:
+          type: string
+        last_execution:
+          type: string
+          format: date-time
+          nullable: true
+        success_rate:
+          type: number
+          format: float
+        avg_execution_time:
+          type: number
+          format: float
+        total_executions:
+          type: integer
+
+    SystemMetrics:
+      type: object
+      properties:
+        cpu_usage:
+          type: number
+          format: float
+        memory_usage:
+          type: number
+          format: float
+        active_agents:
+          type: integer
+        queue_depth:
+          type: integer
+        avg_response_time:
+          type: number
+          format: float
+        system_uptime:
+          type: string
+
+    PatientPreview:
+      type: object
+      properties:
+        patient_id:
+          type: string
+          format: uuid
+        demographics:
+          type: object
+          additionalProperties: true
+        conditions:
+          type: array
+          items:
+            type: string
+        last_encounter:
+          type: string
+          nullable: true
+        data_quality_score:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 100
+        generated_at:
+          type: string
+          format: date-time
+
+    WorkflowTemplate:
+      type: object
+      properties:
+        template_id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+        complexity:
+          type: string
+          enum: [beginner, intermediate, advanced]
+        estimated_runtime:
+          type: string
+        agent_count:
+          type: integer
+        default_population_size:
+          type: integer
+        supported_conditions:
+          type: array
+          items:
+            type: string
+
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - ApiKeyAuth: []
+  - BearerAuth: []
