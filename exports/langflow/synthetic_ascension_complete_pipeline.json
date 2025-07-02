@@ -1,11 +1,11 @@
 {
   "description": "Complete Synthetic Ascension EHR Generation Pipeline - All 50+ Agents",
   "name": "SyntheticAscension_Complete_Pipeline",
-  "id": "f42b5864-439b-48a5-a5e0-9b505fea6797",
+  "id": "6a8d2d9f-70c5-4a56-b9f1-a50ee79058a4",
   "data": {
     "nodes": [
       {
-        "id": "113ec81c-9317-491c-a273-999422fd80cc",
+        "id": "08a69982-013b-4906-b566-3a0729a22221",
         "type": "genericNode",
         "position": {
           "x": 150,
@@ -46,7 +46,7 @@
               }
             ]
           },
-          "id": "113ec81c-9317-491c-a273-999422fd80cc"
+          "id": "08a69982-013b-4906-b566-3a0729a22221"
         },
         "selected": false,
         "positionAbsolute": {
@@ -55,7 +55,7 @@
         }
       },
       {
-        "id": "5a062a95-b345-4dd1-b5b2-2a849b61b216",
+        "id": "84bb0550-8d48-4dc2-a532-3808def23ccf",
         "type": "genericNode",
         "position": {
           "x": 150,
@@ -96,7 +96,7 @@
               }
             ]
           },
-          "id": "5a062a95-b345-4dd1-b5b2-2a849b61b216"
+          "id": "84bb0550-8d48-4dc2-a532-3808def23ccf"
         },
         "selected": false,
         "positionAbsolute": {
@@ -105,7 +105,7 @@
         }
       },
       {
-        "id": "4456503b-4394-4060-8089-36ac7e219908",
+        "id": "46782f7f-15b8-4ea0-b91b-6996c9a15109",
         "type": "genericNode",
         "position": {
           "x": 150,
@@ -146,7 +146,7 @@
               }
             ]
           },
-          "id": "4456503b-4394-4060-8089-36ac7e219908"
+          "id": "46782f7f-15b8-4ea0-b91b-6996c9a15109"
         },
         "selected": false,
         "positionAbsolute": {
@@ -155,7 +155,7 @@
         }
       },
       {
-        "id": "2bf8f5ef-5cab-409a-ac36-2162f9116ba9",
+        "id": "670c80a9-9f8f-4096-a321-6f591145ff21",
         "type": "genericNode",
         "position": {
           "x": 150,
@@ -196,7 +196,7 @@
               }
             ]
           },
-          "id": "2bf8f5ef-5cab-409a-ac36-2162f9116ba9"
+          "id": "670c80a9-9f8f-4096-a321-6f591145ff21"
         },
         "selected": false,
         "positionAbsolute": {
@@ -205,7 +205,7 @@
         }
       },
       {
-        "id": "023ae26f-461d-4751-bf75-a9a16351010f",
+        "id": "50f291b9-b29e-4cd5-b76b-b077aa8e346e",
         "type": "genericNode",
         "position": {
           "x": 150,
@@ -246,7 +246,7 @@
               }
             ]
           },
-          "id": "023ae26f-461d-4751-bf75-a9a16351010f"
+          "id": "50f291b9-b29e-4cd5-b76b-b077aa8e346e"
         },
         "selected": false,
         "positionAbsolute": {
@@ -255,7 +255,7 @@
         }
       },
       {
-        "id": "b86b836d-2be7-49e9-b14b-e435d29a798d",
+        "id": "8ba24f4a-db1d-4c73-b969-99760a650e62",
         "type": "genericNode",
         "position": {
           "x": 150,
@@ -296,7 +296,7 @@
               }
             ]
           },
-          "id": "b86b836d-2be7-49e9-b14b-e435d29a798d"
+          "id": "8ba24f4a-db1d-4c73-b969-99760a650e62"
         },
         "selected": false,
         "positionAbsolute": {
@@ -307,16 +307,16 @@
     ],
     "edges": [
       {
-        "source": "113ec81c-9317-491c-a273-999422fd80cc",
-        "sourceHandle": "113ec81c-9317-491c-a273-999422fd80cc-output",
-        "target": "5a062a95-b345-4dd1-b5b2-2a849b61b216",
-        "targetHandle": "5a062a95-b345-4dd1-b5b2-2a849b61b216-input",
+        "source": "08a69982-013b-4906-b566-3a0729a22221",
+        "sourceHandle": "08a69982-013b-4906-b566-3a0729a22221-output",
+        "target": "84bb0550-8d48-4dc2-a532-3808def23ccf",
+        "targetHandle": "84bb0550-8d48-4dc2-a532-3808def23ccf-input",
         "type": "smoothstep",
-        "id": "7bb7b8ce-fd9c-4c80-97b9-cb789161f746",
+        "id": "cd4dbfda-30e3-402a-93f4-c2261bfa5af7",
         "data": {
           "targetHandle": {
             "fieldName": "input_data",
-            "id": "5a062a95-b345-4dd1-b5b2-2a849b61b216",
+            "id": "84bb0550-8d48-4dc2-a532-3808def23ccf",
             "inputTypes": [
               "Data"
             ],
@@ -324,7 +324,7 @@
           },
           "sourceHandle": {
             "fieldName": "phase_output",
-            "id": "113ec81c-9317-491c-a273-999422fd80cc",
+            "id": "08a69982-013b-4906-b566-3a0729a22221",
             "outputTypes": [
               "Data"
             ],
@@ -334,16 +334,16 @@
         "selected": false
       },
       {
-        "source": "5a062a95-b345-4dd1-b5b2-2a849b61b216",
-        "sourceHandle": "5a062a95-b345-4dd1-b5b2-2a849b61b216-output",
-        "target": "4456503b-4394-4060-8089-36ac7e219908",
-        "targetHandle": "4456503b-4394-4060-8089-36ac7e219908-input",
+        "source": "84bb0550-8d48-4dc2-a532-3808def23ccf",
+        "sourceHandle": "84bb0550-8d48-4dc2-a532-3808def23ccf-output",
+        "target": "46782f7f-15b8-4ea0-b91b-6996c9a15109",
+        "targetHandle": "46782f7f-15b8-4ea0-b91b-6996c9a15109-input",
         "type": "smoothstep",
-        "id": "28e7112f-7f68-4b48-be40-08bb47bdc324",
+        "id": "9f01c6eb-f7dc-48b3-be89-1b6e8fcdf031",
         "data": {
           "targetHandle": {
             "fieldName": "input_data",
-            "id": "4456503b-4394-4060-8089-36ac7e219908",
+            "id": "46782f7f-15b8-4ea0-b91b-6996c9a15109",
             "inputTypes": [
               "Data"
             ],
@@ -351,7 +351,7 @@
           },
           "sourceHandle": {
             "fieldName": "phase_output",
-            "id": "5a062a95-b345-4dd1-b5b2-2a849b61b216",
+            "id": "84bb0550-8d48-4dc2-a532-3808def23ccf",
             "outputTypes": [
               "Data"
             ],
@@ -361,16 +361,16 @@
         "selected": false
       },
       {
-        "source": "4456503b-4394-4060-8089-36ac7e219908",
-        "sourceHandle": "4456503b-4394-4060-8089-36ac7e219908-output",
-        "target": "2bf8f5ef-5cab-409a-ac36-2162f9116ba9",
-        "targetHandle": "2bf8f5ef-5cab-409a-ac36-2162f9116ba9-input",
+        "source": "46782f7f-15b8-4ea0-b91b-6996c9a15109",
+        "sourceHandle": "46782f7f-15b8-4ea0-b91b-6996c9a15109-output",
+        "target": "670c80a9-9f8f-4096-a321-6f591145ff21",
+        "targetHandle": "670c80a9-9f8f-4096-a321-6f591145ff21-input",
         "type": "smoothstep",
-        "id": "2ef6c3fe-6202-46f1-b006-e68c710cbf47",
+        "id": "164491a2-3424-4eeb-8250-7161289a8e7c",
         "data": {
           "targetHandle": {
             "fieldName": "input_data",
-            "id": "2bf8f5ef-5cab-409a-ac36-2162f9116ba9",
+            "id": "670c80a9-9f8f-4096-a321-6f591145ff21",
             "inputTypes": [
               "Data"
             ],
@@ -378,7 +378,7 @@
           },
           "sourceHandle": {
             "fieldName": "phase_output",
-            "id": "4456503b-4394-4060-8089-36ac7e219908",
+            "id": "46782f7f-15b8-4ea0-b91b-6996c9a15109",
             "outputTypes": [
               "Data"
             ],
@@ -388,16 +388,16 @@
         "selected": false
       },
       {
-        "source": "2bf8f5ef-5cab-409a-ac36-2162f9116ba9",
-        "sourceHandle": "2bf8f5ef-5cab-409a-ac36-2162f9116ba9-output",
-        "target": "023ae26f-461d-4751-bf75-a9a16351010f",
-        "targetHandle": "023ae26f-461d-4751-bf75-a9a16351010f-input",
+        "source": "670c80a9-9f8f-4096-a321-6f591145ff21",
+        "sourceHandle": "670c80a9-9f8f-4096-a321-6f591145ff21-output",
+        "target": "50f291b9-b29e-4cd5-b76b-b077aa8e346e",
+        "targetHandle": "50f291b9-b29e-4cd5-b76b-b077aa8e346e-input",
         "type": "smoothstep",
-        "id": "14327260-8f9f-4784-9f59-60ed4016fc39",
+        "id": "05a84120-f1e8-4391-9095-677bfe50a537",
         "data": {
           "targetHandle": {
             "fieldName": "input_data",
-            "id": "023ae26f-461d-4751-bf75-a9a16351010f",
+            "id": "50f291b9-b29e-4cd5-b76b-b077aa8e346e",
             "inputTypes": [
               "Data"
             ],
@@ -405,7 +405,7 @@
           },
           "sourceHandle": {
             "fieldName": "phase_output",
-            "id": "2bf8f5ef-5cab-409a-ac36-2162f9116ba9",
+            "id": "670c80a9-9f8f-4096-a321-6f591145ff21",
             "outputTypes": [
               "Data"
             ],
@@ -415,16 +415,16 @@
         "selected": false
       },
       {
-        "source": "023ae26f-461d-4751-bf75-a9a16351010f",
-        "sourceHandle": "023ae26f-461d-4751-bf75-a9a16351010f-output",
-        "target": "b86b836d-2be7-49e9-b14b-e435d29a798d",
-        "targetHandle": "b86b836d-2be7-49e9-b14b-e435d29a798d-input",
+        "source": "50f291b9-b29e-4cd5-b76b-b077aa8e346e",
+        "sourceHandle": "50f291b9-b29e-4cd5-b76b-b077aa8e346e-output",
+        "target": "8ba24f4a-db1d-4c73-b969-99760a650e62",
+        "targetHandle": "8ba24f4a-db1d-4c73-b969-99760a650e62-input",
         "type": "smoothstep",
-        "id": "b4d416ea-7725-4d36-a833-71ff38de8a13",
+        "id": "9a87362f-c19e-405b-a9d7-d873b133c8d1",
         "data": {
           "targetHandle": {
             "fieldName": "input_data",
-            "id": "b86b836d-2be7-49e9-b14b-e435d29a798d",
+            "id": "8ba24f4a-db1d-4c73-b969-99760a650e62",
             "inputTypes": [
               "Data"
             ],
@@ -432,7 +432,7 @@
           },
           "sourceHandle": {
             "fieldName": "phase_output",
-            "id": "023ae26f-461d-4751-bf75-a9a16351010f",
+            "id": "50f291b9-b29e-4cd5-b76b-b077aa8e346e",
             "outputTypes": [
               "Data"
             ],
@@ -449,7 +449,7 @@
     }
   },
   "is_component": false,
-  "updated_at": "2025-07-02T02:05:08.054906",
+  "updated_at": "2025-07-02T02:36:33.551249",
   "folder_id": null,
   "endpoint_name": null
 }

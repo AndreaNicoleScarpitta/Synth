@@ -296,6 +296,19 @@ python app.py
 npm run build && npx serve -s dist -l 5000
 ```
 
+### External Deployment
+- **📖 [DEPLOYMENT.md](./DEPLOYMENT.md)** - Comprehensive deployment guide for all platforms
+- **⚡ [QUICK_DEPLOY.md](./QUICK_DEPLOY.md)** - Fast deployment for common scenarios
+
+**Supported Platforms:**
+- Docker & Docker Compose
+- Vercel (Frontend) + Railway (Backend)
+- DigitalOcean App Platform
+- AWS (EC2 + RDS)
+- Google Cloud Platform (Cloud Run)
+- Traditional VPS with Nginx
+- Local development environment
+
 ## 📋 API Documentation
 
 ### Interactive Documentation
