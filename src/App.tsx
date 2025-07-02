@@ -622,7 +622,7 @@ function MainApp() {
   const [activePersona, setActivePersona] = useState('researcher')
   const [showSignup, setShowSignup] = useState(false)
   const [showWaitlist, setShowWaitlist] = useState(false)
-  const { showToast, ToastContainer } = useToast()
+  const { addToast, ToastContainer } = useToast()
   
   // Handle URL-based waitlist modal opening
   useEffect(() => {
@@ -1508,7 +1508,7 @@ function MainApp() {
                 style={styles.primaryButton}
                 className="primary-button"
                 onClick={() => {
-                  showToast('Early access coming soon! We\'re putting the finishing touches on this feature.', 'info', 4000);
+                  addToast('Early access coming soon! We\'re putting the finishing touches on this feature.', 'info', 4000);
                 }}
               >
                 Get Early Access

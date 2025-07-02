@@ -72,7 +72,7 @@ const HelpBubble: React.FC<HelpBubbleProps> = ({
 
   // Extract content details
   const contentObj = typeof content === 'string' ? { description: content, examples } : content;
-  const displayExamples = contentObj.examples || examples;
+  const displayExamples = (contentObj?.examples || examples || []);
 
   // Size configurations
   const sizeConfig = {
@@ -283,7 +283,7 @@ const HelpBubble: React.FC<HelpBubbleProps> = ({
               color: '#d1d5db',
               marginBottom: displayExamples.length > 0 ? '8px' : '0'
             }}>
-              {contentObj.description}
+              {contentObj?.description || ''}
             </p>
             
             {displayExamples.length > 0 && (
