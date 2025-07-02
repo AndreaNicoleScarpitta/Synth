@@ -1,0 +1,70 @@
+{
+  "name": "synthetic-ascension-ehr-platform",
+  "description": "Advanced AI-powered Electronic Health Record (EHR) synthesis platform",
+  "version": "1.0.0",
+  "type": "web",
+  "deployment": {
+    "target": "cloud_run",
+    "build": {
+      "commands": [
+        "npm install",
+        "npm run build"
+      ]
+    },
+    "start": {
+      "command": "npx vite --host 0.0.0.0 --port 5000",
+      "dev_command": "npx vite --host 0.0.0.0 --port 5000",
+      "prod_command": "npx serve -s dist -l 5000"
+    },
+    "ports": {
+      "frontend": 5000,
+      "backend_v3": 8004,
+      "backend_legacy": 8003,
+      "api_docs": 8001
+    },
+    "environment": {
+      "NODE_ENV": "production",
+      "PORT": "5000",
+      "VITE_API_BASE_URL": "https://${REPLIT_DOMAIN}:8004"
+    }
+  },
+  "services": [
+    {
+      "name": "frontend",
+      "type": "react",
+      "port": 5000,
+      "command": "npx vite --host 0.0.0.0 --port 5000",
+      "healthcheck": "/",
+      "primary": true
+    },
+    {
+      "name": "enhanced_backend_v3",
+      "type": "fastapi",
+      "port": 8004,
+      "command": "python integrated_server_v3_enhanced.py",
+      "healthcheck": "/",
+      "primary": false
+    },
+    {
+      "name": "legacy_backend",
+      "type": "fastapi", 
+      "port": 8003,
+      "command": "python integrated_server_v2.py",
+      "healthcheck": "/",
+      "primary": false
+    },
+    {
+      "name": "api_documentation",
+      "type": "fastapi",
+      "port": 8001,
+      "command": "python api/swagger_docs.py",
+      "healthcheck": "/",
+      "primary": false
+    }
+  ],
+  "architecture": {
+    "frontend": "React + TypeScript + Tailwind CSS",
+    "backend": "FastAPI + SQLAlchemy + PostgreSQL",
+    "deployment": "Multi-service architecture with primary frontend on port 5000"
+  }
+}

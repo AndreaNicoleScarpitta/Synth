@@ -70,8 +70,10 @@ const HelpBubble: React.FC<HelpBubbleProps> = ({
     setIsVisible(false);
   };
 
-  // Extract content details
-  const contentObj = typeof content === 'string' ? { description: content, examples } : content;
+  // Extract content details - handle null/undefined content
+  const contentObj = typeof content === 'string' 
+    ? { description: content, examples } 
+    : (content || { description: '', examples: [] });
   const displayExamples = (contentObj?.examples || examples || []);
 
   // Size configurations
