@@ -39,6 +39,18 @@ An advanced AI-powered Electronic Health Record (EHR) synthesis platform that ge
 
 ## Recent Changes
 
+### 2025-07-02 - Comprehensive Agentic Architecture Refactoring 
+✅ **Complete Architecture Overhaul** - Implemented comprehensive Doer/Coordinator/Adversarial pattern across 50+ specialized agents
+✅ **Enhanced Base Agent Framework** - Created sophisticated base agent with version pinning, privacy guards, and performance monitoring
+✅ **Six Major Agent Categories** - Cohort Constructor, Clinical Journey Generator, Data Robustness & Noise, QA & Validation, Explanation & Provenance, Supervision & Orchestration
+✅ **Expert Recommendations Integration** - Incorporated all expert-suggested safeguards including differential privacy, clinical realism certification, and RAG hallucination reduction
+✅ **Advanced System Components** - Concurrency controller, human-in-the-loop SLA manager, performance monitor, version manager
+✅ **Enhanced Orchestrator V3** - Six-phase pipeline execution with real-time monitoring and comprehensive audit trails
+✅ **Stub Agent Implementation** - All 50+ agents properly stubbed with realistic functionality and proper role assignments
+✅ **Enhanced Backend Server V3** - New FastAPI server (Port 8004) implementing full comprehensive architecture
+✅ **Database Schema Enhancement** - Enhanced job tracking with phase monitoring, agent run details, and privacy assessments
+✅ **Agent Role Classification** - Clear separation of Doer (generate/transform), Coordinator (orchestrate/validate), Adversarial (stress-test) roles
+
 ### 2025-07-01 - Frontend Cleanup & TypeScript Migration 
 ✅ **Complete Frontend Cleanup** - Removed all duplicate JSX files and migrated to TypeScript-only architecture
 ✅ **TypeScript Migration** - Converted key components (WaitlistModal, DynamicToast, HelpBubble) to TypeScript with proper type definitions
@@ -153,22 +165,40 @@ An advanced AI-powered Electronic Health Record (EHR) synthesis platform that ge
 
 ## API Architecture
 
-### REST Endpoints (Integrated Backend Server - Port 8003) - PRIMARY
+### REST Endpoints (Enhanced Backend Server V3 - Port 8004) - PRIMARY
 ```
-GET  /                          - Comprehensive system overview and agent architecture
-POST /api/v2/generate           - Generate comprehensive synthetic EHR data using 18+ agents
-GET  /api/v2/jobs/{job_id}      - Check multi-agent generation job status with real-time progress
-GET  /api/v2/jobs/{job_id}/results - Get detailed generation results and quality metrics
-GET  /api/v2/analytics          - Platform analytics and agent performance metrics
+GET  /                          - Enhanced system overview with comprehensive agent architecture
+POST /api/v3/generate           - Generate synthetic EHR data using 50+ agents in 6-phase pipeline
+GET  /api/v3/jobs/{job_id}      - Check enhanced job status with phase-by-phase progress tracking
+GET  /api/v3/jobs/{job_id}/results - Get detailed results with privacy assessments and clinical reviews
+GET  /api/v3/analytics          - Enhanced platform analytics with agent performance by role
+GET  /api/v3/architecture       - Complete agent architecture overview with all categories
 GET  /docs                      - Interactive API documentation
 ```
 
-### Integrated Agent Categories
+### Comprehensive Agent Architecture (50+ Agents)
 ```
-Cohort Agents (6):        Demographics, Clinical Journeys, Comorbidities, Medications, Labs, Vitals
-QA Agents (3):            Statistical Validation, Bias Detection, Realism Checking
-Research Agents (4):      Literature Mining, Ontology Mapping, Pattern Analysis, Regulatory Compliance
-Reporting Agents (4):     FHIR Export, Audit Trails, Trust Reports, Cohort Summaries
+Cohort Constructor (11):       Phenotype Assembly, Demographics, Comorbidities, Clinical Realism Certification
+Clinical Journey Generator (11): Procedures/Encounters, Temporal Dynamics, Medications, Journey Realism
+Data Robustness & Noise (10):  Missingness Injection, Variant Generation, Adverse Events, Privacy Guards
+QA & Validation (13):          Summary Reporting, Temporal Validation, FHIR Export, Bias Monitoring
+Explanation & Provenance (13): Report Generation, Ontology Mapping, RAG Retrieval, Provenance Tracking
+Supervision & Orchestration (9): Priority Routing, Log Aggregation, Replay Management, System Monitoring
+```
+
+### Agent Role Distribution
+```
+Doer Agents:        Generate and transform data (primary execution)
+Coordinator Agents: Orchestrate, sequence, and validate doers
+Adversarial Agents: Stress-test and break doers for robustness
+```
+
+### Legacy REST Endpoints (Integrated Backend Server - Port 8003) - LEGACY
+```
+GET  /                          - System overview and basic agent architecture
+POST /api/v2/generate           - Generate EHR data using basic 18+ agent pipeline
+GET  /api/v2/jobs/{job_id}      - Check basic job status
+GET  /docs                      - API documentation
 ```
 
 ### Legacy REST Endpoints (FastAPI MCP Server - Port 8002)
