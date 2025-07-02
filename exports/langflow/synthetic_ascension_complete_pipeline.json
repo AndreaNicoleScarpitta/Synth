@@ -1,0 +1,455 @@
+{
+  "description": "Complete Synthetic Ascension EHR Generation Pipeline - All 50+ Agents",
+  "name": "SyntheticAscension_Complete_Pipeline",
+  "id": "286ac619-6b9c-4c77-bdaf-1bcbc9438e6d",
+  "data": {
+    "nodes": [
+      {
+        "id": "067da5bb-ef10-4c80-9363-17a9c9cdb9c4",
+        "type": "genericNode",
+        "position": {
+          "x": 150,
+          "y": 100
+        },
+        "data": {
+          "type": "CustomComponent",
+          "node": {
+            "template": {
+              "phase_name": {
+                "required": true,
+                "value": "Phase 1: Literature Mining & Research",
+                "type": "str",
+                "display_name": "Phase Name"
+              },
+              "phase_index": {
+                "required": true,
+                "value": 0,
+                "type": "int",
+                "display_name": "Phase Index"
+              },
+              "input_data": {
+                "required": true,
+                "value": "",
+                "type": "str",
+                "display_name": "Input Data"
+              }
+            },
+            "description": "Synthetic Ascension Phase 1: Literature Mining & Research",
+            "display_name": "Phase 1: Literature Mining & Research",
+            "outputs": [
+              {
+                "types": [
+                  "Data"
+                ],
+                "name": "phase_output",
+                "display_name": "Phase Output"
+              }
+            ]
+          },
+          "id": "067da5bb-ef10-4c80-9363-17a9c9cdb9c4"
+        },
+        "selected": false,
+        "positionAbsolute": {
+          "x": 150,
+          "y": 100
+        }
+      },
+      {
+        "id": "5154b0be-132f-4dbc-96f2-f3bc612fc6a4",
+        "type": "genericNode",
+        "position": {
+          "x": 150,
+          "y": 300
+        },
+        "data": {
+          "type": "CustomComponent",
+          "node": {
+            "template": {
+              "phase_name": {
+                "required": true,
+                "value": "Phase 2: Cohort Construction",
+                "type": "str",
+                "display_name": "Phase Name"
+              },
+              "phase_index": {
+                "required": true,
+                "value": 1,
+                "type": "int",
+                "display_name": "Phase Index"
+              },
+              "input_data": {
+                "required": true,
+                "value": "",
+                "type": "str",
+                "display_name": "Input Data"
+              }
+            },
+            "description": "Synthetic Ascension Phase 2: Cohort Construction",
+            "display_name": "Phase 2: Cohort Construction",
+            "outputs": [
+              {
+                "types": [
+                  "Data"
+                ],
+                "name": "phase_output",
+                "display_name": "Phase Output"
+              }
+            ]
+          },
+          "id": "5154b0be-132f-4dbc-96f2-f3bc612fc6a4"
+        },
+        "selected": false,
+        "positionAbsolute": {
+          "x": 150,
+          "y": 300
+        }
+      },
+      {
+        "id": "ebaecfb0-dad5-4516-88d8-18441210c5f7",
+        "type": "genericNode",
+        "position": {
+          "x": 150,
+          "y": 500
+        },
+        "data": {
+          "type": "CustomComponent",
+          "node": {
+            "template": {
+              "phase_name": {
+                "required": true,
+                "value": "Phase 3: Clinical Journey Generation",
+                "type": "str",
+                "display_name": "Phase Name"
+              },
+              "phase_index": {
+                "required": true,
+                "value": 2,
+                "type": "int",
+                "display_name": "Phase Index"
+              },
+              "input_data": {
+                "required": true,
+                "value": "",
+                "type": "str",
+                "display_name": "Input Data"
+              }
+            },
+            "description": "Synthetic Ascension Phase 3: Clinical Journey Generation",
+            "display_name": "Phase 3: Clinical Journey Generation",
+            "outputs": [
+              {
+                "types": [
+                  "Data"
+                ],
+                "name": "phase_output",
+                "display_name": "Phase Output"
+              }
+            ]
+          },
+          "id": "ebaecfb0-dad5-4516-88d8-18441210c5f7"
+        },
+        "selected": false,
+        "positionAbsolute": {
+          "x": 150,
+          "y": 500
+        }
+      },
+      {
+        "id": "729e6a1b-7aa0-4acb-994f-524273e2459d",
+        "type": "genericNode",
+        "position": {
+          "x": 150,
+          "y": 700
+        },
+        "data": {
+          "type": "CustomComponent",
+          "node": {
+            "template": {
+              "phase_name": {
+                "required": true,
+                "value": "Phase 4: Data Robustness Enhancement",
+                "type": "str",
+                "display_name": "Phase Name"
+              },
+              "phase_index": {
+                "required": true,
+                "value": 3,
+                "type": "int",
+                "display_name": "Phase Index"
+              },
+              "input_data": {
+                "required": true,
+                "value": "",
+                "type": "str",
+                "display_name": "Input Data"
+              }
+            },
+            "description": "Synthetic Ascension Phase 4: Data Robustness Enhancement",
+            "display_name": "Phase 4: Data Robustness Enhancement",
+            "outputs": [
+              {
+                "types": [
+                  "Data"
+                ],
+                "name": "phase_output",
+                "display_name": "Phase Output"
+              }
+            ]
+          },
+          "id": "729e6a1b-7aa0-4acb-994f-524273e2459d"
+        },
+        "selected": false,
+        "positionAbsolute": {
+          "x": 150,
+          "y": 700
+        }
+      },
+      {
+        "id": "52bd350d-77bf-422c-baed-779821ea31c3",
+        "type": "genericNode",
+        "position": {
+          "x": 150,
+          "y": 900
+        },
+        "data": {
+          "type": "CustomComponent",
+          "node": {
+            "template": {
+              "phase_name": {
+                "required": true,
+                "value": "Phase 5: QA & Validation",
+                "type": "str",
+                "display_name": "Phase Name"
+              },
+              "phase_index": {
+                "required": true,
+                "value": 4,
+                "type": "int",
+                "display_name": "Phase Index"
+              },
+              "input_data": {
+                "required": true,
+                "value": "",
+                "type": "str",
+                "display_name": "Input Data"
+              }
+            },
+            "description": "Synthetic Ascension Phase 5: QA & Validation",
+            "display_name": "Phase 5: QA & Validation",
+            "outputs": [
+              {
+                "types": [
+                  "Data"
+                ],
+                "name": "phase_output",
+                "display_name": "Phase Output"
+              }
+            ]
+          },
+          "id": "52bd350d-77bf-422c-baed-779821ea31c3"
+        },
+        "selected": false,
+        "positionAbsolute": {
+          "x": 150,
+          "y": 900
+        }
+      },
+      {
+        "id": "b0f33768-bccf-4e02-9482-36c467d53464",
+        "type": "genericNode",
+        "position": {
+          "x": 150,
+          "y": 1100
+        },
+        "data": {
+          "type": "CustomComponent",
+          "node": {
+            "template": {
+              "phase_name": {
+                "required": true,
+                "value": "Phase 6: Reporting & Export",
+                "type": "str",
+                "display_name": "Phase Name"
+              },
+              "phase_index": {
+                "required": true,
+                "value": 5,
+                "type": "int",
+                "display_name": "Phase Index"
+              },
+              "input_data": {
+                "required": true,
+                "value": "",
+                "type": "str",
+                "display_name": "Input Data"
+              }
+            },
+            "description": "Synthetic Ascension Phase 6: Reporting & Export",
+            "display_name": "Phase 6: Reporting & Export",
+            "outputs": [
+              {
+                "types": [
+                  "Data"
+                ],
+                "name": "phase_output",
+                "display_name": "Phase Output"
+              }
+            ]
+          },
+          "id": "b0f33768-bccf-4e02-9482-36c467d53464"
+        },
+        "selected": false,
+        "positionAbsolute": {
+          "x": 150,
+          "y": 1100
+        }
+      }
+    ],
+    "edges": [
+      {
+        "source": "067da5bb-ef10-4c80-9363-17a9c9cdb9c4",
+        "sourceHandle": "067da5bb-ef10-4c80-9363-17a9c9cdb9c4-output",
+        "target": "5154b0be-132f-4dbc-96f2-f3bc612fc6a4",
+        "targetHandle": "5154b0be-132f-4dbc-96f2-f3bc612fc6a4-input",
+        "type": "smoothstep",
+        "id": "96192d8d-7940-46c5-939f-37481b20d586",
+        "data": {
+          "targetHandle": {
+            "fieldName": "input_data",
+            "id": "5154b0be-132f-4dbc-96f2-f3bc612fc6a4",
+            "inputTypes": [
+              "Data"
+            ],
+            "type": "str"
+          },
+          "sourceHandle": {
+            "fieldName": "phase_output",
+            "id": "067da5bb-ef10-4c80-9363-17a9c9cdb9c4",
+            "outputTypes": [
+              "Data"
+            ],
+            "type": "Data"
+          }
+        },
+        "selected": false
+      },
+      {
+        "source": "5154b0be-132f-4dbc-96f2-f3bc612fc6a4",
+        "sourceHandle": "5154b0be-132f-4dbc-96f2-f3bc612fc6a4-output",
+        "target": "ebaecfb0-dad5-4516-88d8-18441210c5f7",
+        "targetHandle": "ebaecfb0-dad5-4516-88d8-18441210c5f7-input",
+        "type": "smoothstep",
+        "id": "6e0e0552-68e3-4571-bf7c-137aa4db04c8",
+        "data": {
+          "targetHandle": {
+            "fieldName": "input_data",
+            "id": "ebaecfb0-dad5-4516-88d8-18441210c5f7",
+            "inputTypes": [
+              "Data"
+            ],
+            "type": "str"
+          },
+          "sourceHandle": {
+            "fieldName": "phase_output",
+            "id": "5154b0be-132f-4dbc-96f2-f3bc612fc6a4",
+            "outputTypes": [
+              "Data"
+            ],
+            "type": "Data"
+          }
+        },
+        "selected": false
+      },
+      {
+        "source": "ebaecfb0-dad5-4516-88d8-18441210c5f7",
+        "sourceHandle": "ebaecfb0-dad5-4516-88d8-18441210c5f7-output",
+        "target": "729e6a1b-7aa0-4acb-994f-524273e2459d",
+        "targetHandle": "729e6a1b-7aa0-4acb-994f-524273e2459d-input",
+        "type": "smoothstep",
+        "id": "4bb92be8-6282-4b84-bc7c-7eaa5f26d3b6",
+        "data": {
+          "targetHandle": {
+            "fieldName": "input_data",
+            "id": "729e6a1b-7aa0-4acb-994f-524273e2459d",
+            "inputTypes": [
+              "Data"
+            ],
+            "type": "str"
+          },
+          "sourceHandle": {
+            "fieldName": "phase_output",
+            "id": "ebaecfb0-dad5-4516-88d8-18441210c5f7",
+            "outputTypes": [
+              "Data"
+            ],
+            "type": "Data"
+          }
+        },
+        "selected": false
+      },
+      {
+        "source": "729e6a1b-7aa0-4acb-994f-524273e2459d",
+        "sourceHandle": "729e6a1b-7aa0-4acb-994f-524273e2459d-output",
+        "target": "52bd350d-77bf-422c-baed-779821ea31c3",
+        "targetHandle": "52bd350d-77bf-422c-baed-779821ea31c3-input",
+        "type": "smoothstep",
+        "id": "19c695dc-9b4f-4b63-9630-55f8032b4e94",
+        "data": {
+          "targetHandle": {
+            "fieldName": "input_data",
+            "id": "52bd350d-77bf-422c-baed-779821ea31c3",
+            "inputTypes": [
+              "Data"
+            ],
+            "type": "str"
+          },
+          "sourceHandle": {
+            "fieldName": "phase_output",
+            "id": "729e6a1b-7aa0-4acb-994f-524273e2459d",
+            "outputTypes": [
+              "Data"
+            ],
+            "type": "Data"
+          }
+        },
+        "selected": false
+      },
+      {
+        "source": "52bd350d-77bf-422c-baed-779821ea31c3",
+        "sourceHandle": "52bd350d-77bf-422c-baed-779821ea31c3-output",
+        "target": "b0f33768-bccf-4e02-9482-36c467d53464",
+        "targetHandle": "b0f33768-bccf-4e02-9482-36c467d53464-input",
+        "type": "smoothstep",
+        "id": "338b0624-df9d-4eb1-9aa6-0089f1a8ea0d",
+        "data": {
+          "targetHandle": {
+            "fieldName": "input_data",
+            "id": "b0f33768-bccf-4e02-9482-36c467d53464",
+            "inputTypes": [
+              "Data"
+            ],
+            "type": "str"
+          },
+          "sourceHandle": {
+            "fieldName": "phase_output",
+            "id": "52bd350d-77bf-422c-baed-779821ea31c3",
+            "outputTypes": [
+              "Data"
+            ],
+            "type": "Data"
+          }
+        },
+        "selected": false
+      }
+    ],
+    "viewport": {
+      "x": 0,
+      "y": 0,
+      "zoom": 0.7
+    }
+  },
+  "is_component": false,
+  "updated_at": "2025-07-02T01:18:42.762173",
+  "folder_id": null,
+  "endpoint_name": null
+}

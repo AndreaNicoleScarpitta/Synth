@@ -11,10 +11,14 @@ from datetime import datetime
 from typing import Dict, Any, List, Optional
 from fastapi import FastAPI, BackgroundTasks, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+import os
+import zipfile
 from pydantic import BaseModel, Field
 
-# Import the enhanced orchestrator
+# Import the enhanced orchestrator and Langflow integration
 from agents.integrated.enhanced_orchestrator import EnhancedAgentOrchestrator
+from agents.langflow.langflow_exporter import LangflowExporter, generate_langflow_exports
 
 # Request/Response Models
 class EnhancedGenerationRequest(BaseModel):
@@ -450,6 +454,151 @@ async def get_enhanced_platform_analytics():
 async def get_agent_architecture():
     """Get comprehensive agent architecture overview"""
     return enhanced_orchestrator.get_agent_architecture_overview()
+
+# Langflow Integration Endpoints
+@app.get("/api/v3/langflow/export")
+async def export_langflow_workflows():
+    """Export all agent workflows as Langflow-compatible JSON files"""
+    
+    # Generate exports
+    export_dir = generate_langflow_exports()
+    
+    # Create ZIP file for download
+    zip_path = "exports/synthetic_ascension_langflow_export.zip"
+    
+    with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
+        for root, dirs, files in os.walk(export_dir):
+            for file in files:
+                file_path = os.path.join(root, file)
+                arcname = os.path.relpath(file_path, "exports")
+                zipf.write(file_path, arcname)
+    
+    return {
+        "status": "success",
+        "message": "Langflow workflows exported successfully",
+        "export_directory": export_dir,
+        "download_url": "/api/v3/langflow/download",
+        "files_exported": [
+            "synthetic_ascension_complete_pipeline.json",
+            "README.md"
+        ],
+        "langflow_compatibility": "1.0.12+",
+        "agent_count": 50,
+        "workflow_phases": 6
+    }
+
+@app.get("/api/v3/langflow/download")
+async def download_langflow_export():
+    """Download Langflow export as ZIP file"""
+    
+    zip_path = "exports/synthetic_ascension_langflow_export.zip"
+    
+    if not os.path.exists(zip_path):
+        # Generate export if it doesn't exist
+        generate_langflow_exports()
+        
+        # Create ZIP file
+        with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
+            export_dir = "exports/langflow"
+            for root, dirs, files in os.walk(export_dir):
+                for file in files:
+                    file_path = os.path.join(root, file)
+                    arcname = os.path.relpath(file_path, "exports")
+                    zipf.write(file_path, arcname)
+    
+    return FileResponse(
+        zip_path,
+        media_type="application/zip",
+        filename="synthetic_ascension_langflow_export.zip"
+    )
+
+@app.get("/api/v3/langflow/flow/{flow_name}")
+async def get_langflow_flow(flow_name: str):
+    """Get specific Langflow flow JSON"""
+    
+    flow_path = f"exports/langflow/{flow_name}.json"
+    
+    if not os.path.exists(flow_path):
+        # Generate if doesn't exist
+        generate_langflow_exports()
+    
+    if os.path.exists(flow_path):
+        with open(flow_path, 'r') as f:
+            flow_data = json.load(f)
+        return flow_data
+    else:
+        raise HTTPException(status_code=404, detail=f"Flow '{flow_name}' not found")
+
+@app.post("/api/v3/langflow/execute")
+async def execute_langflow_workflow(
+    workflow_data: Dict[str, Any],
+    background_tasks: BackgroundTasks
+):
+    """Execute a Langflow workflow with Synthetic Ascension backend"""
+    
+    job_id = str(uuid.uuid4())
+    
+    # Convert Langflow workflow to Synthetic Ascension job
+    request = EnhancedGenerationRequest(
+        use_case="langflow_execution",
+        population_size=workflow_data.get("population_size", 100),
+        condition=workflow_data.get("condition", "general"),
+        pipeline_config=workflow_data.get("config", {}),
+        agent_selection=workflow_data.get("selected_agents", [])
+    )
+    
+    # Execute in background
+    background_tasks.add_task(execute_enhanced_generation_pipeline, job_id, request)
+    
+    return {
+        "job_id": job_id,
+        "status": "started",
+        "message": "Langflow workflow execution started",
+        "langflow_workflow_id": workflow_data.get("id", "unknown"),
+        "check_status_url": f"/api/v3/jobs/{job_id}"
+    }
+
+@app.get("/api/v3/langflow/templates")
+async def get_langflow_templates():
+    """Get available Langflow workflow templates"""
+    
+    return {
+        "templates": [
+            {
+                "name": "Complete Pipeline",
+                "id": "synthetic_ascension_complete_pipeline", 
+                "description": "Full 6-phase EHR generation with all 50+ agents",
+                "phases": 6,
+                "agent_count": 50,
+                "estimated_runtime": "15-30 minutes",
+                "complexity": "advanced"
+            },
+            {
+                "name": "Cohort Constructor Only",
+                "id": "cohort_constructor_workflow",
+                "description": "Demographics and comorbidity generation",
+                "phases": 1,
+                "agent_count": 11,
+                "estimated_runtime": "5-10 minutes", 
+                "complexity": "beginner"
+            },
+            {
+                "name": "Clinical Journey Focus",
+                "id": "clinical_journey_workflow",
+                "description": "Procedure, medication, and care pathway generation",
+                "phases": 1,
+                "agent_count": 11,
+                "estimated_runtime": "8-15 minutes",
+                "complexity": "intermediate"
+            }
+        ],
+        "langflow_setup_instructions": {
+            "install": "pip install langflow",
+            "run": "langflow run",
+            "import_url": "/api/v3/langflow/download",
+            "backend_connection": "http://localhost:8004"
+        }
+    }
 
 if __name__ == "__main__":
     import uvicorn

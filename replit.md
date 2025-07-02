@@ -50,6 +50,9 @@ An advanced AI-powered Electronic Health Record (EHR) synthesis platform that ge
 ✅ **Enhanced Backend Server V3** - New FastAPI server (Port 8004) implementing full comprehensive architecture
 ✅ **Database Schema Enhancement** - Enhanced job tracking with phase monitoring, agent run details, and privacy assessments
 ✅ **Agent Role Classification** - Clear separation of Doer (generate/transform), Coordinator (orchestrate/validate), Adversarial (stress-test) roles
+✅ **Langflow Integration** - Complete plug-and-play Langflow export system with downloadable workflow files
+✅ **Workflow Export Support** - JSON export of all 50+ agents as Langflow-compatible workflows for local modification
+✅ **Visual Workflow Editor** - Full Langflow compatibility allowing drag-and-drop workflow modification and execution
 
 ### 2025-07-01 - Frontend Cleanup & TypeScript Migration 
 ✅ **Complete Frontend Cleanup** - Removed all duplicate JSX files and migrated to TypeScript-only architecture
@@ -173,6 +176,10 @@ GET  /api/v3/jobs/{job_id}      - Check enhanced job status with phase-by-phase 
 GET  /api/v3/jobs/{job_id}/results - Get detailed results with privacy assessments and clinical reviews
 GET  /api/v3/analytics          - Enhanced platform analytics with agent performance by role
 GET  /api/v3/architecture       - Complete agent architecture overview with all categories
+GET  /api/v3/langflow/export    - Export all workflows as Langflow-compatible JSON files
+GET  /api/v3/langflow/download  - Download complete Langflow export as ZIP file
+GET  /api/v3/langflow/templates - Get available Langflow workflow templates
+POST /api/v3/langflow/execute   - Execute Langflow workflows with backend integration
 GET  /docs                      - Interactive API documentation
 ```
 
