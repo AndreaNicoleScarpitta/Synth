@@ -268,6 +268,34 @@ Challenge assumptions, inject failures, and validate robustness
 - **Longitudinal Modeling** - Disease progression patterns
 - **Population Stratification** - Risk-based cohort analysis
 
+## 🚀 Deployment Configuration
+
+**Important:** This is a **React application**, not a Streamlit app. The `.replit` configuration references Streamlit for legacy reasons, but `app.py` handles proper React deployment.
+
+### Service Architecture
+- **Frontend:** Port 5000 (React + Vite + TypeScript) - Primary UI
+- **Enhanced Backend V3:** Port 8004 (50+ agent comprehensive system) - **PRIMARY API**
+- **Legacy Backend:** Port 8003 (18+ agent integrated system) - Legacy support
+- **API Documentation:** Port 8001 (Swagger/OpenAPI docs)
+
+### Deployment Process
+1. **Development Mode:** `app.py` starts Vite dev server directly
+2. **Production Mode:** `app.py` builds React app and serves static files
+3. **Backend Services:** Automatically started in parallel with frontend
+4. **Health Monitoring:** All services include health checks and graceful shutdown
+
+### Deployment Commands
+```bash
+# Development (local)
+npm run dev
+
+# Production deployment
+python app.py
+
+# Manual build
+npm run build && npx serve -s dist -l 5000
+```
+
 ## 📋 API Documentation
 
 ### Interactive Documentation
