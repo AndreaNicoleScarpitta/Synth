@@ -32,6 +32,14 @@ args = "Enhanced Backend Server V3"
 task = "workflow.run"
 args = "API Documentation Server"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Frontend Tests"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Backend Tests"
+
 [[workflows.workflow]]
 name = "React Frontend"
 author = "agent"
@@ -67,6 +75,22 @@ author = "agent"
 task = "shell.exec"
 args = "python api/swagger_docs.py"
 waitForPort = 8001
+
+[[workflows.workflow]]
+name = "Frontend Tests"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx vitest run src/test --reporter=verbose"
+
+[[workflows.workflow]]
+name = "Backend Tests"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python -m pytest tests/backend/ -v --asyncio-mode=auto"
 
 [[ports]]
 localPort = 5000
