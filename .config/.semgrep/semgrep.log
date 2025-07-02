@@ -1,0 +1,180 @@
+2025-07-02 02:37:02,966 - semgrep.run_scan - DEBUG - semgrep version 1.4.0
+2025-07-02 02:37:02,973 - semgrep.git - DEBUG - Failed to get project url from 'git ls-remote': Command failed with exit code: 128
+-----
+Command failed with output:
+fatal: No remote configured to list refs from.
+
+
+Failed to run 'git ls-remote --get-url'. Possible reasons:
+
+- the git binary is not available
+- the current working directory is not a git repository
+- the baseline commit is not a parent of the current commit
+    (if you are running through semgrep-app, check if you are setting `SEMGREP_BRANCH` or `SEMGREP_BASELINE_COMMIT` properly)
+- the current working directory is not marked as safe
+    (fix with `git config --global --add safe.directory $(pwd)`)
+
+Try running the command yourself to debug the issue.
+2025-07-02 02:37:02,974 - semgrep.config_resolver - DEBUG - Loading local config from /home/runner/workspace/.config/.semgrep/semgrep_rules.json
+2025-07-02 02:37:02,977 - semgrep.config_resolver - DEBUG - Done loading local config from /home/runner/workspace/.config/.semgrep/semgrep_rules.json
+2025-07-02 02:37:02,981 - semgrep.config_resolver - DEBUG - Saving rules to /tmp/semgrep-k6fs2217.rules
+2025-07-02 02:37:03,558 - semgrep.rule_lang - DEBUG - semgrep-core validation response: valid=True
+2025-07-02 02:37:03,559 - semgrep.rule_lang - DEBUG - semgrep-core validation succeeded
+2025-07-02 02:37:03,559 - semgrep.rule_lang - DEBUG - RPC validation succeeded
+2025-07-02 02:37:03,559 - semgrep.config_resolver - DEBUG - loaded 1 configs in 0.5850138664245605
+2025-07-02 02:37:03,629 - semgrep.run_scan - VERBOSE - running 715 rules from 1 config /home/runner/workspace/.config/.semgrep/semgrep_rules.json_0
+2025-07-02 02:37:03,629 - semgrep.run_scan - VERBOSE - No .semgrepignore found. Using default .semgrepignore rules. See the docs for the list of default ignores: https://semgrep.dev/docs/cli-usage/#ignore-files
+2025-07-02 02:37:03,632 - semgrep.run_scan - VERBOSE - Rules:
+2025-07-02 02:37:03,632 - semgrep.run_scan - VERBOSE - <SKIPPED DATA (too many entries; use --max-log-list-entries)>
+2025-07-02 02:37:03,685 - semgrep.ignores - VERBOSE - Ignoring src/test/api/backend.test.ts due to .semgrepignore
+2025-07-02 02:37:03,685 - semgrep.ignores - VERBOSE - Ignoring src/test/components/App.test.tsx due to .semgrepignore
+2025-07-02 02:37:03,685 - semgrep.ignores - VERBOSE - Ignoring src/test/components/HelpBubble.test.tsx due to .semgrepignore
+2025-07-02 02:37:03,685 - semgrep.ignores - VERBOSE - Ignoring src/test/components/WaitlistModal.test.tsx due to .semgrepignore
+2025-07-02 02:37:03,685 - semgrep.ignores - VERBOSE - Ignoring src/test/setup.ts due to .semgrepignore
+2025-07-02 02:37:03,685 - semgrep.ignores - VERBOSE - Ignoring tests/backend/test_enhanced_server.py due to .semgrepignore
+2025-07-02 02:37:03,714 - semgrep.ignores - VERBOSE - Ignoring src/test/api/backend.test.ts due to .semgrepignore
+2025-07-02 02:37:03,714 - semgrep.ignores - VERBOSE - Ignoring src/test/components/App.test.tsx due to .semgrepignore
+2025-07-02 02:37:03,714 - semgrep.ignores - VERBOSE - Ignoring src/test/components/HelpBubble.test.tsx due to .semgrepignore
+2025-07-02 02:37:03,714 - semgrep.ignores - VERBOSE - Ignoring src/test/components/WaitlistModal.test.tsx due to .semgrepignore
+2025-07-02 02:37:03,714 - semgrep.ignores - VERBOSE - Ignoring src/test/setup.ts due to .semgrepignore
+2025-07-02 02:37:03,714 - semgrep.ignores - VERBOSE - Ignoring tests/backend/test_enhanced_server.py due to .semgrepignore
+2025-07-02 02:37:03,726 - semgrep.ignores - VERBOSE - Ignoring src/test/api/backend.test.ts due to .semgrepignore
+2025-07-02 02:37:03,726 - semgrep.ignores - VERBOSE - Ignoring src/test/components/App.test.tsx due to .semgrepignore
+2025-07-02 02:37:03,726 - semgrep.ignores - VERBOSE - Ignoring src/test/components/HelpBubble.test.tsx due to .semgrepignore
+2025-07-02 02:37:03,726 - semgrep.ignores - VERBOSE - Ignoring src/test/components/WaitlistModal.test.tsx due to .semgrepignore
+2025-07-02 02:37:03,726 - semgrep.ignores - VERBOSE - Ignoring src/test/setup.ts due to .semgrepignore
+2025-07-02 02:37:03,726 - semgrep.ignores - VERBOSE - Ignoring tests/backend/test_enhanced_server.py due to .semgrepignore
+2025-07-02 02:37:03,827 - semgrep.ignores - VERBOSE - Ignoring tests/backend/test_enhanced_server.py due to .semgrepignore
+2025-07-02 02:37:03,830 - semgrep.ignores - VERBOSE - Ignoring src/test/api/backend.test.ts due to .semgrepignore
+2025-07-02 02:37:03,830 - semgrep.ignores - VERBOSE - Ignoring src/test/components/App.test.tsx due to .semgrepignore
+2025-07-02 02:37:03,831 - semgrep.ignores - VERBOSE - Ignoring src/test/components/HelpBubble.test.tsx due to .semgrepignore
+2025-07-02 02:37:03,831 - semgrep.ignores - VERBOSE - Ignoring src/test/components/WaitlistModal.test.tsx due to .semgrepignore
+2025-07-02 02:37:03,831 - semgrep.ignores - VERBOSE - Ignoring src/test/setup.ts due to .semgrepignore
+2025-07-02 02:37:04,151 - semgrep.core_runner - DEBUG - Passing whole rules directly to semgrep_core
+2025-07-02 02:37:04,334 - semgrep.core_runner - DEBUG - Running Semgrep engine with command:
+2025-07-02 02:37:04,334 - semgrep.core_runner - DEBUG - /tmp/_MEIxiuEbY/semgrep/bin/opengrep-core -json -rules /tmp/tmplq72x9if.json -j 8 -targets /tmp/tmptxvnpqg1 -timeout 5 -timeout_threshold 3 -max_memory 0 -fast
+2025-07-02 02:37:21,134 - semgrep.core_runner - DEBUG - --- semgrep-core stderr ---
+[00.06][[34mINFO[0m]: Executed as: /tmp/_MEIxiuEbY/semgrep/bin/opengrep-core -json -rules /tmp/tmplq72x9if.json -j 8 -targets /tmp/tmptxvnpqg1 -timeout 5 -timeout_threshold 3 -max_memory 0 -fast
+[00.06][[34mINFO[0m]: Version: 1.4.0
+[00.06][[34mINFO[0m]: Parsing rules in /tmp/tmplq72x9if.json
+[00.45][[34mINFO[0m]: scan: processing 355 files (skipping 0), with 715 rules (skipping 0 )
+[03.01][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.python.boto3.security.hardcoded-token file: agents/pubmed_connector.py func: _parse_pubmed_xml:-1]
+[0m[03.07][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.python.boto3.security.hardcoded-token file: app.py func: serve_production:-1]
+[0m[03.14][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.python.boto3.security.hardcoded-token file: agents/pubmed_connector.py func: get_clinical_trials:-1]
+[0m[03.32][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.python.boto3.security.hardcoded-token file: agents/biomedical_database_connector.py func: _parse_pubmed_article:-1]
+[0m[03.55][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.python.boto3.security.hardcoded-token file: agents/biomedical_database_connector.py func: search_clinical_trials:-1]
+[0m[03.70][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.python.boto3.security.hardcoded-token file: agents/biomedical_database_connector.py func: search_fda_drugs:-1]
+[0m[04.01][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.python.boto3.security.hardcoded-token file: agents/biomedical_database_connector.py func: search_nih_reporter:-1]
+[0m[04.10][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.python.boto3.security.hardcoded-token file: agents/biomedical_database_connector.py func: search_uniprot_proteins:-1]
+[0m[04.38][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.python.boto3.security.hardcoded-token file: models/literature_data.py func: extract_abstract_sections:-1]
+[0m[06.48][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.python.boto3.security.hardcoded-token file: integrated_backend_server.py func: execute_pipeline:-1]
+[0m[08.98][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.python.boto3.security.hardcoded-token file: agents/synthetic_cohort_agent.py func: _generate_clinical_notes:-1]
+[0m[14.53][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.typescript.react.security.audit.react-href-var file: src/pages/ResultsOverview.tsx func: ???]
+[0m[15.16][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.unsafe-formatstring file: src/App.tsx func: MainApp:75190]
+[0m[15.86][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.python.boto3.security.hardcoded-token file: agents/statistical_validation_agent.py func: _assess_lab_condition_consistency:-1]
+[0m--- end semgrep-core stderr ---
+2025-07-02 02:37:21,245 - semgrep.rule_match - DEBUG - match_key = ('', PosixPath('agents/biomedical_database_connector.py'), 'config..semgrep.vendored-rules.python.lang.security.use-defused-xml') match_id = 3f44052cbde5557294fe4262f542e21ddab4b4e8e7665ad8503bb9246a0d0a34b13f62a7b066162ef6b49b4dec86ad97c169db4ab570b5df9831409c9f6f7ca0_0
+2025-07-02 02:37:21,246 - semgrep.rule_match - DEBUG - match_key = ('import xml', PosixPath('agents/biomedical_database_connector.py'), 'config..semgrep.vendored-rules.python.lang.security.use-defused-xml') match_id = 9237374b576697cb1b91ff84cfec40f581cfeaa63698f8337f7c6bb49df94a6200262a61b8bd5fb1e4bd9dd5d9628842e4c16b66af4ee8f1cf668e6a9869a1a3_0
+2025-07-02 02:37:21,247 - semgrep.rule_match - DEBUG - match_key = ('import xml', PosixPath('agents/biomedical_database_connector.py'), 'config..semgrep.vendored-rules.python.lang.security.use-defused-xml') match_id = 9237374b576697cb1b91ff84cfec40f581cfeaa63698f8337f7c6bb49df94a6200262a61b8bd5fb1e4bd9dd5d9628842e4c16b66af4ee8f1cf668e6a9869a1a3_0
+2025-07-02 02:37:21,247 - semgrep.rule_match - DEBUG - match_key = ('import xml', PosixPath('agents/biomedical_database_connector.py'), 'config..semgrep.vendored-rules.python.lang.security.use-defused-xml') match_id = 9237374b576697cb1b91ff84cfec40f581cfeaa63698f8337f7c6bb49df94a6200262a61b8bd5fb1e4bd9dd5d9628842e4c16b66af4ee8f1cf668e6a9869a1a3_0
+2025-07-02 02:37:21,248 - semgrep.rule_match - DEBUG - match_key = ('', PosixPath('agents/integrated/enhanced_base_agent.py'), 'config..semgrep.vendored-rules.python.lang.security.insecure-hash-algorithm-md5') match_id = b35328c08c3b260ec65670ca20511ac51e2d7ddb2294a8f77f8bbb67105ba73970c2deec83bc67e4fa687912f78eb7a8621f9dba6962a8f50c233dec99e76200_0
+2025-07-02 02:37:21,249 - semgrep.rule_match - DEBUG - match_key = ('hashlib.md5(...) hashlib.md5(..., usedforsecurity=False, ...)', PosixPath('agents/integrated/enhanced_base_agent.py'), 'config..semgrep.vendored-rules.python.lang.security.insecure-hash-algorithm-md5') match_id = 157e439304f261eae3ac236eb5086667709b2657c0e74c7116021c0de9574172daf5f7261d7d2b5799721acccfe40fe8887ef4752f079aff68246aafe01a86e1_0
+2025-07-02 02:37:21,249 - semgrep.rule_match - DEBUG - match_key = ('hashlib.md5(...) hashlib.md5(..., usedforsecurity=False, ...)', PosixPath('agents/integrated/enhanced_base_agent.py'), 'config..semgrep.vendored-rules.python.lang.security.insecure-hash-algorithm-md5') match_id = 157e439304f261eae3ac236eb5086667709b2657c0e74c7116021c0de9574172daf5f7261d7d2b5799721acccfe40fe8887ef4752f079aff68246aafe01a86e1_0
+2025-07-02 02:37:21,250 - semgrep.rule_match - DEBUG - match_key = ('hashlib.md5(...) hashlib.md5(..., usedforsecurity=False, ...)', PosixPath('agents/integrated/enhanced_base_agent.py'), 'config..semgrep.vendored-rules.python.lang.security.insecure-hash-algorithm-md5') match_id = 157e439304f261eae3ac236eb5086667709b2657c0e74c7116021c0de9574172daf5f7261d7d2b5799721acccfe40fe8887ef4752f079aff68246aafe01a86e1_0
+2025-07-02 02:37:21,251 - semgrep.rule_match - DEBUG - match_key = ('', PosixPath('agents/integrated/enhanced_base_agent.py'), 'config..semgrep.vendored-rules.python.lang.security.insecure-hash-algorithm-md5') match_id = b35328c08c3b260ec65670ca20511ac51e2d7ddb2294a8f77f8bbb67105ba73970c2deec83bc67e4fa687912f78eb7a8621f9dba6962a8f50c233dec99e76200_0
+2025-07-02 02:37:21,252 - semgrep.rule_match - DEBUG - match_key = ('hashlib.md5(...) hashlib.md5(..., usedforsecurity=False, ...)', PosixPath('agents/integrated/enhanced_base_agent.py'), 'config..semgrep.vendored-rules.python.lang.security.insecure-hash-algorithm-md5') match_id = 157e439304f261eae3ac236eb5086667709b2657c0e74c7116021c0de9574172daf5f7261d7d2b5799721acccfe40fe8887ef4752f079aff68246aafe01a86e1_0
+2025-07-02 02:37:21,252 - semgrep.rule_match - DEBUG - match_key = ('hashlib.md5(...) hashlib.md5(..., usedforsecurity=False, ...)', PosixPath('agents/integrated/enhanced_base_agent.py'), 'config..semgrep.vendored-rules.python.lang.security.insecure-hash-algorithm-md5') match_id = 157e439304f261eae3ac236eb5086667709b2657c0e74c7116021c0de9574172daf5f7261d7d2b5799721acccfe40fe8887ef4752f079aff68246aafe01a86e1_0
+2025-07-02 02:37:21,253 - semgrep.rule_match - DEBUG - match_key = ('hashlib.md5(...) hashlib.md5(..., usedforsecurity=False, ...)', PosixPath('agents/integrated/enhanced_base_agent.py'), 'config..semgrep.vendored-rules.python.lang.security.insecure-hash-algorithm-md5') match_id = 157e439304f261eae3ac236eb5086667709b2657c0e74c7116021c0de9574172daf5f7261d7d2b5799721acccfe40fe8887ef4752f079aff68246aafe01a86e1_1
+2025-07-02 02:37:21,254 - semgrep.rule_match - DEBUG - match_key = ('', PosixPath('agents/literature_agent.py'), 'config..semgrep.vendored-rules.python.lang.security.use-defused-xml') match_id = c49ba7b75fd11304a21a2b8cf260d77e48a877390b6a6e211cd4c21b45702c27598ad7fed3e6cf9a5950805ab09d6944a2aa562ed637545331c943a9db08034c_0
+2025-07-02 02:37:21,254 - semgrep.rule_match - DEBUG - match_key = ('import xml', PosixPath('agents/literature_agent.py'), 'config..semgrep.vendored-rules.python.lang.security.use-defused-xml') match_id = a70967200be13a8e5bcc771839d2af41324821267cac3b816c9b6c0f915487361dac8452c2151ef597ac340cd1c0b78572ba46d72c94c2f671de57f440397d50_0
+2025-07-02 02:37:21,255 - semgrep.rule_match - DEBUG - match_key = ('import xml', PosixPath('agents/literature_agent.py'), 'config..semgrep.vendored-rules.python.lang.security.use-defused-xml') match_id = a70967200be13a8e5bcc771839d2af41324821267cac3b816c9b6c0f915487361dac8452c2151ef597ac340cd1c0b78572ba46d72c94c2f671de57f440397d50_0
+2025-07-02 02:37:21,256 - semgrep.rule_match - DEBUG - match_key = ('import xml', PosixPath('agents/literature_agent.py'), 'config..semgrep.vendored-rules.python.lang.security.use-defused-xml') match_id = a70967200be13a8e5bcc771839d2af41324821267cac3b816c9b6c0f915487361dac8452c2151ef597ac340cd1c0b78572ba46d72c94c2f671de57f440397d50_0
+2025-07-02 02:37:21,256 - semgrep.rule_match - DEBUG - match_key = ('', PosixPath('agents/pubmed_connector.py'), 'config..semgrep.vendored-rules.python.lang.security.use-defused-xml') match_id = 8763d2953baf39c2be758c0ec7f850970c0d05897ceb44ca32d7b7f0bc90ab29e51d2df2b5392ad367cae15d6e54f1f67b1cc84aca4856d493854e9f53fede51_0
+2025-07-02 02:37:21,257 - semgrep.rule_match - DEBUG - match_key = ('import xml', PosixPath('agents/pubmed_connector.py'), 'config..semgrep.vendored-rules.python.lang.security.use-defused-xml') match_id = ecd5b714d9eea2700ca2600826ff93b4de3e48ec89c5f545d6aaca3578be28e6fa88b54a544f61993175dbd953c4ad629afb2162980203a261939e930ea7984d_0
+2025-07-02 02:37:21,257 - semgrep.rule_match - DEBUG - match_key = ('import xml', PosixPath('agents/pubmed_connector.py'), 'config..semgrep.vendored-rules.python.lang.security.use-defused-xml') match_id = ecd5b714d9eea2700ca2600826ff93b4de3e48ec89c5f545d6aaca3578be28e6fa88b54a544f61993175dbd953c4ad629afb2162980203a261939e930ea7984d_0
+2025-07-02 02:37:21,258 - semgrep.rule_match - DEBUG - match_key = ('import xml', PosixPath('agents/pubmed_connector.py'), 'config..semgrep.vendored-rules.python.lang.security.use-defused-xml') match_id = ecd5b714d9eea2700ca2600826ff93b4de3e48ec89c5f545d6aaca3578be28e6fa88b54a544f61993175dbd953c4ad629afb2162980203a261939e930ea7984d_0
+2025-07-02 02:37:21,258 - semgrep.rule_match - DEBUG - match_key = ('', PosixPath('agents/web_monitor_agent.py'), 'config..semgrep.vendored-rules.python.lang.security.insecure-hash-algorithm-md5') match_id = fc098703f2a5decba3ba9c043a422b3f74cf605fc7e7e8601ce984df3f5b1fadf6871baa028e9ab4560458bd895e41d473fd81d520761c6b3c042c6b358b0362_0
+2025-07-02 02:37:21,259 - semgrep.rule_match - DEBUG - match_key = ('hashlib.md5(...) hashlib.md5(..., usedforsecurity=False, ...)', PosixPath('agents/web_monitor_agent.py'), 'config..semgrep.vendored-rules.python.lang.security.insecure-hash-algorithm-md5') match_id = 4017918322e7173390ce96223fd3578e1d1782c994f85ec3eb035439ca4369dee52e6a664a54b3114b34283184a1ad8e9522f93fb06c6cc24caf1b323a2d09a3_0
+2025-07-02 02:37:21,260 - semgrep.rule_match - DEBUG - match_key = ('hashlib.md5(...) hashlib.md5(..., usedforsecurity=False, ...)', PosixPath('agents/web_monitor_agent.py'), 'config..semgrep.vendored-rules.python.lang.security.insecure-hash-algorithm-md5') match_id = 4017918322e7173390ce96223fd3578e1d1782c994f85ec3eb035439ca4369dee52e6a664a54b3114b34283184a1ad8e9522f93fb06c6cc24caf1b323a2d09a3_0
+2025-07-02 02:37:21,260 - semgrep.rule_match - DEBUG - match_key = ('hashlib.md5(...) hashlib.md5(..., usedforsecurity=False, ...)', PosixPath('agents/web_monitor_agent.py'), 'config..semgrep.vendored-rules.python.lang.security.insecure-hash-algorithm-md5') match_id = 4017918322e7173390ce96223fd3578e1d1782c994f85ec3eb035439ca4369dee52e6a664a54b3114b34283184a1ad8e9522f93fb06c6cc24caf1b323a2d09a3_0
+2025-07-02 02:37:21,261 - semgrep.rule_match - DEBUG - match_key = ('', PosixPath('app.py'), 'config..semgrep.vendored-rules.python.lang.security.audit.dangerous-subprocess-use-audit') match_id = 3653517aa1369b680f34ff6f310ae5073e5760866e54afb2e79be414b2ca72b563441e5808c78e94902782f7f7f770acbea399a9f31b15bd5251c145361ab69d_0
+2025-07-02 02:37:21,261 - semgrep.rule_match - DEBUG - match_key = ('$ARR = ["=~/(sh|bash|ksh|csh|tcsh|zsh)/", "-c", ...]\n...\n $ARR = [...]\n...\n subprocess.Popen(*$ARR, ...) subprocess.Popen([*$ARR, ...]) subprocess.Popen("...", ...) subprocess.Popen(("...",...), ...) subprocess.Popen(...) subprocess.Popen(["...",...], ...) subprocess.CalledProcessError(...) subprocess.SubprocessError(...) subprocess.Popen("=~/(python)/","...",...) subprocess.Popen("=~/(python)/",...) subprocess.Popen("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c","...",...) subprocess.Popen("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",...) subprocess.Popen(("=~/(python)/","...",...),...) subprocess.Popen(("=~/(python)/",...),...) subprocess.Popen(["=~/(python)/",...],...) subprocess.Popen(["=~/(python)/","...",...],...) subprocess.Popen(("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c","...",...),...) subprocess.Popen(("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",...),...) subprocess.Popen(["=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",...],...) subprocess.Popen(["=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c","...",...],...)', PosixPath('app.py'), 'config..semgrep.vendored-rules.python.lang.security.audit.dangerous-subprocess-use-audit') match_id = 3107ad13447868d007cdfb9c9c3691e83b2ab943641f6e6e7a774885655c135fcd9cf61d7fe2352d1dcf4ac0bd1242c7049b05ff44c821ce8503e2aba731b8ef_0
+2025-07-02 02:37:21,262 - semgrep.rule_match - DEBUG - match_key = ('$ARR = ["=~/(sh|bash|ksh|csh|tcsh|zsh)/", "-c", ...]\n...\n $ARR = [...]\n...\n subprocess.Popen(*$ARR, ...) subprocess.Popen([*$ARR, ...]) subprocess.Popen("...", ...) subprocess.Popen(("...",...), ...) subprocess.Popen(...) subprocess.Popen(["...",...], ...) subprocess.CalledProcessError(...) subprocess.SubprocessError(...) subprocess.Popen("=~/(python)/","...",...) subprocess.Popen("=~/(python)/",...) subprocess.Popen("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c","...",...) subprocess.Popen("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",...) subprocess.Popen(("=~/(python)/","...",...),...) subprocess.Popen(("=~/(python)/",...),...) subprocess.Popen(["=~/(python)/",...],...) subprocess.Popen(["=~/(python)/","...",...],...) subprocess.Popen(("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c","...",...),...) subprocess.Popen(("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",...),...) subprocess.Popen(["=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",...],...) subprocess.Popen(["=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c","...",...],...)', PosixPath('app.py'), 'config..semgrep.vendored-rules.python.lang.security.audit.dangerous-subprocess-use-audit') match_id = 3107ad13447868d007cdfb9c9c3691e83b2ab943641f6e6e7a774885655c135fcd9cf61d7fe2352d1dcf4ac0bd1242c7049b05ff44c821ce8503e2aba731b8ef_0
+2025-07-02 02:37:21,263 - semgrep.rule_match - DEBUG - match_key = ('$ARR = ["=~/(sh|bash|ksh|csh|tcsh|zsh)/", "-c", ...]\n...\n $ARR = [...]\n...\n subprocess.Popen(*$ARR, ...) subprocess.Popen([*$ARR, ...]) subprocess.Popen("...", ...) subprocess.Popen(("...",...), ...) subprocess.Popen(...) subprocess.Popen(["...",...], ...) subprocess.CalledProcessError(...) subprocess.SubprocessError(...) subprocess.Popen("=~/(python)/","...",...) subprocess.Popen("=~/(python)/",...) subprocess.Popen("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c","...",...) subprocess.Popen("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",...) subprocess.Popen(("=~/(python)/","...",...),...) subprocess.Popen(("=~/(python)/",...),...) subprocess.Popen(["=~/(python)/",...],...) subprocess.Popen(["=~/(python)/","...",...],...) subprocess.Popen(("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c","...",...),...) subprocess.Popen(("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",...),...) subprocess.Popen(["=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",...],...) subprocess.Popen(["=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c","...",...],...)', PosixPath('app.py'), 'config..semgrep.vendored-rules.python.lang.security.audit.dangerous-subprocess-use-audit') match_id = 3107ad13447868d007cdfb9c9c3691e83b2ab943641f6e6e7a774885655c135fcd9cf61d7fe2352d1dcf4ac0bd1242c7049b05ff44c821ce8503e2aba731b8ef_0
+2025-07-02 02:37:21,263 - semgrep.rule_match - DEBUG - match_key = ('', PosixPath('app.py'), 'config..semgrep.vendored-rules.python.lang.security.audit.dangerous-subprocess-use-audit') match_id = 3653517aa1369b680f34ff6f310ae5073e5760866e54afb2e79be414b2ca72b563441e5808c78e94902782f7f7f770acbea399a9f31b15bd5251c145361ab69d_0
+2025-07-02 02:37:21,264 - semgrep.rule_match - DEBUG - match_key = ('$ARR = ["=~/(sh|bash|ksh|csh|tcsh|zsh)/", "-c", ...]\n...\n $ARR = [...]\n...\n subprocess.Popen(*$ARR, ...) subprocess.Popen([*$ARR, ...]) subprocess.Popen("...", ...) subprocess.Popen(("...",...), ...) subprocess.Popen(...) subprocess.Popen(["...",...], ...) subprocess.CalledProcessError(...) subprocess.SubprocessError(...) subprocess.Popen("=~/(python)/","...",...) subprocess.Popen("=~/(python)/",...) subprocess.Popen("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c","...",...) subprocess.Popen("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",...) subprocess.Popen(("=~/(python)/","...",...),...) subprocess.Popen(("=~/(python)/",...),...) subprocess.Popen(["=~/(python)/",...],...) subprocess.Popen(["=~/(python)/","...",...],...) subprocess.Popen(("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c","...",...),...) subprocess.Popen(("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",...),...) subprocess.Popen(["=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",...],...) subprocess.Popen(["=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c","...",...],...)', PosixPath('app.py'), 'config..semgrep.vendored-rules.python.lang.security.audit.dangerous-subprocess-use-audit') match_id = 3107ad13447868d007cdfb9c9c3691e83b2ab943641f6e6e7a774885655c135fcd9cf61d7fe2352d1dcf4ac0bd1242c7049b05ff44c821ce8503e2aba731b8ef_0
+2025-07-02 02:37:21,265 - semgrep.rule_match - DEBUG - match_key = ('$ARR = ["=~/(sh|bash|ksh|csh|tcsh|zsh)/", "-c", ...]\n...\n $ARR = [...]\n...\n subprocess.Popen(*$ARR, ...) subprocess.Popen([*$ARR, ...]) subprocess.Popen("...", ...) subprocess.Popen(("...",...), ...) subprocess.Popen(...) subprocess.Popen(["...",...], ...) subprocess.CalledProcessError(...) subprocess.SubprocessError(...) subprocess.Popen("=~/(python)/","...",...) subprocess.Popen("=~/(python)/",...) subprocess.Popen("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c","...",...) subprocess.Popen("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",...) subprocess.Popen(("=~/(python)/","...",...),...) subprocess.Popen(("=~/(python)/",...),...) subprocess.Popen(["=~/(python)/",...],...) subprocess.Popen(["=~/(python)/","...",...],...) subprocess.Popen(("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c","...",...),...) subprocess.Popen(("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",...),...) subprocess.Popen(["=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",...],...) subprocess.Popen(["=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c","...",...],...)', PosixPath('app.py'), 'config..semgrep.vendored-rules.python.lang.security.audit.dangerous-subprocess-use-audit') match_id = 3107ad13447868d007cdfb9c9c3691e83b2ab943641f6e6e7a774885655c135fcd9cf61d7fe2352d1dcf4ac0bd1242c7049b05ff44c821ce8503e2aba731b8ef_0
+2025-07-02 02:37:21,265 - semgrep.rule_match - DEBUG - match_key = ('$ARR = ["=~/(sh|bash|ksh|csh|tcsh|zsh)/", "-c", ...]\n...\n $ARR = [...]\n...\n subprocess.Popen(*$ARR, ...) subprocess.Popen([*$ARR, ...]) subprocess.Popen("...", ...) subprocess.Popen(("...",...), ...) subprocess.Popen(...) subprocess.Popen(["...",...], ...) subprocess.CalledProcessError(...) subprocess.SubprocessError(...) subprocess.Popen("=~/(python)/","...",...) subprocess.Popen("=~/(python)/",...) subprocess.Popen("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c","...",...) subprocess.Popen("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",...) subprocess.Popen(("=~/(python)/","...",...),...) subprocess.Popen(("=~/(python)/",...),...) subprocess.Popen(["=~/(python)/",...],...) subprocess.Popen(["=~/(python)/","...",...],...) subprocess.Popen(("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c","...",...),...) subprocess.Popen(("=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",...),...) subprocess.Popen(["=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c",...],...) subprocess.Popen(["=~/(sh|bash|ksh|csh|tcsh|zsh)/","-c","...",...],...)', PosixPath('app.py'), 'config..semgrep.vendored-rules.python.lang.security.audit.dangerous-subprocess-use-audit') match_id = 3107ad13447868d007cdfb9c9c3691e83b2ab943641f6e6e7a774885655c135fcd9cf61d7fe2352d1dcf4ac0bd1242c7049b05ff44c821ce8503e2aba731b8ef_1
+2025-07-02 02:37:21,266 - semgrep.rule_match - DEBUG - match_key = ('', PosixPath('integrated_backend_server.py'), 'config..semgrep.vendored-rules.python.fastapi.security.wildcard-cors') match_id = 9af15b7afe16bd4dfd65411a8422bd780497be21efb2b5379ad96a6cf38bd0b2a181b3b0a669dcf9fd915ce10142338ded25d0ecf6caec9cc9bd9c2d05f4df01_0
+2025-07-02 02:37:21,267 - semgrep.rule_match - DEBUG - match_key = ('app.add_middleware(\n  CORSMiddleware,\n  allow_origins=["*"],\n  ...);\n ["*"] [..., "*", ...]', PosixPath('integrated_backend_server.py'), 'config..semgrep.vendored-rules.python.fastapi.security.wildcard-cors') match_id = e471c0fea9efe3ac86b7d08e67e29d9aaf734290633792ed862307a431fec966b90e75f34548fb9d5b8531a829f7431ee6abfa64f209fd2f991ee7c522c6cd0c_0
+2025-07-02 02:37:21,267 - semgrep.rule_match - DEBUG - match_key = ('app.add_middleware(\n  CORSMiddleware,\n  allow_origins=["*"],\n  ...);\n ["*"] [..., "*", ...]', PosixPath('integrated_backend_server.py'), 'config..semgrep.vendored-rules.python.fastapi.security.wildcard-cors') match_id = e471c0fea9efe3ac86b7d08e67e29d9aaf734290633792ed862307a431fec966b90e75f34548fb9d5b8531a829f7431ee6abfa64f209fd2f991ee7c522c6cd0c_0
+2025-07-02 02:37:21,268 - semgrep.rule_match - DEBUG - match_key = ('app.add_middleware(\n  CORSMiddleware,\n  allow_origins=["*"],\n  ...);\n ["*"] [..., "*", ...]', PosixPath('integrated_backend_server.py'), 'config..semgrep.vendored-rules.python.fastapi.security.wildcard-cors') match_id = e471c0fea9efe3ac86b7d08e67e29d9aaf734290633792ed862307a431fec966b90e75f34548fb9d5b8531a829f7431ee6abfa64f209fd2f991ee7c522c6cd0c_0
+2025-07-02 02:37:21,269 - semgrep.rule_match - DEBUG - match_key = ('', PosixPath('integrated_server_v2.py'), 'config..semgrep.vendored-rules.python.fastapi.security.wildcard-cors') match_id = 8d286d20ef59ef1d060ec68fba6a3ee30f0634cc9d26b1e01798860645a4733705cbdb37046d4962da7fe7c4740a4d9aa0d72c025a63e6512dadfd26cb07160c_0
+2025-07-02 02:37:21,269 - semgrep.rule_match - DEBUG - match_key = ('app.add_middleware(\n  CORSMiddleware,\n  allow_origins=["*"],\n  ...);\n ["*"] [..., "*", ...]', PosixPath('integrated_server_v2.py'), 'config..semgrep.vendored-rules.python.fastapi.security.wildcard-cors') match_id = dbb4e8b2c47589d6dda72234df05ed062ba7c59d9a877a1562ca2b27156e6742c80c2335e2bdba08466784612b75cf5089345f2fcb95d9ae9e09c70dc94c10f1_0
+2025-07-02 02:37:21,270 - semgrep.rule_match - DEBUG - match_key = ('app.add_middleware(\n  CORSMiddleware,\n  allow_origins=["*"],\n  ...);\n ["*"] [..., "*", ...]', PosixPath('integrated_server_v2.py'), 'config..semgrep.vendored-rules.python.fastapi.security.wildcard-cors') match_id = dbb4e8b2c47589d6dda72234df05ed062ba7c59d9a877a1562ca2b27156e6742c80c2335e2bdba08466784612b75cf5089345f2fcb95d9ae9e09c70dc94c10f1_0
+2025-07-02 02:37:21,271 - semgrep.rule_match - DEBUG - match_key = ('app.add_middleware(\n  CORSMiddleware,\n  allow_origins=["*"],\n  ...);\n ["*"] [..., "*", ...]', PosixPath('integrated_server_v2.py'), 'config..semgrep.vendored-rules.python.fastapi.security.wildcard-cors') match_id = dbb4e8b2c47589d6dda72234df05ed062ba7c59d9a877a1562ca2b27156e6742c80c2335e2bdba08466784612b75cf5089345f2fcb95d9ae9e09c70dc94c10f1_0
+2025-07-02 02:37:21,271 - semgrep.rule_match - DEBUG - match_key = ('', PosixPath('integrated_server_v3_enhanced.py'), 'config..semgrep.vendored-rules.python.fastapi.security.wildcard-cors') match_id = f4288bb877f2fb0c6df03abda96aabad56d4f5e38c6c48a97d29d79d9920bd699a81cf2be7e69d73242a5d5f1737245c21ea3b7ddfe6acdff3ec5102934b27bc_0
+2025-07-02 02:37:21,272 - semgrep.rule_match - DEBUG - match_key = ('app.add_middleware(\n  CORSMiddleware,\n  allow_origins=["*"],\n  ...);\n ["*"] [..., "*", ...]', PosixPath('integrated_server_v3_enhanced.py'), 'config..semgrep.vendored-rules.python.fastapi.security.wildcard-cors') match_id = 864875223662e3f40b747c0850e5da1a2a60461f78ba4efc403f214270ff0fe146a14053b814d4a706ae8a3f1e1e94eaa24eceaf28afec908b933715742fd0a8_0
+2025-07-02 02:37:21,273 - semgrep.rule_match - DEBUG - match_key = ('app.add_middleware(\n  CORSMiddleware,\n  allow_origins=["*"],\n  ...);\n ["*"] [..., "*", ...]', PosixPath('integrated_server_v3_enhanced.py'), 'config..semgrep.vendored-rules.python.fastapi.security.wildcard-cors') match_id = 864875223662e3f40b747c0850e5da1a2a60461f78ba4efc403f214270ff0fe146a14053b814d4a706ae8a3f1e1e94eaa24eceaf28afec908b933715742fd0a8_0
+2025-07-02 02:37:21,273 - semgrep.rule_match - DEBUG - match_key = ('app.add_middleware(\n  CORSMiddleware,\n  allow_origins=["*"],\n  ...);\n ["*"] [..., "*", ...]', PosixPath('integrated_server_v3_enhanced.py'), 'config..semgrep.vendored-rules.python.fastapi.security.wildcard-cors') match_id = 864875223662e3f40b747c0850e5da1a2a60461f78ba4efc403f214270ff0fe146a14053b814d4a706ae8a3f1e1e94eaa24eceaf28afec908b933715742fd0a8_0
+2025-07-02 02:37:21,274 - semgrep.rule_match - DEBUG - match_key = ('', PosixPath('utils/agentic_database_manager.py'), 'config..semgrep.vendored-rules.python.lang.security.deserialization.avoid-pickle') match_id = e7b50820716e82a653a6c50ecd74e31a3bf8a5c261d0d24b3c768203799a9b5e83f3a9704be7186790c256fbff3bccb77dd6e27df8ea0cc040c93d2cb3b270ff_0
+2025-07-02 02:37:21,275 - semgrep.rule_match - DEBUG - match_key = ('_pickle.dumps("...") _pickle.dumps(...) pickle.dumps(...) pickle.dumps("...")', PosixPath('utils/agentic_database_manager.py'), 'config..semgrep.vendored-rules.python.lang.security.deserialization.avoid-pickle') match_id = 9068df2012fc96cd7983793af8d697f4d1791ecc31f0a843f7b3b0a05532199781a4c7c68596df1f1e988cf53daec10bb1f03e4234277100f413f198d45f991d_0
+2025-07-02 02:37:21,276 - semgrep.rule_match - DEBUG - match_key = ('_pickle.dumps("...") _pickle.dumps(...) pickle.dumps(...) pickle.dumps("...")', PosixPath('utils/agentic_database_manager.py'), 'config..semgrep.vendored-rules.python.lang.security.deserialization.avoid-pickle') match_id = 9068df2012fc96cd7983793af8d697f4d1791ecc31f0a843f7b3b0a05532199781a4c7c68596df1f1e988cf53daec10bb1f03e4234277100f413f198d45f991d_0
+2025-07-02 02:37:21,276 - semgrep.rule_match - DEBUG - match_key = ('_pickle.dumps("...") _pickle.dumps(...) pickle.dumps(...) pickle.dumps("...")', PosixPath('utils/agentic_database_manager.py'), 'config..semgrep.vendored-rules.python.lang.security.deserialization.avoid-pickle') match_id = 9068df2012fc96cd7983793af8d697f4d1791ecc31f0a843f7b3b0a05532199781a4c7c68596df1f1e988cf53daec10bb1f03e4234277100f413f198d45f991d_0
+2025-07-02 02:37:21,279 - semgrep.core_runner - DEBUG - semgrep ran in 0:00:17.128091 on 133 files
+2025-07-02 02:37:21,281 - semgrep.core_runner - DEBUG - findings summary: 7 warning, 5 error, 0 info
+2025-07-02 02:37:21,284 - semgrep.app.auth - DEBUG - Getting API token from settings file
+2025-07-02 02:37:21,285 - semgrep.app.auth - DEBUG - No API token found in settings file
+2025-07-02 02:37:21,417 - semgrep.output - VERBOSE - 
+========================================
+Files skipped:
+========================================
+
+  Always skipped by Opengrep:
+
+   • <none>
+
+  Skipped by .gitignore:
+  (Disable by passing --no-git-ignore)
+
+   • <all files not listed by `git ls-files` were skipped>
+
+  Skipped by .semgrepignore:
+  - https://semgrep.dev/docs/ignoring-files-folders-code/#understand-semgrep-defaults
+
+   • src/test/api/backend.test.ts
+   • src/test/components/App.test.tsx
+   • src/test/components/HelpBubble.test.tsx
+   • src/test/components/WaitlistModal.test.tsx
+   • src/test/setup.ts
+   • tests/backend/test_enhanced_server.py
+
+  Skipped by --include patterns:
+
+   • <none>
+
+  Skipped by --exclude patterns:
+
+   • <none>
+
+  Files skipped due to insufficient read permissions:
+
+   • <none>
+
+  Skipped by limiting to files smaller than 1000000 bytes:
+  (Adjust with the --max-target-bytes flag)
+
+   • <none>
+
+  Partially analyzed due to parsing or internal Opengrep errors
+
+   • <none>
+
+2025-07-02 02:37:21,418 - semgrep.output - INFO - Some files were skipped or only partially analyzed.
+  Scan was limited to files tracked by git.
+  Scan skipped: 6 files matching .semgrepignore patterns
+  For a full list of skipped files, run opengrep with the --verbose flag.
+
+Ran 695 rules on 133 files: 12 findings.
+2025-07-02 02:37:21,419 - semgrep.app.version - DEBUG - Version cache does not exist
+2025-07-02 02:37:21,438 - semgrep.metrics - VERBOSE - Not sending pseudonymous metrics since metrics are configured to OFF and registry usage is False
